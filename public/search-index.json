@@ -1,0 +1,142 @@
+[
+  {
+    "date": "2026-07-01",
+    "description": "Create a new post from a title.",
+    "tags": [
+      "cli"
+    ],
+    "text": "Create a new post file from a title, with front matter filled in and a slug derived from the title.\nblogin new <title> [--src=<dir>] [--section=<name>]\n\nArguments\n<title> is the post title. The filename slug comes from it.\nOptions\n--src=<dir> is the content directory. It defaults to content.\n--section=<name> is the section to place the post in. It defaults to the home-section from blogin.json.\n--verbose and --quiet set the logging level.\nExample\nblogin new \"My First Post\" --section=posts",
+    "title": "blogin new",
+    "url": "/cli/blogin-new"
+  },
+  {
+    "date": "2026-07-02",
+    "description": "Preview the site locally with rebuilds on change.",
+    "tags": [
+      "cli"
+    ],
+    "text": "Build the site and serve it locally, rebuilding when content, layouts, static assets, or the configuration change.\nblogin serve [--src=<dir>] [--port=<n>]\n\nOptions\n--src=<dir> is the content directory. It defaults to content.\n--port=<n> is the port to listen on. It defaults to 3000.\n--verbose and --quiet set the logging level.\nExample\nblogin serve --port=4000",
+    "title": "blogin serve",
+    "url": "/cli/blogin-serve"
+  },
+  {
+    "date": "2026-07-03",
+    "description": "Render the site to static files.",
+    "tags": [
+      "cli"
+    ],
+    "text": "Render the content tree to static HTML, writing feeds, a sitemap, and the search index alongside the pages.\nblogin build [--src=<dir>] [--out=<dir>] [--drafts] [--jobs=<n>] [--debug] [--force]\n\nOptions\n--src=<dir> is the content directory. It defaults to content. The blogin.json next to it supplies the configuration.\n--out=<dir> overrides the output directory from the config.\n--drafts includes posts marked as drafts.\n--jobs=<n> sets the number of parallel workers. It defaults to the CPU count.\n--debug emits provenance comments around rendered partials and pages.\n--force rewrites every file, bypassing the incremental content-hash check.\n--verbose and --quiet set the logging level.\nExample\nblogin build --out=dist --force",
+    "title": "blogin build",
+    "url": "/cli/blogin-build"
+  },
+  {
+    "date": "2026-07-04",
+    "description": "Scaffold a new Blogin site.",
+    "tags": [
+      "cli"
+    ],
+    "text": "Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.\nblogin init [<dir>] [--framework=<name>] [--force]\n\nArguments\n<dir> is the target directory. It defaults to the current directory.\nOptions\n--framework=<name> selects a CSS framework profile: none (the default), bootstrap5, pico, or bulma. The choice is recorded in blogin.json and wired into the scaffolded layouts.\n--force overwrites a directory that is not empty.\n--verbose and --quiet set the logging level.\nExample\nblogin init my-blog --framework=bootstrap5",
+    "title": "blogin init",
+    "url": "/cli/blogin-init"
+  },
+  {
+    "date": "2026-07-11",
+    "description": "Publishing the built public/ directory.",
+    "tags": [
+      "reference"
+    ],
+    "text": "blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host.\nClean URLs\nWith \"clean-urls\": true (the default) a post is written as public/posts/hello.html and served at /posts/hello. The host must serve hello.html for the extensionless request. This works out of the box on GitHub Pages, Netlify, and Cloudflare Pages. On nginx, add:\ntry_files $uri $uri.html $uri/ =404;\n\nSet \"clean-urls\": false to write public/posts/hello/index.html and serve at /posts/hello/ instead, which needs no host rewriting.\nBase URL\nSet base-url in blogin.json to your site's origin. Feed entries, the sitemap, and any absolute links use it, so it must match where the site is served.",
+    "title": "Deploying",
+    "url": "/guide/deploying"
+  },
+  {
+    "date": "2026-07-12",
+    "description": "The keys in blogin.json.",
+    "tags": [
+      "reference"
+    ],
+    "text": "Site-wide settings live in blogin.json at the project root. Command-line options override the file.\nKeyMeaningtitleSite title, available to layouts.base-urlAbsolute base for feeds and the sitemap.output-dirWhere the build writes (default public).home-sectionSection whose listing is also the site root.clean-urlsExtensionless URLs when true.css-frameworkClass-map profile: none, bootstrap5, ...page-sizePosts per listing page.highlightServer-side syntax highlighting for fenced code.searchEmit the search index and script.\nPer-section overrides\nThe sections map overrides settings for one section, including its nav label, nav order, visibility, page size, and whether dates show:\n\"sections\": {\n  \"guide\": { \"label\": \"Guide\", \"order\": 1, \"page-size\": 20 }\n}\n\nSection keyMeaninglabelNav label and listing heading (defaults to the humanized name).orderSort position in the nav.page-sizePosts per listing page for this section.navInclude the section in the nav when true.layoutLayout name override for the section.index-datesShow post dates on the section's listing pages (default true).show-datesShow the post date on the section's post pages (default true).\nSet index-dates or show-dates to false to hide dates on reference-style sections while a blog keeps them.",
+    "title": "Configuration",
+    "url": "/guide/configuration"
+  },
+  {
+    "date": "2026-07-13",
+    "description": "The dev server, incremental builds, and debug output.",
+    "tags": [
+      "reference"
+    ],
+    "text": "The preview server\nblogin serve --port 3000\n\nserve builds the site, serves public/ locally, and watches the source tree. Any change to content, layouts, or static assets triggers a full rebuild in place, and config edits are picked up too. Extensionless URLs resolve to their .html files, matching how a production host rewrites, so local preview behaves like the deployed site. The server is a dev tool only; production ships static files.\nIncremental builds\nblogin build renders every page but writes a file only when its content changed, so rebuilding an unchanged site writes nothing and editing one post rewrites just that post and the pages that reference it. Output for a deleted post is pruned. Pass --force to rewrite everything.\nDebug output\nblogin build --debug injects HTML comments marking each template and partial boundary and a provenance comment before each post body naming its source file. It is a separate axis from --verbose/--quiet, which only affect log output. Comment text is sanitized so a stray --> cannot break out.",
+    "title": "Previewing and Building",
+    "url": "/guide/previewing-and-building"
+  },
+  {
+    "date": "2026-07-14",
+    "description": "Atom feeds, the sitemap, and browser search.",
+    "tags": [
+      "reference"
+    ],
+    "text": "Every build with at least one post emits feeds, a sitemap, and a search index.\nFeeds and sitemap\nBlogin writes a site-wide Atom feed at public/feed.xml and a per-section feed at public/<section>/feed.xml. Entry links are absolute, built from base-url, so set that in blogin.json. A public/sitemap.xml lists every built page.\nSearch\nSearch runs in the browser against a prebuilt index, so production stays static. The build writes public/search-index.json, one record per post with its title, url, date, tags, description, and stripped body text (truncated to search-text-length). It also emits public/search.js, hand-written vanilla JavaScript that fetches the index, ranks matches (title and tag hits weigh more than body hits), and renders results.\nMatching is by prefix, so results narrow as you type: c, then cs, then css each refine the same query rather than only matching a whole word.\nThe widget is styled out of the box. The build emits public/search.css alongside the script, styling the input and rendering matches as a dropdown that floats under the box and hides itself when a query has no results. The styling is framework-neutral, so search looks right with or without a css-framework, and a site can override any of it in its own stylesheet.\nAdd the form, stylesheet, and script to a page by including the _search.haml partial. Turn search off with \"search\": false, and cap results with search-cap.",
+    "title": "Feeds and Search",
+    "url": "/guide/feeds-and-search"
+  },
+  {
+    "date": "2026-07-15",
+    "description": "Server-side highlighting for fenced code.",
+    "tags": [
+      "authoring"
+    ],
+    "text": "Set \"highlight\": true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it.\nA fenced block's info string names the language:\n```raku\nmy $x = 1;  # a comment\n```\n\nThe highlighter tokenizes the code into spans, escaping the source:\nmy $greeting = \"hello\";  # keywords, strings, numbers, comments\n\nRecognized languages are raku, ruby, python, javascript, bash, and json. An unrecognized language falls back to escaped plain text with no spans.\nStyling\nHighlighting emits hl-keyword, hl-string, hl-number, and hl-comment classes. The build emits blogin.css with a default color scheme for them, along with base styling for code blocks and heading anchors. Link it from base.haml and override any rule in your own stylesheet. Because the spans are plain HTML, any color scheme is a matter of CSS.",
+    "title": "Syntax Highlighting",
+    "url": "/guide/syntax-highlighting"
+  },
+  {
+    "date": "2026-07-16",
+    "description": "Emit framework-specific classes without touching the core renderer.",
+    "tags": [
+      "reference"
+    ],
+    "text": "The HTML Blogin emits carries framework-specific classes drawn from a selected profile, set by the css-framework config key. The core renderer stays framework-agnostic: it asks the profile for a class rather than hardcoding one.\nProfiles\nProfileStylenonePlain semantic HTML, no extra classes (default).bootstrap5Per-element classes (table, blockquote, img-fluid, pagination).picoClassless; styles bare semantic HTML.bulmaClass-based, with a .content wrapper and .pagination/.navbar/.tag.\nUnder none and pico the elements stay unclassed. Under bootstrap5 and bulma the renderer adds each framework's classes to the same semantic HTML, so switching frameworks never changes the markup structure.\nWiring the assets\nblogin init --framework=bootstrap5 (or pico, bulma) records the framework in blogin.json. The layout emits that framework's assets from the config through two helpers:\nframework-stylesheet-tag renders the stylesheet <link> in the document head.\nframework-script-tag renders the JavaScript bundle <script> before the closing </body>.\nBoth read the selected profile, so changing css-framework in blogin.json swaps the linked assets without editing any template. A profile with no script (the none, pico, and bulma profiles) renders an empty script tag, so the bundle only loads where a framework ships one.\nBootstrap 5 ships bootstrap.bundle.min.js, which powers its interactive components (the responsive navbar toggle, dropdowns, collapses). The scaffolded base.haml includes framework-script-tag, so those components work out of the box.\nLayouts read a slot's class with framework-class('pagination'), so a framework-aware template picks up the right class automatically.",
+    "title": "CSS Frameworks",
+    "url": "/guide/css-frameworks"
+  },
+  {
+    "date": "2026-07-17",
+    "description": "HAML templates, chrome partials, and per-section layouts.",
+    "tags": [
+      "authoring"
+    ],
+    "text": "Blogin renders pages with Template::HAML. A build wraps each post's rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.\nThe layout files\nFileRolebase.hamlPage shell, wraps everything. Required.show.hamlA single post. Required.index.hamlA section or tag listing. Required for listings.home.hamlThe site root. Optional, falls back to index.haml._header.haml, _sidebar.haml, _footer.hamlOptional chrome, pulled in by base.haml._nav.haml, _search.hamlThe nav menu and search form partials.\nAn absent chrome partial is skipped rather than an error, so a site without a sidebar renders full width. A missing base.haml, show.haml, or index.haml is a build error that names the layout.\nThe home page\nThe site root renders through home.haml when it exists, falling back to index.haml. This gives the root a distinct landing page, a hero and feature callouts, separate from the home-section listing that the same posts produce at their section path. Like a listing, home.haml can reach posts and pagination-html, or ignore them for a static landing.\nPer-section layouts\nA section overrides a layout by placing it in a matching subdirectory. A post in content/essays/ renders through layouts/essays/show.haml when present, otherwise layouts/show.haml, resolved by the nearest ancestor. The same applies to index.haml and the chrome partials.\nWhat a template can reach\nTemplates read post fields and site data as bare identifiers: title, date, body, site-title, section. A single post exposes body (the rendered HTML, injected unescaped), while a listing exposes posts and pagination-html. The nav tree is available as nav-nodes, with nav-current(node) marking the current section.",
+    "title": "Layouts",
+    "url": "/guide/layouts"
+  },
+  {
+    "date": "2026-07-18",
+    "description": "Front matter, sections, and tags.",
+    "tags": [
+      "authoring"
+    ],
+    "text": "A post is a Markdown file with a --- front matter block:\n---\ntitle: My Post\ndate: 2026-07-20\ntags: [raku, web]\ndescription: A short summary.\n---\nThe body goes here.\n\nRun blogin new \"My Post\" to scaffold one with the front matter filled in.\nSections\nThe subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.\nTags\nTags are collected across every section. Each tag gets a page at /tags/<tag> listing its posts, and a tag index at /tags lists every tag with counts.",
+    "title": "Writing Posts",
+    "url": "/guide/writing-posts"
+  },
+  {
+    "date": "2026-07-19",
+    "description": "Install Blogin and build your first site.",
+    "tags": [
+      "intro"
+    ],
+    "text": "Install\nzef install Blogin\n\nCreate a site\nblogin init myblog\n\nThis scaffolds a buildable starter site: a blogin.json, a first post under content/posts/, the layouts, and a stylesheet.\nBuild\ncd myblog\nblogin build\n\nThe generated HTML lands in public/, ready to deploy to any static host.\nPreview\nblogin serve\n\nThis builds the site, serves it locally, and rebuilds as you edit.",
+    "title": "Getting Started",
+    "url": "/guide/getting-started"
+  },
+  {
+    "date": "2026-07-20",
+    "description": "What Blogin is and how it works.",
+    "tags": [
+      "intro"
+    ],
+    "text": "Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime: only the build host needs Rakudo, and what ships is static HTML, CSS, and one search script.\nThe pipeline\nA build reads content/, parses each post's front matter and Markdown, renders the body to HTML, wraps it in your HAML layouts, and writes the result under public/. The same pass produces section listings, tag pages, an Atom feed per section, a sitemap, and a search index.\nOwning the parser\nBlogin parses Markdown with its own grammar, so there is no C dependency and no ecosystem parser to track. Owning the parser also means it can carry extensions, such as attribute lists on links:\nmy $ast = Blogin::Markdown::parse($source);",
+    "title": "Overview",
+    "url": "/guide/overview"
+  }
+]

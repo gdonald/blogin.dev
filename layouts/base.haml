@@ -1,0 +1,24 @@
+!!! 5
+%html{lang: 'en'}
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
+    %title= site-title
+    != framework-stylesheet-tag
+    %link{rel: 'stylesheet', href: '/blogin.css'}
+  %body
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      .container
+        %a.navbar-brand{href: '/'}= site-title
+        %button.navbar-toggler{type: 'button', 'data-bs-toggle' => 'collapse', 'data-bs-target' => '#topbar', 'aria-controls' => 'topbar', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation'}
+          %span.navbar-toggler-icon
+        #topbar.collapse.navbar-collapse
+          != render(:partial<nav>)
+          .ms-auto.mt-2.mt-lg-0{style: 'width: 24rem; max-width: 90vw'}
+            != render(:partial<search>)
+    %main.container.my-4
+      = yield
+    %footer.border-top.mt-5.py-4
+      .container
+        %p.text-body-secondary.mb-0 Built with Blogin.
+    != framework-script-tag

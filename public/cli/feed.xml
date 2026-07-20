@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blogin: cli</title>
+  <id>https://blogin.dev/cli</id>
+  <link href="https://blogin.dev/cli"/>
+  <link href="https://blogin.dev/cli/feed.xml" rel="self"/>
+  <updated>2026-07-04T00:00:00Z</updated>
+  <entry>
+    <title>blogin init</title>
+    <id>https://blogin.dev/cli/blogin-init</id>
+    <link href="https://blogin.dev/cli/blogin-init"/>
+    <updated>2026-07-04T00:00:00Z</updated>
+  </entry>
+  <entry>
+    <title>blogin build</title>
+    <id>https://blogin.dev/cli/blogin-build</id>
+    <link href="https://blogin.dev/cli/blogin-build"/>
+    <updated>2026-07-03T00:00:00Z</updated>
+  </entry>
+  <entry>
+    <title>blogin serve</title>
+    <id>https://blogin.dev/cli/blogin-serve</id>
+    <link href="https://blogin.dev/cli/blogin-serve"/>
+    <updated>2026-07-02T00:00:00Z</updated>
+  </entry>
+  <entry>
+    <title>blogin new</title>
+    <id>https://blogin.dev/cli/blogin-new</id>
+    <link href="https://blogin.dev/cli/blogin-new"/>
+    <updated>2026-07-01T00:00:00Z</updated>
+  </entry>
+</feed>

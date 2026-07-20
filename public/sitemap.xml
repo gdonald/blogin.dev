@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://blogin.dev/</loc></url>
+  <url><loc>https://blogin.dev/cli</loc></url>
+  <url><loc>https://blogin.dev/cli/blogin-build</loc></url>
+  <url><loc>https://blogin.dev/cli/blogin-init</loc></url>
+  <url><loc>https://blogin.dev/cli/blogin-new</loc></url>
+  <url><loc>https://blogin.dev/cli/blogin-serve</loc></url>
+  <url><loc>https://blogin.dev/guide</loc></url>
+  <url><loc>https://blogin.dev/guide/configuration</loc></url>
+  <url><loc>https://blogin.dev/guide/css-frameworks</loc></url>
+  <url><loc>https://blogin.dev/guide/deploying</loc></url>
+  <url><loc>https://blogin.dev/guide/feeds-and-search</loc></url>
+  <url><loc>https://blogin.dev/guide/getting-started</loc></url>
+  <url><loc>https://blogin.dev/guide/layouts</loc></url>
+  <url><loc>https://blogin.dev/guide/overview</loc></url>
+  <url><loc>https://blogin.dev/guide/previewing-and-building</loc></url>
+  <url><loc>https://blogin.dev/guide/syntax-highlighting</loc></url>
+  <url><loc>https://blogin.dev/guide/writing-posts</loc></url>
+  <url><loc>https://blogin.dev/tags</loc></url>
+  <url><loc>https://blogin.dev/tags/authoring</loc></url>
+  <url><loc>https://blogin.dev/tags/cli</loc></url>
+  <url><loc>https://blogin.dev/tags/intro</loc></url>
+  <url><loc>https://blogin.dev/tags/reference</loc></url>
+</urlset>

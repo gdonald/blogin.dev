@@ -1,0 +1,13 @@
+{
+  "title": "Blogin",
+  "base-url": "https://blogin.dev",
+  "home-section": "guide",
+  "clean-urls": true,
+  "css-framework": "bootstrap5",
+  "highlight": true,
+  "page-size": 20,
+  "sections": {
+    "guide": { "order": 0, "index-dates": false },
+    "cli": { "label": "CLI", "order": 1, "index-dates": false }
+  }
+}

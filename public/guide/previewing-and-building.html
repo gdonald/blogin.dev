@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Blogin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/blogin.css'>
+  </head>
+  <body>
+    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+      <div class='container'>
+        <a class='navbar-brand' href='/'>Blogin</a>
+        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
+          <span class='navbar-toggler-icon'></span>
+        </button>
+        <div id='topbar' class='collapse navbar-collapse'>
+          <ul class='navbar-nav mb-2 mb-lg-0'>
+  <li class='nav-item'>
+  <a class='nav-link active' href='/guide'>Guide</a>
+</li>
+<li class='nav-item'>
+  <a class='nav-link' href='/cli'>CLI</a>
+</li>
+
+</ul>
+
+          <div class='ms-auto mt-2 mt-lg-0' style='width: 24rem; max-width: 90vw'>
+            <div class='blogin-search'>
+  <form data-blogin-search='true' role='search'>
+    <input type='search' name='q' placeholder='Search' aria-label='Search'>
+  </form>
+  <ul data-blogin-results='true'></ul>
+</div>
+<link rel='stylesheet' href='/search.css'>
+<script src='/search.js'></script>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class='container my-4'>
+      <div class='card'>
+  <div class='card-body'>
+    <article>
+      <h1 class='mb-4'>Previewing and Building</h1>
+      <h2 id="the-preview-server">The preview server<a class="anchor" href="#the-preview-server">#</a></h2>
+<pre><code class="language-bash">blogin serve --port <span class="hl-number">3000</span>
+</code></pre>
+<p><code>serve</code> builds the site, serves <code>public/</code> locally, and watches the source tree.
+Any change to content, layouts, or static assets triggers a full rebuild in
+place, and config edits are picked up too. Extensionless URLs resolve to their
+<code>.html</code> files, matching how a production host rewrites, so local preview behaves
+like the deployed site. The server is a dev tool only; production ships static
+files.</p>
+<h2 id="incremental-builds">Incremental builds<a class="anchor" href="#incremental-builds">#</a></h2>
+<p><code>blogin build</code> renders every page but writes a file only when its content
+changed, so rebuilding an unchanged site writes nothing and editing one post
+rewrites just that post and the pages that reference it. Output for a deleted post
+is pruned. Pass <code>--force</code> to rewrite everything.</p>
+<h2 id="debug-output">Debug output<a class="anchor" href="#debug-output">#</a></h2>
+<p><code>blogin build --debug</code> injects HTML comments marking each template and partial
+boundary and a provenance comment before each post body naming its source file.
+It is a separate axis from <code>--verbose</code>/<code>--quiet</code>, which only affect log output.
+Comment text is sanitized so a stray <code>--&gt;</code> cannot break out.</p>
+
+    </article>
+  </div>
+</div>
+
+    </main>
+    <footer class='border-top mt-5 py-4'>
+      <div class='container'>
+        <p class='text-body-secondary mb-0'>Built with Blogin.</p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
