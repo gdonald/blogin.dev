@@ -21,10 +21,10 @@
         <div id='topbar' class='collapse navbar-collapse'>
           <ul class='navbar-nav mb-2 mb-lg-0'>
   <li class='nav-item'>
-  <a class='nav-link active' href='/guide'>Guide</a>
+  <a class='nav-link' href='/guide/'>Guide</a>
 </li>
 <li class='nav-item'>
-  <a class='nav-link' href='/cli'>CLI</a>
+  <a class='nav-link active' href='/cli/'>CLI</a>
 </li>
 
 </ul>
@@ -44,32 +44,43 @@
       </div>
     </nav>
     <main class='container my-4'>
-      <div class='card'>
+      <section>
+  <h1 class='mb-4'>CLI</h1>
+  <div class='card mb-3'>
   <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>Getting Started</h1>
-      <h2 id="install">Install<a class="anchor" href="#install">#</a></h2>
-<pre><code class="language-bash">zef install Blogin
-</code></pre>
-<h2 id="create-a-site">Create a site<a class="anchor" href="#create-a-site">#</a></h2>
-<pre><code class="language-bash">blogin init myblog
-</code></pre>
-<p>This scaffolds a buildable starter site: a <code>blogin.json</code>, a first post under
-<code>content/posts/</code>, the layouts, and a stylesheet.</p>
-<h2 id="build">Build<a class="anchor" href="#build">#</a></h2>
-<pre><code class="language-bash">cd myblog
-blogin build
-</code></pre>
-<p>The generated HTML lands in <code>public/</code>, ready to deploy to any static host.</p>
-<h2 id="preview">Preview<a class="anchor" href="#preview">#</a></h2>
-<pre><code class="language-bash">blogin serve
-</code></pre>
-<p>This builds the site, serves it locally, and rebuilds as you edit.</p>
-
-    </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/overview"><span aria-hidden="true">&larr;</span> Overview</a><a class="next btn btn-primary" href="/guide/writing-posts">Writing Posts <span aria-hidden="true">&rarr;</span></a></nav>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/cli/blogin-init/'>blogin init</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>Scaffold a new Blogin site.</p>
   </div>
 </div>
+<div class='card mb-3'>
+  <div class='card-body'>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/cli/blogin-build/'>blogin build</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>Render the site to static files.</p>
+  </div>
+</div>
+<div class='card mb-3'>
+  <div class='card-body'>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/cli/blogin-serve/'>blogin serve</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>Preview the site locally with rebuilds on change.</p>
+  </div>
+</div>
+<div class='card mb-3'>
+  <div class='card-body'>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/cli/blogin-new/'>blogin new</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>Create a new post from a title.</p>
+  </div>
+</div>
+
+  
+</section>
 
     </main>
     <footer class='border-top mt-5 py-4'>

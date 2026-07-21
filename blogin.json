@@ -2,7 +2,7 @@
   "title": "Blogin",
   "base-url": "https://blogin.dev",
   "home-section": "guide",
-  "clean-urls": true,
+  "clean-urls": false,
   "css-framework": "bootstrap5",
   "highlight": true,
   "page-size": 20,

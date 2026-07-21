@@ -21,10 +21,10 @@
         <div id='topbar' class='collapse navbar-collapse'>
           <ul class='navbar-nav mb-2 mb-lg-0'>
   <li class='nav-item'>
-  <a class='nav-link active' href='/guide'>Guide</a>
+  <a class='nav-link active' href='/guide/'>Guide</a>
 </li>
 <li class='nav-item'>
-  <a class='nav-link' href='/cli'>CLI</a>
+  <a class='nav-link' href='/cli/'>CLI</a>
 </li>
 
 </ul>
@@ -47,24 +47,25 @@
       <div class='card'>
   <div class='card-body'>
     <article>
-      <h1 class='mb-4'>Deploying</h1>
-      <p><code>blogin build</code> writes a self-contained <code>public/</code> directory. Deploying is copying
-that directory to any static host.</p>
-<h2 id="clean-urls">Clean URLs<a class="anchor" href="#clean-urls">#</a></h2>
-<p>With <code>"clean-urls": true</code> (the default) a post is written as
-<code>public/posts/hello.html</code> and served at <code>/posts/hello</code>. The host must serve
-<code>hello.html</code> for the extensionless request. This works out of the box on GitHub
-Pages, Netlify, and Cloudflare Pages. On nginx, add:</p>
-<pre><code>try_files $uri $uri.html $uri/ =404;
+      <h1 class='mb-4'>Overview</h1>
+      <p>Blogin is a static blog generator written in Raku. Point it at a directory of
+Markdown files and it produces a directory of plain HTML you can host anywhere.
+There is no database and no runtime: only the build host needs Rakudo, and what
+ships is static HTML, CSS, and one search script.</p>
+<h2 id="the-pipeline">The pipeline<a class="anchor" href="#the-pipeline">#</a></h2>
+<p>A build reads <code>content/</code>, parses each post's front matter and Markdown, renders
+the body to HTML, wraps it in your HAML layouts, and writes the result under
+<code>public/</code>. The same pass produces section listings, tag pages, an Atom feed per
+section, a sitemap, and a search index.</p>
+<h2 id="owning-the-parser">Owning the parser<a class="anchor" href="#owning-the-parser">#</a></h2>
+<p>Blogin parses Markdown with its own grammar, so there is no C dependency and no
+ecosystem parser to track. Owning the parser also means it can carry extensions,
+such as attribute lists on links:</p>
+<pre><code class="language-raku"><span class="hl-keyword">my</span> $ast = Blogin::Markdown::parse($source);
 </code></pre>
-<p>Set <code>"clean-urls": false</code> to write <code>public/posts/hello/index.html</code> and serve at
-<code>/posts/hello/</code> instead, which needs no host rewriting.</p>
-<h2 id="base-url">Base URL<a class="anchor" href="#base-url">#</a></h2>
-<p>Set <code>base-url</code> in <code>blogin.json</code> to your site's origin. Feed entries, the sitemap,
-and any absolute links use it, so it must match where the site is served.</p>
 
     </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/configuration"><span aria-hidden="true">&larr;</span> Configuration</a></nav>
+    <nav class="post-nav"><a class="next btn btn-primary" href="/guide/getting-started/">Getting Started <span aria-hidden="true">&rarr;</span></a></nav>
   </div>
 </div>
 

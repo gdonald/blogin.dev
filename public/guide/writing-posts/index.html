@@ -21,10 +21,10 @@
         <div id='topbar' class='collapse navbar-collapse'>
           <ul class='navbar-nav mb-2 mb-lg-0'>
   <li class='nav-item'>
-  <a class='nav-link' href='/guide'>Guide</a>
+  <a class='nav-link active' href='/guide/'>Guide</a>
 </li>
 <li class='nav-item'>
-  <a class='nav-link' href='/cli'>CLI</a>
+  <a class='nav-link' href='/cli/'>CLI</a>
 </li>
 
 </ul>
@@ -44,47 +44,34 @@
       </div>
     </nav>
     <main class='container my-4'>
-      <section>
-  <h1 class='mb-4'></h1>
-  <div class='card mb-3'>
+      <div class='card'>
   <div class='card-body'>
-    <h5 class='card-title mb-1'>
-      <a class='text-decoration-none' href='/tags/authoring'>authoring (3)</a>
-    </h5>
-    <p class='card-text text-body-secondary mb-2'></p>
-    <small class='text-body-secondary'></small>
-  </div>
-</div>
-<div class='card mb-3'>
-  <div class='card-body'>
-    <h5 class='card-title mb-1'>
-      <a class='text-decoration-none' href='/tags/cli'>cli (4)</a>
-    </h5>
-    <p class='card-text text-body-secondary mb-2'></p>
-    <small class='text-body-secondary'></small>
-  </div>
-</div>
-<div class='card mb-3'>
-  <div class='card-body'>
-    <h5 class='card-title mb-1'>
-      <a class='text-decoration-none' href='/tags/intro'>intro (2)</a>
-    </h5>
-    <p class='card-text text-body-secondary mb-2'></p>
-    <small class='text-body-secondary'></small>
-  </div>
-</div>
-<div class='card mb-3'>
-  <div class='card-body'>
-    <h5 class='card-title mb-1'>
-      <a class='text-decoration-none' href='/tags/reference'>reference (5)</a>
-    </h5>
-    <p class='card-text text-body-secondary mb-2'></p>
-    <small class='text-body-secondary'></small>
-  </div>
-</div>
+    <article>
+      <h1 class='mb-4'>Writing Posts</h1>
+      <p>A post is a Markdown file with a <code>---</code> front matter block:</p>
+<pre><code>---
+title: My Post
+date: 2026-07-20
+tags: [raku, web]
+description: A short summary.
+---
+The body goes here.
+</code></pre>
+<p>Run <code>blogin new "My Post"</code> to scaffold one with the front matter filled in.</p>
+<h2 id="sections">Sections<a class="anchor" href="#sections">#</a></h2>
+<p>The subdirectory a file sits in under <code>content/</code> is its section, and the section
+is both the URL prefix and the layout selector. A file at <code>content/posts/hello.md</code>
+becomes <code>/posts/hello</code> and renders through <code>layouts/posts/show.haml</code> when present,
+otherwise <code>layouts/show.haml</code>. Nested directories become nested sections and
+nested nav entries.</p>
+<h2 id="tags">Tags<a class="anchor" href="#tags">#</a></h2>
+<p>Tags are collected across every section. Each tag gets a page at <code>/tags/&lt;tag&gt;</code>
+listing its posts, and a tag index at <code>/tags</code> lists every tag with counts.</p>
 
-  
-</section>
+    </article>
+    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/getting-started/"><span aria-hidden="true">&larr;</span> Getting Started</a><a class="next btn btn-primary" href="/guide/layouts/">Layouts <span aria-hidden="true">&rarr;</span></a></nav>
+  </div>
+</div>
 
     </main>
     <footer class='border-top mt-5 py-4'>

@@ -21,10 +21,10 @@
         <div id='topbar' class='collapse navbar-collapse'>
           <ul class='navbar-nav mb-2 mb-lg-0'>
   <li class='nav-item'>
-  <a class='nav-link' href='/guide'>Guide</a>
+  <a class='nav-link' href='/guide/'>Guide</a>
 </li>
 <li class='nav-item'>
-  <a class='nav-link active' href='/cli'>CLI</a>
+  <a class='nav-link' href='/cli/'>CLI</a>
 </li>
 
 </ul>
@@ -44,36 +44,56 @@
       </div>
     </nav>
     <main class='container my-4'>
-      <div class='card'>
+      <section>
+  <h1 class='mb-4'></h1>
+  <div class='card mb-3'>
   <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>blogin init</h1>
-      <p>Scaffold a new site in a directory, with a starter post, layouts, and a
-<code>blogin.json</code>.</p>
-<pre><code>blogin init [&lt;dir&gt;] [--framework=&lt;name&gt;] [--force]
-</code></pre>
-<h2 id="arguments">Arguments<a class="anchor" href="#arguments">#</a></h2>
-<dl>
-<dt><code>&lt;dir&gt;</code></dt>
-<dd>the target directory. It defaults to the current directory.</dd>
-</dl>
-<h2 id="options">Options<a class="anchor" href="#options">#</a></h2>
-<dl>
-<dt><code>--framework=&lt;name&gt;</code></dt>
-<dd>selects a CSS framework profile: <code>none</code> (the default), <code>bootstrap5</code>, <code>pico</code>, or <code>bulma</code>. The choice is recorded in <code>blogin.json</code> and wired into the scaffolded layouts.</dd>
-<dt><code>--force</code></dt>
-<dd>overwrites a directory that is not empty.</dd>
-<dt><code>--verbose</code></dt>
-<dd>prints extra detail.</dd>
-</dl>
-<h2 id="example">Example<a class="anchor" href="#example">#</a></h2>
-<pre><code>blogin init my-blog --framework=bootstrap5
-</code></pre>
-
-    </article>
-    <nav class="post-nav"><a class="next btn btn-primary" href="/cli/blogin-build">blogin build <span aria-hidden="true">&rarr;</span></a></nav>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/guide/css-frameworks/'>CSS Frameworks</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>Emit framework-specific classes without touching the core renderer.</p>
+    <small class='text-body-secondary'>2026-07-16</small>
   </div>
 </div>
+<div class='card mb-3'>
+  <div class='card-body'>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/guide/feeds-and-search/'>Feeds and Search</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>Atom feeds, the sitemap, and browser search.</p>
+    <small class='text-body-secondary'>2026-07-14</small>
+  </div>
+</div>
+<div class='card mb-3'>
+  <div class='card-body'>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/guide/previewing-and-building/'>Previewing and Building</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>The dev server, incremental builds, and debug output.</p>
+    <small class='text-body-secondary'>2026-07-13</small>
+  </div>
+</div>
+<div class='card mb-3'>
+  <div class='card-body'>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/guide/configuration/'>Configuration</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>The keys in blogin.json.</p>
+    <small class='text-body-secondary'>2026-07-12</small>
+  </div>
+</div>
+<div class='card mb-3'>
+  <div class='card-body'>
+    <h5 class='card-title mb-1'>
+      <a class='text-decoration-none' href='/guide/deploying/'>Deploying</a>
+    </h5>
+    <p class='card-text text-body-secondary mb-2'>Publishing the built public/ directory.</p>
+    <small class='text-body-secondary'>2026-07-11</small>
+  </div>
+</div>
+
+  
+</section>
 
     </main>
     <footer class='border-top mt-5 py-4'>
