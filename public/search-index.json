@@ -5,7 +5,7 @@
     "tags": [
       "cli"
     ],
-    "text": "Create a new post file from a title, with front matter filled in and a slug derived from the title.\nblogin new <title> [--src=<dir>] [--section=<name>]\n\nArguments\n<title> is the post title. The filename slug comes from it.\nOptions\n--src=<dir> is the content directory. It defaults to content.\n--section=<name> is the section to place the post in. It defaults to the home-section from blogin.json.\n--verbose and --quiet set the logging level.\nExample\nblogin new \"My First Post\" --section=posts",
+    "text": "Create a new post file from a title, with front matter filled in and a slug derived from the title.\nblogin new <title> [--src=<dir>] [--section=<name>]\n\nArguments\n<title>\nthe post title. The filename slug comes from it.\nOptions\n--src=<dir>\nthe content directory. It defaults to content.\n--section=<name>\nthe section to place the post in. It defaults to the home-section from blogin.json.\n--verbose\nprints extra detail.\nExample\nblogin new \"My First Post\" --section=posts",
     "title": "blogin new",
     "url": "/cli/blogin-new"
   },
@@ -15,7 +15,7 @@
     "tags": [
       "cli"
     ],
-    "text": "Build the site and serve it locally, rebuilding when content, layouts, static assets, or the configuration change.\nblogin serve [--src=<dir>] [--port=<n>]\n\nOptions\n--src=<dir> is the content directory. It defaults to content.\n--port=<n> is the port to listen on. It defaults to 3000.\n--verbose and --quiet set the logging level.\nExample\nblogin serve --port=4000",
+    "text": "Build the site and serve it locally, rebuilding when content, layouts, static assets, or the configuration change.\nblogin serve [--src=<dir>] [--port=<n>]\n\nOptions\n--src=<dir>\nthe content directory. It defaults to content.\n--port=<n>\nthe port to listen on. It defaults to 3000.\n--verbose\nprints extra detail.\nExample\nblogin serve --port=4000",
     "title": "blogin serve",
     "url": "/cli/blogin-serve"
   },
@@ -25,7 +25,7 @@
     "tags": [
       "cli"
     ],
-    "text": "Render the content tree to static HTML, writing feeds, a sitemap, and the search index alongside the pages.\nblogin build [--src=<dir>] [--out=<dir>] [--drafts] [--jobs=<n>] [--debug] [--force]\n\nOptions\n--src=<dir> is the content directory. It defaults to content. The blogin.json next to it supplies the configuration.\n--out=<dir> overrides the output directory from the config.\n--drafts includes posts marked as drafts.\n--jobs=<n> sets the number of parallel workers. It defaults to the CPU count.\n--debug emits provenance comments around rendered partials and pages.\n--force rewrites every file, bypassing the incremental content-hash check.\n--verbose and --quiet set the logging level.\nExample\nblogin build --out=dist --force",
+    "text": "Render the content tree to static HTML, writing feeds, a sitemap, and the search index alongside the pages.\nblogin build [--src=<dir>] [--out=<dir>] [--drafts] [--jobs=<n>] [--debug] [--force]\n\nOptions\n--src=<dir>\nthe content directory. It defaults to content. The blogin.json next to it supplies the configuration.\n--out=<dir>\noverrides the output directory from the config.\n--drafts\nincludes posts marked as drafts.\n--jobs=<n>\nsets the number of parallel workers. It defaults to the CPU count.\n--debug\nemits provenance comments around rendered partials and pages.\n--force\nrewrites every file, bypassing the incremental content-hash check.\n--verbose\nprints extra detail.\nExample\nblogin build --out=dist --force",
     "title": "blogin build",
     "url": "/cli/blogin-build"
   },
@@ -35,7 +35,7 @@
     "tags": [
       "cli"
     ],
-    "text": "Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.\nblogin init [<dir>] [--framework=<name>] [--force]\n\nArguments\n<dir> is the target directory. It defaults to the current directory.\nOptions\n--framework=<name> selects a CSS framework profile: none (the default), bootstrap5, pico, or bulma. The choice is recorded in blogin.json and wired into the scaffolded layouts.\n--force overwrites a directory that is not empty.\n--verbose and --quiet set the logging level.\nExample\nblogin init my-blog --framework=bootstrap5",
+    "text": "Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.\nblogin init [<dir>] [--framework=<name>] [--force]\n\nArguments\n<dir>\nthe target directory. It defaults to the current directory.\nOptions\n--framework=<name>\nselects a CSS framework profile: none (the default), bootstrap5, pico, or bulma. The choice is recorded in blogin.json and wired into the scaffolded layouts.\n--force\noverwrites a directory that is not empty.\n--verbose\nprints extra detail.\nExample\nblogin init my-blog --framework=bootstrap5",
     "title": "blogin init",
     "url": "/cli/blogin-init"
   },
@@ -105,7 +105,7 @@
     "tags": [
       "authoring"
     ],
-    "text": "Blogin renders pages with Template::HAML. A build wraps each post's rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.\nThe layout files\nFileRolebase.hamlPage shell, wraps everything. Required.show.hamlA single post. Required.index.hamlA section or tag listing. Required for listings.home.hamlThe site root. Optional, falls back to index.haml._header.haml, _sidebar.haml, _footer.hamlOptional chrome, pulled in by base.haml._nav.haml, _search.hamlThe nav menu and search form partials.\nAn absent chrome partial is skipped rather than an error, so a site without a sidebar renders full width. A missing base.haml, show.haml, or index.haml is a build error that names the layout.\nThe home page\nThe site root renders through home.haml when it exists, falling back to index.haml. This gives the root a distinct landing page, a hero and feature callouts, separate from the home-section listing that the same posts produce at their section path. Like a listing, home.haml can reach posts and pagination-html, or ignore them for a static landing.\nPer-section layouts\nA section overrides a layout by placing it in a matching subdirectory. A post in content/essays/ renders through layouts/essays/show.haml when present, otherwise layouts/show.haml, resolved by the nearest ancestor. The same applies to index.haml and the chrome partials.\nWhat a template can reach\nTemplates read post fields and site data as bare identifiers: title, date, body, site-title, section. A single post exposes body (the rendered HTML, injected unescaped), while a listing exposes posts and pagination-html. The nav tree is available as nav-nodes, with nav-current(node) marking the current section.",
+    "text": "Blogin renders pages with Template::HAML. A build wraps each post's rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.\nThe layout files\nFileRolebase.hamlPage shell, wraps everything. Required.show.hamlA single post. Required.index.hamlA section or tag listing. Required for listings.home.hamlThe site root. Optional, falls back to index.haml._header.haml, _sidebar.haml, _footer.hamlOptional chrome, pulled in by base.haml._nav.haml, _search.hamlThe nav menu and search form partials.\nAn absent chrome partial is skipped rather than an error, so a site without a sidebar renders full width. A missing base.haml, show.haml, or index.haml is a build error that names the layout.\nThe home page\nThe site root renders through home.haml when it exists, falling back to index.haml. This gives the root a distinct landing page, a hero and feature callouts, separate from the home-section listing that the same posts produce at their section path. Like a listing, home.haml can reach posts and pagination-html, or ignore them for a static landing.\nPer-section layouts\nA section overrides a layout by placing it in a matching subdirectory. A post in content/essays/ renders through layouts/essays/show.haml when present, otherwise layouts/show.haml, resolved by the nearest ancestor. The same applies to index.haml and the chrome partials.\nWhat a template can reach\nTemplates read post fields and site data as bare identifiers: title, date, body, site-title, section. A single post exposes body (the rendered HTML, injected unescaped) and post-nav-html, links to the newer and older posts in the same section. A listing exposes posts and pagination-html. The nav tree is available as nav-nodes, with nav-current(node) marking the current section.",
     "title": "Layouts",
     "url": "/guide/layouts"
   },
