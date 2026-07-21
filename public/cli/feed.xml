@@ -10,23 +10,34 @@
     <id>https://blogin.dev/cli/blogin-init/</id>
     <link href="https://blogin.dev/cli/blogin-init/"/>
     <updated>2026-07-04T00:00:00Z</updated>
-  </entry>
-  <entry>
-    <title>blogin build</title>
-    <id>https://blogin.dev/cli/blogin-build/</id>
-    <link href="https://blogin.dev/cli/blogin-build/"/>
-    <updated>2026-07-03T00:00:00Z</updated>
-  </entry>
-  <entry>
-    <title>blogin serve</title>
-    <id>https://blogin.dev/cli/blogin-serve/</id>
-    <link href="https://blogin.dev/cli/blogin-serve/"/>
-    <updated>2026-07-02T00:00:00Z</updated>
+    <summary>Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.</summary>
   </entry>
   <entry>
     <title>blogin new</title>
     <id>https://blogin.dev/cli/blogin-new/</id>
     <link href="https://blogin.dev/cli/blogin-new/"/>
     <updated>2026-07-01T00:00:00Z</updated>
+    <summary>Create a new post file from a title, with front matter filled in and a slug derived from the title.</summary>
+  </entry>
+  <entry>
+    <title>blogin build</title>
+    <id>https://blogin.dev/cli/blogin-build/</id>
+    <link href="https://blogin.dev/cli/blogin-build/"/>
+    <updated>2026-07-03T00:00:00Z</updated>
+    <summary>Render the content tree to static HTML, writing feeds, a sitemap, and the search index alongside the pages.</summary>
+  </entry>
+  <entry>
+    <title>blogin serve</title>
+    <id>https://blogin.dev/cli/blogin-serve/</id>
+    <link href="https://blogin.dev/cli/blogin-serve/"/>
+    <updated>2026-07-02T00:00:00Z</updated>
+    <summary>Build the site and serve it locally, rebuilding when content, layouts, static assets, or the configuration change.</summary>
+  </entry>
+  <entry>
+    <title>blogin clean</title>
+    <id>https://blogin.dev/cli/blogin-clean/</id>
+    <link href="https://blogin.dev/cli/blogin-clean/"/>
+    <updated>2026-07-05T00:00:00Z</updated>
+    <summary>Remove the output directory produced by a build, leaving the content, layouts, and configuration in place.</summary>
   </entry>
 </feed>

@@ -1,6 +1,7 @@
 ---
 title: Configuration
 date: 2026-07-12
+order: 11
 tags: [reference]
 description: The keys in blogin.json.
 ---
@@ -16,6 +17,8 @@ options override the file.
 | `clean-urls` | Extensionless URLs when true. |
 | `css-framework` | Class-map profile: `none`, `bootstrap5`, ... |
 | `page-size` | Posts per listing page. |
+| `summary-length` | Character cap on an auto-generated post summary (default 200). |
+| `robots` | Emit `robots.txt` (default true). |
 | `highlight` | Server-side syntax highlighting for fenced code. |
 | `search` | Emit the search index and script. |
 

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blogin.dev/sitemap.xml

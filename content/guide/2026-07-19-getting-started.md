@@ -1,6 +1,7 @@
 ---
 title: Getting Started
 date: 2026-07-19
+order: 2
 tags: [intro]
 description: Install Blogin and build your first site.
 ---

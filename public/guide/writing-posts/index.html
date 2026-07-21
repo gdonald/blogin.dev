@@ -4,6 +4,16 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Blogin</title>
+    <link rel="canonical" href="https://blogin.dev/guide/writing-posts/"/>
+<meta name="description" content="Front matter, sections, and tags."/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Writing Posts"/>
+<meta property="og:description" content="Front matter, sections, and tags."/>
+<meta property="og:url" content="https://blogin.dev/guide/writing-posts/"/>
+<meta property="og:site_name" content="Blogin"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Writing Posts"/>
+<meta name="twitter:description" content="Front matter, sections, and tags."/>
     <link rel='icon' type='image/svg+xml' href='/logo.svg'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel='stylesheet' href='/blogin.css'>
@@ -64,6 +74,40 @@ is both the URL prefix and the layout selector. A file at <code>content/posts/he
 becomes <code>/posts/hello</code> and renders through <code>layouts/posts/show.haml</code> when present,
 otherwise <code>layouts/show.haml</code>. Nested directories become nested sections and
 nested nav entries.</p>
+<h2 id="summaries">Summaries<a class="anchor" href="#summaries">#</a></h2>
+<p>A listing and a feed entry show a short summary of each post rather than the
+whole body. Blogin picks the summary in this order:</p>
+<ol>
+<li>A <code>summary</code> in front matter, used verbatim.</li>
+<li>The text before a `` marker in the body.</li>
+<li>The first block of the body, capped at <code>summary-length</code> characters (200 by
+default, set in <code>blogin.json</code>).</li>
+</ol>
+<pre><code>---
+title: A Longer Post
+summary: One sentence that stands in for the post on listing pages.
+---
+</code></pre>
+<p>Or mark the cut point in the body:</p>
+<pre><code>The opening paragraph that reads as the teaser.
+
+
+
+The rest of the post, shown only on the post's own page.
+</code></pre>
+<p>The marker never appears in the rendered page. A layout reaches the summary in a
+listing through <code>$entry&lt;summary&gt;</code>.</p>
+<h2 id="ordering">Ordering<a class="anchor" href="#ordering">#</a></h2>
+<p>A section listing shows its posts newest first by date. Set an <code>order</code> in front
+matter to place a post explicitly instead:</p>
+<pre><code>---
+title: Getting Started
+order: 2
+---
+</code></pre>
+<p>Posts with an <code>order</code> sort ascending and come before any post without one. Posts
+without an <code>order</code> keep the newest-first date order behind them. This suits a
+guide or a documentation section where reading order matters more than date.</p>
 <h2 id="tags">Tags<a class="anchor" href="#tags">#</a></h2>
 <p>Tags are collected across every section. Each tag gets a page at <code>/tags/&lt;tag&gt;</code>
 listing its posts, and a tag index at <code>/tags</code> lists every tag with counts.</p>

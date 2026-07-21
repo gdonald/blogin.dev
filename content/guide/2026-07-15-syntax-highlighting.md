@@ -1,6 +1,7 @@
 ---
 title: Syntax Highlighting
 date: 2026-07-15
+order: 7
 tags: [authoring]
 description: Server-side highlighting for fenced code.
 ---

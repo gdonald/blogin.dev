@@ -10,59 +10,98 @@
     <id>https://blogin.dev/guide/overview/</id>
     <link href="https://blogin.dev/guide/overview/"/>
     <updated>2026-07-20T00:00:00Z</updated>
+    <summary>Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime:…</summary>
   </entry>
   <entry>
     <title>Getting Started</title>
     <id>https://blogin.dev/guide/getting-started/</id>
     <link href="https://blogin.dev/guide/getting-started/"/>
     <updated>2026-07-19T00:00:00Z</updated>
+    <summary>Install</summary>
   </entry>
   <entry>
     <title>Writing Posts</title>
     <id>https://blogin.dev/guide/writing-posts/</id>
     <link href="https://blogin.dev/guide/writing-posts/"/>
     <updated>2026-07-18T00:00:00Z</updated>
+    <summary>A post is a Markdown file with a --- front matter block:
+---
+title: My Post
+date: 2026-07-20
+tags: [raku, web]
+description: A short summary.
+---
+The body goes here.
+
+Run blogin new &quot;My Post&quot; to scaffold one with the front matter filled in.
+Sections
+The subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.
+Summaries
+A listing and a feed entry show a short summary of each post rather than the whole body. Blogin picks the summary in this order:
+A summary in front matter, used verbatim.
+The text before a `</summary>
   </entry>
   <entry>
     <title>Layouts</title>
     <id>https://blogin.dev/guide/layouts/</id>
     <link href="https://blogin.dev/guide/layouts/"/>
     <updated>2026-07-17T00:00:00Z</updated>
+    <summary>Blogin renders pages with Template::HAML. A build wraps each post&apos;s rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.</summary>
+  </entry>
+  <entry>
+    <title>Data files</title>
+    <id>https://blogin.dev/guide/data-files/</id>
+    <link href="https://blogin.dev/guide/data-files/"/>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <summary>A data/ directory beside content/ holds structured values that layouts read directly, so a list of authors, a set of social links, or a navigation table lives in one place rather than being repeated…</summary>
   </entry>
   <entry>
     <title>CSS Frameworks</title>
     <id>https://blogin.dev/guide/css-frameworks/</id>
     <link href="https://blogin.dev/guide/css-frameworks/"/>
     <updated>2026-07-16T00:00:00Z</updated>
+    <summary>The HTML Blogin emits carries framework-specific classes drawn from a selected profile, set by the css-framework config key. The core renderer stays framework-agnostic: it asks the profile for a…</summary>
   </entry>
   <entry>
     <title>Syntax Highlighting</title>
     <id>https://blogin.dev/guide/syntax-highlighting/</id>
     <link href="https://blogin.dev/guide/syntax-highlighting/"/>
     <updated>2026-07-15T00:00:00Z</updated>
+    <summary>Set &quot;highlight&quot;: true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it.</summary>
   </entry>
   <entry>
     <title>Feeds and Search</title>
     <id>https://blogin.dev/guide/feeds-and-search/</id>
     <link href="https://blogin.dev/guide/feeds-and-search/"/>
     <updated>2026-07-14T00:00:00Z</updated>
+    <summary>Every build with at least one post emits feeds, a sitemap, and a search index.</summary>
+  </entry>
+  <entry>
+    <title>Metadata and SEO</title>
+    <id>https://blogin.dev/guide/metadata-and-seo/</id>
+    <link href="https://blogin.dev/guide/metadata-and-seo/"/>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <summary>Blogin emits per-page metadata for search engines and social cards, and a site-wide robots.txt, without any template work beyond a single call in the page head.</summary>
   </entry>
   <entry>
     <title>Previewing and Building</title>
     <id>https://blogin.dev/guide/previewing-and-building/</id>
     <link href="https://blogin.dev/guide/previewing-and-building/"/>
     <updated>2026-07-13T00:00:00Z</updated>
+    <summary>The preview server</summary>
   </entry>
   <entry>
     <title>Configuration</title>
     <id>https://blogin.dev/guide/configuration/</id>
     <link href="https://blogin.dev/guide/configuration/"/>
     <updated>2026-07-12T00:00:00Z</updated>
+    <summary>Site-wide settings live in blogin.json at the project root. Command-line options override the file.</summary>
   </entry>
   <entry>
     <title>Deploying</title>
     <id>https://blogin.dev/guide/deploying/</id>
     <link href="https://blogin.dev/guide/deploying/"/>
     <updated>2026-07-11T00:00:00Z</updated>
+    <summary>blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host.</summary>
   </entry>
 </feed>

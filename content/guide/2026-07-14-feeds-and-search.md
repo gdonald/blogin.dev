@@ -1,6 +1,7 @@
 ---
 title: Feeds and Search
 date: 2026-07-14
+order: 8
 tags: [reference]
 description: Atom feeds, the sitemap, and browser search.
 ---

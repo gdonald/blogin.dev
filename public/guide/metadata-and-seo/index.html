@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Blogin</title>
+    <link rel="canonical" href="https://blogin.dev/guide/metadata-and-seo/"/>
+<meta name="description" content="Open Graph and Twitter tags, canonical links, and robots.txt."/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Metadata and SEO"/>
+<meta property="og:description" content="Open Graph and Twitter tags, canonical links, and robots.txt."/>
+<meta property="og:url" content="https://blogin.dev/guide/metadata-and-seo/"/>
+<meta property="og:site_name" content="Blogin"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Metadata and SEO"/>
+<meta name="twitter:description" content="Open Graph and Twitter tags, canonical links, and robots.txt."/>
+    <link rel='icon' type='image/svg+xml' href='/logo.svg'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/blogin.css'>
+  </head>
+  <body>
+    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+      <div class='container'>
+        <a class='navbar-brand d-flex align-items-center' href='/'>
+          <img class='me-2' src='/logo.svg' alt='' width='28' height='28'>
+          Blogin
+        </a>
+        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
+          <span class='navbar-toggler-icon'></span>
+        </button>
+        <div id='topbar' class='collapse navbar-collapse'>
+          <ul class='navbar-nav mb-2 mb-lg-0'>
+  <li class='nav-item'>
+  <a class='nav-link active' href='/guide/'>Guide</a>
+</li>
+<li class='nav-item'>
+  <a class='nav-link' href='/cli/'>CLI</a>
+</li>
+
+</ul>
+
+          <div class='ms-auto mt-2 mt-lg-0' style='width: 24rem; max-width: 90vw'>
+            <div class='blogin-search'>
+  <form data-blogin-search='true' role='search'>
+    <input type='search' name='q' placeholder='Search' aria-label='Search'>
+  </form>
+  <ul data-blogin-results='true'></ul>
+</div>
+<link rel='stylesheet' href='/search.css'>
+<script src='/search.js'></script>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class='container my-4'>
+      <div class='card'>
+  <div class='card-body'>
+    <article>
+      <h1 class='mb-4'>Metadata and SEO</h1>
+      <p>Blogin emits per-page metadata for search engines and social cards, and a
+site-wide <code>robots.txt</code>, without any template work beyond a single call in the
+page head.</p>
+<h2 id="head-meta">head-meta<a class="anchor" href="#head-meta">#</a></h2>
+<p>A layout's <code>base.haml</code> head calls <code>head-meta</code>, which the scaffold includes:</p>
+<pre><code class="language-haml">%head
+  %title= site-title
+  != head-meta
+</code></pre>
+<p>For a post page it emits a canonical link and the article metadata:</p>
+<pre><code class="language-html">&lt;link rel="canonical" href="https://example.com/posts/hello"/&gt;
+&lt;meta name="description" content="A short description."/&gt;
+&lt;meta property="og:type" content="article"/&gt;
+&lt;meta property="og:title" content="Hello"/&gt;
+&lt;meta property="og:description" content="A short description."/&gt;
+&lt;meta property="og:url" content="https://example.com/posts/hello"/&gt;
+&lt;meta property="og:site_name" content="My Site"/&gt;
+&lt;meta name="twitter:card" content="summary"/&gt;
+&lt;meta name="twitter:title" content="Hello"/&gt;
+&lt;meta name="twitter:description" content="Hello"/&gt;
+</code></pre>
+<p>The description is the post's front-matter <code>description</code>, falling back to the
+derived summary. The canonical and <code>og:url</code> links are absolute, built from
+<code>base-url</code> in <code>blogin.json</code>, so set <code>base-url</code> for them to be complete. A listing
+page emits the same shape with <code>og:type</code> of <code>website</code> and the section label as
+the title.</p>
+<h2 id="robots-txt">robots.txt<a class="anchor" href="#robots-txt">#</a></h2>
+<p>Every build writes <code>robots.txt</code> at the site root:</p>
+<pre><code>User-agent: *
+Allow: /
+Sitemap: https://example.com/sitemap.xml
+</code></pre>
+<p>The <code>Sitemap</code> line appears when <code>base-url</code> is set. Turn the file off with
+<code>"robots": false</code> in <code>blogin.json</code>.</p>
+
+    </article>
+    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/feeds-and-search/"><span aria-hidden="true">&larr;</span> Feeds and Search</a><a class="next btn btn-primary" href="/guide/previewing-and-building/">Previewing and Building <span aria-hidden="true">&rarr;</span></a></nav>
+  </div>
+</div>
+
+    </main>
+    <footer class='border-top mt-5 py-4'>
+      <div class='container'>
+        <p class='text-body-secondary mb-0'>Built with Blogin.</p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

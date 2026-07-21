@@ -1,6 +1,7 @@
 ---
 title: Previewing and Building
 date: 2026-07-13
+order: 10
 tags: [reference]
 description: The dev server, incremental builds, and debug output.
 ---
