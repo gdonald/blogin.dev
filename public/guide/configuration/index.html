@@ -77,6 +77,10 @@ options override the file.</p>
 <td>Absolute base for feeds and the sitemap.</td>
 </tr>
 <tr>
+<td><code>author</code></td>
+<td>Site author, available to layouts and feeds.</td>
+</tr>
+<tr>
 <td><code>output-dir</code></td>
 <td>Where the build writes (default <code>public</code>).</td>
 </tr>
@@ -105,12 +109,32 @@ options override the file.</p>
 <td>Emit <code>robots.txt</code> (default true).</td>
 </tr>
 <tr>
+<td><code>taxonomies</code></td>
+<td>Front-matter keys to group posts by (default <code>["tags"]</code>).</td>
+</tr>
+<tr>
+<td><code>feed-formats</code></td>
+<td>Feed formats to emit: <code>atom</code>, <code>rss</code>, <code>json</code> (default <code>["atom"]</code>).</td>
+</tr>
+<tr>
 <td><code>highlight</code></td>
 <td>Server-side syntax highlighting for fenced code.</td>
 </tr>
 <tr>
 <td><code>search</code></td>
 <td>Emit the search index and script.</td>
+</tr>
+<tr>
+<td><code>search-text-length</code></td>
+<td>Characters of body text indexed per post (default 2000).</td>
+</tr>
+<tr>
+<td><code>search-cap</code></td>
+<td>Maximum search results shown (default 10).</td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td>Emit provenance comments around rendered partials and pages.</td>
 </tr>
 </tbody>
 </table>

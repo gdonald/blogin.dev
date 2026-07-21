@@ -63,6 +63,12 @@
 <p>Blogin writes a site-wide Atom feed at <code>public/feed.xml</code> and a per-section feed at
 <code>public/&lt;section&gt;/feed.xml</code>. Entry links are absolute, built from <code>base-url</code>, so
 set that in <code>blogin.json</code>. A <code>public/sitemap.xml</code> lists every built page.</p>
+<p>RSS 2.0 and JSON Feed are available alongside Atom. List the formats you want in
+<code>feed-formats</code>:</p>
+<pre><code class="language-json"><span class="hl-string">"feed-formats"</span>: [<span class="hl-string">"atom"</span>, <span class="hl-string">"rss"</span>, <span class="hl-string">"json"</span>]
+</code></pre>
+<p>Each format writes a site-wide file and a per-section file: Atom at <code>feed.xml</code>,
+RSS at <code>rss.xml</code>, and JSON Feed at <code>feed.json</code>. The default is <code>["atom"]</code>.</p>
 <h2 id="search">Search<a class="anchor" href="#search">#</a></h2>
 <p>Search runs in the browser against a prebuilt index, so production stays static.
 The build writes <code>public/search-index.json</code>, one record per post with its title,

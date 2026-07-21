@@ -119,12 +119,23 @@ falling back to <code>show.haml</code> when that file is absent:</p>
 </code></pre>
 <p>Posts under <code>content/essays/</code> then render through <code>layouts/essay.haml</code>, resolved
 along the same nearest-ancestor search path as the directory-based override.</p>
+<h2 id="table-of-contents">Table of contents<a class="anchor" href="#table-of-contents">#</a></h2>
+<p>A post view exposes <code>toc-html</code>, a nested list of the post's headings linked to
+their anchors, and <code>has-toc</code>, true when the post's front matter sets <code>toc: true</code>.
+A show layout renders one by gating on the flag:</p>
+<pre><code class="language-haml">- if has-toc
+  %nav.toc
+    != toc-html
+</code></pre>
+<p>The list nests by heading level and each entry links to the heading's slug id,
+the same id the renderer puts on the heading itself.</p>
 <h2 id="what-a-template-can-reach">What a template can reach<a class="anchor" href="#what-a-template-can-reach">#</a></h2>
 <p>Templates read post fields and site data as bare identifiers: <code>title</code>, <code>date</code>,
 <code>body</code>, <code>site-title</code>, <code>section</code>. A single post exposes <code>body</code> (the rendered HTML,
 injected unescaped) and <code>post-nav-html</code>, links to the newer and older posts in the
-same section. A listing exposes <code>posts</code> and <code>pagination-html</code>. The nav tree is
-available as <code>nav-nodes</code>, with <code>nav-current(node)</code> marking the current section.</p>
+same section. It also exposes <code>toc-html</code> and <code>has-toc</code> for a table of contents. A
+listing exposes <code>posts</code> and <code>pagination-html</code>. The nav tree is available as
+<code>nav-nodes</code>, with <code>nav-current(node)</code> marking the current section.</p>
 
     </article>
     <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/writing-posts/"><span aria-hidden="true">&larr;</span> Writing Posts</a><a class="next btn btn-primary" href="/guide/data-files/">Data files <span aria-hidden="true">&rarr;</span></a></nav>

@@ -65,8 +65,26 @@ ships is static HTML, CSS, and one search script.</p>
 <h2 id="the-pipeline">The pipeline<a class="anchor" href="#the-pipeline">#</a></h2>
 <p>A build reads <code>content/</code>, parses each post's front matter and Markdown, renders
 the body to HTML, wraps it in your HAML layouts, and writes the result under
-<code>public/</code>. The same pass produces section listings, tag pages, an Atom feed per
-section, a sitemap, and a search index.</p>
+<code>public/</code>. The same pass produces section listings, taxonomy pages, per-section
+feeds, a sitemap, and a search index.</p>
+<h2 id="what-you-get">What you get<a class="anchor" href="#what-you-get">#</a></h2>
+<ul>
+<li>Sections from the content tree, with clean URLs, pagination, and explicit post
+ordering.</li>
+<li>Named taxonomies (tags, categories, and any you declare), each with term pages
+and an index. See <a href="/guide/writing-posts/">Writing Posts</a>.</li>
+<li>Atom, RSS, and JSON feeds, site-wide and per section, and a sitemap. See
+<a href="/guide/feeds-and-search/">Feeds and Search</a>.</li>
+<li>Markdown extensions: tables, task lists, footnotes, and reference links. See
+<a href="/guide/writing-posts/">Writing Posts</a>.</li>
+<li>Per-post summaries and an optional table of contents. See
+<a href="/guide/writing-posts/">Writing Posts</a>.</li>
+<li>Open Graph and Twitter metadata, canonical links, and <code>robots.txt</code>. See
+<a href="/guide/metadata-and-seo/">Metadata and SEO</a>.</li>
+<li>Data files, CSS-framework profiles, and server-side syntax highlighting.</li>
+<li>A preview server that rebuilds and live-reloads the open page on save. See
+<a href="/guide/previewing-and-building/">Previewing and Building</a>.</li>
+</ul>
 <h2 id="owning-the-parser">Owning the parser<a class="anchor" href="#owning-the-parser">#</a></h2>
 <p>Blogin parses Markdown with its own grammar, so there is no C dependency and no
 ecosystem parser to track. Owning the parser also means it can carry extensions,

@@ -13,6 +13,16 @@ Blogin writes a site-wide Atom feed at `public/feed.xml` and a per-section feed 
 `public/<section>/feed.xml`. Entry links are absolute, built from `base-url`, so
 set that in `blogin.json`. A `public/sitemap.xml` lists every built page.
 
+RSS 2.0 and JSON Feed are available alongside Atom. List the formats you want in
+`feed-formats`:
+
+```json
+"feed-formats": ["atom", "rss", "json"]
+```
+
+Each format writes a site-wide file and a per-section file: Atom at `feed.xml`,
+RSS at `rss.xml`, and JSON Feed at `feed.json`. The default is `["atom"]`.
+
 ## Search
 
 Search runs in the browser against a prebuilt index, so production stays static.

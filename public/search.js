@@ -65,13 +65,17 @@ const BLOGIN_SEARCH_CAP = 10;
 
       const a = document.createElement('a');
       a.href = rec.url;
-      a.textContent = rec.title;
-      li.appendChild(a);
+
+      const title = document.createElement('span');
+      title.className = 'blogin-result-title';
+      title.textContent = rec.title;
+      a.appendChild(title);
 
       const p = document.createElement('p');
       p.textContent = snippet(rec.text || '', tokens);
-      li.appendChild(p);
+      a.appendChild(p);
 
+      li.appendChild(a);
       results.appendChild(li);
     }
   }

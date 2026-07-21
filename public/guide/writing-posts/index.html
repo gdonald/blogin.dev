@@ -68,6 +68,23 @@ description: A short summary.
 The body goes here.
 </code></pre>
 <p>Run <code>blogin new "My Post"</code> to scaffold one with the front matter filled in.</p>
+<h2 id="reference-links-and-footnotes">Reference links and footnotes<a class="anchor" href="#reference-links-and-footnotes">#</a></h2>
+<p>Links can carry their target in a separate definition rather than inline. Write
+<code>[text][label]</code> in the body and define the label anywhere in the file:</p>
+<pre><code>See [the home page][home] for more.
+
+[home]: https://example.com "Optional title"
+</code></pre>
+<p>A collapsed form, <code>[text][]</code>, uses the text as the label. Labels match
+case-insensitively, and an undefined reference is left as literal text.</p>
+<p>Footnotes use <code>[^label]</code> where the note is cited, with a matching definition:</p>
+<pre><code>A claim that needs a source[^src].
+
+[^src]: The cited source.
+</code></pre>
+<p>Footnotes are numbered in the order they are first referenced and collected into
+a footnotes section at the end of the post, each with a link back to its
+reference. Reference and footnote definition lines never render as content.</p>
 <h2 id="sections">Sections<a class="anchor" href="#sections">#</a></h2>
 <p>The subdirectory a file sits in under <code>content/</code> is its section, and the section
 is both the URL prefix and the layout selector. A file at <code>content/posts/hello.md</code>
@@ -97,6 +114,10 @@ The rest of the post, shown only on the post's own page.
 </code></pre>
 <p>The marker never appears in the rendered page. A layout reaches the summary in a
 listing through <code>$entry&lt;summary&gt;</code>.</p>
+<h2 id="table-of-contents">Table of contents<a class="anchor" href="#table-of-contents">#</a></h2>
+<p>Set <code>toc: true</code> in front matter to turn on the table of contents for a post. The
+show layout renders it from the post's headings when the flag is set. See
+<a href="/guide/layouts/">Layouts</a> for the template side.</p>
 <h2 id="ordering">Ordering<a class="anchor" href="#ordering">#</a></h2>
 <p>A section listing shows its posts newest first by date. Set an <code>order</code> in front
 matter to place a post explicitly instead:</p>
@@ -108,9 +129,24 @@ order: 2
 <p>Posts with an <code>order</code> sort ascending and come before any post without one. Posts
 without an <code>order</code> keep the newest-first date order behind them. This suits a
 guide or a documentation section where reading order matters more than date.</p>
-<h2 id="tags">Tags<a class="anchor" href="#tags">#</a></h2>
+<h2 id="tags-and-taxonomies">Tags and taxonomies<a class="anchor" href="#tags-and-taxonomies">#</a></h2>
 <p>Tags are collected across every section. Each tag gets a page at <code>/tags/&lt;tag&gt;</code>
 listing its posts, and a tag index at <code>/tags</code> lists every tag with counts.</p>
+<p>Tags are one taxonomy. Declare more in <code>blogin.json</code> and group posts by any
+front-matter key:</p>
+<pre><code class="language-json"><span class="hl-string">"taxonomies"</span>: [<span class="hl-string">"tags"</span>, <span class="hl-string">"categories"</span>]
+</code></pre>
+<pre><code>---
+title: My Post
+tags: [raku, web]
+categories: [tutorials]
+---
+</code></pre>
+<p>Each taxonomy <code>name</code> builds a page per term at <code>/name/&lt;term&gt;</code> and an index at
+<code>/name</code>. A term page renders through <code>layouts/&lt;name&gt;.haml</code> when present, then
+<code>layouts/&lt;singular&gt;.haml</code>, then <code>layouts/term.haml</code>, then <code>layouts/index.haml</code>,
+so <code>categories</code> can style its term pages with a <code>categories.haml</code> while tags keep
+using <code>tag.haml</code>.</p>
 
     </article>
     <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/getting-started/"><span aria-hidden="true">&larr;</span> Getting Started</a><a class="next btn btn-primary" href="/guide/layouts/">Layouts <span aria-hidden="true">&rarr;</span></a></nav>

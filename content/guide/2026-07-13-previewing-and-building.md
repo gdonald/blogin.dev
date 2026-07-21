@@ -18,6 +18,11 @@ place, and config edits are picked up too. Extensionless URLs resolve to their
 like the deployed site. The server is a dev tool only; production ships static
 files.
 
+The preview server also reloads the open page for you. It injects a small client
+into each served HTML page that listens on a server-sent events stream, and a
+successful rebuild pushes a reload so the browser refreshes on its own. The
+injection happens only while serving. Built `public/` files never contain it.
+
 ## Incremental builds
 
 `blogin build` renders every page but writes a file only when its content

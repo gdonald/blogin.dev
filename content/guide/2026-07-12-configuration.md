@@ -12,6 +12,7 @@ options override the file.
 | --- | --- |
 | `title` | Site title, available to layouts. |
 | `base-url` | Absolute base for feeds and the sitemap. |
+| `author` | Site author, available to layouts and feeds. |
 | `output-dir` | Where the build writes (default `public`). |
 | `home-section` | Section whose listing is also the site root. |
 | `clean-urls` | Extensionless URLs when true. |
@@ -19,8 +20,13 @@ options override the file.
 | `page-size` | Posts per listing page. |
 | `summary-length` | Character cap on an auto-generated post summary (default 200). |
 | `robots` | Emit `robots.txt` (default true). |
+| `taxonomies` | Front-matter keys to group posts by (default `["tags"]`). |
+| `feed-formats` | Feed formats to emit: `atom`, `rss`, `json` (default `["atom"]`). |
 | `highlight` | Server-side syntax highlighting for fenced code. |
 | `search` | Emit the search index and script. |
+| `search-text-length` | Characters of body text indexed per post (default 2000). |
+| `search-cap` | Maximum search results shown (default 10). |
+| `debug` | Emit provenance comments around rendered partials and pages. |
 
 ## Per-section overrides
 

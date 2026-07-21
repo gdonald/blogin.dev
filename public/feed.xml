@@ -48,6 +48,19 @@ description: A short summary.
 The body goes here.
 
 Run blogin new &quot;My Post&quot; to scaffold one with the front matter filled in.
+Reference links and footnotes
+Links can carry their target in a separate definition rather than inline. Write [text][label] in the body and define the label anywhere in the file:
+See [the home page][home] for more.
+
+[home]: https://example.com &quot;Optional title&quot;
+
+A collapsed form, [text][], uses the text as the label. Labels match case-insensitively, and an undefined reference is left as literal text.
+Footnotes use [^label] where the note is cited, with a matching definition:
+A claim that needs a source[^src].
+
+[^src]: The cited source.
+
+Footnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.
 Sections
 The subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.
 Summaries
@@ -74,7 +87,7 @@ The text before a `</summary>
     <id>https://blogin.dev/cli/blogin-serve/</id>
     <link href="https://blogin.dev/cli/blogin-serve/"/>
     <updated>2026-07-02T00:00:00Z</updated>
-    <summary>Build the site and serve it locally, rebuilding when content, layouts, static assets, or the configuration change.</summary>
+    <summary>Build the site and serve it locally, rebuilding when content, layouts, static assets, data files, or the configuration change. A successful rebuild live-reloads the open page in the browser.</summary>
   </entry>
   <entry>
     <title>Data files</title>
