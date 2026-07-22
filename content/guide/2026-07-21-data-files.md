@@ -2,7 +2,8 @@
 title: Data files
 date: 2026-07-21
 order: 5
-tags: [authoring]
+toc: true
+tags: [templates]
 description: Load JSON and YAML into layouts, site-wide and per directory.
 ---
 A `data/` directory beside `content/` holds structured values that layouts read

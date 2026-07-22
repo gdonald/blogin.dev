@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Blogin logo">
+  <g transform="translate(0 4)" fill="#ffffff">
+    <path d="M32 21 L53 14 L45 32 Z" opacity="0.6"/>
+    <path d="M32 21 L45 32 L32 34 Z"/>
+    <path d="M32 34 L48 47 L39 41 Z" opacity="0.5"/>
+    <path d="M32 34 L39 41 L32 39 Z" opacity="0.85"/>
+    <path d="M32 21 L11 14 L19 32 Z" opacity="0.6"/>
+    <path d="M32 21 L19 32 L32 34 Z"/>
+    <path d="M32 34 L16 47 L25 41 Z" opacity="0.5"/>
+    <path d="M32 34 L25 41 L32 39 Z" opacity="0.85"/>
+    <rect x="30.6" y="18" width="2.8" height="26" rx="1.4"/>
+    <g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+      <path d="M32 19 L26 11"/><path d="M32 19 L38 11"/>
+    </g>
+  </g>
+</svg>

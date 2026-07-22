@@ -2,7 +2,8 @@
 title: Themes and Plugins
 date: 2026-07-21
 order: 12.5
-tags: [reference]
+toc: true
+tags: [styling]
 description: Reuse a layout set, and extend the build with a hook.
 ---
 ## Themes

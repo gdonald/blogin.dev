@@ -2,7 +2,8 @@
 title: Feeds and Search
 date: 2026-07-14
 order: 8
-tags: [reference]
+toc: true
+tags: [configuration, seo]
 description: Atom feeds, the sitemap, and browser search.
 ---
 Every build with at least one post emits feeds, a sitemap, and a search index.

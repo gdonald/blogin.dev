@@ -2,7 +2,7 @@
 title: Internationalization
 date: 2026-07-21
 order: 12
-tags: [reference]
+tags: [configuration]
 description: Build a site in more than one language.
 ---
 List the languages you write in and Blogin builds each into its own subtree.

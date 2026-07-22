@@ -21,11 +21,16 @@
   <url><loc>https://blogin.dev/guide/overview/</loc></url>
   <url><loc>https://blogin.dev/guide/previewing-and-building/</loc></url>
   <url><loc>https://blogin.dev/guide/syntax-highlighting/</loc></url>
+  <url><loc>https://blogin.dev/guide/template-data/</loc></url>
   <url><loc>https://blogin.dev/guide/themes-and-plugins/</loc></url>
   <url><loc>https://blogin.dev/guide/writing-posts/</loc></url>
   <url><loc>https://blogin.dev/tags/</loc></url>
-  <url><loc>https://blogin.dev/tags/authoring/</loc></url>
+  <url><loc>https://blogin.dev/tags/builds/</loc></url>
   <url><loc>https://blogin.dev/tags/cli/</loc></url>
+  <url><loc>https://blogin.dev/tags/configuration/</loc></url>
   <url><loc>https://blogin.dev/tags/intro/</loc></url>
-  <url><loc>https://blogin.dev/tags/reference/</loc></url>
+  <url><loc>https://blogin.dev/tags/markdown/</loc></url>
+  <url><loc>https://blogin.dev/tags/seo/</loc></url>
+  <url><loc>https://blogin.dev/tags/styling/</loc></url>
+  <url><loc>https://blogin.dev/tags/templates/</loc></url>
 </urlset>

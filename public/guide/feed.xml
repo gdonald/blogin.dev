@@ -17,7 +17,7 @@
     <id>https://blogin.dev/guide/getting-started/</id>
     <link href="https://blogin.dev/guide/getting-started/"/>
     <updated>2026-07-19T00:00:00Z</updated>
-    <summary>Install</summary>
+    <summary>Install Raku and zef</summary>
   </entry>
   <entry>
     <title>Writing Posts</title>
@@ -60,6 +60,13 @@ The text before a `</summary>
     <link href="https://blogin.dev/guide/layouts/"/>
     <updated>2026-07-17T00:00:00Z</updated>
     <summary>Blogin renders pages with Template::HAML. A build wraps each post&apos;s rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.</summary>
+  </entry>
+  <entry>
+    <title>Template Data</title>
+    <id>https://blogin.dev/guide/template-data/</id>
+    <link href="https://blogin.dev/guide/template-data/"/>
+    <updated>2026-07-22T00:00:00Z</updated>
+    <summary>Every layout renders against a context object. A method call in HAML is a call on that object, so = title runs the context&apos;s title method and - for posts iterates its posts collection. There are two…</summary>
   </entry>
   <entry>
     <title>Data files</title>

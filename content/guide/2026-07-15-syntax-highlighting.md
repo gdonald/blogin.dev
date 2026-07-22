@@ -2,7 +2,7 @@
 title: Syntax Highlighting
 date: 2026-07-15
 order: 7
-tags: [authoring]
+tags: [markdown]
 description: Server-side highlighting for fenced code.
 ---
 Set `"highlight": true` in `blogin.json` and Blogin highlights fenced code during

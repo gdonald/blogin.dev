@@ -2,7 +2,8 @@
 title: Metadata and SEO
 date: 2026-07-21
 order: 9
-tags: [reference]
+toc: true
+tags: [seo, configuration]
 description: Open Graph and Twitter tags, canonical links, and robots.txt.
 ---
 Blogin emits per-page metadata for search engines and social cards, and a

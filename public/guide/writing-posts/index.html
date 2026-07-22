@@ -14,15 +14,34 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Writing Posts"/>
 <meta name="twitter:description" content="Front matter, sections, and tags."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.9152d4f7.svg'>
+    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.d4bbc380.svg'>
+    <link rel='icon' href='/favicon.83c2e094.ico' sizes='any'>
+    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.44bad3b4.png'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.ddf11610.css'>
+    <link rel='stylesheet' href='/assets/css/blogin.9c27f599.css'>
+    <script>
+(function () {
+  var KEY = 'blogin-theme', root = document.documentElement;
+  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+  function pref() {
+    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  apply(pref());
+  window.bloginToggleTheme = function () {
+    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(m);
+    try { localStorage.setItem(KEY, m); } catch (e) {}
+  };
+})();
+</script>
+
   </head>
   <body>
-    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
       <div class='container'>
         <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.9152d4f7.svg' alt='' width='28' height='28'>
+          <img class='me-2' src='/assets/img/logo.d4bbc380.svg' alt='' width='28' height='28'>
           Blogin
         </a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
@@ -39,8 +58,9 @@
 
 </ul>
 
-          <div class='ms-auto mt-2 mt-lg-0' style='width: 24rem; max-width: 90vw'>
-            <div class='blogin-search'>
+          <div class='ms-auto d-flex align-items-center gap-2 mt-2 mt-lg-0'>
+            <div style='width: 24rem; max-width: 90vw'>
+              <div class='blogin-search'>
   <form data-blogin-search='true' role='search'>
     <input type='search' name='q' placeholder='Search' aria-label='Search'>
   </form>
@@ -49,6 +69,8 @@
 <link rel='stylesheet' href='/assets/css/search.bebff177.css'>
 <script src='/assets/js/search.88e6a3bf.js'></script>
 
+            </div>
+            <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
           </div>
         </div>
       </div>
@@ -60,7 +82,7 @@
       <h1 class='mb-4'>Writing Posts</h1>
       <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
         <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#reference-links-and-footnotes">Reference links and footnotes</a></li><li><a href="#sections">Sections</a></li><li><a href="#summaries">Summaries</a></li><li><a href="#table-of-contents">Table of contents</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#future-dated-posts">Future-dated posts</a></li><li><a href="#shortcodes">Shortcodes</a><ul><li><a href="#adding-your-own">Adding your own</a></li></ul></li><li><a href="#redirects">Redirects</a></li><li><a href="#tags-and-taxonomies">Tags and taxonomies</a></li></ul>
+        <ul><li><a href="#reference-links-and-footnotes">Reference links and footnotes</a></li><li><a href="#sections">Sections</a></li><li><a href="#summaries">Summaries</a></li><li><a href="#table-of-contents">Table of contents</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#future-dated-posts">Future-dated posts</a></li><li><a href="#shortcodes">Shortcodes</a><ul><li><a href="#adding-your-own">Adding your own</a></li></ul></li><li><a href="#redirects">Redirects</a></li><li><a href="#tags-and-taxonomies">Tags and taxonomies</a></li><li><a href="#showing-a-post-s-tags">Showing a post's tags</a></li></ul>
       </nav>
       <p>A post is a Markdown file with a <code>---</code> front matter block:</p>
 <pre><code>---
@@ -183,11 +205,36 @@ categories: [tutorials]
 ---
 </code></pre>
 <p>Each taxonomy <code>name</code> builds a page per term at <code>/name/&lt;term&gt;</code> and an index at
-<code>/name</code>. A term page renders through <code>layouts/&lt;name&gt;.haml</code> when present, then
-<code>layouts/&lt;singular&gt;.haml</code>, then <code>layouts/term.haml</code>, then <code>layouts/index.haml</code>,
-so <code>categories</code> can style its term pages with a <code>categories.haml</code> while tags keep
-using <code>tag.haml</code>.</p>
+<code>/name</code>. A term page renders through <code>layouts/&lt;singular&gt;.haml</code> when present, then
+<code>layouts/term.haml</code>, then <code>layouts/&lt;name&gt;.haml</code>, then <code>layouts/index.haml</code>, so
+<code>tags</code> styles its term pages with <code>tag.haml</code> and <code>categories</code> with a
+<code>categorie.haml</code> or a shared <code>term.haml</code>.</p>
+<p>The index renders through <code>layouts/&lt;name&gt;.haml</code>, then <code>layouts/index.haml</code>. Since
+term pages prefer the singular, a <code>tags.haml</code> styles the tag index alone while
+<code>tag.haml</code> styles each term page, letting the index show a tag cloud and the term
+pages show post listings. Both layouts get a <code>heading</code>: the term name on a term
+page, the humanized taxonomy name on the index. A listing receives its terms as
+<code>posts</code>, so the index iterates them the same way a section listing iterates its
+posts.</p>
+<h2 id="showing-a-post-s-tags">Showing a post's tags<a class="anchor" href="#showing-a-post-s-tags">#</a></h2>
+<p>Building the tag pages is one half. Linking to them from each post is the other.
+The post layout receives the post's tags as <code>{ name, url }</code> links, so <code>show.haml</code>
+renders them itself:</p>
+<pre><code class="language-haml hl-plain">- if has-tags
+  %nav.tags
+    - for tags -&gt; $tag
+      %a{href: "#{$tag&lt;url&gt;}"}= $tag&lt;name&gt;
+</code></pre>
+<p><code>tags</code> holds the post's own terms in the <code>tags</code> taxonomy, each <code>url</code> pointing at
+that tag's page, and <code>has-tags</code> is false when the post has none, so the block
+drops out. The scaffold <code>show.haml</code> ships this markup, so a fresh site links a
+post's tags out of the box. Nothing else surfaces tags automatically: the nav is
+built from content sections, so link to <code>/tags</code> from a layout when you want the
+tag index in it.</p>
 
+      <nav class='tags mt-4'>
+        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/markdown/'>markdown</a>
+      </nav>
     </article>
     <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/getting-started/"><span aria-hidden="true">&larr;</span> Getting Started</a><a class="next btn btn-primary" href="/guide/layouts/">Layouts <span aria-hidden="true">&rarr;</span></a></nav>
   </div>
@@ -195,8 +242,16 @@ using <code>tag.haml</code>.</p>
 
     </main>
     <footer class='border-top mt-5 py-4'>
-      <div class='container'>
-        <p class='text-body-secondary mb-0'>Built with Blogin.</p>
+      <div class='container d-flex flex-wrap justify-content-between gap-2'>
+        <p class='text-body-secondary mb-0'>
+          Built with
+          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
+        </p>
+        <nav class='d-flex gap-3'>
+          <a class='link-secondary' href='/tags/'>Browse by tag</a>
+          <a class='link-secondary' href='/feed.xml'>Atom</a>
+          <a class='link-secondary' href='/rss.xml'>RSS</a>
+        </nav>
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

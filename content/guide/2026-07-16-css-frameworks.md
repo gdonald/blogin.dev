@@ -2,7 +2,8 @@
 title: CSS Frameworks
 date: 2026-07-16
 order: 6
-tags: [reference]
+toc: true
+tags: [styling]
 description: Emit framework-specific classes without touching the core renderer.
 ---
 The HTML Blogin emits carries framework-specific classes drawn from a selected

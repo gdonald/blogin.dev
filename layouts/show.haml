@@ -7,4 +7,8 @@
           %h2.h6.text-muted.text-uppercase Contents
           != toc-html
       != body
+      - if has-tags
+        %nav.tags.mt-4
+          - for tags -> $tag
+            %a.badge.text-bg-secondary.text-decoration-none.me-1{href: "#{$tag<url>}"}= $tag<name>
     != post-nav-html

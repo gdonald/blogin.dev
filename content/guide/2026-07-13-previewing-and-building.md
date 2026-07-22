@@ -3,7 +3,7 @@ title: Previewing and Building
 date: 2026-07-13
 order: 10
 toc: true
-tags: [reference]
+tags: [cli, builds]
 description: The dev server, incremental builds, and debug output.
 ---
 ## The preview server
@@ -20,9 +20,11 @@ like the deployed site. The server is a dev tool only; production ships static
 files.
 
 The preview server also reloads the open page for you. It injects a small client
-into each served HTML page that listens on a server-sent events stream, and a
-successful rebuild pushes a reload so the browser refreshes on its own. The
-injection happens only while serving. Built `public/` files never contain it.
+into each served HTML page that polls a build-version endpoint, and a successful
+rebuild bumps that version so the browser refreshes on its own. Polling keeps no
+long-lived connection open, so closing a tab leaves nothing for the server to
+write to. The injection happens only while serving. Built `public/` files never
+contain it.
 
 ## Incremental builds
 

@@ -2,7 +2,7 @@
 title: Configuration
 date: 2026-07-12
 order: 11
-tags: [reference]
+tags: [configuration]
 description: The keys in blogin.json.
 ---
 Site-wide settings live in `blogin.json` at the project root. Command-line
@@ -15,7 +15,7 @@ options override the file.
 | `author` | Site author, available to layouts and feeds. |
 | `output-dir` | Where the build writes (default `public`). |
 | `home-section` | Section whose listing is also the site root. |
-| `clean-urls` | Extensionless URLs when true. |
+| `clean-urls` | Extensionless URLs when true (default false; true needs web-server config, see [Deploying](/guide/deploying/)). |
 | `css-framework` | Class-map profile: `none`, `bootstrap5`, ... |
 | `page-size` | Posts per listing page. |
 | `summary-length` | Character cap on an auto-generated post summary (default 200). |

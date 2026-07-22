@@ -2,7 +2,8 @@
 title: Deploying
 date: 2026-07-11
 order: 13
-tags: [reference]
+toc: true
+tags: [builds]
 description: Publishing the built public/ directory.
 ---
 `blogin build` writes a self-contained `public/` directory. Deploying is copying
@@ -10,17 +11,36 @@ that directory to any static host.
 
 ## Clean URLs
 
-With `"clean-urls": true` (the default) a post is written as
-`public/posts/hello.html` and served at `/posts/hello`. The host must serve
-`hello.html` for the extensionless request. This works out of the box on GitHub
-Pages, Netlify, and Cloudflare Pages. On nginx, add:
+By default (`"clean-urls": false`) a post is written as
+`public/posts/hello/index.html` and served at `/posts/hello/`. Every static host
+serves an `index.html` for a directory request, so this works everywhere with no
+configuration.
+
+Set `"clean-urls": true` for extensionless URLs: the post is written as
+`public/posts/hello.html` and linked as `/posts/hello`. The host then has to serve
+`hello.html` for the extensionless request, which needs server configuration.
+Managed hosts do this for you: GitHub Pages, Netlify, and Cloudflare Pages serve
+`/posts/hello` from `posts/hello.html` out of the box.
+
+On a self-managed server you configure the rewrite yourself. For nginx, in the
+`server` block:
 
 ```
-try_files $uri $uri.html $uri/ =404;
+location / {
+  try_files $uri $uri.html $uri/ =404;
+}
 ```
 
-Set `"clean-urls": false` to write `public/posts/hello/index.html` and serve at
-`/posts/hello/` instead, which needs no host rewriting.
+For Apache, in a `.htaccess` at the site root:
+
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+)$ $1.html [L]
+```
+
+If you would rather not touch the server, leave `clean-urls` off.
 
 ## Base URL
 

@@ -3,7 +3,7 @@ title: Writing Posts
 date: 2026-07-18
 order: 3
 toc: true
-tags: [authoring]
+tags: [markdown]
 description: Front matter, sections, and tags.
 ---
 A post is a Markdown file with a `---` front matter block:
@@ -185,7 +185,35 @@ categories: [tutorials]
 ```
 
 Each taxonomy `name` builds a page per term at `/name/<term>` and an index at
-`/name`. A term page renders through `layouts/<name>.haml` when present, then
-`layouts/<singular>.haml`, then `layouts/term.haml`, then `layouts/index.haml`,
-so `categories` can style its term pages with a `categories.haml` while tags keep
-using `tag.haml`.
+`/name`. A term page renders through `layouts/<singular>.haml` when present, then
+`layouts/term.haml`, then `layouts/<name>.haml`, then `layouts/index.haml`, so
+`tags` styles its term pages with `tag.haml` and `categories` with a
+`categorie.haml` or a shared `term.haml`.
+
+The index renders through `layouts/<name>.haml`, then `layouts/index.haml`. Since
+term pages prefer the singular, a `tags.haml` styles the tag index alone while
+`tag.haml` styles each term page, letting the index show a tag cloud and the term
+pages show post listings. Both layouts get a `heading`: the term name on a term
+page, the humanized taxonomy name on the index. A listing receives its terms as
+`posts`, so the index iterates them the same way a section listing iterates its
+posts.
+
+## Showing a post's tags
+
+Building the tag pages is one half. Linking to them from each post is the other.
+The post layout receives the post's tags as `{ name, url }` links, so `show.haml`
+renders them itself:
+
+```haml
+- if has-tags
+  %nav.tags
+    - for tags -> $tag
+      %a{href: "#{$tag<url>}"}= $tag<name>
+```
+
+`tags` holds the post's own terms in the `tags` taxonomy, each `url` pointing at
+that tag's page, and `has-tags` is false when the post has none, so the block
+drops out. The scaffold `show.haml` ships this markup, so a fresh site links a
+post's tags out of the box. Nothing else surfaces tags automatically: the nav is
+built from content sections, so link to `/tags` from a layout when you want the
+tag index in it.

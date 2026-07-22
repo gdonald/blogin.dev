@@ -24,7 +24,7 @@
       <link>https://blogin.dev/guide/getting-started/</link>
       <guid isPermaLink="true">https://blogin.dev/guide/getting-started/</guid>
       <pubDate>Sun, 19 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Install</description>
+      <description>Install Raku and zef</description>
     </item>
     <item>
       <title>blogin new</title>
@@ -88,6 +88,13 @@ The text before a `</description>
       <guid isPermaLink="true">https://blogin.dev/cli/blogin-serve/</guid>
       <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
       <description>Build the site and serve it locally, rebuilding when content, layouts, static assets, data files, or the configuration change. A successful rebuild live-reloads the open page in the browser.</description>
+    </item>
+    <item>
+      <title>Template Data</title>
+      <link>https://blogin.dev/guide/template-data/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/template-data/</guid>
+      <pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Every layout renders against a context object. A method call in HAML is a call on that object, so = title runs the context&apos;s title method and - for posts iterates its posts collection. There are two…</description>
     </item>
     <item>
       <title>Data files</title>

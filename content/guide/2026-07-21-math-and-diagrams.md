@@ -3,7 +3,7 @@ title: Math and Diagrams
 date: 2026-07-21
 order: 7.5
 toc: true
-tags: [authoring]
+tags: [markdown]
 description: Write math and diagrams that render in the browser.
 ---
 Blogin parses math and Mermaid diagrams into markup that a client-side renderer

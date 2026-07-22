@@ -3,10 +3,31 @@ title: Getting Started
 date: 2026-07-19
 order: 2
 toc: true
-tags: [intro]
+tags: [intro, cli]
 description: Install Blogin and build your first site.
 ---
-## Install
+## Install Raku and zef
+
+Blogin runs on Rakudo, the Raku compiler, and installs through zef, the Raku
+module manager. If `raku` and `zef` are already on your `PATH`, skip to the next
+section.
+
+Otherwise install Rakudo Star, a bundle that ships Rakudo and zef together.
+Download it for your platform from [rakudo.org](https://rakudo.org/star), or on
+macOS with Homebrew:
+
+```bash
+brew install rakudo-star
+```
+
+Confirm both tools are available:
+
+```bash
+raku --version
+zef --version
+```
+
+## Install Blogin
 
 ```bash
 zef install Blogin

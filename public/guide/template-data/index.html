@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Blogin</title>
+    <link rel="canonical" href="https://blogin.dev/guide/template-data/"/>
+<meta name="description" content="The context object every layout renders against, and the shapes it exposes."/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Template Data"/>
+<meta property="og:description" content="The context object every layout renders against, and the shapes it exposes."/>
+<meta property="og:url" content="https://blogin.dev/guide/template-data/"/>
+<meta property="og:site_name" content="Blogin"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Template Data"/>
+<meta name="twitter:description" content="The context object every layout renders against, and the shapes it exposes."/>
+    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.d4bbc380.svg'>
+    <link rel='icon' href='/favicon.83c2e094.ico' sizes='any'>
+    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.44bad3b4.png'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/assets/css/blogin.9c27f599.css'>
+    <script>
+(function () {
+  var KEY = 'blogin-theme', root = document.documentElement;
+  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+  function pref() {
+    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  apply(pref());
+  window.bloginToggleTheme = function () {
+    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(m);
+    try { localStorage.setItem(KEY, m); } catch (e) {}
+  };
+})();
+</script>
+
+  </head>
+  <body>
+    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
+      <div class='container'>
+        <a class='navbar-brand d-flex align-items-center' href='/'>
+          <img class='me-2' src='/assets/img/logo.d4bbc380.svg' alt='' width='28' height='28'>
+          Blogin
+        </a>
+        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
+          <span class='navbar-toggler-icon'></span>
+        </button>
+        <div id='topbar' class='collapse navbar-collapse'>
+          <ul class='navbar-nav mb-2 mb-lg-0'>
+  <li class='nav-item'>
+  <a class='nav-link active' href='/guide/'>Guide</a>
+</li>
+<li class='nav-item'>
+  <a class='nav-link' href='/cli/'>CLI</a>
+</li>
+
+</ul>
+
+          <div class='ms-auto d-flex align-items-center gap-2 mt-2 mt-lg-0'>
+            <div style='width: 24rem; max-width: 90vw'>
+              <div class='blogin-search'>
+  <form data-blogin-search='true' role='search'>
+    <input type='search' name='q' placeholder='Search' aria-label='Search'>
+  </form>
+  <ul data-blogin-results='true'></ul>
+</div>
+<link rel='stylesheet' href='/assets/css/search.bebff177.css'>
+<script src='/assets/js/search.88e6a3bf.js'></script>
+
+            </div>
+            <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class='container my-4'>
+      <div class='card'>
+  <div class='card-body'>
+    <article>
+      <h1 class='mb-4'>Template Data</h1>
+      <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
+        <h2 class='h6 text-muted text-uppercase'>Contents</h2>
+        <ul><li><a href="#the-site-context">The site context</a></li><li><a href="#the-post-context">The post context</a></li><li><a href="#the-listing-context">The listing context</a></li><li><a href="#the-shapes-inside-the-collections">The shapes inside the collections</a></li><li><a href="#partials-and-locals">Partials and locals</a></li></ul>
+      </nav>
+      <p>Every layout renders against a context object. A method call in HAML is a call on
+that object, so <code>= title</code> runs the context's <code>title</code> method and <code>- for posts</code>
+iterates its <code>posts</code> collection. There are two context types. A post context
+backs <code>show.haml</code>, and a listing context backs <code>index.haml</code>, <code>home.haml</code>,
+<code>tag.haml</code>, <code>tags.haml</code>, and <code>404.haml</code>. Both build on a shared site context, and
+<code>base.haml</code> sees whichever one wraps the page, so site-wide methods work in the
+shell and in every template it yields into.</p>
+<p>Knowing the exact surface is what lets you customize past the scaffold. This page
+lists every method and collection each context exposes, and the shape of the data
+inside the collections.</p>
+<h2 id="the-site-context">The site context<a class="anchor" href="#the-site-context">#</a></h2>
+<p>These are available in every template, including <code>base.haml</code> and the partials.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>site-title</code></td>
+<td>The configured <code>title</code>.</td>
+</tr>
+<tr>
+<td><code>section</code></td>
+<td>The current section path, <code>''</code> at the root.</td>
+</tr>
+<tr>
+<td><code>section-label</code></td>
+<td>The section's nav label, or its humanized name.</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>The page's own URL.</td>
+</tr>
+<tr>
+<td><code>canonical-url</code></td>
+<td><code>base-url</code> joined to <code>url</code>, for a canonical link.</td>
+</tr>
+<tr>
+<td><code>head-meta</code></td>
+<td>The Open Graph, Twitter, and canonical tags as one HTML string.</td>
+</tr>
+<tr>
+<td><code>meta-title</code>, <code>meta-description</code>, <code>meta-type</code></td>
+<td>The values <code>head-meta</code> uses, each callable on its own.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>The merged data files as a hash, keyed by file name. See <a href="/guide/data-files/">Data files</a>.</td>
+</tr>
+<tr>
+<td><code>languages</code>, <code>has-languages</code></td>
+<td>The translations of the current page, and whether there are any.</td>
+</tr>
+<tr>
+<td><code>nav-nodes</code></td>
+<td>The navigation tree, a list of nodes.</td>
+</tr>
+<tr>
+<td><code>nav-current(node)</code></td>
+<td>True when a nav node is the current section or an ancestor of it.</td>
+</tr>
+<tr>
+<td><code>framework-class(slot)</code></td>
+<td>The CSS-framework class for a named slot, <code>''</code> under <code>none</code>.</td>
+</tr>
+<tr>
+<td><code>framework-stylesheet-tag</code>, <code>framework-script-tag</code></td>
+<td>The framework's <code>&lt;link&gt;</code> and <code>&lt;script&gt;</code>, <code>''</code> under <code>none</code>.</td>
+</tr>
+<tr>
+<td><code>theme-script</code></td>
+<td>An inline <code>&lt;script&gt;</code> for the <code>&lt;head&gt;</code> that applies the saved or preferred color theme before paint and defines the toggle.</td>
+</tr>
+<tr>
+<td><code>theme-toggle</code></td>
+<td>A ready-made light/dark toggle button, moon and sun icons, wired to the script.</td>
+</tr>
+<tr>
+<td><code>has-header</code>, <code>has-sidebar</code>, <code>has-footer</code></td>
+<td>Whether the matching chrome partial exists.</td>
+</tr>
+<tr>
+<td><code>truncate(text, n)</code>, <code>format-date(date, fmt)</code>, <code>group-by(items, field)</code></td>
+<td>Filters. See <a href="/guide/layouts/">Layouts</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-post-context">The post context<a class="anchor" href="#the-post-context">#</a></h2>
+<p><code>show.haml</code> adds these to the site context.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code>, <code>date</code>, <code>description</code></td>
+<td>The post's front matter fields.</td>
+</tr>
+<tr>
+<td><code>show-dates</code></td>
+<td>Whether the section shows dates.</td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>The rendered post HTML. Insert with <code>!=</code>, it is already escaped where it needs to be.</td>
+</tr>
+<tr>
+<td><code>has-toc</code>, <code>toc-html</code></td>
+<td>Whether <code>toc: true</code> is set, and the table of contents as HTML.</td>
+</tr>
+<tr>
+<td><code>word-count</code>, <code>reading-time</code></td>
+<td>The body word count and its whole-minute reading time.</td>
+</tr>
+<tr>
+<td><code>related</code>, <code>has-related</code></td>
+<td>Posts sharing taxonomy terms, most-shared first, as post entries.</td>
+</tr>
+<tr>
+<td><code>tags</code>, <code>has-tags</code></td>
+<td>The post's own tags as <code>{ name, url }</code> links, and whether there are any.</td>
+</tr>
+<tr>
+<td><code>post-nav-html</code></td>
+<td>The newer/older links within the section, as HTML.</td>
+</tr>
+</tbody>
+</table>
+<p>A <code>show.haml</code> that uses the lot:</p>
+<pre><code class="language-haml hl-plain">%article
+  %h1= title
+  - if show-dates
+    %p.meta= "#{date} · #{reading-time} min read"
+  - if has-toc
+    %nav.toc
+      != toc-html
+  != body
+  - if has-tags
+    %nav.tags
+      - for tags -&gt; $tag
+        %a{href: "#{$tag&lt;url&gt;}"}= $tag&lt;name&gt;
+!= post-nav-html
+- if has-related
+  %nav.related
+    %h2 Related
+    != render(:partial&lt;entry&gt;, :collection(related), :as&lt;entry&gt;)
+</code></pre>
+<h2 id="the-listing-context">The listing context<a class="anchor" href="#the-listing-context">#</a></h2>
+<p><code>index.haml</code>, <code>home.haml</code>, <code>tag.haml</code>, <code>tags.haml</code>, and <code>404.haml</code> add these.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>heading</code></td>
+<td>The page's <code>h1</code> text: the section label, or the term name on a term page, or the humanized taxonomy name on a taxonomy index.</td>
+</tr>
+<tr>
+<td><code>posts</code></td>
+<td>The entries to list.</td>
+</tr>
+<tr>
+<td><code>page-number</code>, <code>total-pages</code></td>
+<td>The current page and the page count.</td>
+</tr>
+<tr>
+<td><code>pagination-html</code></td>
+<td>The newer/older paging links, as HTML.</td>
+</tr>
+<tr>
+<td><code>index-dates</code></td>
+<td>Whether the section lists dates.</td>
+</tr>
+</tbody>
+</table>
+<p><code>posts</code> holds different shapes depending on the page. On a section listing,
+<code>home.haml</code>, and a term page it holds post entries. On a taxonomy index such as
+<code>tags.haml</code> it holds term entries. A section listing:</p>
+<pre><code class="language-haml hl-plain">%section
+  %h1= heading
+  - for posts -&gt; $entry
+    %article
+      %a{href: "#{$entry&lt;url&gt;}"}= $entry&lt;title&gt;
+      - if index-dates
+        %span.date= $entry&lt;date&gt;
+      %p= $entry&lt;description&gt;
+  != pagination-html
+</code></pre>
+<p>The tag index, iterating term entries into a cloud:</p>
+<pre><code class="language-haml hl-plain">%section
+  %h1= heading
+  - for posts -&gt; $term
+    %a.tag{href: "#{$term&lt;url&gt;}"}= $term&lt;title&gt;
+</code></pre>
+<h2 id="the-shapes-inside-the-collections">The shapes inside the collections<a class="anchor" href="#the-shapes-inside-the-collections">#</a></h2>
+<p>The collections hold plain hashes and nodes with a fixed set of keys.</p>
+<p>A <strong>post entry</strong> (<code>posts</code> on a listing, <code>related</code> on a post):</p>
+<pre><code>{ title, url, date, description, summary }
+</code></pre>
+<p>A <strong>term entry</strong> (<code>posts</code> on a taxonomy index). Its <code>title</code> already carries the
+count, such as <code>raku (4)</code>:</p>
+<pre><code>{ title, url, date }
+</code></pre>
+<p>A <strong>tag link</strong> (<code>tags</code> on a post):</p>
+<pre><code>{ name, url }
+</code></pre>
+<p>A <strong>language</strong> (<code>languages</code>). <code>current</code> marks the page you are on:</p>
+<pre><code>{ code, url, current }
+</code></pre>
+<p>A <strong>nav node</strong> (<code>nav-nodes</code>, and each node's <code>children</code>) is an object, so read it
+with method calls, not hash keys:</p>
+<pre><code class="language-haml hl-plain">%a{href: "#{$node.url}"}= $node.label
+- if $node.children.elems
+  %ul
+    != render(:partial&lt;nav-item&gt;, :collection($node.children), :as&lt;node&gt;)
+</code></pre>
+<p>Its fields are <code>name</code>, <code>label</code>, <code>path</code>, <code>url</code>, <code>order</code>, and <code>children</code>.</p>
+<h2 id="partials-and-locals">Partials and locals<a class="anchor" href="#partials-and-locals">#</a></h2>
+<p>A partial renders against the same context as the template that calls it, so
+every method above is in scope. Two things pass extra values in. A collection
+render binds each item to the name in <code>:as</code>:</p>
+<pre><code class="language-haml hl-plain">!= render(:partial&lt;entry&gt;, :collection(posts), :as&lt;entry&gt;)
+</code></pre>
+<p>Inside <code>_entry.haml</code>, <code>$entry</code> is one post entry. Explicit locals pass a hash:</p>
+<pre><code class="language-haml hl-plain">!= render(:partial&lt;header&gt;, :locals(%( brand =&gt; site-title )))
+</code></pre>
+<p>Inside <code>_header.haml</code>, <code>$brand</code> is that value. Locals and the <code>:as</code> binding arrive
+as <code>$</code>-sigiled variables (<code>$entry</code>, <code>$node</code>, <code>$brand</code>), which is what sets them
+apart from the context methods, which are barewords.</p>
+
+      <nav class='tags mt-4'>
+        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/templates/'>templates</a>
+      </nav>
+    </article>
+    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/layouts/"><span aria-hidden="true">&larr;</span> Layouts</a><a class="next btn btn-primary" href="/guide/data-files/">Data files <span aria-hidden="true">&rarr;</span></a></nav>
+  </div>
+</div>
+
+    </main>
+    <footer class='border-top mt-5 py-4'>
+      <div class='container d-flex flex-wrap justify-content-between gap-2'>
+        <p class='text-body-secondary mb-0'>
+          Built with
+          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
+        </p>
+        <nav class='d-flex gap-3'>
+          <a class='link-secondary' href='/tags/'>Browse by tag</a>
+          <a class='link-secondary' href='/feed.xml'>Atom</a>
+          <a class='link-secondary' href='/rss.xml'>RSS</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
