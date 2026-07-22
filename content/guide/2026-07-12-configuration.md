@@ -20,6 +20,15 @@ options override the file.
 | `page-size` | Posts per listing page. |
 | `summary-length` | Character cap on an auto-generated post summary (default 200). |
 | `robots` | Emit `robots.txt` (default true). |
+| `minify` | Minify emitted and copied CSS and JavaScript (default false). |
+| `fingerprint` | Content-hash asset filenames and rewrite references (default false). |
+| `image-widths` | Widths to resize images to for `srcset` (default `[]`, off). |
+| `reading-wpm` | Words per minute for the reading-time estimate (default 200). |
+| `related-count` | Maximum related posts per post (default 5). |
+| `languages` | Language codes to build, each into its own `/<code>/` subtree. |
+| `language-config` | Per-language overrides, e.g. `title`, keyed by code. |
+| `theme` | Name of a theme under `themes/` to fall back to for layouts and assets. |
+| `plugins` | Module names whose `blogin-emit` hook runs after the build. |
 | `taxonomies` | Front-matter keys to group posts by (default `["tags"]`). |
 | `feed-formats` | Feed formats to emit: `atom`, `rss`, `json` (default `["atom"]`). |
 | `highlight` | Server-side syntax highlighting for fenced code. |

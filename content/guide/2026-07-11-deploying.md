@@ -1,7 +1,7 @@
 ---
 title: Deploying
 date: 2026-07-11
-order: 12
+order: 13
 tags: [reference]
 description: Publishing the built public/ directory.
 ---

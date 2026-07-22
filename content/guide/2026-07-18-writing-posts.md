@@ -2,6 +2,7 @@
 title: Writing Posts
 date: 2026-07-18
 order: 3
+toc: true
 tags: [authoring]
 description: Front matter, sections, and tags.
 ---
@@ -104,6 +105,64 @@ order: 2
 Posts with an `order` sort ascending and come before any post without one. Posts
 without an `order` keep the newest-first date order behind them. This suits a
 guide or a documentation section where reading order matters more than date.
+
+## Future-dated posts
+
+A post whose `date` is in the future is left out of a normal build, so you can
+write ahead and publish by dating. Pass `blogin build --future` to include them
+while previewing.
+
+## Shortcodes
+
+Shortcodes expand to HTML that Markdown can't express on its own. Write one on its
+own line in a post body, with `key="value"` arguments:
+
+```
+{{< youtube id="dQw4w9WgXcQ" >}}
+
+{{< figure src="/img/photo.png" alt="A photo" caption="On location" >}}
+```
+
+Two shortcodes are built in: `youtube` embeds a responsive player, and `figure`
+wraps an image with an optional caption.
+
+### Adding your own
+
+Put an HTML template in a `shortcodes/` directory beside `content/`, named for the
+shortcode. A `{{ key }}` placeholder is replaced with the matching argument, HTML
+escaped:
+
+```
+shortcodes/note.html
+```
+
+```html
+<aside class="note">{{ text }}</aside>
+```
+
+Then use it in a post:
+
+```
+{{< note text="Heads up" >}}
+```
+
+which renders `<aside class="note">Heads up</aside>`. A file named for a built-in,
+such as `shortcodes/youtube.html`, overrides that built-in. An unrecognized
+shortcode is left in the page as plain text so nothing silently vanishes.
+
+## Redirects
+
+When a post moves, list its old URLs in `aliases` so old links keep working:
+
+```
+---
+title: My Post
+aliases: [/old-path, /2020/01/my-post]
+---
+```
+
+The build writes a small redirecting page at each alias that sends the browser to
+the post's current URL, so redirects work on any static host.
 
 ## Tags and taxonomies
 

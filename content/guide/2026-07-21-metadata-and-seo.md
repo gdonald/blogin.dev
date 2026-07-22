@@ -1,6 +1,6 @@
 ---
 title: Metadata and SEO
-date: 2026-07-22
+date: 2026-07-21
 order: 9
 tags: [reference]
 description: Open Graph and Twitter tags, canonical links, and robots.txt.

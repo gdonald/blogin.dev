@@ -1,0 +1,43 @@
+{
+  "feed_url": "https://blogin.dev/cli/feed.json",
+  "version": "https://jsonfeed.org/version/1.1",
+  "items": [
+    {
+      "url": "https://blogin.dev/cli/blogin-init/",
+      "date_published": "2026-07-04T00:00:00Z",
+      "id": "https://blogin.dev/cli/blogin-init/",
+      "content_text": "Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.",
+      "title": "blogin init"
+    },
+    {
+      "date_published": "2026-07-01T00:00:00Z",
+      "title": "blogin new",
+      "url": "https://blogin.dev/cli/blogin-new/",
+      "content_text": "Create a new post file from a title, with front matter filled in and a slug derived from the title.",
+      "id": "https://blogin.dev/cli/blogin-new/"
+    },
+    {
+      "date_published": "2026-07-03T00:00:00Z",
+      "url": "https://blogin.dev/cli/blogin-build/",
+      "content_text": "Render the content tree to static HTML, writing feeds, a sitemap, and the search index alongside the pages.",
+      "title": "blogin build",
+      "id": "https://blogin.dev/cli/blogin-build/"
+    },
+    {
+      "url": "https://blogin.dev/cli/blogin-serve/",
+      "id": "https://blogin.dev/cli/blogin-serve/",
+      "content_text": "Build the site and serve it locally, rebuilding when content, layouts, static assets, data files, or the configuration change. A successful rebuild live-reloads the open page in the browser.",
+      "title": "blogin serve",
+      "date_published": "2026-07-02T00:00:00Z"
+    },
+    {
+      "date_published": "2026-07-05T00:00:00Z",
+      "title": "blogin clean",
+      "url": "https://blogin.dev/cli/blogin-clean/",
+      "content_text": "Remove the output directory produced by a build, leaving the content, layouts, and configuration in place.",
+      "id": "https://blogin.dev/cli/blogin-clean/"
+    }
+  ],
+  "home_page_url": "https://blogin.dev/cli",
+  "title": "Blogin: cli"
+}

@@ -118,6 +118,13 @@ The text before a `</summary>
     <summary>Set &quot;highlight&quot;: true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it.</summary>
   </entry>
   <entry>
+    <title>Math and Diagrams</title>
+    <id>https://blogin.dev/guide/math-and-diagrams/</id>
+    <link href="https://blogin.dev/guide/math-and-diagrams/"/>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <summary>Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays pure and static; the rendering happens in the browser.</summary>
+  </entry>
+  <entry>
     <title>Feeds and Search</title>
     <id>https://blogin.dev/guide/feeds-and-search/</id>
     <link href="https://blogin.dev/guide/feeds-and-search/"/>
@@ -128,7 +135,7 @@ The text before a `</summary>
     <title>Metadata and SEO</title>
     <id>https://blogin.dev/guide/metadata-and-seo/</id>
     <link href="https://blogin.dev/guide/metadata-and-seo/"/>
-    <updated>2026-07-22T00:00:00Z</updated>
+    <updated>2026-07-21T00:00:00Z</updated>
     <summary>Blogin emits per-page metadata for search engines and social cards, and a site-wide robots.txt, without any template work beyond a single call in the page head.</summary>
   </entry>
   <entry>
@@ -144,6 +151,20 @@ The text before a `</summary>
     <link href="https://blogin.dev/guide/configuration/"/>
     <updated>2026-07-12T00:00:00Z</updated>
     <summary>Site-wide settings live in blogin.json at the project root. Command-line options override the file.</summary>
+  </entry>
+  <entry>
+    <title>Internationalization</title>
+    <id>https://blogin.dev/guide/internationalization/</id>
+    <link href="https://blogin.dev/guide/internationalization/"/>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <summary>List the languages you write in and Blogin builds each into its own subtree.</summary>
+  </entry>
+  <entry>
+    <title>Themes and Plugins</title>
+    <id>https://blogin.dev/guide/themes-and-plugins/</id>
+    <link href="https://blogin.dev/guide/themes-and-plugins/"/>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <summary>Themes</summary>
   </entry>
   <entry>
     <title>Deploying</title>

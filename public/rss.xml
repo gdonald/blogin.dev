@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Blogin</title>
+    <link>https://blogin.dev/</link>
+    <description>Blogin</description>
+    <lastBuildDate>Mon, 20 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Overview</title>
+      <link>https://blogin.dev/guide/overview/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/overview/</guid>
+      <pubDate>Mon, 20 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime:…</description>
+    </item>
+    <item>
+      <title>blogin init</title>
+      <link>https://blogin.dev/cli/blogin-init/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-init/</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.</description>
+    </item>
+    <item>
+      <title>Getting Started</title>
+      <link>https://blogin.dev/guide/getting-started/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/getting-started/</guid>
+      <pubDate>Sun, 19 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Install</description>
+    </item>
+    <item>
+      <title>blogin new</title>
+      <link>https://blogin.dev/cli/blogin-new/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-new/</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Create a new post file from a title, with front matter filled in and a slug derived from the title.</description>
+    </item>
+    <item>
+      <title>Writing Posts</title>
+      <link>https://blogin.dev/guide/writing-posts/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/writing-posts/</guid>
+      <pubDate>Sat, 18 Jul 2026 00:00:00 +0000</pubDate>
+      <description>A post is a Markdown file with a --- front matter block:
+---
+title: My Post
+date: 2026-07-20
+tags: [raku, web]
+description: A short summary.
+---
+The body goes here.
+
+Run blogin new &quot;My Post&quot; to scaffold one with the front matter filled in.
+Reference links and footnotes
+Links can carry their target in a separate definition rather than inline. Write [text][label] in the body and define the label anywhere in the file:
+See [the home page][home] for more.
+
+[home]: https://example.com &quot;Optional title&quot;
+
+A collapsed form, [text][], uses the text as the label. Labels match case-insensitively, and an undefined reference is left as literal text.
+Footnotes use [^label] where the note is cited, with a matching definition:
+A claim that needs a source[^src].
+
+[^src]: The cited source.
+
+Footnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.
+Sections
+The subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.
+Summaries
+A listing and a feed entry show a short summary of each post rather than the whole body. Blogin picks the summary in this order:
+A summary in front matter, used verbatim.
+The text before a `</description>
+    </item>
+    <item>
+      <title>blogin build</title>
+      <link>https://blogin.dev/cli/blogin-build/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-build/</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Render the content tree to static HTML, writing feeds, a sitemap, and the search index alongside the pages.</description>
+    </item>
+    <item>
+      <title>Layouts</title>
+      <link>https://blogin.dev/guide/layouts/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/layouts/</guid>
+      <pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Blogin renders pages with Template::HAML. A build wraps each post&apos;s rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.</description>
+    </item>
+    <item>
+      <title>blogin serve</title>
+      <link>https://blogin.dev/cli/blogin-serve/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-serve/</guid>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Build the site and serve it locally, rebuilding when content, layouts, static assets, data files, or the configuration change. A successful rebuild live-reloads the open page in the browser.</description>
+    </item>
+    <item>
+      <title>Data files</title>
+      <link>https://blogin.dev/guide/data-files/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/data-files/</guid>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
+      <description>A data/ directory beside content/ holds structured values that layouts read directly, so a list of authors, a set of social links, or a navigation table lives in one place rather than being repeated…</description>
+    </item>
+    <item>
+      <title>blogin clean</title>
+      <link>https://blogin.dev/cli/blogin-clean/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-clean/</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Remove the output directory produced by a build, leaving the content, layouts, and configuration in place.</description>
+    </item>
+    <item>
+      <title>CSS Frameworks</title>
+      <link>https://blogin.dev/guide/css-frameworks/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/css-frameworks/</guid>
+      <pubDate>Thu, 16 Jul 2026 00:00:00 +0000</pubDate>
+      <description>The HTML Blogin emits carries framework-specific classes drawn from a selected profile, set by the css-framework config key. The core renderer stays framework-agnostic: it asks the profile for a…</description>
+    </item>
+    <item>
+      <title>Syntax Highlighting</title>
+      <link>https://blogin.dev/guide/syntax-highlighting/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/syntax-highlighting/</guid>
+      <pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Set &quot;highlight&quot;: true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it.</description>
+    </item>
+    <item>
+      <title>Math and Diagrams</title>
+      <link>https://blogin.dev/guide/math-and-diagrams/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/math-and-diagrams/</guid>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays pure and static; the rendering happens in the browser.</description>
+    </item>
+    <item>
+      <title>Feeds and Search</title>
+      <link>https://blogin.dev/guide/feeds-and-search/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/feeds-and-search/</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Every build with at least one post emits feeds, a sitemap, and a search index.</description>
+    </item>
+    <item>
+      <title>Metadata and SEO</title>
+      <link>https://blogin.dev/guide/metadata-and-seo/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/metadata-and-seo/</guid>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Blogin emits per-page metadata for search engines and social cards, and a site-wide robots.txt, without any template work beyond a single call in the page head.</description>
+    </item>
+    <item>
+      <title>Previewing and Building</title>
+      <link>https://blogin.dev/guide/previewing-and-building/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/previewing-and-building/</guid>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <description>The preview server</description>
+    </item>
+    <item>
+      <title>Configuration</title>
+      <link>https://blogin.dev/guide/configuration/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/configuration/</guid>
+      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Site-wide settings live in blogin.json at the project root. Command-line options override the file.</description>
+    </item>
+    <item>
+      <title>Internationalization</title>
+      <link>https://blogin.dev/guide/internationalization/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/internationalization/</guid>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
+      <description>List the languages you write in and Blogin builds each into its own subtree.</description>
+    </item>
+    <item>
+      <title>Themes and Plugins</title>
+      <link>https://blogin.dev/guide/themes-and-plugins/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/themes-and-plugins/</guid>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Themes</description>
+    </item>
+    <item>
+      <title>Deploying</title>
+      <link>https://blogin.dev/guide/deploying/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/deploying/</guid>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <description>blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host.</description>
+    </item>
+  </channel>
+</rss>

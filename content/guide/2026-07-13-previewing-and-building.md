@@ -2,6 +2,7 @@
 title: Previewing and Building
 date: 2026-07-13
 order: 10
+toc: true
 tags: [reference]
 description: The dev server, incremental builds, and debug output.
 ---
@@ -29,6 +30,25 @@ injection happens only while serving. Built `public/` files never contain it.
 changed, so rebuilding an unchanged site writes nothing and editing one post
 rewrites just that post and the pages that reference it. Output for a deleted post
 is pruned. Pass `--force` to rewrite everything.
+
+## Asset optimization
+
+Two `blogin.json` keys tune the emitted assets. `minify` shrinks every emitted
+and copied CSS and JavaScript file: it strips comments, collapses whitespace, and
+drops blank and comment-only script lines while keeping line breaks so JavaScript
+semicolon insertion stays safe.
+
+`fingerprint` renames each CSS, JavaScript, and image file to include a
+content hash, such as `style.1a2b3c4d.css`, and rewrites every reference to it in
+the built HTML and CSS. A changed asset gets a new name, so a far-future cache
+never serves a stale file. Both default off.
+
+`image-widths` turns on responsive images. Given a list like `[320, 640, 960]`,
+the build resizes each raster image to every width smaller than the original,
+writing variants like `photo-320.png` beside it, and adds a `srcset` to each
+reference so the browser picks the right size. It needs an image resizer on the
+build host: ImageMagick or, on macOS, `sips`. With no widths set, images are
+copied unchanged.
 
 ## Debug output
 

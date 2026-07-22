@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Blogin: cli</title>
+    <link>https://blogin.dev/cli</link>
+    <description>Blogin: cli</description>
+    <lastBuildDate>Sat, 04 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>blogin init</title>
+      <link>https://blogin.dev/cli/blogin-init/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-init/</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.</description>
+    </item>
+    <item>
+      <title>blogin new</title>
+      <link>https://blogin.dev/cli/blogin-new/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-new/</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Create a new post file from a title, with front matter filled in and a slug derived from the title.</description>
+    </item>
+    <item>
+      <title>blogin build</title>
+      <link>https://blogin.dev/cli/blogin-build/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-build/</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Render the content tree to static HTML, writing feeds, a sitemap, and the search index alongside the pages.</description>
+    </item>
+    <item>
+      <title>blogin serve</title>
+      <link>https://blogin.dev/cli/blogin-serve/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-serve/</guid>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Build the site and serve it locally, rebuilding when content, layouts, static assets, data files, or the configuration change. A successful rebuild live-reloads the open page in the browser.</description>
+    </item>
+    <item>
+      <title>blogin clean</title>
+      <link>https://blogin.dev/cli/blogin-clean/</link>
+      <guid isPermaLink="true">https://blogin.dev/cli/blogin-clean/</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Remove the output directory produced by a build, leaving the content, layouts, and configuration in place.</description>
+    </item>
+  </channel>
+</rss>

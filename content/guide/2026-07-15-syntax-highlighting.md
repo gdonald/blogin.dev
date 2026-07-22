@@ -23,8 +23,10 @@ The highlighter tokenizes the code into spans, escaping the source:
 my $greeting = "hello";  # keywords, strings, numbers, comments
 ```
 
-Recognized languages are raku, ruby, python, javascript, bash, and json. An
-unrecognized language falls back to escaped plain text with no spans.
+Recognized languages are raku, ruby, python, javascript, typescript, bash, json,
+c, cpp, java, go, and rust. An unrecognized language falls back to escaped plain
+text and its code block is labeled with an `hl-plain` class, so a stylesheet can
+tell a highlighted block from an unhighlighted one.
 
 ## Styling
 

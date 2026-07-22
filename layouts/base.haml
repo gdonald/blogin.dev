@@ -5,14 +5,14 @@
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
     %title= site-title
     != head-meta
-    %link{rel: 'icon', type: 'image/svg+xml', href: '/logo.svg'}
+    %link{rel: 'icon', type: 'image/svg+xml', href: '/assets/img/logo.svg'}
     != framework-stylesheet-tag
-    %link{rel: 'stylesheet', href: '/blogin.css'}
+    %link{rel: 'stylesheet', href: '/assets/css/blogin.css'}
   %body
     %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       .container
         %a.navbar-brand.d-flex.align-items-center{href: '/'}
-          %img.me-2{src: '/logo.svg', alt: '', width: '28', height: '28'}
+          %img.me-2{src: '/assets/img/logo.svg', alt: '', width: '28', height: '28'}
           = site-title
         %button.navbar-toggler{type: 'button', 'data-bs-toggle' => 'collapse', 'data-bs-target' => '#topbar', 'aria-controls' => 'topbar', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation'}
           %span.navbar-toggler-icon
