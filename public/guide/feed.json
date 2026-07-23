@@ -1,120 +1,120 @@
 {
-  "home_page_url": "https://blogin.dev/guide",
-  "title": "Blogin: guide",
   "feed_url": "https://blogin.dev/guide/feed.json",
+  "version": "https://jsonfeed.org/version/1.1",
   "items": [
     {
+      "title": "Overview",
       "url": "https://blogin.dev/guide/overview/",
-      "content_text": "Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime:…",
-      "id": "https://blogin.dev/guide/overview/",
       "date_published": "2026-07-20T00:00:00Z",
-      "title": "Overview"
+      "content_text": "Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime:…",
+      "id": "https://blogin.dev/guide/overview/"
     },
     {
-      "date_published": "2026-07-19T00:00:00Z",
-      "content_text": "Install Raku and zef",
-      "id": "https://blogin.dev/guide/getting-started/",
       "title": "Getting Started",
+      "content_text": "Install Raku and zef",
+      "date_published": "2026-07-19T00:00:00Z",
+      "id": "https://blogin.dev/guide/getting-started/",
       "url": "https://blogin.dev/guide/getting-started/"
     },
     {
+      "url": "https://blogin.dev/guide/writing-posts/",
       "content_text": "A post is a Markdown file with a --- front matter block:\n---\ntitle: My Post\ndate: 2026-07-20\ntags: [raku, web]\ndescription: A short summary.\n---\nThe body goes here.\n\nRun blogin new \"My Post\" to scaffold one with the front matter filled in.\nReference links and footnotes\nLinks can carry their target in a separate definition rather than inline. Write [text][label] in the body and define the label anywhere in the file:\nSee [the home page][home] for more.\n\n[home]: https://example.com \"Optional title\"\n\nA collapsed form, [text][], uses the text as the label. Labels match case-insensitively, and an undefined reference is left as literal text.\nFootnotes use [^label] where the note is cited, with a matching definition:\nA claim that needs a source[^src].\n\n[^src]: The cited source.\n\nFootnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.\nSections\nThe subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.\nSummaries\nA listing and a feed entry show a short summary of each post rather than the whole body. Blogin picks the summary in this order:\nA summary in front matter, used verbatim.\nThe text before a `",
-      "title": "Writing Posts",
-      "id": "https://blogin.dev/guide/writing-posts/",
       "date_published": "2026-07-18T00:00:00Z",
-      "url": "https://blogin.dev/guide/writing-posts/"
+      "title": "Writing Posts",
+      "id": "https://blogin.dev/guide/writing-posts/"
     },
     {
-      "date_published": "2026-07-17T00:00:00Z",
       "id": "https://blogin.dev/guide/layouts/",
-      "url": "https://blogin.dev/guide/layouts/",
+      "date_published": "2026-07-17T00:00:00Z",
       "title": "Layouts",
+      "url": "https://blogin.dev/guide/layouts/",
       "content_text": "Blogin renders pages with Template::HAML. A build wraps each post's rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml."
     },
     {
+      "content_text": "Every layout renders against a context object. A method call in HAML is a call on that object, so = title runs the context's title method and - for posts iterates its posts collection. There are two…",
+      "id": "https://blogin.dev/guide/template-data/",
       "url": "https://blogin.dev/guide/template-data/",
       "title": "Template Data",
-      "id": "https://blogin.dev/guide/template-data/",
-      "content_text": "Every layout renders against a context object. A method call in HAML is a call on that object, so = title runs the context's title method and - for posts iterates its posts collection. There are two…",
       "date_published": "2026-07-22T00:00:00Z"
     },
     {
-      "title": "Data files",
-      "id": "https://blogin.dev/guide/data-files/",
       "date_published": "2026-07-21T00:00:00Z",
+      "content_text": "A data/ directory beside content/ holds structured values that layouts read directly, so a list of authors, a set of social links, or a navigation table lives in one place rather than being repeated…",
       "url": "https://blogin.dev/guide/data-files/",
-      "content_text": "A data/ directory beside content/ holds structured values that layouts read directly, so a list of authors, a set of social links, or a navigation table lives in one place rather than being repeated…"
+      "title": "Data files",
+      "id": "https://blogin.dev/guide/data-files/"
     },
     {
-      "date_published": "2026-07-16T00:00:00Z",
-      "url": "https://blogin.dev/guide/css-frameworks/",
       "content_text": "The HTML Blogin emits carries framework-specific classes drawn from a selected profile, set by the css-framework config key. The core renderer stays framework-agnostic: it asks the profile for a…",
+      "title": "CSS Frameworks",
       "id": "https://blogin.dev/guide/css-frameworks/",
-      "title": "CSS Frameworks"
+      "date_published": "2026-07-16T00:00:00Z",
+      "url": "https://blogin.dev/guide/css-frameworks/"
     },
     {
-      "id": "https://blogin.dev/guide/syntax-highlighting/",
-      "title": "Syntax Highlighting",
-      "content_text": "Set \"highlight\": true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it.",
       "date_published": "2026-07-15T00:00:00Z",
-      "url": "https://blogin.dev/guide/syntax-highlighting/"
+      "content_text": "Set \"highlight\": true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it.",
+      "id": "https://blogin.dev/guide/syntax-highlighting/",
+      "url": "https://blogin.dev/guide/syntax-highlighting/",
+      "title": "Syntax Highlighting"
     },
     {
-      "id": "https://blogin.dev/guide/math-and-diagrams/",
-      "title": "Math and Diagrams",
+      "url": "https://blogin.dev/guide/math-and-diagrams/",
       "date_published": "2026-07-21T00:00:00Z",
+      "title": "Math and Diagrams",
       "content_text": "Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays pure and static; the rendering happens in the browser.",
-      "url": "https://blogin.dev/guide/math-and-diagrams/"
+      "id": "https://blogin.dev/guide/math-and-diagrams/"
     },
     {
-      "id": "https://blogin.dev/guide/feeds-and-search/",
-      "date_published": "2026-07-14T00:00:00Z",
+      "url": "https://blogin.dev/guide/feeds-and-search/",
       "title": "Feeds and Search",
       "content_text": "Every build with at least one post emits feeds, a sitemap, and a search index.",
-      "url": "https://blogin.dev/guide/feeds-and-search/"
+      "id": "https://blogin.dev/guide/feeds-and-search/",
+      "date_published": "2026-07-14T00:00:00Z"
     },
     {
       "title": "Metadata and SEO",
-      "id": "https://blogin.dev/guide/metadata-and-seo/",
-      "content_text": "Blogin emits per-page metadata for search engines and social cards, and a site-wide robots.txt, without any template work beyond a single call in the page head.",
+      "url": "https://blogin.dev/guide/metadata-and-seo/",
       "date_published": "2026-07-21T00:00:00Z",
-      "url": "https://blogin.dev/guide/metadata-and-seo/"
+      "content_text": "Blogin emits per-page metadata for search engines and social cards, and a site-wide robots.txt, without any template work beyond a single call in the page head.",
+      "id": "https://blogin.dev/guide/metadata-and-seo/"
     },
     {
-      "url": "https://blogin.dev/guide/previewing-and-building/",
       "date_published": "2026-07-13T00:00:00Z",
-      "title": "Previewing and Building",
+      "id": "https://blogin.dev/guide/previewing-and-building/",
       "content_text": "The preview server",
-      "id": "https://blogin.dev/guide/previewing-and-building/"
+      "title": "Previewing and Building",
+      "url": "https://blogin.dev/guide/previewing-and-building/"
     },
     {
       "id": "https://blogin.dev/guide/configuration/",
-      "url": "https://blogin.dev/guide/configuration/",
-      "content_text": "Site-wide settings live in blogin.json at the project root. Command-line options override the file.",
+      "title": "Configuration",
       "date_published": "2026-07-12T00:00:00Z",
-      "title": "Configuration"
+      "url": "https://blogin.dev/guide/configuration/",
+      "content_text": "Site-wide settings live in blogin.json at the project root. Command-line options override the file."
     },
     {
-      "content_text": "List the languages you write in and Blogin builds each into its own subtree.",
-      "url": "https://blogin.dev/guide/internationalization/",
       "id": "https://blogin.dev/guide/internationalization/",
+      "content_text": "List the languages you write in and Blogin builds each into its own subtree.",
       "title": "Internationalization",
+      "url": "https://blogin.dev/guide/internationalization/",
       "date_published": "2026-07-21T00:00:00Z"
     },
     {
       "content_text": "Themes",
-      "title": "Themes and Plugins",
       "id": "https://blogin.dev/guide/themes-and-plugins/",
-      "url": "https://blogin.dev/guide/themes-and-plugins/",
-      "date_published": "2026-07-21T00:00:00Z"
+      "title": "Themes and Plugins",
+      "date_published": "2026-07-21T00:00:00Z",
+      "url": "https://blogin.dev/guide/themes-and-plugins/"
     },
     {
+      "content_text": "blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host.",
+      "id": "https://blogin.dev/guide/deploying/",
       "url": "https://blogin.dev/guide/deploying/",
       "date_published": "2026-07-11T00:00:00Z",
-      "id": "https://blogin.dev/guide/deploying/",
-      "title": "Deploying",
-      "content_text": "blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host."
+      "title": "Deploying"
     }
   ],
-  "version": "https://jsonfeed.org/version/1.1"
+  "home_page_url": "https://blogin.dev/guide",
+  "title": "Blogin: guide"
 }
