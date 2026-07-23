@@ -20,11 +20,12 @@ like the deployed site. The server is a dev tool only; production ships static
 files.
 
 The preview server also reloads the open page for you. It injects a small client
-into each served HTML page that polls a build-version endpoint, and a successful
-rebuild bumps that version so the browser refreshes on its own. Polling keeps no
-long-lived connection open, so closing a tab leaves nothing for the server to
-write to. The injection happens only while serving. Built `public/` files never
-contain it.
+into each served HTML page that long-polls a build-version endpoint: the request
+parks on the server until a rebuild bumps the version or the wait times out, then
+the browser either refreshes or reconnects. Because the held connection sits idle
+rather than being written to, a browser that navigates away closes a socket the
+server is not mid-write on. The injection happens only while serving. Built
+`public/` files never contain it.
 
 ## Incremental builds
 

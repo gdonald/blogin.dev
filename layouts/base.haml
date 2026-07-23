@@ -21,10 +21,11 @@
           %span.navbar-toggler-icon
         #topbar.collapse.navbar-collapse
           != render(:partial<nav>)
-          .ms-auto.d-flex.align-items-center.gap-2.mt-2.mt-lg-0
-            %div{style: 'width: 24rem; max-width: 90vw'}
+          .navbar-tools
+            .navbar-search
               != render(:partial<search>)
-            != theme-toggle
+            .navbar-toggle-slot
+              != theme-toggle
     %main.container.my-4
       = yield
     %footer.border-top.mt-5.py-4
