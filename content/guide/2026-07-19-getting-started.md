@@ -48,8 +48,8 @@ This scaffolds a buildable starter site: a `blogin.json`, a first post under
 | --- | --- |
 | `content/` | Markdown posts, grouped into sections by subdirectory. |
 | `layouts/` | HAML templates and partials. |
-| `assets/css`, `assets/js`, `assets/img` | Stylesheets, scripts, and images, copied to `public/assets/` keeping their subfolders. |
-| `static/` | Files copied to the site root as-is, for `favicon.ico`, `CNAME`, and the like. |
+| `assets/css`, `assets/js`, `assets/img` | Stylesheets, scripts, and images, copied to `public/assets/` keeping their subfolders. This is the processed pipeline: minify, fingerprint, and responsive images apply here. |
+| `static/` | Files copied to the site root verbatim, with their exact names, for `favicon.ico`, `CNAME`, `robots.txt`, `.well-known/`, and the like. Nothing here is minified or fingerprinted, so fixed URLs stay fixed. |
 | `data/` | Optional JSON and YAML exposed to layouts. |
 | `shortcodes/` | Optional shortcode templates. |
 

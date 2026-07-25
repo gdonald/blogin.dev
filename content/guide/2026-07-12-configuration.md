@@ -20,9 +20,9 @@ options override the file.
 | `page-size` | Posts per listing page. |
 | `summary-length` | Character cap on an auto-generated post summary (default 200). |
 | `robots` | Emit `robots.txt` (default true). |
-| `minify` | Minify emitted and copied CSS and JavaScript (default false). |
-| `fingerprint` | Content-hash asset filenames and rewrite references (default false). |
-| `image-widths` | Widths to resize images to for `srcset` (default `[]`, off). |
+| `minify` | Minify CSS and JavaScript under `assets/` (default false). `static/` files are left verbatim. |
+| `fingerprint` | Hash `assets/` filenames and rewrite references (default false). `static/` files keep their names. |
+| `image-widths` | Widths to resize `assets/` images to for `srcset` (default `[]`, off). |
 | `reading-wpm` | Words per minute for the reading-time estimate (default 200). |
 | `related-count` | Maximum related posts per post (default 5). |
 | `languages` | Language codes to build, each into its own `/<code>/` subtree. |

@@ -43,5 +43,7 @@ components (the responsive navbar toggle, dropdowns, collapses). The scaffolded
 `base.haml` includes `framework-script-tag`, so those components work out of the
 box.
 
-Layouts read a slot's class with `framework-class('pagination')`, so a
-framework-aware template picks up the right class automatically.
+Layouts read a slot's class with `framework-class('table')`, so a
+framework-aware template picks up the right class automatically. The built-in
+`pagination-html` uses this to class its markup per framework, so a paginated
+listing looks right under each profile with no layout change.

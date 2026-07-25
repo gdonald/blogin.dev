@@ -14,11 +14,11 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Template Data"/>
 <meta name="twitter:description" content="The context object every layout renders against, and the shapes it exposes."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.d4bbc380.svg'>
-    <link rel='icon' href='/favicon.83c2e094.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.44bad3b4.png'>
+    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.66764b54.svg'>
+    <link rel='icon' href='/favicon.ico' sizes='any'>
+    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.65f304c5.png'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.2aa1c946.css'>
+    <link rel='stylesheet' href='/assets/css/blogin.304efdf5.css'>
     <script>
 (function () {
   var KEY = 'blogin-theme', root = document.documentElement;
@@ -41,7 +41,7 @@
     <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
       <div class='container'>
         <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.d4bbc380.svg' alt='' width='28' height='28'>
+          <img class='me-2' src='/assets/img/logo.66764b54.svg' alt='' width='28' height='28'>
           Blogin
         </a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
@@ -66,8 +66,8 @@
   </form>
   <ul data-blogin-results='true'></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.bebff177.css'>
-<script src='/assets/js/search.88e6a3bf.js'></script>
+<link rel='stylesheet' href='/assets/css/search.b44b4f38.css'>
+<script src='/assets/js/search.9fbf762c.js'></script>
 
             </div>
             <div class='navbar-toggle-slot'>
@@ -174,6 +174,10 @@ inside the collections.</p>
 <td><code>truncate(text, n)</code>, <code>format-date(date, fmt)</code>, <code>group-by(items, field)</code></td>
 <td>Filters. See <a href="/guide/layouts/">Layouts</a>.</td>
 </tr>
+<tr>
+<td><code>cache-fragment(key, block)</code></td>
+<td>Render the block once and reuse its HTML for every later call with the same key. For invariant chrome only. See <a href="/guide/layouts/">Layouts</a>.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="the-post-context">The post context<a class="anchor" href="#the-post-context">#</a></h2>
@@ -263,7 +267,11 @@ inside the collections.</p>
 </tr>
 <tr>
 <td><code>pagination-html</code></td>
-<td>The newer/older paging links, as HTML.</td>
+<td>A numbered pagination bar as HTML: first, previous, the current page with three on either side, next, and last. Classed for the active CSS framework. Empty on a single-page listing.</td>
+</tr>
+<tr>
+<td><code>pagination-links</code></td>
+<td>One entry per page, for a layout that renders its own pagination instead. Empty on a single-page listing.</td>
 </tr>
 <tr>
 <td><code>index-dates</code></td>
@@ -301,6 +309,19 @@ count, such as <code>raku (4)</code>:</p>
 </code></pre>
 <p>A <strong>tag link</strong> (<code>tags</code> on a post):</p>
 <pre><code>{ name, url }
+</code></pre>
+<p>A <strong>pagination link</strong> (<code>pagination-links</code> on a listing). <code>current</code> marks the page
+being rendered:</p>
+<pre><code>{ number, url, current }
+</code></pre>
+<p>A layout builds numbered pagination by iterating them:</p>
+<pre><code class="language-haml hl-plain">- if pagination-links
+  %nav.pagination
+    - for pagination-links -&gt; $page
+      - if $page&lt;current&gt;
+        %span.current= $page&lt;number&gt;
+      - else
+        %a{href: "#{$page&lt;url&gt;}"}= $page&lt;number&gt;
 </code></pre>
 <p>A <strong>language</strong> (<code>languages</code>). <code>current</code> marks the page you are on:</p>
 <pre><code>{ code, url, current }

@@ -36,15 +36,18 @@ is pruned. Pass `--force` to rewrite everything.
 
 ## Asset optimization
 
-Two `blogin.json` keys tune the emitted assets. `minify` shrinks every emitted
-and copied CSS and JavaScript file: it strips comments, collapses whitespace, and
-drops blank and comment-only script lines while keeping line breaks so JavaScript
-semicolon insertion stays safe.
+Two `blogin.json` keys tune the emitted assets, and both act only on the assets
+pipeline under `public/assets/`. Files copied verbatim from `static/` to the site
+root are never touched, so a `favicon.ico` or `CNAME` keeps its exact name.
 
-`fingerprint` renames each CSS, JavaScript, and image file to include a
-content hash, such as `style.1a2b3c4d.css`, and rewrites every reference to it in
-the built HTML and CSS. A changed asset gets a new name, so a far-future cache
-never serves a stale file. Both default off.
+`minify` shrinks every CSS and JavaScript file under `assets/`: it strips
+comments, collapses whitespace, and drops blank and comment-only script lines
+while keeping line breaks so JavaScript semicolon insertion stays safe.
+
+`fingerprint` renames each CSS, JavaScript, and image file under `assets/` to
+include a short hash of its size and timestamp, such as `style.1a2b3c4d.css`, and
+rewrites every reference to it in the built HTML and CSS. A changed asset gets a
+new name, so a far-future cache never serves a stale file. Both default off.
 
 `image-widths` turns on responsive images. Given a list like `[320, 640, 960]`,
 the build resizes each raster image to every width smaller than the original,

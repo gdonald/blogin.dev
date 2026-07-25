@@ -30,7 +30,9 @@ These are available in every template, including `base.haml` and the partials.
 | `url` | The page's own URL. |
 | `canonical-url` | `base-url` joined to `url`, for a canonical link. |
 | `head-meta` | The Open Graph, Twitter, and canonical tags as one HTML string. |
-| `meta-title`, `meta-description`, `meta-type` | The values `head-meta` uses, each callable on its own. |
+| `meta-title` | The document title for the `<title>` tag: the site title, then the page's own title after a ` :: ` separator (`Greg Donald :: My Post`). The home page is the site title alone. |
+| `page-title` | The page's own title without the site prefix: the post title, the section label, or a term name. Empty on the home page. This is what `head-meta` puts in `og:title` and `twitter:title`. |
+| `meta-description`, `meta-type` | The other values `head-meta` uses, each callable on its own. |
 | `data` | The merged data files as a hash, keyed by file name. See [Data files](/guide/data-files/). |
 | `languages`, `has-languages` | The translations of the current page, and whether there are any. |
 | `nav-nodes` | The navigation tree, a list of nodes. |
@@ -41,6 +43,7 @@ These are available in every template, including `base.haml` and the partials.
 | `theme-toggle` | A ready-made light/dark toggle button, moon and sun icons, wired to the script. |
 | `has-header`, `has-sidebar`, `has-footer` | Whether the matching chrome partial exists. |
 | `truncate(text, n)`, `format-date(date, fmt)`, `group-by(items, field)` | Filters. See [Layouts](/guide/layouts/). |
+| `cache-fragment(key, block)` | Render the block once and reuse its HTML for every later call with the same key. For invariant chrome only. See [Layouts](/guide/layouts/). |
 
 ## The post context
 
@@ -88,7 +91,8 @@ A `show.haml` that uses the lot:
 | `heading` | The page's `h1` text: the section label, or the term name on a term page, or the humanized taxonomy name on a taxonomy index. |
 | `posts` | The entries to list. |
 | `page-number`, `total-pages` | The current page and the page count. |
-| `pagination-html` | The newer/older paging links, as HTML. |
+| `pagination-html` | A numbered pagination bar as HTML: first, previous, the current page with three on either side, next, and last. Classed for the active CSS framework. Empty on a single-page listing. |
+| `pagination-links` | One entry per page, for a layout that renders its own pagination instead. Empty on a single-page listing. |
 | `index-dates` | Whether the section lists dates. |
 
 `posts` holds different shapes depending on the page. On a section listing,
@@ -123,8 +127,11 @@ The collections hold plain hashes and nodes with a fixed set of keys.
 A **post entry** (`posts` on a listing, `related` on a post):
 
 ```
-{ title, url, date, description, summary }
+{ title, url, date, description, summary, image }
 ```
+
+`image` is the source of the first image in the post's body, or `''` when the
+post has none. A listing renders it as a lead thumbnail with `- if $entry<image>`.
 
 A **term entry** (`posts` on a taxonomy index). Its `title` already carries the
 count, such as `raku (4)`:
@@ -137,6 +144,25 @@ A **tag link** (`tags` on a post):
 
 ```
 { name, url }
+```
+
+A **pagination link** (`pagination-links` on a listing). `current` marks the page
+being rendered:
+
+```
+{ number, url, current }
+```
+
+A layout builds numbered pagination by iterating them:
+
+```haml
+- if pagination-links
+  %nav.pagination
+    - for pagination-links -> $page
+      - if $page<current>
+        %span.current= $page<number>
+      - else
+        %a{href: "#{$page<url>}"}= $page<number>
 ```
 
 A **language** (`languages`). `current` marks the page you are on:
