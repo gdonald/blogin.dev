@@ -20,6 +20,33 @@ The body goes here.
 
 Run `blogin new "My Post"` to scaffold one with the front matter filled in.
 
+## Links and images
+
+A link or an image takes an optional attribute list in braces right after the
+closing paren. Use `key=value` for an attribute, `.name` for a class, and
+`#name` for an id:
+
+```
+[the docs](https://example.com){target=_blank rel=noopener .external}
+
+![A cat](/images/cat.png){.rounded #hero}
+```
+
+Wrap an image in a link to make the image itself clickable. The attribute list
+belongs to the link, so a linked thumbnail opens its full-size version in a new
+tab:
+
+```
+[![A cat](/images/cat-thumb.png)](/images/cat.png){target=_blank}
+```
+
+That renders an `<img>` inside the `<a>`, and the image keeps any attribute
+list of its own:
+
+```
+[![A cat](/images/cat-thumb.png){.thumb}](/images/cat.png){target=_blank}
+```
+
 ## Reference links and footnotes
 
 Links can carry their target in a separate definition rather than inline. Write

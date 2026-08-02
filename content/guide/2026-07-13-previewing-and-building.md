@@ -14,18 +14,41 @@ blogin serve --port 3000
 
 `serve` builds the site, serves `public/` locally, and watches the source tree.
 Any change to content, layouts, or static assets triggers a full rebuild in
-place, and config edits are picked up too. Extensionless URLs resolve to their
-`.html` files, matching how a production host rewrites, so local preview behaves
-like the deployed site. The server is a dev tool only; production ships static
-files.
+place, and config edits are picked up too. Every directory under the watched
+trees is watched, however deeply nested, and a directory you add while the server
+runs starts firing changes on its own. A save that fires several filesystem
+events is coalesced into one rebuild. Extensionless URLs resolve to their `.html`
+files, matching how a production host rewrites, so local preview behaves like the
+deployed site. The server is a dev tool only; production ships static files.
 
-The preview server also reloads the open page for you. It injects a small client
-into each served HTML page that long-polls a build-version endpoint: the request
-parks on the server until a rebuild bumps the version or the wait times out, then
-the browser either refreshes or reconnects. Because the held connection sits idle
-rather than being written to, a browser that navigates away closes a socket the
-server is not mid-write on. The injection happens only while serving. Built
-`public/` files never contain it.
+`minify` and `fingerprint` are off while serving, whatever `blogin.json` says,
+and the server prints a line saying so when the config asks for them.
+Fingerprinting renames every asset on each build, which would leave an already
+open page pointing at files the rebuild just deleted, and it costs that renaming
+work on every save. `blogin build` still applies both, so what you deploy is
+unaffected.
+
+## Live reload
+
+Each served HTML page carries a small client that holds a WebSocket to the
+server. When a rebuild finishes, the server pushes the list of output files it
+actually rewrote, and the page acts on it:
+
+- The page reloads when its own HTML file changed, or when a script it loads
+  changed.
+- A changed stylesheet is swapped in place, so styling updates without a reload
+  and without losing scroll position or form state.
+- A changed image is re-fetched in place.
+- A rebuild that rewrote nothing sends nothing, and no page reloads.
+
+The client reconnects on its own when the socket drops, so a restarted server
+picks the page back up. On reconnecting it compares the build the page is showing
+against the one the server is serving, and reloads when they differ, which covers
+edits made while the server was down. Preview responses are sent with
+`Cache-Control: no-store` so a reloaded page never comes back from the browser
+cache.
+
+The injection happens only while serving. Built `public/` files never contain it.
 
 ## Incremental builds
 
@@ -33,6 +56,11 @@ server is not mid-write on. The injection happens only while serving. Built
 changed, so rebuilding an unchanged site writes nothing and editing one post
 rewrites just that post and the pages that reference it. Output for a deleted post
 is pruned. Pass `--force` to rewrite everything.
+
+A `.keep` file is yours, not build output, so pruning leaves it alone and the
+directory holding it survives. Keep one at `public/.keep` to track the output
+directory in git, or in any directory under `public/` the build writes nothing
+into. `blogin clean` leaves `.keep` files and their directories in place too.
 
 ## Asset optimization
 

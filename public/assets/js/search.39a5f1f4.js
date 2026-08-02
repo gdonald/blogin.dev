@@ -6,6 +6,13 @@ const form = document.querySelector('[data-blogin-search]');
 if (!form) return;
 const input = form.querySelector('input');
 const results = document.querySelector('[data-blogin-results]');
+if (results && results.parentNode !== document.body) document.body.appendChild(results);
+function place() {
+const r = input.getBoundingClientRect();
+results.style.top = (r.bottom + 4) + 'px';
+results.style.left = r.left + 'px';
+results.style.width = r.width + 'px';
+}
 let records = [];
 fetch('/search-index.json').then(function (r) { return r.json(); }).then(function (data) {
 records = data;
@@ -63,6 +70,9 @@ a.appendChild(p);
 li.appendChild(a);
 results.appendChild(li);
 }
+if (results.children.length) place();
 }
 input.addEventListener('input', function () { render(input.value); });
+window.addEventListener('resize', function () { if (results.children.length) place(); });
+window.addEventListener('scroll', function () { if (results.children.length) place(); }, true);
 })();

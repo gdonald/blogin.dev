@@ -14,11 +14,11 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Writing Posts"/>
 <meta name="twitter:description" content="Front matter, sections, and tags."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.66764b54.svg'>
+    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
     <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.65f304c5.png'>
+    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.304efdf5.css'>
+    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
     <script>
 (function () {
   var KEY = 'blogin-theme', root = document.documentElement;
@@ -36,12 +36,19 @@
 })();
 </script>
 
+    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y16FBSMK2N');
+    </script>
   </head>
   <body>
     <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
       <div class='container'>
         <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.66764b54.svg' alt='' width='28' height='28'>
+          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
           Blogin
         </a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
@@ -66,8 +73,8 @@
   </form>
   <ul data-blogin-results='true'></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.b44b4f38.css'>
-<script src='/assets/js/search.9fbf762c.js'></script>
+<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
+<script src='/assets/js/search.39a5f1f4.js'></script>
 
             </div>
             <div class='navbar-toggle-slot'>
@@ -84,7 +91,7 @@
       <h1 class='mb-4'>Writing Posts</h1>
       <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
         <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#reference-links-and-footnotes">Reference links and footnotes</a></li><li><a href="#sections">Sections</a></li><li><a href="#summaries">Summaries</a></li><li><a href="#table-of-contents">Table of contents</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#future-dated-posts">Future-dated posts</a></li><li><a href="#shortcodes">Shortcodes</a><ul><li><a href="#adding-your-own">Adding your own</a></li></ul></li><li><a href="#redirects">Redirects</a></li><li><a href="#tags-and-taxonomies">Tags and taxonomies</a></li><li><a href="#showing-a-post-s-tags">Showing a post's tags</a></li></ul>
+        <ul><li><a href="#links-and-images">Links and images</a></li><li><a href="#reference-links-and-footnotes">Reference links and footnotes</a></li><li><a href="#sections">Sections</a></li><li><a href="#summaries">Summaries</a></li><li><a href="#table-of-contents">Table of contents</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#future-dated-posts">Future-dated posts</a></li><li><a href="#shortcodes">Shortcodes</a><ul><li><a href="#adding-your-own">Adding your own</a></li></ul></li><li><a href="#redirects">Redirects</a></li><li><a href="#tags-and-taxonomies">Tags and taxonomies</a></li><li><a href="#showing-a-post-s-tags">Showing a post's tags</a></li></ul>
       </nav>
       <p>A post is a Markdown file with a <code>---</code> front matter block:</p>
 <pre><code>---
@@ -96,6 +103,23 @@ description: A short summary.
 The body goes here.
 </code></pre>
 <p>Run <code>blogin new "My Post"</code> to scaffold one with the front matter filled in.</p>
+<h2 id="links-and-images">Links and images<a class="anchor" href="#links-and-images">#</a></h2>
+<p>A link or an image takes an optional attribute list in braces right after the
+closing paren. Use <code>key=value</code> for an attribute, <code>.name</code> for a class, and
+<code>#name</code> for an id:</p>
+<pre><code>[the docs](https://example.com){target=_blank rel=noopener .external}
+
+![A cat](/images/cat.png){.rounded #hero}
+</code></pre>
+<p>Wrap an image in a link to make the image itself clickable. The attribute list
+belongs to the link, so a linked thumbnail opens its full-size version in a new
+tab:</p>
+<pre><code>[![A cat](/images/cat-thumb.png)](/images/cat.png){target=_blank}
+</code></pre>
+<p>That renders an <code>&lt;img&gt;</code> inside the <code>&lt;a&gt;</code>, and the image keeps any attribute
+list of its own:</p>
+<pre><code>[![A cat](/images/cat-thumb.png){.thumb}](/images/cat.png){target=_blank}
+</code></pre>
 <h2 id="reference-links-and-footnotes">Reference links and footnotes<a class="anchor" href="#reference-links-and-footnotes">#</a></h2>
 <p>Links can carry their target in a separate definition rather than inline. Write
 <code>[text][label]</code> in the body and define the label anywhere in the file:</p>
@@ -238,7 +262,7 @@ tag index in it.</p>
         <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/markdown/'>markdown</a>
       </nav>
     </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/getting-started/"><span aria-hidden="true">&larr;</span> Getting Started</a><a class="next btn btn-primary" href="/guide/layouts/">Layouts <span aria-hidden="true">&rarr;</span></a></nav>
+    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/getting-started/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Getting Started</span></a><a class="next btn btn-primary" href="/guide/layouts/"><span class="post-nav-label">Layouts</span> <span aria-hidden="true">&rarr;</span></a></nav>
   </div>
 </div>
 

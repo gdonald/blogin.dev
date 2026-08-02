@@ -14,11 +14,11 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Previewing and Building"/>
 <meta name="twitter:description" content="The dev server, incremental builds, and debug output."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.66764b54.svg'>
+    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
     <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.65f304c5.png'>
+    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.304efdf5.css'>
+    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
     <script>
 (function () {
   var KEY = 'blogin-theme', root = document.documentElement;
@@ -36,12 +36,19 @@
 })();
 </script>
 
+    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y16FBSMK2N');
+    </script>
   </head>
   <body>
     <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
       <div class='container'>
         <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.66764b54.svg' alt='' width='28' height='28'>
+          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
           Blogin
         </a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
@@ -66,8 +73,8 @@
   </form>
   <ul data-blogin-results='true'></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.b44b4f38.css'>
-<script src='/assets/js/search.9fbf762c.js'></script>
+<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
+<script src='/assets/js/search.39a5f1f4.js'></script>
 
             </div>
             <div class='navbar-toggle-slot'>
@@ -84,29 +91,53 @@
       <h1 class='mb-4'>Previewing and Building</h1>
       <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
         <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#the-preview-server">The preview server</a></li><li><a href="#incremental-builds">Incremental builds</a></li><li><a href="#asset-optimization">Asset optimization</a></li><li><a href="#debug-output">Debug output</a></li></ul>
+        <ul><li><a href="#the-preview-server">The preview server</a></li><li><a href="#live-reload">Live reload</a></li><li><a href="#incremental-builds">Incremental builds</a></li><li><a href="#asset-optimization">Asset optimization</a></li><li><a href="#debug-output">Debug output</a></li></ul>
       </nav>
       <h2 id="the-preview-server">The preview server<a class="anchor" href="#the-preview-server">#</a></h2>
 <pre><code class="language-bash">blogin serve --port <span class="hl-number">3000</span>
 </code></pre>
 <p><code>serve</code> builds the site, serves <code>public/</code> locally, and watches the source tree.
 Any change to content, layouts, or static assets triggers a full rebuild in
-place, and config edits are picked up too. Extensionless URLs resolve to their
-<code>.html</code> files, matching how a production host rewrites, so local preview behaves
-like the deployed site. The server is a dev tool only; production ships static
-files.</p>
-<p>The preview server also reloads the open page for you. It injects a small client
-into each served HTML page that long-polls a build-version endpoint: the request
-parks on the server until a rebuild bumps the version or the wait times out, then
-the browser either refreshes or reconnects. Because the held connection sits idle
-rather than being written to, a browser that navigates away closes a socket the
-server is not mid-write on. The injection happens only while serving. Built
-<code>public/</code> files never contain it.</p>
+place, and config edits are picked up too. Every directory under the watched
+trees is watched, however deeply nested, and a directory you add while the server
+runs starts firing changes on its own. A save that fires several filesystem
+events is coalesced into one rebuild. Extensionless URLs resolve to their <code>.html</code>
+files, matching how a production host rewrites, so local preview behaves like the
+deployed site. The server is a dev tool only; production ships static files.</p>
+<p><code>minify</code> and <code>fingerprint</code> are off while serving, whatever <code>blogin.json</code> says,
+and the server prints a line saying so when the config asks for them.
+Fingerprinting renames every asset on each build, which would leave an already
+open page pointing at files the rebuild just deleted, and it costs that renaming
+work on every save. <code>blogin build</code> still applies both, so what you deploy is
+unaffected.</p>
+<h2 id="live-reload">Live reload<a class="anchor" href="#live-reload">#</a></h2>
+<p>Each served HTML page carries a small client that holds a WebSocket to the
+server. When a rebuild finishes, the server pushes the list of output files it
+actually rewrote, and the page acts on it:</p>
+<ul>
+<li>The page reloads when its own HTML file changed, or when a script it loads
+changed.</li>
+<li>A changed stylesheet is swapped in place, so styling updates without a reload
+and without losing scroll position or form state.</li>
+<li>A changed image is re-fetched in place.</li>
+<li>A rebuild that rewrote nothing sends nothing, and no page reloads.</li>
+</ul>
+<p>The client reconnects on its own when the socket drops, so a restarted server
+picks the page back up. On reconnecting it compares the build the page is showing
+against the one the server is serving, and reloads when they differ, which covers
+edits made while the server was down. Preview responses are sent with
+<code>Cache-Control: no-store</code> so a reloaded page never comes back from the browser
+cache.</p>
+<p>The injection happens only while serving. Built <code>public/</code> files never contain it.</p>
 <h2 id="incremental-builds">Incremental builds<a class="anchor" href="#incremental-builds">#</a></h2>
 <p><code>blogin build</code> renders every page but writes a file only when its content
 changed, so rebuilding an unchanged site writes nothing and editing one post
 rewrites just that post and the pages that reference it. Output for a deleted post
 is pruned. Pass <code>--force</code> to rewrite everything.</p>
+<p>A <code>.keep</code> file is yours, not build output, so pruning leaves it alone and the
+directory holding it survives. Keep one at <code>public/.keep</code> to track the output
+directory in git, or in any directory under <code>public/</code> the build writes nothing
+into. <code>blogin clean</code> leaves <code>.keep</code> files and their directories in place too.</p>
 <h2 id="asset-optimization">Asset optimization<a class="anchor" href="#asset-optimization">#</a></h2>
 <p>Two <code>blogin.json</code> keys tune the emitted assets, and both act only on the assets
 pipeline under <code>public/assets/</code>. Files copied verbatim from <code>static/</code> to the site
@@ -135,7 +166,7 @@ Comment text is sanitized so a stray <code>--&gt;</code> cannot break out.</p>
         <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/builds/'>builds</a>
       </nav>
     </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/metadata-and-seo/"><span aria-hidden="true">&larr;</span> Metadata and SEO</a><a class="next btn btn-primary" href="/guide/configuration/">Configuration <span aria-hidden="true">&rarr;</span></a></nav>
+    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/metadata-and-seo/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Metadata and SEO</span></a><a class="next btn btn-primary" href="/guide/configuration/"><span class="post-nav-label">Configuration</span> <span aria-hidden="true">&rarr;</span></a></nav>
   </div>
 </div>
 

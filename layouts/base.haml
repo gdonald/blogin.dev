@@ -11,6 +11,12 @@
     != framework-stylesheet-tag
     %link{rel: 'stylesheet', href: '/assets/css/blogin.css'}
     != theme-script
+    %script{async: True, src: 'https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y16FBSMK2N');
   %body
     %nav.navbar.navbar-expand-lg.bg-body-tertiary.border-bottom
       .container
