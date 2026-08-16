@@ -142,3 +142,53 @@
   --bs-link-color-rgb: 160, 174, 248;
   --bs-link-hover-color-rgb: 196, 181, 253;
 }
+
+/* Back to top, revealed once the page has scrolled past a screenful. It carries
+ * the same blue-to-violet gradient as the brand mark and the primary button, so
+ * the three read as one accent. Bootstrap's body variables supply the ring, and
+ * the mark itself is the same in both themes. */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1030;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(124, 58, 237, 0.45);
+  border-radius: 50%;
+  background-image: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    filter 0.3s ease;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  filter: brightness(1.12);
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 2px;
+}
+
+/* Someone who asked for less motion gets the jump rather than the glide. */
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: none;
+  }
+}

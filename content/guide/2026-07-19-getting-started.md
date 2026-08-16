@@ -26,7 +26,8 @@ and `homebrew/cask` are trusted without asking.
 Blogin can join `homebrew/core`, which would drop both the tap and the trust
 step, once it meets Homebrew's notability bar: 225 stars, 90 forks, or 90
 watchers when the author submits it. If you find Blogin useful, a star on
-[github.com/gdonald/Blogin](https://github.com/gdonald/Blogin) counts toward
+[github.com/gdonald/Blogin](https://github.com/gdonald/Blogin){target=_blank rel=noopener}
+counts toward
 that.
 
 **Linux, and Windows through WSL2**
@@ -138,7 +139,7 @@ release also carries a build provenance attestation, signed by GitHub with a
 short-lived certificate issued to the workflow that built it. No long-lived
 private key is involved.
 
-Verifying needs the [GitHub CLI](https://cli.github.com):
+Verifying needs the [GitHub CLI](https://cli.github.com){target=_blank rel=noopener}:
 
 ```bash
 gh attestation verify blogin-linux-x86_64 --repo gdonald/Blogin

@@ -38,11 +38,13 @@
     %footer.border-top.mt-5.py-4
       .container.d-flex.flex-wrap.justify-content-between.gap-2
         %p.text-body-secondary.mb-0
-          &copy; 2026 blogin.dev. Built with
-          %a.link-secondary{href: 'https://github.com/gdonald/Blogin'} Blogin
+          &copy; 2026
+          %a.link-secondary{href: '/'} blogin.dev
         %nav.d-flex.gap-3
-          %a.link-secondary{href: 'https://github.com/gdonald/Blogin'} GitHub
+          %a.link-secondary{href: 'https://github.com/gdonald/Blogin', target: '_blank', rel: 'noopener'} GitHub
           %a.link-secondary{href: '/tags/'} Browse by tag
           %a.link-secondary{href: '/feed.xml'} Atom
           %a.link-secondary{href: '/rss.xml'} RSS
+    %button.back-to-top{type: 'button', 'aria-label': 'Back to top'} &#8679;
     != framework-script-tag
+    %script{type: 'module', src: '/assets/js/application.js'}

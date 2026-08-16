@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
-<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
+<link rel="stylesheet" href="/assets/css/site.5b80a045b80faf3d.css" />
     <script>
     (function () {
       var KEY = 'blogin-theme', root = document.documentElement;
@@ -105,7 +105,8 @@ and <code>homebrew/cask</code> are trusted without asking.</p>
 <p>Blogin can join <code>homebrew/core</code>, which would drop both the tap and the trust
 step, once it meets Homebrew's notability bar: 225 stars, 90 forks, or 90
 watchers when the author submits it. If you find Blogin useful, a star on
-<a href="https://github.com/gdonald/Blogin">github.com/gdonald/Blogin</a> counts toward
+<a href="https://github.com/gdonald/Blogin" target="_blank" rel="noopener">github.com/gdonald/Blogin</a>
+counts toward
 that.</p>
 <p><strong>Linux, and Windows through WSL2</strong></p>
 <pre><code class="language-bash">curl -LO https://github.com/gdonald/Blogin/releases/latest/download/blogin-linux-x86_64
@@ -214,7 +215,7 @@ because whoever replaced the file could replace the checksum beside it. The
 release also carries a build provenance attestation, signed by GitHub with a
 short-lived certificate issued to the workflow that built it. No long-lived
 private key is involved.</p>
-<p>Verifying needs the <a href="https://cli.github.com">GitHub CLI</a>:</p>
+<p>Verifying needs the <a href="https://cli.github.com" target="_blank" rel="noopener">GitHub CLI</a>:</p>
 <pre><code class="language-bash">gh attestation verify blogin-linux-x86_64 --repo gdonald/Blogin
 </code></pre>
 <p>It reports which workflow built the file, from which commit. A file built
@@ -339,17 +340,19 @@ setup at all.</p>
 <footer class="border-top mt-5 py-4">
 <div class="container d-flex flex-wrap justify-content-between gap-2">
 <p class="text-body-secondary mb-0">
-&copy; 2026 blogin.dev. Built with
-<a class="link-secondary" href="https://github.com/gdonald/Blogin">Blogin</a>
+&copy; 2026
+<a class="link-secondary" href="/">blogin.dev</a>
 </p>
 <nav class="d-flex gap-3">
-<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="https://github.com/gdonald/Blogin" target="_blank" rel="noopener">GitHub</a>
 <a class="link-secondary" href="/tags/">Browse by tag</a>
 <a class="link-secondary" href="/feed.xml">Atom</a>
 <a class="link-secondary" href="/rss.xml">RSS</a>
 </nav>
 </div>
 </footer>
+<button class="back-to-top" type="button" aria-label="Back to top">&#8679;</button>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="/assets/js/application.de1a1a92f7d79096.js"></script>
 </body>
 </html>
