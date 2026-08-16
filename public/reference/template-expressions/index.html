@@ -89,7 +89,7 @@ Blogin
 <h1 class="mb-4">Template Expressions</h1>
 <nav class="toc mb-4 p-3 bg-body-tertiary rounded">
 <h2 class="h6 text-muted text-uppercase">Contents</h2>
-<ul><li><a href="#why-a-language-at-all">Why a language at all</a></li><li><a href="#values">Values</a></li><li><a href="#truthiness">Truthiness</a></li><li><a href="#grammar">Grammar</a></li><li><a href="#reading-values">Reading values</a></li><li><a href="#maps">Maps</a></li><li><a href="#named-arguments">Named arguments</a></li><li><a href="#control-flow">Control flow</a></li><li><a href="#output">Output</a></li><li><a href="#blocks">Blocks</a></li><li><a href="#worked-examples">Worked examples</a><ul><li><a href="#a-post-s-page">A post's page</a></li><li><a href="#a-listing-entry">A listing entry</a></li><li><a href="#navigation-which-is-recursive">Navigation, which is recursive</a></li><li><a href="#a-default">A default</a></li><li><a href="#a-fragment-rendered-once">A fragment rendered once</a></li><li><a href="#values-passed-to-a-partial">Values passed to a partial</a></li></ul></li><li><a href="#what-it-does-not-do">What it does not do</a></li><li><a href="#errors">Errors</a></li></ul>
+<ul><li><a href="#why-a-language-at-all">Why a language at all</a></li><li><a href="#values">Values</a></li><li><a href="#truthiness">Truthiness</a></li><li><a href="#grammar">Grammar</a></li><li><a href="#reading-values">Reading values</a></li><li><a href="#maps">Maps</a></li><li><a href="#named-arguments">Named arguments</a></li><li><a href="#control-flow">Control flow</a></li><li><a href="#output">Output</a></li><li><a href="#blocks">Blocks</a></li><li><a href="#working-examples">Working examples</a><ul><li><a href="#a-post-s-page">A post's page</a></li><li><a href="#a-listing-entry">A listing entry</a></li><li><a href="#navigation-which-is-recursive">Navigation, which is recursive</a></li><li><a href="#a-default">A default</a></li><li><a href="#a-fragment-rendered-once">A fragment rendered once</a></li><li><a href="#values-passed-to-a-partial">Values passed to a partial</a></li></ul></li><li><a href="#what-it-does-not-do">What it does not do</a></li><li><a href="#errors">Errors</a></li></ul>
 </nav>
 <p>Blogin's layouts are HAML. What HAML does not define is the language inside
 <code>= ...</code>, <code>- if ...</code>, and <code>#{...}</code>. Ruby HAML embeds Ruby. Blogin embeds a small
@@ -202,7 +202,7 @@ markup accidentally: raw output is always spelled <code>!=</code>.</p>
 <p>The block is not a closure. It is an expression whose evaluation is deferred,
 which is all <code>cache-fragment</code> needs. Blocks cannot take parameters, be stored,
 or be passed anywhere else.</p>
-<h2 id="worked-examples">Worked examples<a class="anchor" href="#worked-examples">#</a></h2>
+<h2 id="working-examples">Working examples<a class="anchor" href="#working-examples">#</a></h2>
 <p>Each of these is a pattern a real site uses, with what the language is doing
 spelled out.</p>
 <h3 id="a-post-s-page">A post's page<a class="anchor" href="#a-post-s-page">#</a></h3>

@@ -69,7 +69,7 @@ nav order, visibility, page size, and whether dates show:
 Set `index-dates` or `show-dates` to `false` to hide dates on reference-style
 sections while a blog keeps them.
 
-## A worked example
+## A working example
 
 ```json
 {

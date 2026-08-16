@@ -161,7 +161,7 @@ The block is not a closure. It is an expression whose evaluation is deferred,
 which is all `cache-fragment` needs. Blocks cannot take parameters, be stored,
 or be passed anywhere else.
 
-## Worked examples
+## Working examples
 
 Each of these is a pattern a real site uses, with what the language is doing
 spelled out.
