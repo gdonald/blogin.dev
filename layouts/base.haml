@@ -10,6 +10,7 @@
     %link{rel: 'apple-touch-icon', sizes: '180x180', href: '/assets/img/apple-touch-icon.png'}
     != framework-stylesheet-tag
     %link{rel: 'stylesheet', href: '/assets/css/blogin.css'}
+    %link{rel: 'stylesheet', href: '/assets/css/site.css'}
     != theme-script
     %script{async: True, src: 'https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'}
     :javascript
@@ -37,9 +38,10 @@
     %footer.border-top.mt-5.py-4
       .container.d-flex.flex-wrap.justify-content-between.gap-2
         %p.text-body-secondary.mb-0
-          Built with
+          &copy; 2026 Greg Donald. Built with
           %a.link-secondary{href: 'https://blogin.dev'} Blogin
         %nav.d-flex.gap-3
+          %a.link-secondary{href: 'https://github.com/gdonald/Blogin'} GitHub
           %a.link-secondary{href: '/tags/'} Browse by tag
           %a.link-secondary{href: '/feed.xml'} Atom
           %a.link-secondary{href: '/rss.xml'} RSS

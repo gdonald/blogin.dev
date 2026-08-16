@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Blogin</title>
-    <link rel="canonical" href="https://blogin.dev/guide/configuration/"/>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/configuration/"/>
 <meta name="description" content="The keys in blogin.json."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Configuration"/>
@@ -14,202 +14,263 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuration"/>
 <meta name="twitter:description" content="The keys in blogin.json."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
-    <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
-    <script>
-(function () {
-  var KEY = 'blogin-theme', root = document.documentElement;
-  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
-  function pref() {
-    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
-    return 'light';
-  }
-  apply(pref());
-  window.bloginToggleTheme = function () {
-    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    apply(m);
-    try { localStorage.setItem(KEY, m); } catch (e) {}
-  };
-})();
-</script>
 
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y16FBSMK2N');
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
     </script>
-  </head>
-  <body>
-    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
-      <div class='container'>
-        <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
-          Blogin
-        </a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div id='topbar' class='collapse navbar-collapse'>
-          <ul class='navbar-nav mb-2 mb-lg-0'>
-  <li class='nav-item'>
-  <a class='nav-link active' href='/guide/'>Guide</a>
-</li>
-<li class='nav-item'>
-  <a class='nav-link' href='/cli/'>CLI</a>
-</li>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
 </ul>
 
-          <div class='navbar-tools'>
-            <div class='navbar-search'>
-              <div class='blogin-search'>
-  <form data-blogin-search='true' role='search'>
-    <input type='search' name='q' placeholder='Search' aria-label='Search'>
-  </form>
-  <ul data-blogin-results='true'></ul>
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
-<script src='/assets/js/search.39a5f1f4.js'></script>
-
-            </div>
-            <div class='navbar-toggle-slot'>
-              <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main class='container my-4'>
-      <div class='card'>
-  <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>Configuration</h1>
-      <p>Site-wide settings live in <code>blogin.json</code> at the project root. Command-line
-options override the file.</p>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Configuration</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#per-section-overrides">Per-section overrides</a></li><li><a href="#a-worked-example">A worked example</a></li></ul>
+</nav>
+<p>Site-wide settings live in <code>blogin.json</code> beside the content directory. Every key
+is optional. Command-line options override the file.</p>
+<p>An unknown key is a warning naming the closest real key, so a typo is reported
+rather than silently ignored. A key with the wrong type stops the build.</p>
 <table class="table">
 <thead>
 <tr>
 <th>Key</th>
+<th>Type</th>
+<th>Default</th>
 <th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>title</code></td>
-<td>Site title, available to layouts.</td>
+<td>string</td>
+<td>empty</td>
+<td>Site title, available to layouts and feeds.</td>
 </tr>
 <tr>
 <td><code>base-url</code></td>
-<td>Absolute base for feeds and the sitemap.</td>
+<td>string</td>
+<td>empty</td>
+<td>Absolute base, with no trailing slash, for feeds, the sitemap, and canonical links.</td>
 </tr>
 <tr>
 <td><code>author</code></td>
+<td>string</td>
+<td>empty</td>
 <td>Site author, available to layouts and feeds.</td>
 </tr>
 <tr>
 <td><code>output-dir</code></td>
-<td>Where the build writes (default <code>public</code>).</td>
+<td>string</td>
+<td><code>public</code></td>
+<td>Where the build writes, relative to the site root.</td>
 </tr>
 <tr>
 <td><code>home-section</code></td>
+<td>string</td>
+<td>empty</td>
 <td>Section whose listing is also the site root.</td>
 </tr>
 <tr>
-<td><code>clean-urls</code></td>
-<td>Extensionless URLs when true (default false; true needs web-server config, see <a href="/guide/deploying/">Deploying</a>).</td>
+<td><code>css-framework</code></td>
+<td>string</td>
+<td><code>none</code></td>
+<td>Class-map profile: <code>none</code>, <code>bootstrap5</code>, <code>pico</code>, or <code>bulma</code>.</td>
 </tr>
 <tr>
-<td><code>css-framework</code></td>
-<td>Class-map profile: <code>none</code>, <code>bootstrap5</code>, ...</td>
+<td><code>theme</code></td>
+<td>string</td>
+<td>empty</td>
+<td>Name of a directory under <code>themes/</code> to fall back to for layouts, assets, and static files.</td>
 </tr>
 <tr>
 <td><code>page-size</code></td>
+<td>integer</td>
+<td><code>10</code></td>
 <td>Posts per listing page.</td>
 </tr>
 <tr>
 <td><code>summary-length</code></td>
-<td>Character cap on an auto-generated post summary (default 200).</td>
-</tr>
-<tr>
-<td><code>robots</code></td>
-<td>Emit <code>robots.txt</code> (default true).</td>
-</tr>
-<tr>
-<td><code>minify</code></td>
-<td>Minify CSS and JavaScript under <code>assets/</code> (default false). <code>static/</code> files are left verbatim.</td>
-</tr>
-<tr>
-<td><code>fingerprint</code></td>
-<td>Hash <code>assets/</code> filenames and rewrite references (default false). <code>static/</code> files keep their names.</td>
-</tr>
-<tr>
-<td><code>image-widths</code></td>
-<td>Widths to resize <code>assets/</code> images to for <code>srcset</code> (default <code>[]</code>, off).</td>
+<td>integer</td>
+<td><code>200</code></td>
+<td>Character cap on a summary derived from the body.</td>
 </tr>
 <tr>
 <td><code>reading-wpm</code></td>
-<td>Words per minute for the reading-time estimate (default 200).</td>
+<td>integer</td>
+<td><code>200</code></td>
+<td>Words per minute behind the reading-time estimate.</td>
 </tr>
 <tr>
 <td><code>related-count</code></td>
-<td>Maximum related posts per post (default 5).</td>
-</tr>
-<tr>
-<td><code>languages</code></td>
-<td>Language codes to build, each into its own <code>/&lt;code&gt;/</code> subtree.</td>
-</tr>
-<tr>
-<td><code>language-config</code></td>
-<td>Per-language overrides, e.g. <code>title</code>, keyed by code.</td>
-</tr>
-<tr>
-<td><code>theme</code></td>
-<td>Name of a theme under <code>themes/</code> to fall back to for layouts and assets.</td>
-</tr>
-<tr>
-<td><code>plugins</code></td>
-<td>Module names whose <code>blogin-emit</code> hook runs after the build.</td>
-</tr>
-<tr>
-<td><code>taxonomies</code></td>
-<td>Front-matter keys to group posts by (default <code>["tags"]</code>).</td>
-</tr>
-<tr>
-<td><code>feed-formats</code></td>
-<td>Feed formats to emit: <code>atom</code>, <code>rss</code>, <code>json</code> (default <code>["atom"]</code>).</td>
-</tr>
-<tr>
-<td><code>highlight</code></td>
-<td>Server-side syntax highlighting for fenced code.</td>
-</tr>
-<tr>
-<td><code>search</code></td>
-<td>Emit the search index and script.</td>
+<td>integer</td>
+<td><code>5</code></td>
+<td>Maximum related posts listed on a post's page.</td>
 </tr>
 <tr>
 <td><code>search-text-length</code></td>
-<td>Characters of body text indexed per post (default 2000).</td>
+<td>integer</td>
+<td><code>2000</code></td>
+<td>Characters of body text indexed per post.</td>
 </tr>
 <tr>
 <td><code>search-cap</code></td>
-<td>Maximum search results shown (default 10).</td>
+<td>integer</td>
+<td><code>10</code></td>
+<td>Maximum search results the browser shows.</td>
+</tr>
+<tr>
+<td><code>clean-urls</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Extensionless URLs when true. True needs web-server configuration, see <a href="/guide/deploying/">Deploying</a>.</td>
 </tr>
 <tr>
 <td><code>debug</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
 <td>Emit provenance comments around rendered partials and pages.</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Emit the search index and its script.</td>
+</tr>
+<tr>
+<td><code>highlight</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Server-side syntax highlighting for fenced code.</td>
+</tr>
+<tr>
+<td><code>robots</code></td>
+<td>boolean</td>
+<td><code>true</code></td>
+<td>Emit <code>robots.txt</code>.</td>
+</tr>
+<tr>
+<td><code>minify</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Minify CSS and JavaScript under <code>assets/</code>. Files under <code>static/</code> are left verbatim.</td>
+</tr>
+<tr>
+<td><code>fingerprint</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Name each <code>assets/</code> file for a hash of its content and rewrite every reference. Files under <code>static/</code> keep their names.</td>
+</tr>
+<tr>
+<td><code>image-widths</code></td>
+<td>list of integers</td>
+<td>empty</td>
+<td>Widths to write each raster image at, with a <code>srcset</code> wherever a page references it.</td>
+</tr>
+<tr>
+<td><code>taxonomies</code></td>
+<td>list of strings</td>
+<td><code>[&quot;tags&quot;]</code></td>
+<td>Front-matter keys to group posts by.</td>
+</tr>
+<tr>
+<td><code>feed-formats</code></td>
+<td>list of strings</td>
+<td><code>[&quot;atom&quot;]</code></td>
+<td>Any of <code>atom</code>, <code>rss</code>, <code>json</code>.</td>
+</tr>
+<tr>
+<td><code>languages</code></td>
+<td>list of strings</td>
+<td>empty</td>
+<td>Language codes, each built into its own <code>/&lt;code&gt;/</code> subtree.</td>
+</tr>
+<tr>
+<td><code>language-config</code></td>
+<td>map</td>
+<td>empty</td>
+<td>Per-language overrides such as <code>title</code>, keyed by code.</td>
+</tr>
+<tr>
+<td><code>sections</code></td>
+<td>map</td>
+<td>empty</td>
+<td>Per-section overrides, keyed by section name. See below.</td>
 </tr>
 </tbody>
 </table>
+<p>The fingerprint hash is taken over the file's bytes, not its size and timestamp,
+so the same input produces the same names on every machine and a rebuild that
+changes nothing changes no name.</p>
 <h2 id="per-section-overrides">Per-section overrides<a class="anchor" href="#per-section-overrides">#</a></h2>
 <p>The <code>sections</code> map overrides settings for one section, including its nav label,
 nav order, visibility, page size, and whether dates show:</p>
-<pre><code>"sections": {
-  "guide": { "label": "Guide", "order": 1, "page-size": 20 }
+<pre><code class="language-json"><span class="hl-string">&quot;sections&quot;</span>: {
+  <span class="hl-string">&quot;guide&quot;</span>: { <span class="hl-string">&quot;label&quot;</span>: <span class="hl-string">&quot;Guide&quot;</span>, <span class="hl-string">&quot;order&quot;</span>: <span class="hl-number">1</span>, <span class="hl-string">&quot;page-size&quot;</span>: <span class="hl-number">20</span> }
 }
 </code></pre>
 <table class="table">
@@ -222,11 +283,11 @@ nav order, visibility, page size, and whether dates show:</p>
 <tbody>
 <tr>
 <td><code>label</code></td>
-<td>Nav label and listing heading (defaults to the humanized name).</td>
+<td>Nav label and listing heading. Defaults to the humanized name.</td>
 </tr>
 <tr>
 <td><code>order</code></td>
-<td>Sort position in the nav.</td>
+<td>Sort position in the nav, ahead of alphabetical.</td>
 </tr>
 <tr>
 <td><code>page-size</code></td>
@@ -252,29 +313,43 @@ nav order, visibility, page size, and whether dates show:</p>
 </table>
 <p>Set <code>index-dates</code> or <code>show-dates</code> to <code>false</code> to hide dates on reference-style
 sections while a blog keeps them.</p>
+<h2 id="a-worked-example">A worked example<a class="anchor" href="#a-worked-example">#</a></h2>
+<pre><code class="language-json">{
+  <span class="hl-string">&quot;title&quot;</span>: <span class="hl-string">&quot;My Site&quot;</span>,
+  <span class="hl-string">&quot;base-url&quot;</span>: <span class="hl-string">&quot;https://example.com&quot;</span>,
+  <span class="hl-string">&quot;clean-urls&quot;</span>: true,
+  <span class="hl-string">&quot;highlight&quot;</span>: true,
+  <span class="hl-string">&quot;minify&quot;</span>: true,
+  <span class="hl-string">&quot;fingerprint&quot;</span>: true,
+  <span class="hl-string">&quot;feed-formats&quot;</span>: [<span class="hl-string">&quot;atom&quot;</span>, <span class="hl-string">&quot;json&quot;</span>],
+  <span class="hl-string">&quot;sections&quot;</span>: {
+    <span class="hl-string">&quot;notes&quot;</span>: { <span class="hl-string">&quot;label&quot;</span>: <span class="hl-string">&quot;Notes&quot;</span>, <span class="hl-string">&quot;order&quot;</span>: <span class="hl-number">1</span>, <span class="hl-string">&quot;page-size&quot;</span>: <span class="hl-number">20</span> }
+  }
+}
+</code></pre>
 
-      <nav class='tags mt-4'>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/configuration/'>configuration</a>
-      </nav>
-    </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/previewing-and-building/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Previewing and Building</span></a><a class="next btn btn-primary" href="/guide/internationalization/"><span class="post-nav-label">Internationalization</span> <span aria-hidden="true">&rarr;</span></a></nav>
-  </div>
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/configuration/">configuration</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/guide/previewing-and-building/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Previewing and Building</span></a><a class="next btn btn-primary" href="/guide/internationalization/"><span class="post-nav-label">Internationalization</span> <span aria-hidden="true">&rarr;</span></a></nav>
 </div>
-
-    </main>
-    <footer class='border-top mt-5 py-4'>
-      <div class='container d-flex flex-wrap justify-content-between gap-2'>
-        <p class='text-body-secondary mb-0'>
-          Built with
-          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
-        </p>
-        <nav class='d-flex gap-3'>
-          <a class='link-secondary' href='/tags/'>Browse by tag</a>
-          <a class='link-secondary' href='/feed.xml'>Atom</a>
-          <a class='link-secondary' href='/rss.xml'>RSS</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

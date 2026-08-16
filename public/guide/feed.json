@@ -1,75 +1,85 @@
 {
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Blogin: guide",
   "home_page_url": "https://blogin.dev/guide",
+  "feed_url": "https://blogin.dev/guide/feed.json",
   "items": [
     {
-      "date_published": "2026-07-20T00:00:00Z",
-      "url": "https://blogin.dev/guide/overview/",
-      "content_text": "Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime:…",
       "id": "https://blogin.dev/guide/overview/",
-      "title": "Overview"
+      "url": "https://blogin.dev/guide/overview/",
+      "title": "Overview",
+      "date_published": "2026-07-20T00:00:00Z",
+      "content_text": "Blogin is a static blog generator written in C++. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime. What…"
     },
     {
-      "url": "https://blogin.dev/guide/getting-started/",
       "id": "https://blogin.dev/guide/getting-started/",
-      "content_text": "Install Raku and zef",
+      "url": "https://blogin.dev/guide/getting-started/",
+      "title": "Getting Started",
       "date_published": "2026-07-19T00:00:00Z",
-      "title": "Getting Started"
+      "content_text": "Install"
     },
     {
-      "url": "https://blogin.dev/guide/writing-posts/",
-      "content_text": "A post is a Markdown file with a --- front matter block:\n---\ntitle: My Post\ndate: 2026-07-20\ntags: [raku, web]\ndescription: A short summary.\n---\nThe body goes here.\n\nRun blogin new \"My Post\" to scaffold one with the front matter filled in.\nLinks and images\nA link or an image takes an optional attribute list in braces right after the closing paren. Use key=value for an attribute, .name for a class, and #name for an id:\n[the docs](https://example.com){target=_blank rel=noopener .external}\n\n![A cat](/images/cat.png){.rounded #hero}\n\nWrap an image in a link to make the image itself clickable. The attribute list belongs to the link, so a linked thumbnail opens its full-size version in a new tab:\n[![A cat](/images/cat-thumb.png)](/images/cat.png){target=_blank}\n\nThat renders an <img> inside the <a>, and the image keeps any attribute list of its own:\n[![A cat](/images/cat-thumb.png){.thumb}](/images/cat.png){target=_blank}\n\nReference links and footnotes\nLinks can carry their target in a separate definition rather than inline. Write [text][label] in the body and define the label anywhere in the file:\nSee [the home page][home] for more.\n\n[home]: https://example.com \"Optional title\"\n\nA collapsed form, [text][], uses the text as the label. Labels match case-insensitively, and an undefined reference is left as literal text.\nFootnotes use [^label] where the note is cited, with a matching definition:\nA claim that needs a source[^src].\n\n[^src]: The cited source.\n\nFootnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.\nSections\nThe subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.\nSummaries\nA listing and a feed entry show a short summary of each post rather than the whole body. Blogin picks the summary in this order:\nA summary in front matter, used verbatim.\nThe text before a `",
-      "date_published": "2026-07-18T00:00:00Z",
       "id": "https://blogin.dev/guide/writing-posts/",
-      "title": "Writing Posts"
+      "url": "https://blogin.dev/guide/writing-posts/",
+      "title": "Writing Posts",
+      "date_published": "2026-07-18T00:00:00Z",
+      "content_text": "A post is a Markdown file with a --- front matter block:\n---\ntitle: My Post\ndate: 2026-07-20\ntags: [cpp, web]\ndescription: A short summary.\n---\nThe body goes here.\nRun blogin new \"My Post\" to scaffold one with the front matter filled in.\ntitle is the only required key. Everything else has a default: the date falls back to a date at the front of the filename, the slug follows the title, and the layout follows the section. draft, date, description, summary, slug, layout, order, toc, tags, and aliases are read, and any other key you write is available to the layout under its own name.\nSlugs\nA slug comes from the title, lowercased, with runs of punctuation and whitespace collapsed to single hyphens. Three characters carry the whole meaning of a name and are spelled out rather than dropped: + becomes plus, # becomes sharp, and & becomes and. So a c++ tag is c-plus-plus and a c tag is c, two pages rather than one overwriting the other.\nSet slug in front matter to choose the URL yourself.\nMarkdown\nThe body is CommonMark, with GitHub Flavored Markdown for the extensions: tables, task lists, strikethrough, and fenced code blocks with an info string. Footnotes, reference links, attribute lists, math, and Mermaid diagrams are covered below and in Math and Diagrams.\n| Column | Column |\n| --- | --- |\n| a | b |\n\n- [x] done\n- [ ] not done\n\n~~struck through~~\nDefinition lists\nA paragraph followed by a line starting with :  becomes a term and its definition:\nTerm\n: what it means\nwhich renders as:\n<dl>\n<dt>Term</dt>\n<dd>what it means</dd>\n</dl>\nOne term takes as many definitions as you give it, and a list holds as many terms as you like:\n--src <dir>\n: the content directory\n: defaults to `content`\n\n--out <dir>\n: where the site is written\nA definition holds inline markup, so : with *emphasis* works. The CLI pages on this site are written this way.\nLinks and images\nA link or an image takes an optional attribute list in braces right after the closing paren. Use key=value for an attribute, .name for a class, and #name for an id:\n[the docs](https://example.com){target=_blank rel=noopener .external}\n\n![A cat](/images/cat.png){.rounded #hero}\nWrap an image in a link to make the image itself clickable. The attribute list belongs to the link, so a linked thumbnail opens its full-size version in a new tab:\n[![A cat](/images/cat-thumb.png)](/images/cat.png){target=_blank}\nThat renders an <img> inside the <a>, and the image keeps any attribute list of its own:\n[![A cat](/images/cat-thumb.png){.thumb}](/images/cat.png){target=_blank}\nReference links and footnotes\nLinks can carry their target in a separate definition rather than inline. Write [text][label] in the body and define the label anywhere in the file:\nSee [the home page][home] for more.\n\n[home]: https://example.com \"Optional title\"\nA collapsed form, [text][], uses the text as the label. Labels match case-insensitively, and an undefined reference is left as literal text.\nFootnotes use [^label] where the note is cited, with a matching definition:\nA claim that needs a source[^src].\n\n[^src]: The cited source.\nFootnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.\nSections\nThe subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.\nSummaries\nA listing and a feed entry show a short summary of each post rather than the whole body. Blogin picks the summary in this order:\nA summary in front matter, used verbatim.\nThe text before a `"
     },
     {
-      "title": "Layouts",
+      "id": "https://blogin.dev/guide/layouts/",
       "url": "https://blogin.dev/guide/layouts/",
-      "content_text": "Blogin renders pages with Template::HAML. A build wraps each post's rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.",
+      "title": "Layouts",
       "date_published": "2026-07-17T00:00:00Z",
-      "id": "https://blogin.dev/guide/layouts/"
+      "content_text": "Blogin renders pages with its own HAML engine. A build wraps each post's rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml."
     },
     {
-      "date_published": "2026-07-22T00:00:00Z",
-      "title": "Template Data",
-      "url": "https://blogin.dev/guide/template-data/",
       "id": "https://blogin.dev/guide/template-data/",
+      "url": "https://blogin.dev/guide/template-data/",
+      "title": "Template Data",
+      "date_published": "2026-07-22T00:00:00Z",
       "content_text": "Every layout renders against a context object. A method call in HAML is a call on that object, so = title runs the context's title method and - for posts iterates its posts collection. There are two…"
     },
     {
-      "content_text": "A data/ directory beside content/ holds structured values that layouts read directly, so a list of authors, a set of social links, or a navigation table lives in one place rather than being repeated…",
-      "url": "https://blogin.dev/guide/data-files/",
       "id": "https://blogin.dev/guide/data-files/",
+      "url": "https://blogin.dev/guide/data-files/",
+      "title": "Data files",
       "date_published": "2026-07-21T00:00:00Z",
-      "title": "Data files"
+      "content_text": "A data/ directory beside content/ holds structured values that layouts read directly, so a list of authors, a set of social links, or a navigation table lives in one place rather than being repeated…"
     },
     {
       "id": "https://blogin.dev/guide/css-frameworks/",
-      "date_published": "2026-07-16T00:00:00Z",
-      "content_text": "The HTML Blogin emits carries framework-specific classes drawn from a selected profile, set by the css-framework config key. The core renderer stays framework-agnostic: it asks the profile for a…",
+      "url": "https://blogin.dev/guide/css-frameworks/",
       "title": "CSS Frameworks",
-      "url": "https://blogin.dev/guide/css-frameworks/"
+      "date_published": "2026-07-16T00:00:00Z",
+      "content_text": "Blogin adds framework-specific classes to the HTML it writes, taken from the profile you name in the css-framework config key. The renderer itself knows no framework. It asks the profile for a named…"
     },
     {
-      "date_published": "2026-07-15T00:00:00Z",
-      "content_text": "Set \"highlight\": true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it.",
+      "id": "https://blogin.dev/guide/syntax-highlighting/",
       "url": "https://blogin.dev/guide/syntax-highlighting/",
       "title": "Syntax Highlighting",
-      "id": "https://blogin.dev/guide/syntax-highlighting/"
+      "date_published": "2026-07-15T00:00:00Z",
+      "content_text": "Set \"highlight\": true in blogin.json and Blogin highlights fenced code during the build. Highlighting is server-side: there is no client JavaScript, and the pages work without it."
     },
     {
-      "title": "Math and Diagrams",
-      "url": "https://blogin.dev/guide/math-and-diagrams/",
       "id": "https://blogin.dev/guide/math-and-diagrams/",
+      "url": "https://blogin.dev/guide/math-and-diagrams/",
+      "title": "Math and Diagrams",
       "date_published": "2026-07-21T00:00:00Z",
-      "content_text": "Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays pure and static; the rendering happens in the browser."
+      "content_text": "Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays static, and the rendering happens in the browser."
     },
     {
-      "title": "Feeds and Search",
-      "url": "https://blogin.dev/guide/feeds-and-search/",
-      "date_published": "2026-07-14T00:00:00Z",
       "id": "https://blogin.dev/guide/feeds-and-search/",
+      "url": "https://blogin.dev/guide/feeds-and-search/",
+      "title": "Feeds and Search",
+      "date_published": "2026-07-14T00:00:00Z",
       "content_text": "Every build with at least one post emits feeds, a sitemap, and a search index."
+    },
+    {
+      "id": "https://blogin.dev/guide/pagination/",
+      "url": "https://blogin.dev/guide/pagination/",
+      "title": "Pagination",
+      "date_published": "2026-07-10T00:00:00Z",
+      "content_text": "Any listing that holds more posts than page-size splits into numbered pages. A section listing, the home page, and every taxonomy term page paginate the same way, with the same URLs and the same…"
     },
     {
       "id": "https://blogin.dev/guide/metadata-and-seo/",
@@ -79,42 +89,46 @@
       "content_text": "Blogin emits per-page metadata for search engines and social cards, and a site-wide robots.txt, without any template work beyond a single call in the page head."
     },
     {
-      "url": "https://blogin.dev/guide/previewing-and-building/",
       "id": "https://blogin.dev/guide/previewing-and-building/",
+      "url": "https://blogin.dev/guide/previewing-and-building/",
+      "title": "Previewing and Building",
       "date_published": "2026-07-13T00:00:00Z",
-      "content_text": "The preview server",
-      "title": "Previewing and Building"
+      "content_text": "The preview server"
     },
     {
-      "title": "Configuration",
       "id": "https://blogin.dev/guide/configuration/",
       "url": "https://blogin.dev/guide/configuration/",
-      "content_text": "Site-wide settings live in blogin.json at the project root. Command-line options override the file.",
-      "date_published": "2026-07-12T00:00:00Z"
+      "title": "Configuration",
+      "date_published": "2026-07-12T00:00:00Z",
+      "content_text": "Site-wide settings live in blogin.json beside the content directory. Every key is optional. Command-line options override the file."
     },
     {
       "id": "https://blogin.dev/guide/internationalization/",
       "url": "https://blogin.dev/guide/internationalization/",
-      "date_published": "2026-07-21T00:00:00Z",
       "title": "Internationalization",
+      "date_published": "2026-07-21T00:00:00Z",
       "content_text": "List the languages you write in and Blogin builds each into its own subtree."
     },
     {
-      "url": "https://blogin.dev/guide/themes-and-plugins/",
-      "title": "Themes and Plugins",
-      "content_text": "Themes",
-      "id": "https://blogin.dev/guide/themes-and-plugins/",
-      "date_published": "2026-07-21T00:00:00Z"
+      "id": "https://blogin.dev/guide/themes/",
+      "url": "https://blogin.dev/guide/themes/",
+      "title": "Themes",
+      "date_published": "2026-07-21T00:00:00Z",
+      "content_text": "A theme is a reusable set of layouts and assets. Put one under themes/<name>/ with its own layouts/, static/, and assets/, and select it in blogin.json:"
     },
     {
-      "date_published": "2026-07-11T00:00:00Z",
-      "title": "Deploying",
+      "id": "https://blogin.dev/guide/deploying/",
       "url": "https://blogin.dev/guide/deploying/",
-      "content_text": "blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host.",
-      "id": "https://blogin.dev/guide/deploying/"
+      "title": "Deploying",
+      "date_published": "2026-07-11T00:00:00Z",
+      "content_text": "blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host."
+    },
+    {
+      "id": "https://blogin.dev/guide/cookbook/",
+      "url": "https://blogin.dev/guide/cookbook/",
+      "title": "Cookbook",
+      "date_published": "2026-07-09T00:00:00Z",
+      "content_text": "A Blogin site is customized in six places. This page is the index: what each one reaches, and where the detail lives."
     }
-  ],
-  "feed_url": "https://blogin.dev/guide/feed.json",
-  "title": "Blogin: guide",
-  "version": "https://jsonfeed.org/version/1.1"
+  ]
 }

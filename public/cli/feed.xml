@@ -10,7 +10,7 @@
     <id>https://blogin.dev/cli/blogin-init/</id>
     <link href="https://blogin.dev/cli/blogin-init/"/>
     <updated>2026-07-04T00:00:00Z</updated>
-    <summary>Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.</summary>
+    <summary>Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json. What it writes builds with nothing to fill in first.</summary>
   </entry>
   <entry>
     <title>blogin new</title>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Blogin</title>
-    <link rel="canonical" href="https://blogin.dev/guide/overview/"/>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/overview/"/>
 <meta name="description" content="What Blogin is and how it works."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Overview"/>
@@ -14,136 +14,156 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Overview"/>
 <meta name="twitter:description" content="What Blogin is and how it works."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
-    <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
-    <script>
-(function () {
-  var KEY = 'blogin-theme', root = document.documentElement;
-  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
-  function pref() {
-    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
-    return 'light';
-  }
-  apply(pref());
-  window.bloginToggleTheme = function () {
-    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    apply(m);
-    try { localStorage.setItem(KEY, m); } catch (e) {}
-  };
-})();
-</script>
 
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y16FBSMK2N');
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
     </script>
-  </head>
-  <body>
-    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
-      <div class='container'>
-        <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
-          Blogin
-        </a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div id='topbar' class='collapse navbar-collapse'>
-          <ul class='navbar-nav mb-2 mb-lg-0'>
-  <li class='nav-item'>
-  <a class='nav-link active' href='/guide/'>Guide</a>
-</li>
-<li class='nav-item'>
-  <a class='nav-link' href='/cli/'>CLI</a>
-</li>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
 </ul>
 
-          <div class='navbar-tools'>
-            <div class='navbar-search'>
-              <div class='blogin-search'>
-  <form data-blogin-search='true' role='search'>
-    <input type='search' name='q' placeholder='Search' aria-label='Search'>
-  </form>
-  <ul data-blogin-results='true'></ul>
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
-<script src='/assets/js/search.39a5f1f4.js'></script>
-
-            </div>
-            <div class='navbar-toggle-slot'>
-              <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main class='container my-4'>
-      <div class='card'>
-  <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>Overview</h1>
-      <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
-        <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#the-pipeline">The pipeline</a></li><li><a href="#what-you-get">What you get</a></li></ul>
-      </nav>
-      <p>Blogin is a static blog generator written in Raku. Point it at a directory of
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Overview</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#the-pipeline">The pipeline</a></li><li><a href="#speed">Speed</a></li><li><a href="#what-you-get">What you get</a></li><li><a href="#templates">Templates</a></li></ul>
+</nav>
+<p>Blogin is a static blog generator written in C++. Point it at a directory of
 Markdown files and it produces a directory of plain HTML you can host anywhere.
-There is no database and no runtime: only the build host needs Rakudo, and what
-ships is static HTML, CSS, and one search script.</p>
+There is no database and no runtime. What ships is static HTML, CSS, and one
+search script, and the generator itself is a single binary with no dependencies.</p>
 <h2 id="the-pipeline">The pipeline<a class="anchor" href="#the-pipeline">#</a></h2>
 <p>A build reads <code>content/</code>, parses each post's front matter and Markdown, renders
 the body to HTML, wraps it in your HAML layouts, and writes the result under
 <code>public/</code>. The same pass produces section listings, taxonomy pages, per-section
 feeds, a sitemap, and a search index.</p>
+<p>Markdown targets CommonMark, with GitHub Flavored Markdown for the extensions.</p>
+<h2 id="speed">Speed<a class="anchor" href="#speed">#</a></h2>
+<p>A full build of a 300-page site with 167 MB of images takes well under a second
+on an M-series Mac, and most of that is copying the images. A rebuild after one
+edit takes milliseconds, because a rebuild only does the work the change
+requires: when nothing changed, nothing is parsed, rendered, or written, and
+when one post changed, one post is rendered.</p>
+<p>An incremental result is byte-identical to a build from scratch, checked against
+randomised edit sequences rather than a few examples.</p>
 <h2 id="what-you-get">What you get<a class="anchor" href="#what-you-get">#</a></h2>
 <ul>
 <li>Sections from the content tree, with clean URLs, pagination, and explicit post
 ordering.</li>
 <li>Named taxonomies (tags, categories, and any you declare), each with term pages
-and an index. See <a href="/guide/writing-posts/">Writing Posts</a>.</li>
+and an index, paginated the same way a section listing is. See
+<a href="/guide/writing-posts/">Writing Posts</a>.</li>
 <li>Atom, RSS, and JSON feeds, site-wide and per section, and a sitemap. See
 <a href="/guide/feeds-and-search/">Feeds and Search</a>.</li>
-<li>Markdown extensions: tables, task lists, footnotes, and reference links. See
-<a href="/guide/writing-posts/">Writing Posts</a>.</li>
+<li>Markdown extensions: tables, task lists, footnotes, reference links, attribute
+lists, math, and Mermaid diagrams. See <a href="/guide/writing-posts/">Writing Posts</a>
+and <a href="/guide/math-and-diagrams/">Math and Diagrams</a>.</li>
 <li>Per-post summaries and an optional table of contents. See
 <a href="/guide/writing-posts/">Writing Posts</a>.</li>
 <li>Open Graph and Twitter metadata, canonical links, and <code>robots.txt</code>. See
 <a href="/guide/metadata-and-seo/">Metadata and SEO</a>.</li>
 <li>Data files, CSS-framework profiles, and server-side syntax highlighting.</li>
+<li>An asset pipeline that minifies, content-hashes, and writes responsive image
+variants.</li>
 <li>A preview server that rebuilds and live-reloads the open page on save. See
 <a href="/guide/previewing-and-building/">Previewing and Building</a>.</li>
 </ul>
+<h2 id="templates">Templates<a class="anchor" href="#templates">#</a></h2>
+<p>Layouts are HAML with Blogin's own expression language: literals, names from the
+view, member access, calls with arguments, comparison, boolean operators, string
+concatenation, and <code>#{}</code> interpolation. There are no user-defined functions, no
+assignment, and no way to call out into a host language. Anything outside the
+language is an error naming the file, the line, the column, and the construct.</p>
+<p><a href="/reference/template-expressions/">Template Expressions</a> is the complete
+language, and <a href="/reference/haml-compatibility/">HAML Compatibility</a> lists every
+HAML construct with its status.</p>
 
-      <nav class='tags mt-4'>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/intro/'>intro</a>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/markdown/'>markdown</a>
-      </nav>
-    </article>
-    <nav class="post-nav"><a class="next btn btn-primary" href="/guide/getting-started/"><span class="post-nav-label">Getting Started</span> <span aria-hidden="true">&rarr;</span></a></nav>
-  </div>
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/intro/">intro</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/markdown/">markdown</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="next btn btn-primary" href="/guide/getting-started/"><span class="post-nav-label">Getting Started</span> <span aria-hidden="true">&rarr;</span></a></nav>
 </div>
-
-    </main>
-    <footer class='border-top mt-5 py-4'>
-      <div class='container d-flex flex-wrap justify-content-between gap-2'>
-        <p class='text-body-secondary mb-0'>
-          Built with
-          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
-        </p>
-        <nav class='d-flex gap-3'>
-          <a class='link-secondary' href='/tags/'>Browse by tag</a>
-          <a class='link-secondary' href='/feed.xml'>Atom</a>
-          <a class='link-secondary' href='/rss.xml'>RSS</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

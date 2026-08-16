@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/reference/template-expressions/"/>
+<meta name="description" content="The complete language inside =, -, and #{} in a HAML layout."/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Template Expressions"/>
+<meta property="og:description" content="The complete language inside =, -, and #{} in a HAML layout."/>
+<meta property="og:url" content="https://blogin.dev/reference/template-expressions/"/>
+<meta property="og:site_name" content="Blogin"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Template Expressions"/>
+<meta name="twitter:description" content="The complete language inside =, -, and #{} in a HAML layout."/>
+
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
+    <script>
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
+    </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link active" href="/reference/">Reference</a>
+</li>
+</ul>
+
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
+</div>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Template Expressions</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#why-a-language-at-all">Why a language at all</a></li><li><a href="#values">Values</a></li><li><a href="#truthiness">Truthiness</a></li><li><a href="#grammar">Grammar</a></li><li><a href="#reading-values">Reading values</a></li><li><a href="#maps">Maps</a></li><li><a href="#named-arguments">Named arguments</a></li><li><a href="#control-flow">Control flow</a></li><li><a href="#output">Output</a></li><li><a href="#blocks">Blocks</a></li><li><a href="#worked-examples">Worked examples</a><ul><li><a href="#a-post-s-page">A post's page</a></li><li><a href="#a-listing-entry">A listing entry</a></li><li><a href="#navigation-which-is-recursive">Navigation, which is recursive</a></li><li><a href="#a-default">A default</a></li><li><a href="#a-fragment-rendered-once">A fragment rendered once</a></li><li><a href="#values-passed-to-a-partial">Values passed to a partial</a></li></ul></li><li><a href="#what-it-does-not-do">What it does not do</a></li><li><a href="#errors">Errors</a></li></ul>
+</nav>
+<p>Blogin's layouts are HAML. What HAML does not define is the language inside
+<code>= ...</code>, <code>- if ...</code>, and <code>#{...}</code>. Ruby HAML embeds Ruby. Blogin embeds a small
+language of its own.</p>
+<p>Everything it does not do is a stated boundary rather than a missing feature,
+and reaching one produces an error naming the file, the line, the column, and
+the construct. It never guesses.</p>
+<h2 id="why-a-language-at-all">Why a language at all<a class="anchor" href="#why-a-language-at-all">#</a></h2>
+<p>A layout has to ask questions of the page it is rendering: what is the title,
+does this post have tags, which navigation item is current. Answering those takes
+expressions. What it does not take is a general-purpose
+programming language embedded in a template, and the cost of one is a template
+that can do anything, including things nobody can predict from reading it.</p>
+<p>So this language can read, compare, iterate, and call what the view offers. It
+cannot define, assign, or mutate.</p>
+<h2 id="values">Values<a class="anchor" href="#values">#</a></h2>
+<p>Every value is one of: null, boolean, integer, number, string, list, or map.
+These are the same values configuration and data files produce, so a layout
+reads <code>data</code> from a JSON file the same way it reads anything else.</p>
+<h2 id="truthiness">Truthiness<a class="anchor" href="#truthiness">#</a></h2>
+<p><code>- if</code> and <code>- unless</code> ask whether a value is true. False are:</p>
+<ul>
+<li><code>null</code></li>
+<li><code>false</code></li>
+<li><code>0</code> and <code>0.0</code></li>
+<li>the empty string</li>
+<li>the empty list</li>
+<li>the empty map</li>
+</ul>
+<p>Everything else is true. An empty collection being false is what lets a layout
+write <code>- if tags</code> rather than <code>- if tags.elems &gt; 0</code>.</p>
+<h2 id="grammar">Grammar<a class="anchor" href="#grammar">#</a></h2>
+<pre><code>expression   := or
+or           := and ( &quot;||&quot; and )*
+and          := comparison ( &quot;&amp;&amp;&quot; comparison )*
+comparison   := additive ( (&quot;==&quot; | &quot;!=&quot; | &quot;&lt;&quot; | &quot;&lt;=&quot; | &quot;&gt;&quot; | &quot;&gt;=&quot; | &quot;eq&quot; | &quot;ne&quot;) additive )*
+additive     := unary ( (&quot;+&quot; | &quot;-&quot; | &quot;~&quot;) unary )*
+unary        := ( &quot;!&quot; | &quot;not&quot; )? postfix
+postfix      := primary ( &quot;.&quot; name call-args? | &quot;&lt;&quot; name &quot;&gt;&quot; | &quot;(&quot; arguments &quot;)&quot; )*
+primary      := literal | variable | name | map | &quot;(&quot; expression &quot;)&quot;
+literal      := string | number | &quot;true&quot; | &quot;false&quot; | &quot;null&quot;
+map          := &quot;{&quot; ( entry ( &quot;,&quot; entry )* )? &quot;}&quot;
+entry        := name &quot;:&quot; expression
+variable     := &quot;$&quot; name
+name         := letter ( letter | digit | &quot;-&quot; | &quot;_&quot; )*
+arguments    := ( argument ( &quot;,&quot; argument )* )?
+argument     := expression | &quot;:&quot; name &quot;&lt;&quot; text &quot;&gt;&quot; | &quot;:&quot; name &quot;(&quot; expression &quot;)&quot;
+</code></pre>
+<p><code>+</code> concatenates strings, and so does <code>~</code>.</p>
+<p><code>&amp;&amp;</code> and <code>||</code> stop as soon as the answer is known and yield the value rather
+than a boolean, so <code>subtitle || title</code> reads as a default and
+<code>- if post &amp;&amp; post&lt;title&gt;</code> is safe to write.</p>
+<h2 id="reading-values">Reading values<a class="anchor" href="#reading-values">#</a></h2>
+<p><strong>A bare name</strong> is a question asked of the view: <code>title</code>, <code>site-title</code>,
+<code>has-tags</code>, <code>nav-nodes</code>. The view decides what to return. A name the view does
+not offer is an error, not null, because a typo in a layout should be visible.</p>
+<p><strong><code>$name</code></strong> is a local: a loop variable, or something passed through <code>:locals</code>.
+An unknown local is an error for the same reason.</p>
+<p><strong><code>.name</code></strong> reads a member of a map or asks an object for a property:
+<code>$node.url</code>, <code>$post.title</code>. On a list, <code>.elems</code>, <code>.size</code>, <code>.count</code>, <code>.first</code>,
+and <code>.last</code> are built in. On a string, <code>.chars</code> and <code>.elems</code> are its length.</p>
+<p><strong><code>&lt;name&gt;</code></strong> reads a map key: <code>$tag&lt;url&gt;</code>, <code>data&lt;archives&gt;</code>. <code>$tag.url</code> and
+<code>$tag&lt;url&gt;</code> do the same thing, so write whichever reads better.</p>
+<p>A missing key reads as null rather than raising, because <code>- if $entry&lt;image&gt;</code> is
+how a layout asks whether something is there.</p>
+<p><strong><code>name(...)</code></strong> calls what the view offers, with arguments:
+<code>format-date(date, &quot;%B %e, %Y&quot;)</code>, <code>nav-current($node)</code>, <code>truncate(summary, 200)</code>.
+<code>url()</code> and <code>url</code> mean the same thing.</p>
+<h2 id="maps">Maps<a class="anchor" href="#maps">#</a></h2>
+<p><code>{ name: expression, ... }</code> is the one way to write a map, and it exists because
+<code>:locals</code> needs one:</p>
+<pre><code class="language-haml hl-plain">!= render(:partial&lt;header&gt;, :locals({brand: site-title}))
+</code></pre>
+<p>A map and a deferred block both open with <code>{</code>. A map's first thing is a name
+followed by a colon, and nothing else can start that way, so the two are told
+apart without any marker.</p>
+<h2 id="named-arguments">Named arguments<a class="anchor" href="#named-arguments">#</a></h2>
+<p><code>render</code> takes named arguments:</p>
+<pre><code class="language-haml hl-plain">!= render(:partial&lt;entry&gt;, :collection(posts), :as&lt;entry&gt;)
+</code></pre>
+<p><code>:name&lt;text&gt;</code> passes literal text. <code>:name(expression)</code> passes a value. This
+shape is accepted for any call, not only <code>render</code>.</p>
+<h2 id="control-flow">Control flow<a class="anchor" href="#control-flow">#</a></h2>
+<pre><code class="language-haml hl-plain">- if has-tags
+  %p tagged
+- elsif has-categories
+  %p categorised
+- else
+  %p untagged
+
+- unless draft
+  %p published
+
+- for tags -&gt; $tag
+  %li= $tag&lt;name&gt;
+</code></pre>
+<p><code>- for</code> iterates a list. Iterating null or a scalar is an error, since it is
+almost always a mistake rather than an empty result.</p>
+<p>There is no ternary operator. Write a two-branch <code>- if</code> instead, or reach for
+<code>||</code> when what you want is a default.</p>
+<h2 id="output">Output<a class="anchor" href="#output">#</a></h2>
+<p><code>=</code> writes an escaped value. <code>!=</code> writes it raw. <code>#{...}</code> interpolates inside
+text and inside attribute values, and escapes.</p>
+<p>Escaping means <code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, and <code>&quot;</code> become entities. There is no way to write
+markup accidentally: raw output is always spelled <code>!=</code>.</p>
+<h2 id="blocks">Blocks<a class="anchor" href="#blocks">#</a></h2>
+<p>One form takes a block, and only one:</p>
+<pre><code class="language-haml hl-plain">!= cache-fragment('header', { render(:partial&lt;header&gt;) })
+</code></pre>
+<p>The block is not a closure. It is an expression whose evaluation is deferred,
+which is all <code>cache-fragment</code> needs. Blocks cannot take parameters, be stored,
+or be passed anywhere else.</p>
+<h2 id="worked-examples">Worked examples<a class="anchor" href="#worked-examples">#</a></h2>
+<p>Each of these is a pattern a real site uses, with what the language is doing
+spelled out.</p>
+<h3 id="a-post-s-page">A post's page<a class="anchor" href="#a-post-s-page">#</a></h3>
+<pre><code class="language-haml hl-plain">%article
+  %h1= title
+  - if show-dates
+    %p.meta= &quot;#{format-date(date, &quot;%B %e, %Y&quot;)} · #{reading-time} min read&quot;
+  != body
+</code></pre>
+<p><code>title</code>, <code>show-dates</code>, <code>date</code>, <code>reading-time</code>, and <code>body</code> are names the view
+answers. <code>format-date</code> is a call the view offers, taking the date and a strftime
+pattern. <code>body</code> is written with <code>!=</code> because it is HTML the Markdown renderer
+produced. Everything else is written with <code>=</code> and escapes.</p>
+<h3 id="a-listing-entry">A listing entry<a class="anchor" href="#a-listing-entry">#</a></h3>
+<pre><code class="language-haml hl-plain">.card
+  %h5
+    %a{href: &quot;#{$entry&lt;url&gt;}&quot;}= $entry&lt;title&gt;
+  %p= $entry&lt;description&gt;
+  - if index-dates
+    %small= $entry&lt;date&gt;
+</code></pre>
+<p><code>$entry</code> is the loop variable the listing passed in through <code>:collection</code> and
+<code>:as</code>. <code>&lt;url&gt;</code> reads a key of it. The <code>href</code> is written with interpolation
+because it is part of a larger string. The attribute value escapes either way.</p>
+<h3 id="navigation-which-is-recursive">Navigation, which is recursive<a class="anchor" href="#navigation-which-is-recursive">#</a></h3>
+<pre><code class="language-haml hl-plain">%li
+  - if nav-current($node)
+    %a.active{href: &quot;#{$node.url}&quot;}= $node.label
+  - else
+    %a{href: &quot;#{$node.url}&quot;}= $node.label
+  - if $node.children.elems
+    %ul
+      != render(:partial&lt;nav-item&gt;, :collection($node.children), :as&lt;node&gt;)
+</code></pre>
+<p><code>nav-current($node)</code> asks the view whether this node is the section being
+rendered. <code>$node.children.elems</code> is the list's length, and an empty list is
+false, so the test could be written <code>- if $node.children</code> just as well. The
+partial renders itself, once per child, with <code>$node</code> rebound each time.</p>
+<h3 id="a-default">A default<a class="anchor" href="#a-default">#</a></h3>
+<pre><code class="language-haml hl-plain">%title= page-title || site-title
+</code></pre>
+<p><code>||</code> yields the left value when it is true and the right one otherwise, rather
+than a boolean, which is what makes it read as a default.</p>
+<h3 id="a-fragment-rendered-once">A fragment rendered once<a class="anchor" href="#a-fragment-rendered-once">#</a></h3>
+<pre><code class="language-haml hl-plain">!= cache-fragment('header', { render(:partial&lt;header&gt;) })
+</code></pre>
+<p>The name is advisory. What decides whether the rendered bytes are reused is what
+the fragment read while rendering: a header reading only site-level values
+renders once for the whole build, and one reading the current url renders per
+page. Asking for reuse cannot produce a stale fragment.</p>
+<h3 id="values-passed-to-a-partial">Values passed to a partial<a class="anchor" href="#values-passed-to-a-partial">#</a></h3>
+<pre><code class="language-haml hl-plain">!= render(:partial&lt;header&gt;, :locals({brand: site-title}))
+</code></pre>
+<p>Inside <code>_header.haml</code>, that is <code>$brand</code>. <code>:locals</code> takes a map, which is the
+reason the language has one.</p>
+<h2 id="what-it-does-not-do">What it does not do<a class="anchor" href="#what-it-does-not-do">#</a></h2>
+<p>Each of these is refused with an error rather than half-supported:</p>
+<ul>
+<li><strong>Assignment.</strong> No <code>=</code>, no <code>my</code>, no accumulating a variable across a loop.</li>
+<li><strong>List literals.</strong> A map is written because <code>:locals</code> needs one. Nothing needs
+a list literal, so there is not one.</li>
+<li><strong>User-defined functions.</strong> A layout calls what the view offers.</li>
+<li><strong>Mutation.</strong> Nothing a template does changes a value another template sees.</li>
+<li><strong>Arbitrary method chains into the host.</strong> <code>.uc</code>, <code>.split</code>, <code>.map</code> and the
+like are not available. What the view offers is the whole surface.</li>
+<li><strong>General closures.</strong> Only the deferred-block form above.</li>
+<li><strong>Ranges, regular expressions, and case statements.</strong> No equivalent.</li>
+<li><strong>Arithmetic beyond <code>+</code> and <code>-</code>.</strong> No <code>*</code>, <code>/</code>, or <code>%</code>. Layouts do not
+calculate. Views do.</li>
+</ul>
+<h2 id="errors">Errors<a class="anchor" href="#errors">#</a></h2>
+<p>An error names where it happened and what was refused:</p>
+<pre><code>layouts/show.haml:14:11: no such name 'has-tag' (did you mean 'has-tags'?)
+layouts/_entry.haml:3:22: cannot iterate a string
+layouts/base.haml:9:5: assignment is not supported
+</code></pre>
+<p>A suggestion appears when a name is close to one that exists, since the usual
+cause is a typo rather than a misunderstanding.</p>
+<p>The names the view answers are listed in
+<a href="/guide/template-data/">Template Data</a>. The HAML constructs around them are in
+<a href="/reference/haml-compatibility/">HAML Compatibility</a>.</p>
+
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/templates/">templates</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/reference/">reference</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="next btn btn-primary" href="/reference/haml-compatibility/"><span class="post-nav-label">HAML Compatibility</span> <span aria-hidden="true">&rarr;</span></a></nav>
+</div>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

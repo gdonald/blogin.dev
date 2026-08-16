@@ -1,0 +1,144 @@
+/* This site's own styling, on top of Bootstrap and blogin.css.
+ *
+ * Colours come from Bootstrap's variables rather than being written out, so
+ * both themes follow the data-bs-theme attribute without a second rule set. */
+
+/* The feature tiles on the home page. Each is an anchor wrapping a card, so the
+ * whole tile is the click target rather than a link buried in its text. */
+.feature-tile {
+  display: block;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.feature-tile:hover,
+.feature-tile:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--bs-primary);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.feature-tile:focus-visible {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 2px;
+}
+
+.feature-tile .card-title {
+  color: var(--bs-primary);
+}
+
+/* A pointing device is what the lift is for. Someone who asked for less motion
+ * still gets the border and the shadow, which is what says the tile is a link. */
+@media (prefers-reduced-motion: reduce) {
+  .feature-tile {
+    transition: none;
+  }
+
+  .feature-tile:hover,
+  .feature-tile:focus-visible {
+    transform: none;
+  }
+}
+
+/* Buttons.
+ *
+ * The brand mark is a blue-to-violet gradient, so the primary button carries
+ * the same one at the same angle. Bootstrap 5.3 paints a button from its own
+ * variables, so those are cleared to transparent and the gradient goes on as a
+ * background image, which leaves every other button property alone. */
+.btn-primary,
+.btn-secondary {
+  --bs-btn-bg: transparent;
+  --bs-btn-hover-bg: transparent;
+  --bs-btn-active-bg: transparent;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-active-border-color: transparent;
+  --bs-btn-disabled-border-color: transparent;
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-color: #fff;
+  border: 0;
+  transition:
+    background-image 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background-image: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --bs-btn-focus-shadow-rgb: 99, 102, 241;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.btn-primary:active,
+.btn-primary.active {
+  background-image: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+}
+
+/* Grey, and the same gradient rather than a flat fill, so the pair reads as one
+ * set rather than two unrelated buttons. */
+.btn-secondary {
+  background-image: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  --bs-btn-focus-shadow-rgb: 107, 114, 128;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible,
+.btn-secondary:active,
+.btn-secondary.active {
+  background-image: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+}
+
+/* Dark mode lifts both, since the darker halves of each gradient sink into a
+ * dark page. */
+[data-bs-theme="dark"] .btn-primary {
+  background-image: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
+[data-bs-theme="dark"] .btn-primary:hover,
+[data-bs-theme="dark"] .btn-primary:focus-visible,
+[data-bs-theme="dark"] .btn-primary:active {
+  background-image: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+}
+
+[data-bs-theme="dark"] .btn-secondary {
+  background-image: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  --bs-btn-color: #111827;
+  --bs-btn-hover-color: #111827;
+  --bs-btn-active-color: #111827;
+}
+
+[data-bs-theme="dark"] .btn-secondary:hover,
+[data-bs-theme="dark"] .btn-secondary:focus-visible,
+[data-bs-theme="dark"] .btn-secondary:active {
+  background-image: linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.55;
+}
+
+/* Links.
+ *
+ * Bootstrap's link blue is a little colder than the brand, so it is nudged
+ * toward the violet end of the logo gradient. Hover goes further that way and
+ * darker, which is the direction the primary button already moves in.
+ *
+ * Set as rgb triples because that is how Bootstrap 5.3 composes a link colour,
+ * and setting the triple keeps its opacity utilities working. */
+:root {
+  --bs-link-color-rgb: 61, 85, 224;
+  --bs-link-hover-color-rgb: 91, 62, 199;
+}
+
+/* A dark page needs the pair lifted, or a violet link reads as unvisited text. */
+[data-bs-theme="dark"] {
+  --bs-link-color-rgb: 160, 174, 248;
+  --bs-link-hover-color-rgb: 196, 181, 253;
+}

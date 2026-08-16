@@ -4,27 +4,41 @@
     <title>Blogin</title>
     <link>https://blogin.dev/</link>
     <description>Blogin</description>
-    <lastBuildDate>Mon, 20 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Template Expressions</title>
+      <link>https://blogin.dev/reference/template-expressions/</link>
+      <guid isPermaLink="true">https://blogin.dev/reference/template-expressions/</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Blogin&apos;s layouts are HAML. What HAML does not define is the language inside = ..., - if ..., and #{...}. Ruby HAML embeds Ruby. Blogin embeds a small language of its own.</description>
+    </item>
     <item>
       <title>Overview</title>
       <link>https://blogin.dev/guide/overview/</link>
       <guid isPermaLink="true">https://blogin.dev/guide/overview/</guid>
       <pubDate>Mon, 20 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime:…</description>
+      <description>Blogin is a static blog generator written in C++. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime. What…</description>
     </item>
     <item>
       <title>blogin init</title>
       <link>https://blogin.dev/cli/blogin-init/</link>
       <guid isPermaLink="true">https://blogin.dev/cli/blogin-init/</guid>
       <pubDate>Sat, 04 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json.</description>
+      <description>Scaffold a new site in a directory, with a starter post, layouts, and a blogin.json. What it writes builds with nothing to fill in first.</description>
+    </item>
+    <item>
+      <title>HAML Compatibility</title>
+      <link>https://blogin.dev/reference/haml-compatibility/</link>
+      <guid isPermaLink="true">https://blogin.dev/reference/haml-compatibility/</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+      <description>There is no HAML standard. Ruby HAML is a reference implementation that embeds Ruby, and every implementation embeds some host language. The structural syntax is what carries across, and the…</description>
     </item>
     <item>
       <title>Getting Started</title>
       <link>https://blogin.dev/guide/getting-started/</link>
       <guid isPermaLink="true">https://blogin.dev/guide/getting-started/</guid>
       <pubDate>Sun, 19 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Install Raku and zef</description>
+      <description>Install</description>
     </item>
     <item>
       <title>blogin new</title>
@@ -32,6 +46,13 @@
       <guid isPermaLink="true">https://blogin.dev/cli/blogin-new/</guid>
       <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
       <description>Create a new post file from a title, with front matter filled in and a slug derived from the title.</description>
+    </item>
+    <item>
+      <title>Data File YAML</title>
+      <link>https://blogin.dev/reference/data-file-yaml/</link>
+      <guid isPermaLink="true">https://blogin.dev/reference/data-file-yaml/</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Blogin reads YAML in two places: data/*.yaml, which a layout reads through data, and _data.yaml beside a section, which a layout reads the same way for pages in that section. See Data files for how…</description>
     </item>
     <item>
       <title>Writing Posts</title>
@@ -42,36 +63,61 @@
 ---
 title: My Post
 date: 2026-07-20
-tags: [raku, web]
+tags: [cpp, web]
 description: A short summary.
 ---
 The body goes here.
-
 Run blogin new &quot;My Post&quot; to scaffold one with the front matter filled in.
+title is the only required key. Everything else has a default: the date falls back to a date at the front of the filename, the slug follows the title, and the layout follows the section. draft, date, description, summary, slug, layout, order, toc, tags, and aliases are read, and any other key you write is available to the layout under its own name.
+Slugs
+A slug comes from the title, lowercased, with runs of punctuation and whitespace collapsed to single hyphens. Three characters carry the whole meaning of a name and are spelled out rather than dropped: + becomes plus, # becomes sharp, and &amp; becomes and. So a c++ tag is c-plus-plus and a c tag is c, two pages rather than one overwriting the other.
+Set slug in front matter to choose the URL yourself.
+Markdown
+The body is CommonMark, with GitHub Flavored Markdown for the extensions: tables, task lists, strikethrough, and fenced code blocks with an info string. Footnotes, reference links, attribute lists, math, and Mermaid diagrams are covered below and in Math and Diagrams.
+| Column | Column |
+| --- | --- |
+| a | b |
+
+- [x] done
+- [ ] not done
+
+~~struck through~~
+Definition lists
+A paragraph followed by a line starting with :  becomes a term and its definition:
+Term
+: what it means
+which renders as:
+&lt;dl&gt;
+&lt;dt&gt;Term&lt;/dt&gt;
+&lt;dd&gt;what it means&lt;/dd&gt;
+&lt;/dl&gt;
+One term takes as many definitions as you give it, and a list holds as many terms as you like:
+--src &lt;dir&gt;
+: the content directory
+: defaults to `content`
+
+--out &lt;dir&gt;
+: where the site is written
+A definition holds inline markup, so : with *emphasis* works. The CLI pages on this site are written this way.
 Links and images
 A link or an image takes an optional attribute list in braces right after the closing paren. Use key=value for an attribute, .name for a class, and #name for an id:
 [the docs](https://example.com){target=_blank rel=noopener .external}
 
 ![A cat](/images/cat.png){.rounded #hero}
-
 Wrap an image in a link to make the image itself clickable. The attribute list belongs to the link, so a linked thumbnail opens its full-size version in a new tab:
 [![A cat](/images/cat-thumb.png)](/images/cat.png){target=_blank}
-
 That renders an &lt;img&gt; inside the &lt;a&gt;, and the image keeps any attribute list of its own:
 [![A cat](/images/cat-thumb.png){.thumb}](/images/cat.png){target=_blank}
-
 Reference links and footnotes
 Links can carry their target in a separate definition rather than inline. Write [text][label] in the body and define the label anywhere in the file:
 See [the home page][home] for more.
 
 [home]: https://example.com &quot;Optional title&quot;
-
 A collapsed form, [text][], uses the text as the label. Labels match case-insensitively, and an undefined reference is left as literal text.
 Footnotes use [^label] where the note is cited, with a matching definition:
 A claim that needs a source[^src].
 
 [^src]: The cited source.
-
 Footnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.
 Sections
 The subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.
@@ -92,7 +138,7 @@ The text before a `</description>
       <link>https://blogin.dev/guide/layouts/</link>
       <guid isPermaLink="true">https://blogin.dev/guide/layouts/</guid>
       <pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Blogin renders pages with Template::HAML. A build wraps each post&apos;s rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.</description>
+      <description>Blogin renders pages with its own HAML engine. A build wraps each post&apos;s rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.</description>
     </item>
     <item>
       <title>blogin serve</title>
@@ -127,7 +173,7 @@ The text before a `</description>
       <link>https://blogin.dev/guide/css-frameworks/</link>
       <guid isPermaLink="true">https://blogin.dev/guide/css-frameworks/</guid>
       <pubDate>Thu, 16 Jul 2026 00:00:00 +0000</pubDate>
-      <description>The HTML Blogin emits carries framework-specific classes drawn from a selected profile, set by the css-framework config key. The core renderer stays framework-agnostic: it asks the profile for a…</description>
+      <description>Blogin adds framework-specific classes to the HTML it writes, taken from the profile you name in the css-framework config key. The renderer itself knows no framework. It asks the profile for a named…</description>
     </item>
     <item>
       <title>Syntax Highlighting</title>
@@ -141,7 +187,7 @@ The text before a `</description>
       <link>https://blogin.dev/guide/math-and-diagrams/</link>
       <guid isPermaLink="true">https://blogin.dev/guide/math-and-diagrams/</guid>
       <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays pure and static; the rendering happens in the browser.</description>
+      <description>Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays static, and the rendering happens in the browser.</description>
     </item>
     <item>
       <title>Feeds and Search</title>
@@ -149,6 +195,13 @@ The text before a `</description>
       <guid isPermaLink="true">https://blogin.dev/guide/feeds-and-search/</guid>
       <pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
       <description>Every build with at least one post emits feeds, a sitemap, and a search index.</description>
+    </item>
+    <item>
+      <title>Pagination</title>
+      <link>https://blogin.dev/guide/pagination/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/pagination/</guid>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Any listing that holds more posts than page-size splits into numbered pages. A section listing, the home page, and every taxonomy term page paginate the same way, with the same URLs and the same…</description>
     </item>
     <item>
       <title>Metadata and SEO</title>
@@ -169,7 +222,7 @@ The text before a `</description>
       <link>https://blogin.dev/guide/configuration/</link>
       <guid isPermaLink="true">https://blogin.dev/guide/configuration/</guid>
       <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Site-wide settings live in blogin.json at the project root. Command-line options override the file.</description>
+      <description>Site-wide settings live in blogin.json beside the content directory. Every key is optional. Command-line options override the file.</description>
     </item>
     <item>
       <title>Internationalization</title>
@@ -179,11 +232,11 @@ The text before a `</description>
       <description>List the languages you write in and Blogin builds each into its own subtree.</description>
     </item>
     <item>
-      <title>Themes and Plugins</title>
-      <link>https://blogin.dev/guide/themes-and-plugins/</link>
-      <guid isPermaLink="true">https://blogin.dev/guide/themes-and-plugins/</guid>
+      <title>Themes</title>
+      <link>https://blogin.dev/guide/themes/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/themes/</guid>
       <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Themes</description>
+      <description>A theme is a reusable set of layouts and assets. Put one under themes/&lt;name&gt;/ with its own layouts/, static/, and assets/, and select it in blogin.json:</description>
     </item>
     <item>
       <title>Deploying</title>
@@ -191,6 +244,13 @@ The text before a `</description>
       <guid isPermaLink="true">https://blogin.dev/guide/deploying/</guid>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
       <description>blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host.</description>
+    </item>
+    <item>
+      <title>Cookbook</title>
+      <link>https://blogin.dev/guide/cookbook/</link>
+      <guid isPermaLink="true">https://blogin.dev/guide/cookbook/</guid>
+      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <description>A Blogin site is customized in six places. This page is the index: what each one reaches, and where the detail lives.</description>
     </item>
   </channel>
 </rss>

@@ -4,7 +4,7 @@ date: 2026-07-13
 order: 10
 toc: true
 tags: [cli, builds]
-description: The dev server, incremental builds, and debug output.
+description: The preview server, incremental builds, and debug output.
 ---
 ## The preview server
 
@@ -12,14 +12,21 @@ description: The dev server, incremental builds, and debug output.
 blogin serve --port 3000
 ```
 
-`serve` builds the site, serves `public/` locally, and watches the source tree.
+It binds loopback only, so nothing outside the machine reaches it.
+
+`serve` builds the site into `.blogin-preview/`, serves that locally, and watches
+the source tree. It never writes `public/`, so serving a site cannot leave the
+directory you deploy holding preview output. A preview is unminified and
+unfingerprinted, and it keeps its own build state, so the two builds never read
+each other's.
 Any change to content, layouts, or static assets triggers a full rebuild in
 place, and config edits are picked up too. Every directory under the watched
 trees is watched, however deeply nested, and a directory you add while the server
-runs starts firing changes on its own. A save that fires several filesystem
+runs is picked up without a restart. A save that fires several filesystem
 events is coalesced into one rebuild. Extensionless URLs resolve to their `.html`
 files, matching how a production host rewrites, so local preview behaves like the
-deployed site. The server is a dev tool only; production ships static files.
+deployed site. The server is for previewing only, and what you deploy is
+static files.
 
 `minify` and `fingerprint` are off while serving, whatever `blogin.json` says,
 and the server prints a line saying so when the config asks for them.
@@ -31,8 +38,8 @@ unaffected.
 ## Live reload
 
 Each served HTML page carries a small client that holds a WebSocket to the
-server. When a rebuild finishes, the server pushes the list of output files it
-actually rewrote, and the page acts on it:
+server. When a rebuild finishes, the server pushes the list of output files the
+rebuild rewrote, and the page acts on it:
 
 - The page reloads when its own HTML file changed, or when a script it loads
   changed.
@@ -48,14 +55,24 @@ edits made while the server was down. Preview responses are sent with
 `Cache-Control: no-store` so a reloaded page never comes back from the browser
 cache.
 
-The injection happens only while serving. Built `public/` files never contain it.
+The injection happens only while serving. Built `public/` files never contain it,
+and the preview is written elsewhere in any case.
 
 ## Incremental builds
 
-`blogin build` renders every page but writes a file only when its content
-changed, so rebuilding an unchanged site writes nothing and editing one post
-rewrites just that post and the pages that reference it. Output for a deleted post
-is pruned. Pass `--force` to rewrite everything.
+A rebuild only does the work the change requires. When nothing changed, nothing
+is parsed, rendered, or written. When one post changed, that post is rendered
+along with the pages that reference it, and everything else is left alone.
+Output for a deleted post is pruned. Pass `--force` to ignore what the last
+build recorded and rebuild everything.
+
+The result is byte-identical to a build from scratch, checked against randomised
+sequences of edits rather than a handful of examples.
+
+Pass `--counters` to see the work a build did: posts parsed, templates compiled,
+pages rendered, files read and written, and directory walks. Those numbers are
+deterministic across machines, which is what makes them useful for telling
+whether a change did more work than it needed to.
 
 A `.keep` file is yours, not build output, so pruning leaves it alone and the
 directory holding it survives. Keep one at `public/.keep` to track the output
@@ -64,18 +81,21 @@ into. `blogin clean` leaves `.keep` files and their directories in place too.
 
 ## Asset optimization
 
-Two `blogin.json` keys tune the emitted assets, and both act only on the assets
-pipeline under `public/assets/`. Files copied verbatim from `static/` to the site
-root are never touched, so a `favicon.ico` or `CNAME` keeps its exact name.
+Three `blogin.json` keys tune the emitted assets, and all three act only on the
+assets pipeline under `public/assets/`. Files copied verbatim from `static/` to
+the site root are never touched, so a `favicon.ico` or `CNAME` keeps its exact
+name.
 
 `minify` shrinks every CSS and JavaScript file under `assets/`: it strips
 comments, collapses whitespace, and drops blank and comment-only script lines
 while keeping line breaks so JavaScript semicolon insertion stays safe.
 
 `fingerprint` renames each CSS, JavaScript, and image file under `assets/` to
-include a short hash of its size and timestamp, such as `style.1a2b3c4d.css`, and
-rewrites every reference to it in the built HTML and CSS. A changed asset gets a
-new name, so a far-future cache never serves a stale file. Both default off.
+include a short hash of its content, such as `style.1a2b3c4d.css`, and rewrites
+every reference to it in the built HTML and CSS. A changed asset gets a new name,
+so a far-future cache never serves a stale file. Hashing the bytes rather than
+the file's size and timestamp means the same input produces the same names on
+any machine, so two builds of the same source agree. Both keys default off.
 
 `image-widths` turns on responsive images. Given a list like `[320, 640, 960]`,
 the build resizes each raster image to every width smaller than the original,
@@ -87,6 +107,10 @@ copied unchanged.
 ## Debug output
 
 `blogin build --debug` injects HTML comments marking each template and partial
-boundary and a provenance comment before each post body naming its source file.
-It is a separate axis from `--verbose`/`--quiet`, which only affect log output.
-Comment text is sanitized so a stray `-->` cannot break out.
+boundary and a provenance comment before each post body naming its source file,
+so a page says which layout produced what. It is a separate axis from
+`--verbose`, which only affects log output. Comment text is sanitized so a stray
+`-->` cannot break out.
+
+Turn it on for a site permanently with `"debug": true` in `blogin.json`, and
+turn that off for one build with `--no-debug`.

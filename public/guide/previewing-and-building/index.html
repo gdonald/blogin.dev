@@ -1,109 +1,113 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Blogin</title>
-    <link rel="canonical" href="https://blogin.dev/guide/previewing-and-building/"/>
-<meta name="description" content="The dev server, incremental builds, and debug output."/>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/previewing-and-building/"/>
+<meta name="description" content="The preview server, incremental builds, and debug output."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Previewing and Building"/>
-<meta property="og:description" content="The dev server, incremental builds, and debug output."/>
+<meta property="og:description" content="The preview server, incremental builds, and debug output."/>
 <meta property="og:url" content="https://blogin.dev/guide/previewing-and-building/"/>
 <meta property="og:site_name" content="Blogin"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Previewing and Building"/>
-<meta name="twitter:description" content="The dev server, incremental builds, and debug output."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
-    <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
-    <script>
-(function () {
-  var KEY = 'blogin-theme', root = document.documentElement;
-  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
-  function pref() {
-    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
-    return 'light';
-  }
-  apply(pref());
-  window.bloginToggleTheme = function () {
-    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    apply(m);
-    try { localStorage.setItem(KEY, m); } catch (e) {}
-  };
-})();
-</script>
+<meta name="twitter:description" content="The preview server, incremental builds, and debug output."/>
 
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y16FBSMK2N');
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
     </script>
-  </head>
-  <body>
-    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
-      <div class='container'>
-        <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
-          Blogin
-        </a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div id='topbar' class='collapse navbar-collapse'>
-          <ul class='navbar-nav mb-2 mb-lg-0'>
-  <li class='nav-item'>
-  <a class='nav-link active' href='/guide/'>Guide</a>
-</li>
-<li class='nav-item'>
-  <a class='nav-link' href='/cli/'>CLI</a>
-</li>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
 </ul>
 
-          <div class='navbar-tools'>
-            <div class='navbar-search'>
-              <div class='blogin-search'>
-  <form data-blogin-search='true' role='search'>
-    <input type='search' name='q' placeholder='Search' aria-label='Search'>
-  </form>
-  <ul data-blogin-results='true'></ul>
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
-<script src='/assets/js/search.39a5f1f4.js'></script>
-
-            </div>
-            <div class='navbar-toggle-slot'>
-              <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main class='container my-4'>
-      <div class='card'>
-  <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>Previewing and Building</h1>
-      <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
-        <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#the-preview-server">The preview server</a></li><li><a href="#live-reload">Live reload</a></li><li><a href="#incremental-builds">Incremental builds</a></li><li><a href="#asset-optimization">Asset optimization</a></li><li><a href="#debug-output">Debug output</a></li></ul>
-      </nav>
-      <h2 id="the-preview-server">The preview server<a class="anchor" href="#the-preview-server">#</a></h2>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Previewing and Building</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#the-preview-server">The preview server</a></li><li><a href="#live-reload">Live reload</a></li><li><a href="#incremental-builds">Incremental builds</a></li><li><a href="#asset-optimization">Asset optimization</a></li><li><a href="#debug-output">Debug output</a></li></ul>
+</nav>
+<h2 id="the-preview-server">The preview server<a class="anchor" href="#the-preview-server">#</a></h2>
 <pre><code class="language-bash">blogin serve --port <span class="hl-number">3000</span>
 </code></pre>
-<p><code>serve</code> builds the site, serves <code>public/</code> locally, and watches the source tree.
+<p>It binds loopback only, so nothing outside the machine reaches it.</p>
+<p><code>serve</code> builds the site into <code>.blogin-preview/</code>, serves that locally, and watches
+the source tree. It never writes <code>public/</code>, so serving a site cannot leave the
+directory you deploy holding preview output. A preview is unminified and
+unfingerprinted, and it keeps its own build state, so the two builds never read
+each other's.
 Any change to content, layouts, or static assets triggers a full rebuild in
 place, and config edits are picked up too. Every directory under the watched
 trees is watched, however deeply nested, and a directory you add while the server
-runs starts firing changes on its own. A save that fires several filesystem
+runs is picked up without a restart. A save that fires several filesystem
 events is coalesced into one rebuild. Extensionless URLs resolve to their <code>.html</code>
 files, matching how a production host rewrites, so local preview behaves like the
-deployed site. The server is a dev tool only; production ships static files.</p>
+deployed site. The server is for previewing only, and what you deploy is
+static files.</p>
 <p><code>minify</code> and <code>fingerprint</code> are off while serving, whatever <code>blogin.json</code> says,
 and the server prints a line saying so when the config asks for them.
 Fingerprinting renames every asset on each build, which would leave an already
@@ -112,8 +116,8 @@ work on every save. <code>blogin build</code> still applies both, so what you de
 unaffected.</p>
 <h2 id="live-reload">Live reload<a class="anchor" href="#live-reload">#</a></h2>
 <p>Each served HTML page carries a small client that holds a WebSocket to the
-server. When a rebuild finishes, the server pushes the list of output files it
-actually rewrote, and the page acts on it:</p>
+server. When a rebuild finishes, the server pushes the list of output files the
+rebuild rewrote, and the page acts on it:</p>
 <ul>
 <li>The page reloads when its own HTML file changed, or when a script it loads
 changed.</li>
@@ -128,27 +132,38 @@ against the one the server is serving, and reloads when they differ, which cover
 edits made while the server was down. Preview responses are sent with
 <code>Cache-Control: no-store</code> so a reloaded page never comes back from the browser
 cache.</p>
-<p>The injection happens only while serving. Built <code>public/</code> files never contain it.</p>
+<p>The injection happens only while serving. Built <code>public/</code> files never contain it,
+and the preview is written elsewhere in any case.</p>
 <h2 id="incremental-builds">Incremental builds<a class="anchor" href="#incremental-builds">#</a></h2>
-<p><code>blogin build</code> renders every page but writes a file only when its content
-changed, so rebuilding an unchanged site writes nothing and editing one post
-rewrites just that post and the pages that reference it. Output for a deleted post
-is pruned. Pass <code>--force</code> to rewrite everything.</p>
+<p>A rebuild only does the work the change requires. When nothing changed, nothing
+is parsed, rendered, or written. When one post changed, that post is rendered
+along with the pages that reference it, and everything else is left alone.
+Output for a deleted post is pruned. Pass <code>--force</code> to ignore what the last
+build recorded and rebuild everything.</p>
+<p>The result is byte-identical to a build from scratch, checked against randomised
+sequences of edits rather than a handful of examples.</p>
+<p>Pass <code>--counters</code> to see the work a build did: posts parsed, templates compiled,
+pages rendered, files read and written, and directory walks. Those numbers are
+deterministic across machines, which is what makes them useful for telling
+whether a change did more work than it needed to.</p>
 <p>A <code>.keep</code> file is yours, not build output, so pruning leaves it alone and the
 directory holding it survives. Keep one at <code>public/.keep</code> to track the output
 directory in git, or in any directory under <code>public/</code> the build writes nothing
 into. <code>blogin clean</code> leaves <code>.keep</code> files and their directories in place too.</p>
 <h2 id="asset-optimization">Asset optimization<a class="anchor" href="#asset-optimization">#</a></h2>
-<p>Two <code>blogin.json</code> keys tune the emitted assets, and both act only on the assets
-pipeline under <code>public/assets/</code>. Files copied verbatim from <code>static/</code> to the site
-root are never touched, so a <code>favicon.ico</code> or <code>CNAME</code> keeps its exact name.</p>
+<p>Three <code>blogin.json</code> keys tune the emitted assets, and all three act only on the
+assets pipeline under <code>public/assets/</code>. Files copied verbatim from <code>static/</code> to
+the site root are never touched, so a <code>favicon.ico</code> or <code>CNAME</code> keeps its exact
+name.</p>
 <p><code>minify</code> shrinks every CSS and JavaScript file under <code>assets/</code>: it strips
 comments, collapses whitespace, and drops blank and comment-only script lines
 while keeping line breaks so JavaScript semicolon insertion stays safe.</p>
 <p><code>fingerprint</code> renames each CSS, JavaScript, and image file under <code>assets/</code> to
-include a short hash of its size and timestamp, such as <code>style.1a2b3c4d.css</code>, and
-rewrites every reference to it in the built HTML and CSS. A changed asset gets a
-new name, so a far-future cache never serves a stale file. Both default off.</p>
+include a short hash of its content, such as <code>style.1a2b3c4d.css</code>, and rewrites
+every reference to it in the built HTML and CSS. A changed asset gets a new name,
+so a far-future cache never serves a stale file. Hashing the bytes rather than
+the file's size and timestamp means the same input produces the same names on
+any machine, so two builds of the same source agree. Both keys default off.</p>
 <p><code>image-widths</code> turns on responsive images. Given a list like <code>[320, 640, 960]</code>,
 the build resizes each raster image to every width smaller than the original,
 writing variants like <code>photo-320.png</code> beside it, and adds a <code>srcset</code> to each
@@ -157,33 +172,36 @@ build host: ImageMagick or, on macOS, <code>sips</code>. With no widths set, ima
 copied unchanged.</p>
 <h2 id="debug-output">Debug output<a class="anchor" href="#debug-output">#</a></h2>
 <p><code>blogin build --debug</code> injects HTML comments marking each template and partial
-boundary and a provenance comment before each post body naming its source file.
-It is a separate axis from <code>--verbose</code>/<code>--quiet</code>, which only affect log output.
-Comment text is sanitized so a stray <code>--&gt;</code> cannot break out.</p>
+boundary and a provenance comment before each post body naming its source file,
+so a page says which layout produced what. It is a separate axis from
+<code>--verbose</code>, which only affects log output. Comment text is sanitized so a stray
+<code>--&gt;</code> cannot break out.</p>
+<p>Turn it on for a site permanently with <code>&quot;debug&quot;: true</code> in <code>blogin.json</code>, and
+turn that off for one build with <code>--no-debug</code>.</p>
 
-      <nav class='tags mt-4'>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/cli/'>cli</a>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/builds/'>builds</a>
-      </nav>
-    </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/metadata-and-seo/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Metadata and SEO</span></a><a class="next btn btn-primary" href="/guide/configuration/"><span class="post-nav-label">Configuration</span> <span aria-hidden="true">&rarr;</span></a></nav>
-  </div>
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/cli/">cli</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/builds/">builds</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/guide/metadata-and-seo/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Metadata and SEO</span></a><a class="next btn btn-primary" href="/guide/configuration/"><span class="post-nav-label">Configuration</span> <span aria-hidden="true">&rarr;</span></a></nav>
 </div>
-
-    </main>
-    <footer class='border-top mt-5 py-4'>
-      <div class='container d-flex flex-wrap justify-content-between gap-2'>
-        <p class='text-body-secondary mb-0'>
-          Built with
-          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
-        </p>
-        <nav class='d-flex gap-3'>
-          <a class='link-secondary' href='/tags/'>Browse by tag</a>
-          <a class='link-secondary' href='/feed.xml'>Atom</a>
-          <a class='link-secondary' href='/rss.xml'>RSS</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

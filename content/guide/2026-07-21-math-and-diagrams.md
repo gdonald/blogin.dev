@@ -7,7 +7,7 @@ tags: [markdown]
 description: Write math and diagrams that render in the browser.
 ---
 Blogin parses math and Mermaid diagrams into markup that a client-side renderer
-turns into equations and graphics. The build stays pure and static; the rendering
+turns into equations and graphics. The build stays static, and the rendering
 happens in the browser.
 
 ## Math

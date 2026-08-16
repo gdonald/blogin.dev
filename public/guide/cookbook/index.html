@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/cookbook/"/>
+<meta name="description" content="Every way a Blogin site can be customized, and where each one is documented."/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Cookbook"/>
+<meta property="og:description" content="Every way a Blogin site can be customized, and where each one is documented."/>
+<meta property="og:url" content="https://blogin.dev/guide/cookbook/"/>
+<meta property="og:site_name" content="Blogin"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cookbook"/>
+<meta name="twitter:description" content="Every way a Blogin site can be customized, and where each one is documented."/>
+
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
+    <script>
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
+    </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
+</ul>
+
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
+</div>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Cookbook</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#change-what-a-page-looks-like">Change what a page looks like</a></li><li><a href="#change-what-a-post-does">Change what a post does</a></li><li><a href="#change-the-site-s-behaviour">Change the site's behaviour</a></li><li><a href="#change-the-navigation">Change the navigation</a></li><li><a href="#change-the-styling">Change the styling</a></li><li><a href="#change-the-pagination">Change the pagination</a></li><li><a href="#add-values-a-layout-can-read">Add values a layout can read</a></li><li><a href="#add-markup-a-post-can-call">Add markup a post can call</a></li><li><a href="#reuse-a-whole-design">Reuse a whole design</a></li><li><a href="#speed-up-a-big-site">Speed up a big site</a></li><li><a href="#what-cannot-be-customized">What cannot be customized</a></li></ul>
+</nav>
+<p>A Blogin site is customized in six places. This page is the index: what each one
+reaches, and where the detail lives.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Where</th>
+<th>What it changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>blogin.json</code></td>
+<td>Site-wide behaviour. Feeds, pagination, taxonomies, assets, languages.</td>
+</tr>
+<tr>
+<td>Front matter</td>
+<td>One post. Its URL, its ordering, its summary, its redirects.</td>
+</tr>
+<tr>
+<td><code>layouts/</code></td>
+<td>The markup of every page, per section if you want.</td>
+</tr>
+<tr>
+<td><code>assets/</code> and <code>static/</code></td>
+<td>Stylesheets, scripts, images, and files served verbatim.</td>
+</tr>
+<tr>
+<td><code>data/</code> and <code>shortcodes/</code></td>
+<td>Values a layout reads, and markup a post can call.</td>
+</tr>
+<tr>
+<td><code>themes/</code></td>
+<td>A whole layout and asset set, reused across sites.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="change-what-a-page-looks-like">Change what a page looks like<a class="anchor" href="#change-what-a-page-looks-like">#</a></h2>
+<p>Edit <code>layouts/</code>. <code>base.haml</code> is the shell, <code>show.haml</code> a post, and <code>index.haml</code>
+a listing. A missing one of those three is a build error naming it.</p>
+<p>Give one section its own markup by putting a layout in a matching directory.
+A post in <code>content/essays/</code> renders through <code>layouts/essays/show.haml</code> when that
+file exists, falling back to <code>layouts/show.haml</code>:</p>
+<pre><code>layouts/
+  show.haml            every post
+  essays/show.haml     posts under content/essays/
+</code></pre>
+<p>Or name a layout in the config instead of using a directory:</p>
+<pre><code class="language-json"><span class="hl-string">&quot;sections&quot;</span>: {
+  <span class="hl-string">&quot;essays&quot;</span>: { <span class="hl-string">&quot;layout&quot;</span>: <span class="hl-string">&quot;essay&quot;</span> }
+}
+</code></pre>
+<p>See <a href="/guide/layouts/">Layouts</a> for the full set of files and how they resolve,
+and <a href="/guide/template-data/">Template Data</a> for every value a layout can read.</p>
+<h2 id="change-what-a-post-does">Change what a post does<a class="anchor" href="#change-what-a-post-does">#</a></h2>
+<p>Front matter. <code>title</code> is the only required key:</p>
+<pre><code>---
+title: My Post
+slug: a-different-url
+order: 2
+toc: true
+draft: true
+summary: What listings and feeds show instead of the opening paragraph.
+aliases: [/the-old-url]
+---
+</code></pre>
+<p><code>slug</code> picks the URL, <code>order</code> places a post ahead of date ordering, <code>toc</code> turns
+on the table of contents, <code>draft</code> holds it back from a normal build, and
+<code>aliases</code> writes a redirecting page at each old URL. Any key Blogin does not
+recognise is still available to the layout under its own name, so
+<code>series: Advanced</code> in front matter reads as <code>series</code> in <code>show.haml</code>.</p>
+<p>See <a href="/guide/writing-posts/">Writing Posts</a>.</p>
+<h2 id="change-the-site-s-behaviour">Change the site's behaviour<a class="anchor" href="#change-the-site-s-behaviour">#</a></h2>
+<p><code>blogin.json</code>. Every key is optional, an unknown key is a warning naming the
+closest real one, and a key with the wrong type stops the build.</p>
+<p>Common ones:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Want</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extensionless URLs</td>
+<td><code>clean-urls</code></td>
+</tr>
+<tr>
+<td>Posts per listing page</td>
+<td><code>page-size</code>, or per section</td>
+</tr>
+<tr>
+<td>More than tags</td>
+<td><code>taxonomies</code></td>
+</tr>
+<tr>
+<td>RSS or JSON alongside Atom</td>
+<td><code>feed-formats</code></td>
+</tr>
+<tr>
+<td>Syntax highlighting</td>
+<td><code>highlight</code></td>
+</tr>
+<tr>
+<td>Smaller CSS and JS</td>
+<td><code>minify</code></td>
+</tr>
+<tr>
+<td>Cache-safe asset names</td>
+<td><code>fingerprint</code></td>
+</tr>
+<tr>
+<td>Responsive images</td>
+<td><code>image-widths</code></td>
+</tr>
+<tr>
+<td>More than one language</td>
+<td><code>languages</code></td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="/guide/configuration/">Configuration</a> for all of them with types and
+defaults.</p>
+<h2 id="change-the-navigation">Change the navigation<a class="anchor" href="#change-the-navigation">#</a></h2>
+<p>The nav is built from the content tree, so a new directory under <code>content/</code>
+becomes a new nav entry. Adjust it per section:</p>
+<pre><code class="language-json"><span class="hl-string">&quot;sections&quot;</span>: {
+  <span class="hl-string">&quot;notes&quot;</span>: { <span class="hl-string">&quot;label&quot;</span>: <span class="hl-string">&quot;Field Notes&quot;</span>, <span class="hl-string">&quot;order&quot;</span>: <span class="hl-number">1</span> },
+  <span class="hl-string">&quot;drafts&quot;</span>: { <span class="hl-string">&quot;nav&quot;</span>: false }
+}
+</code></pre>
+<p><code>label</code> renames it, <code>order</code> places it ahead of alphabetical, and <code>nav: false</code>
+keeps it out. A layout renders the tree itself from <code>nav-nodes</code>, with
+<code>nav-current(node)</code> marking the current section, so the markup is yours. See
+<a href="/guide/template-data/">Template Data</a>.</p>
+<p>Nothing links <code>/tags</code> automatically. Add it to a layout when you want it.</p>
+<h2 id="change-the-styling">Change the styling<a class="anchor" href="#change-the-styling">#</a></h2>
+<p>Three separate levers, and they combine.</p>
+<p><strong>A CSS framework.</strong> Set <code>css-framework</code> to <code>none</code>, <code>bootstrap5</code>, <code>pico</code>, or
+<code>bulma</code> and Blogin classes the HTML it writes to match. See
+<a href="/guide/css-frameworks/">CSS Frameworks</a>.</p>
+<p><strong>Your own CSS.</strong> Anything under <code>assets/css</code> is copied to <code>public/assets/css</code>,
+minified and fingerprinted if you asked for it. Link it from <code>base.haml</code>.</p>
+<p><strong>The generated stylesheet.</strong> <code>public/assets/css/blogin.css</code> carries the syntax
+highlighting colors, code block styling, and the light and dark toggle. Override
+any rule in your own stylesheet rather than editing it, since a build rewrites
+it.</p>
+<p>For a light and dark toggle, put <code>theme-script</code> in the <code>&lt;head&gt;</code> and
+<code>theme-toggle</code> in the navbar. See <a href="/guide/layouts/">Layouts</a>.</p>
+<h2 id="change-the-pagination">Change the pagination<a class="anchor" href="#change-the-pagination">#</a></h2>
+<p><code>page-size</code> sets how many posts a listing page holds, and a section can override
+it. <code>pagination-html</code> renders a ready-made bar, and <code>pagination-links</code> gives the
+pages as data for a bar you write yourself. See <a href="/guide/pagination/">Pagination</a>.</p>
+<h2 id="add-values-a-layout-can-read">Add values a layout can read<a class="anchor" href="#add-values-a-layout-can-read">#</a></h2>
+<p><code>data/</code>. Every <code>.json</code>, <code>.yaml</code>, and <code>.yml</code> file under it loads into <code>data</code>,
+keyed by filename:</p>
+<pre><code>data/
+  authors.json    -&gt; data&lt;authors&gt;
+  site/links.yaml -&gt; data&lt;site&gt;&lt;links&gt;
+</code></pre>
+<p>A <code>_data.json</code> inside a content directory applies to the pages beneath it and
+overrides the site-wide tree key by key. See <a href="/guide/data-files/">Data files</a>
+and <a href="/reference/data-file-yaml/">Data File YAML</a> for what a YAML file may hold.</p>
+<h2 id="add-markup-a-post-can-call">Add markup a post can call<a class="anchor" href="#add-markup-a-post-can-call">#</a></h2>
+<p><code>shortcodes/</code>. Put an HTML template there named for the shortcode, and a post
+calls it with <code>key=&quot;value&quot;</code> arguments:</p>
+<pre><code class="language-html hl-plain">&lt;!-- shortcodes/note.html --&gt;
+&lt;aside class=&quot;note&quot;&gt;{{ text }}&lt;/aside&gt;
+</code></pre>
+<pre><code>{{&lt; note text=&quot;Heads up&quot; &gt;}}
+</code></pre>
+<p><code>youtube</code> and <code>figure</code> are built in, and a file of the same name overrides one.
+See <a href="/guide/writing-posts/">Writing Posts</a>.</p>
+<h2 id="reuse-a-whole-design">Reuse a whole design<a class="anchor" href="#reuse-a-whole-design">#</a></h2>
+<p><code>themes/</code>. A theme is a directory of <code>layouts/</code>, <code>assets/</code>, and <code>static/</code> that
+fills in behind your own file by file, so you can override one layout and keep
+the rest:</p>
+<pre><code class="language-json"><span class="hl-string">&quot;theme&quot;</span>: <span class="hl-string">&quot;acme&quot;</span>
+</code></pre>
+<p>See <a href="/guide/themes/">Themes</a>.</p>
+<h2 id="speed-up-a-big-site">Speed up a big site<a class="anchor" href="#speed-up-a-big-site">#</a></h2>
+<p>Wrap chrome that renders the same on every page in <code>cache-fragment</code>:</p>
+<pre><code class="language-haml hl-plain">!= cache-fragment('sidebar', { render(:partial&lt;sidebar&gt;) })
+</code></pre>
+<p>Reuse is decided by the values the fragment read, so it cannot serve one page's
+markup to another. See <a href="/guide/layouts/">Layouts</a>.</p>
+<p><code>blogin build --counters</code> prints the work a build did, which is what says
+whether a change made it do more. See
+<a href="/guide/previewing-and-building/">Previewing and Building</a>.</p>
+<h2 id="what-cannot-be-customized">What cannot be customized<a class="anchor" href="#what-cannot-be-customized">#</a></h2>
+<p>Know these before you go looking for a setting.</p>
+<ul>
+<li><strong>No plugin system.</strong> Everything a site needs is in the binary.</li>
+<li><strong>No template logic beyond the expression language.</strong> It reads, compares,
+iterates, and calls what the view offers. No assignment, no user-defined
+functions, no calling into a host language. See
+<a href="/reference/template-expressions/">Template Expressions</a>.</li>
+<li><strong>No per-taxonomy page size.</strong> Term pages use the site's <code>page-size</code>.</li>
+<li><strong>The <code>page/2</code> URL shape is fixed.</strong> See <a href="/guide/pagination/">Pagination</a>.</li>
+<li><strong>Feeds carry every post in scope</strong>, with no length key.</li>
+</ul>
+
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/templates/">templates</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/configuration/">configuration</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/styling/">styling</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/guide/deploying/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Deploying</span></a></nav>
+</div>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

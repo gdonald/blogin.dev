@@ -35,13 +35,20 @@ languages, and `language-config` overrides settings like `title` per language.
 ## Translations and the switcher
 
 Two files with the same path in different language trees are treated as
-translations, matched by filename rather than slug, so a translated title (and
-its slug) still links up. A layout reaches the switcher through `languages`, a
+translations, matched by filename rather than slug, so a translated title, and
+the different slug it produces, still resolves to the right page. A layout reaches the switcher through `languages`, a
 list of `{ code, url, current }` where `url` is the translation in that language,
 or that language's home page when there is no translation:
 
 ```haml
 %nav.languages
   - for languages -> $lang
-    %a{href: "#{$lang<url>}", class: ($lang<current> ?? 'current' !! '')}= $lang<code>
+    - if $lang<current>
+      %a.current{href: "#{$lang<url>}"}= $lang<code>
+    - else
+      %a{href: "#{$lang<url>}"}= $lang<code>
 ```
+
+The expression language has no ternary operator, so a two-branch `- if` is how a
+layout picks between two pieces of markup. See
+[Template Expressions](/reference/template-expressions/).

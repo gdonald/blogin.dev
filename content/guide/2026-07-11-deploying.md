@@ -19,8 +19,8 @@ configuration.
 Set `"clean-urls": true` for extensionless URLs: the post is written as
 `public/posts/hello.html` and linked as `/posts/hello`. The host then has to serve
 `hello.html` for the extensionless request, which needs server configuration.
-Managed hosts do this for you: GitHub Pages, Netlify, and Cloudflare Pages serve
-`/posts/hello` from `posts/hello.html` out of the box.
+Managed hosts do this for you. GitHub Pages, Netlify, and Cloudflare Pages serve
+`/posts/hello` from `posts/hello.html` with no configuration.
 
 On a self-managed server you configure the rewrite yourself. For nginx, in the
 `server` block:

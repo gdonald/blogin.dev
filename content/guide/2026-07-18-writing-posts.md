@@ -12,13 +12,81 @@ A post is a Markdown file with a `---` front matter block:
 ---
 title: My Post
 date: 2026-07-20
-tags: [raku, web]
+tags: [cpp, web]
 description: A short summary.
 ---
 The body goes here.
 ```
 
 Run `blogin new "My Post"` to scaffold one with the front matter filled in.
+
+`title` is the only required key. Everything else has a default: the date falls
+back to a date at the front of the filename, the slug follows the title, and the
+layout follows the section. `draft`, `date`, `description`, `summary`, `slug`,
+`layout`, `order`, `toc`, `tags`, and `aliases` are read, and any other key you
+write is available to the layout under its own name.
+
+## Slugs
+
+A slug comes from the title, lowercased, with runs of punctuation and whitespace
+collapsed to single hyphens. Three characters carry the whole meaning of a name
+and are spelled out rather than dropped: `+` becomes `plus`, `#` becomes
+`sharp`, and `&` becomes `and`. So a `c++` tag is `c-plus-plus` and a `c` tag is
+`c`, two pages rather than one overwriting the other.
+
+Set `slug` in front matter to choose the URL yourself.
+
+## Markdown
+
+The body is CommonMark, with GitHub Flavored Markdown for the extensions:
+tables, task lists, strikethrough, and fenced code blocks with an info string.
+Footnotes, reference links, attribute lists, math, and Mermaid diagrams are
+covered below and in [Math and Diagrams](/guide/math-and-diagrams/).
+
+```
+| Column | Column |
+| --- | --- |
+| a | b |
+
+- [x] done
+- [ ] not done
+
+~~struck through~~
+```
+
+## Definition lists
+
+A paragraph followed by a line starting with `: ` becomes a term and its
+definition:
+
+```
+Term
+: what it means
+```
+
+which renders as:
+
+```html
+<dl>
+<dt>Term</dt>
+<dd>what it means</dd>
+</dl>
+```
+
+One term takes as many definitions as you give it, and a list holds as many
+terms as you like:
+
+```
+--src <dir>
+: the content directory
+: defaults to `content`
+
+--out <dir>
+: where the site is written
+```
+
+A definition holds inline markup, so `: with *emphasis*` works. The CLI pages on
+this site are written this way.
 
 ## Links and images
 
@@ -141,8 +209,8 @@ while previewing.
 
 ## Shortcodes
 
-Shortcodes expand to HTML that Markdown can't express on its own. Write one on its
-own line in a post body, with `key="value"` arguments:
+Shortcodes expand to HTML that Markdown cannot express on its own. Write one on
+its own line in a post body, with `key="value"` arguments:
 
 ```
 {{< youtube id="dQw4w9WgXcQ" >}}
@@ -206,13 +274,14 @@ front-matter key:
 ```
 ---
 title: My Post
-tags: [raku, web]
+tags: [cpp, web]
 categories: [tutorials]
 ---
 ```
 
 Each taxonomy `name` builds a page per term at `/name/<term>` and an index at
-`/name`. A term page renders through `layouts/<singular>.haml` when present, then
+`/name`. A term page paginates at the site's `page-size`, the same as any other
+listing. A term page renders through `layouts/<singular>.haml` when present, then
 `layouts/term.haml`, then `layouts/<name>.haml`, then `layouts/index.haml`, so
 `tags` styles its term pages with `tag.haml` and `categories` with a
 `categorie.haml` or a shared `term.haml`.
@@ -227,9 +296,9 @@ posts.
 
 ## Showing a post's tags
 
-Building the tag pages is one half. Linking to them from each post is the other.
-The post layout receives the post's tags as `{ name, url }` links, so `show.haml`
-renders them itself:
+Building the tag pages does not link to them from each post. The post layout
+receives the post's tags as `{ name, url }` links, so `show.haml` renders them
+itself:
 
 ```haml
 - if has-tags
@@ -241,6 +310,6 @@ renders them itself:
 `tags` holds the post's own terms in the `tags` taxonomy, each `url` pointing at
 that tag's page, and `has-tags` is false when the post has none, so the block
 drops out. The scaffold `show.haml` ships this markup, so a fresh site links a
-post's tags out of the box. Nothing else surfaces tags automatically: the nav is
+post's tags without any editing. Nothing else surfaces tags automatically: the nav is
 built from content sections, so link to `/tags` from a layout when you want the
 tag index in it.

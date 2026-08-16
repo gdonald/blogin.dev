@@ -10,14 +10,14 @@
     <id>https://blogin.dev/guide/overview/</id>
     <link href="https://blogin.dev/guide/overview/"/>
     <updated>2026-07-20T00:00:00Z</updated>
-    <summary>Blogin is a static blog generator written in Raku. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime:…</summary>
+    <summary>Blogin is a static blog generator written in C++. Point it at a directory of Markdown files and it produces a directory of plain HTML you can host anywhere. There is no database and no runtime. What…</summary>
   </entry>
   <entry>
     <title>Getting Started</title>
     <id>https://blogin.dev/guide/getting-started/</id>
     <link href="https://blogin.dev/guide/getting-started/"/>
     <updated>2026-07-19T00:00:00Z</updated>
-    <summary>Install Raku and zef</summary>
+    <summary>Install</summary>
   </entry>
   <entry>
     <title>Writing Posts</title>
@@ -28,36 +28,61 @@
 ---
 title: My Post
 date: 2026-07-20
-tags: [raku, web]
+tags: [cpp, web]
 description: A short summary.
 ---
 The body goes here.
-
 Run blogin new &quot;My Post&quot; to scaffold one with the front matter filled in.
+title is the only required key. Everything else has a default: the date falls back to a date at the front of the filename, the slug follows the title, and the layout follows the section. draft, date, description, summary, slug, layout, order, toc, tags, and aliases are read, and any other key you write is available to the layout under its own name.
+Slugs
+A slug comes from the title, lowercased, with runs of punctuation and whitespace collapsed to single hyphens. Three characters carry the whole meaning of a name and are spelled out rather than dropped: + becomes plus, # becomes sharp, and &amp; becomes and. So a c++ tag is c-plus-plus and a c tag is c, two pages rather than one overwriting the other.
+Set slug in front matter to choose the URL yourself.
+Markdown
+The body is CommonMark, with GitHub Flavored Markdown for the extensions: tables, task lists, strikethrough, and fenced code blocks with an info string. Footnotes, reference links, attribute lists, math, and Mermaid diagrams are covered below and in Math and Diagrams.
+| Column | Column |
+| --- | --- |
+| a | b |
+
+- [x] done
+- [ ] not done
+
+~~struck through~~
+Definition lists
+A paragraph followed by a line starting with :  becomes a term and its definition:
+Term
+: what it means
+which renders as:
+&lt;dl&gt;
+&lt;dt&gt;Term&lt;/dt&gt;
+&lt;dd&gt;what it means&lt;/dd&gt;
+&lt;/dl&gt;
+One term takes as many definitions as you give it, and a list holds as many terms as you like:
+--src &lt;dir&gt;
+: the content directory
+: defaults to `content`
+
+--out &lt;dir&gt;
+: where the site is written
+A definition holds inline markup, so : with *emphasis* works. The CLI pages on this site are written this way.
 Links and images
 A link or an image takes an optional attribute list in braces right after the closing paren. Use key=value for an attribute, .name for a class, and #name for an id:
 [the docs](https://example.com){target=_blank rel=noopener .external}
 
 ![A cat](/images/cat.png){.rounded #hero}
-
 Wrap an image in a link to make the image itself clickable. The attribute list belongs to the link, so a linked thumbnail opens its full-size version in a new tab:
 [![A cat](/images/cat-thumb.png)](/images/cat.png){target=_blank}
-
 That renders an &lt;img&gt; inside the &lt;a&gt;, and the image keeps any attribute list of its own:
 [![A cat](/images/cat-thumb.png){.thumb}](/images/cat.png){target=_blank}
-
 Reference links and footnotes
 Links can carry their target in a separate definition rather than inline. Write [text][label] in the body and define the label anywhere in the file:
 See [the home page][home] for more.
 
 [home]: https://example.com &quot;Optional title&quot;
-
 A collapsed form, [text][], uses the text as the label. Labels match case-insensitively, and an undefined reference is left as literal text.
 Footnotes use [^label] where the note is cited, with a matching definition:
 A claim that needs a source[^src].
 
 [^src]: The cited source.
-
 Footnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.
 Sections
 The subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.
@@ -71,7 +96,7 @@ The text before a `</summary>
     <id>https://blogin.dev/guide/layouts/</id>
     <link href="https://blogin.dev/guide/layouts/"/>
     <updated>2026-07-17T00:00:00Z</updated>
-    <summary>Blogin renders pages with Template::HAML. A build wraps each post&apos;s rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.</summary>
+    <summary>Blogin renders pages with its own HAML engine. A build wraps each post&apos;s rendered body in show.haml inside base.haml, and each section listing in index.haml inside base.haml.</summary>
   </entry>
   <entry>
     <title>Template Data</title>
@@ -92,7 +117,7 @@ The text before a `</summary>
     <id>https://blogin.dev/guide/css-frameworks/</id>
     <link href="https://blogin.dev/guide/css-frameworks/"/>
     <updated>2026-07-16T00:00:00Z</updated>
-    <summary>The HTML Blogin emits carries framework-specific classes drawn from a selected profile, set by the css-framework config key. The core renderer stays framework-agnostic: it asks the profile for a…</summary>
+    <summary>Blogin adds framework-specific classes to the HTML it writes, taken from the profile you name in the css-framework config key. The renderer itself knows no framework. It asks the profile for a named…</summary>
   </entry>
   <entry>
     <title>Syntax Highlighting</title>
@@ -106,7 +131,7 @@ The text before a `</summary>
     <id>https://blogin.dev/guide/math-and-diagrams/</id>
     <link href="https://blogin.dev/guide/math-and-diagrams/"/>
     <updated>2026-07-21T00:00:00Z</updated>
-    <summary>Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays pure and static; the rendering happens in the browser.</summary>
+    <summary>Blogin parses math and Mermaid diagrams into markup that a client-side renderer turns into equations and graphics. The build stays static, and the rendering happens in the browser.</summary>
   </entry>
   <entry>
     <title>Feeds and Search</title>
@@ -114,6 +139,13 @@ The text before a `</summary>
     <link href="https://blogin.dev/guide/feeds-and-search/"/>
     <updated>2026-07-14T00:00:00Z</updated>
     <summary>Every build with at least one post emits feeds, a sitemap, and a search index.</summary>
+  </entry>
+  <entry>
+    <title>Pagination</title>
+    <id>https://blogin.dev/guide/pagination/</id>
+    <link href="https://blogin.dev/guide/pagination/"/>
+    <updated>2026-07-10T00:00:00Z</updated>
+    <summary>Any listing that holds more posts than page-size splits into numbered pages. A section listing, the home page, and every taxonomy term page paginate the same way, with the same URLs and the same…</summary>
   </entry>
   <entry>
     <title>Metadata and SEO</title>
@@ -134,7 +166,7 @@ The text before a `</summary>
     <id>https://blogin.dev/guide/configuration/</id>
     <link href="https://blogin.dev/guide/configuration/"/>
     <updated>2026-07-12T00:00:00Z</updated>
-    <summary>Site-wide settings live in blogin.json at the project root. Command-line options override the file.</summary>
+    <summary>Site-wide settings live in blogin.json beside the content directory. Every key is optional. Command-line options override the file.</summary>
   </entry>
   <entry>
     <title>Internationalization</title>
@@ -144,11 +176,11 @@ The text before a `</summary>
     <summary>List the languages you write in and Blogin builds each into its own subtree.</summary>
   </entry>
   <entry>
-    <title>Themes and Plugins</title>
-    <id>https://blogin.dev/guide/themes-and-plugins/</id>
-    <link href="https://blogin.dev/guide/themes-and-plugins/"/>
+    <title>Themes</title>
+    <id>https://blogin.dev/guide/themes/</id>
+    <link href="https://blogin.dev/guide/themes/"/>
     <updated>2026-07-21T00:00:00Z</updated>
-    <summary>Themes</summary>
+    <summary>A theme is a reusable set of layouts and assets. Put one under themes/&lt;name&gt;/ with its own layouts/, static/, and assets/, and select it in blogin.json:</summary>
   </entry>
   <entry>
     <title>Deploying</title>
@@ -156,5 +188,12 @@ The text before a `</summary>
     <link href="https://blogin.dev/guide/deploying/"/>
     <updated>2026-07-11T00:00:00Z</updated>
     <summary>blogin build writes a self-contained public/ directory. Deploying is copying that directory to any static host.</summary>
+  </entry>
+  <entry>
+    <title>Cookbook</title>
+    <id>https://blogin.dev/guide/cookbook/</id>
+    <link href="https://blogin.dev/guide/cookbook/"/>
+    <updated>2026-07-09T00:00:00Z</updated>
+    <summary>A Blogin site is customized in six places. This page is the index: what each one reaches, and where the detail lives.</summary>
   </entry>
 </feed>

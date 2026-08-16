@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/pagination/"/>
+<meta name="description" content="How listings split into pages, the URLs they get, and how to render your own."/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Pagination"/>
+<meta property="og:description" content="How listings split into pages, the URLs they get, and how to render your own."/>
+<meta property="og:url" content="https://blogin.dev/guide/pagination/"/>
+<meta property="og:site_name" content="Blogin"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pagination"/>
+<meta name="twitter:description" content="How listings split into pages, the URLs they get, and how to render your own."/>
+
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
+    <script>
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
+    </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
+</ul>
+
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
+</div>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Pagination</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#page-size">Page size</a></li><li><a href="#the-urls">The URLs</a></li><li><a href="#rendering-the-bar">Rendering the bar</a></li><li><a href="#rendering-your-own">Rendering your own</a></li><li><a href="#turning-it-off">Turning it off</a></li><li><a href="#what-does-not-paginate">What does not paginate</a></li></ul>
+</nav>
+<p>Any listing that holds more posts than <code>page-size</code> splits into numbered pages. A
+section listing, the home page, and every taxonomy term page paginate the same
+way, with the same URLs and the same helpers.</p>
+<h2 id="page-size">Page size<a class="anchor" href="#page-size">#</a></h2>
+<p><code>page-size</code> in <code>blogin.json</code> sets it for the whole site, and defaults to 10:</p>
+<pre><code class="language-json"><span class="hl-string">&quot;page-size&quot;</span>: <span class="hl-number">10</span>
+</code></pre>
+<p>A section overrides it for its own listing:</p>
+<pre><code class="language-json"><span class="hl-string">&quot;sections&quot;</span>: {
+  <span class="hl-string">&quot;notes&quot;</span>: { <span class="hl-string">&quot;page-size&quot;</span>: <span class="hl-number">30</span> }
+}
+</code></pre>
+<p>A value below 1 is raised to 1, so a typo cannot produce a listing with no posts
+on it.</p>
+<p>Taxonomy term pages use the site's <code>page-size</code>. There is no per-taxonomy
+override, so a tag with 200 posts paginates at the same size a section does.</p>
+<h2 id="the-urls">The URLs<a class="anchor" href="#the-urls">#</a></h2>
+<p>The first page keeps the listing's own path. Later pages sit under <code>page/</code>:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Page</th>
+<th><code>clean-urls: false</code></th>
+<th><code>clean-urls: true</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Section, page 1</td>
+<td><code>/notes/</code></td>
+<td><code>/notes</code></td>
+</tr>
+<tr>
+<td>Section, page 2</td>
+<td><code>/notes/page/2/</code></td>
+<td><code>/notes/page/2</code></td>
+</tr>
+<tr>
+<td>Home, page 1</td>
+<td><code>/</code></td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td>Home, page 2</td>
+<td><code>/page/2/</code></td>
+<td><code>/page/2</code></td>
+</tr>
+<tr>
+<td>Tag, page 2</td>
+<td><code>/tags/cpp/page/2/</code></td>
+<td><code>/tags/cpp/page/2</code></td>
+</tr>
+</tbody>
+</table>
+<p>Page 1 never gets a <code>page/1</code> URL, so the canonical address of a listing does not
+change when it grows past one page.</p>
+<h2 id="rendering-the-bar">Rendering the bar<a class="anchor" href="#rendering-the-bar">#</a></h2>
+<p><code>pagination-html</code> is the ready-made one. It returns an empty string on a
+single-page listing, so it can sit in a layout unconditionally:</p>
+<pre><code class="language-haml hl-plain">%section
+  %h1= heading
+  - for posts -&gt; $entry
+    %article
+      %a{href: &quot;#{$entry&lt;url&gt;}&quot;}= $entry&lt;title&gt;
+  != pagination-html
+</code></pre>
+<p>It renders first, previous, a window of numbers, next, and last:</p>
+<pre><code class="language-html hl-plain">&lt;nav class=&quot;blogin-pagination&quot; aria-label=&quot;Pagination&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a aria-label=&quot;First&quot; href=&quot;/notes/&quot;&gt;&amp;laquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a rel=&quot;prev&quot; aria-label=&quot;Previous&quot; href=&quot;/notes/&quot;&gt;&amp;lsaquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/notes/&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current=&quot;page&quot;&gt;2&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/notes/page/3/&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/notes/page/4/&quot;&gt;4&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a rel=&quot;next&quot; aria-label=&quot;Next&quot; href=&quot;/notes/page/3/&quot;&gt;&amp;rsaquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a aria-label=&quot;Last&quot; href=&quot;/notes/page/4/&quot;&gt;&amp;raquo;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
+<p>The current page is a <code>&lt;span&gt;</code> rather than a link, marked <code>aria-current=&quot;page&quot;</code>.
+The previous and next links carry <code>rel=&quot;prev&quot;</code> and <code>rel=&quot;next&quot;</code>. The first and
+last links appear only when there is a previous or next page to go to, so page 1
+of a listing shows no leading arrows.</p>
+<p>The number window is the current page and up to three either side, clamped to
+what exists, so the bar never grows past seven numbers however many pages the
+listing has.</p>
+<p>Its classes come from the active CSS framework, so the same call renders
+Bootstrap's <code>.pagination</code>/<code>.page-item</code>/<code>.page-link</code> and Bulma's
+<code>.pagination</code>/<code>.pagination-list</code>/<code>.pagination-link</code> with no layout change. See
+<a href="/guide/css-frameworks/">CSS Frameworks</a>. The outer <code>&lt;nav&gt;</code> always carries
+<code>blogin-pagination</code>, which is what to target when styling it yourself.</p>
+<h2 id="rendering-your-own">Rendering your own<a class="anchor" href="#rendering-your-own">#</a></h2>
+<p><code>pagination-links</code> gives the same pages as data, one entry per page, for a
+layout that wants different markup:</p>
+<pre><code>{ number, url, current }
+</code></pre>
+<p>It is empty on a single-page listing, which is what makes it safe to gate on:</p>
+<pre><code class="language-haml hl-plain">- if pagination-links
+  %nav.pages
+    - for pagination-links -&gt; $page
+      - if $page&lt;current&gt;
+        %span.current= $page&lt;number&gt;
+      - else
+        %a{href: &quot;#{$page&lt;url&gt;}&quot;}= $page&lt;number&gt;
+</code></pre>
+<p>Unlike <code>pagination-html</code>, this is every page rather than a window, so a listing
+with 40 pages yields 40 entries. Add your own windowing if that matters.</p>
+<p>Two more values are on the listing context for a bar built by hand:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page-number</code></td>
+<td>The page being rendered, starting at 1.</td>
+</tr>
+<tr>
+<td><code>total-pages</code></td>
+<td>How many pages the listing has.</td>
+</tr>
+</tbody>
+</table>
+<p>Which gives the plainest possible bar:</p>
+<pre><code class="language-haml hl-plain">- if total-pages &gt; 1
+  %p.pages
+    = &quot;Page #{page-number} of #{total-pages}&quot;
+</code></pre>
+<h2 id="turning-it-off">Turning it off<a class="anchor" href="#turning-it-off">#</a></h2>
+<p>There is no key that disables pagination. Set <code>page-size</code> high enough to hold
+the section:</p>
+<pre><code class="language-json"><span class="hl-string">&quot;sections&quot;</span>: {
+  <span class="hl-string">&quot;docs&quot;</span>: { <span class="hl-string">&quot;page-size&quot;</span>: <span class="hl-number">1000</span> }
+}
+</code></pre>
+<p><code>pagination-html</code> and <code>pagination-links</code> are both empty on a single-page
+listing, so a layout needs no change when a section stops paginating.</p>
+<h2 id="what-does-not-paginate">What does not paginate<a class="anchor" href="#what-does-not-paginate">#</a></h2>
+<p>A post's own page, and the taxonomy index at <code>/tags</code>, which lists every term on
+one page however many there are.</p>
+<p>Feeds do not paginate either, and they are not cut to <code>page-size</code>. A feed
+carries every published post in its scope, so a reader subscribing to
+<code>/notes/feed.xml</code> gets the whole section rather than its first page.</p>
+
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/templates/">templates</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/configuration/">configuration</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/guide/feeds-and-search/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Feeds and Search</span></a><a class="next btn btn-primary" href="/guide/metadata-and-seo/"><span class="post-nav-label">Metadata and SEO</span> <span aria-hidden="true">&rarr;</span></a></nav>
+</div>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

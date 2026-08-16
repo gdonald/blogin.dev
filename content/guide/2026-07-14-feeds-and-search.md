@@ -29,18 +29,23 @@ RSS at `rss.xml`, and JSON Feed at `feed.json`. The default is `["atom"]`.
 Search runs in the browser against a prebuilt index, so production stays static.
 The build writes `public/search-index.json`, one record per post with its title,
 url, date, tags, description, and stripped body text (truncated to
-`search-text-length`). It also emits `public/search.js`, hand-written vanilla
-JavaScript that fetches the index, ranks matches (title and tag hits weigh more
-than body hits), and renders results.
+`search-text-length`). It also emits `public/assets/js/search.js`, hand-written
+vanilla JavaScript that fetches the index, ranks matches (title and tag hits
+weigh more than body hits), and renders results.
 
 Matching is by prefix, so results narrow as you type: `c`, then `cs`, then `css`
 each refine the same query rather than only matching a whole word.
 
-The widget is styled out of the box. The build emits `public/search.css`
-alongside the script, styling the input and rendering matches as a dropdown that
-floats under the box and hides itself when a query has no results. The styling is
+The widget comes styled. The build emits `public/assets/css/search.css` beside
+the script, styling the input and rendering matches as a dropdown that floats
+under the box and hides itself when a query has no results. The styling is
 framework-neutral, so search looks right with or without a `css-framework`, and a
 site can override any of it in its own stylesheet.
+
+Both go through the asset pipeline like anything else under `assets/`, so with
+`fingerprint` on they are written as `search.<hash>.js` and `search.<hash>.css`
+and the tags that reference them are rewritten to match. The index itself stays
+at `public/search-index.json`, since the script fetches it by a fixed path.
 
 Add the form, stylesheet, and script to a page by including the `_search.haml`
 partial. Turn search off with `"search": false`, and cap results with

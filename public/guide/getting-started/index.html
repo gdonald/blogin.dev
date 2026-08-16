@@ -1,131 +1,142 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Blogin</title>
-    <link rel="canonical" href="https://blogin.dev/guide/getting-started/"/>
-<meta name="description" content="Install Blogin and build your first site."/>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/getting-started/"/>
+<meta name="description" content="Install Blogin and build your first site in four commands."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Getting Started"/>
-<meta property="og:description" content="Install Blogin and build your first site."/>
+<meta property="og:description" content="Install Blogin and build your first site in four commands."/>
 <meta property="og:url" content="https://blogin.dev/guide/getting-started/"/>
 <meta property="og:site_name" content="Blogin"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Getting Started"/>
-<meta name="twitter:description" content="Install Blogin and build your first site."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
-    <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
-    <script>
-(function () {
-  var KEY = 'blogin-theme', root = document.documentElement;
-  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
-  function pref() {
-    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
-    return 'light';
-  }
-  apply(pref());
-  window.bloginToggleTheme = function () {
-    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    apply(m);
-    try { localStorage.setItem(KEY, m); } catch (e) {}
-  };
-})();
-</script>
+<meta name="twitter:description" content="Install Blogin and build your first site in four commands."/>
 
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y16FBSMK2N');
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
     </script>
-  </head>
-  <body>
-    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
-      <div class='container'>
-        <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
-          Blogin
-        </a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div id='topbar' class='collapse navbar-collapse'>
-          <ul class='navbar-nav mb-2 mb-lg-0'>
-  <li class='nav-item'>
-  <a class='nav-link active' href='/guide/'>Guide</a>
-</li>
-<li class='nav-item'>
-  <a class='nav-link' href='/cli/'>CLI</a>
-</li>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
 </ul>
 
-          <div class='navbar-tools'>
-            <div class='navbar-search'>
-              <div class='blogin-search'>
-  <form data-blogin-search='true' role='search'>
-    <input type='search' name='q' placeholder='Search' aria-label='Search'>
-  </form>
-  <ul data-blogin-results='true'></ul>
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
-<script src='/assets/js/search.39a5f1f4.js'></script>
-
-            </div>
-            <div class='navbar-toggle-slot'>
-              <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main class='container my-4'>
-      <div class='card'>
-  <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>Getting Started</h1>
-      <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
-        <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#install-raku-and-zef">Install Raku and zef</a></li><li><a href="#install-blogin">Install Blogin</a></li><li><a href="#create-a-site">Create a site</a></li><li><a href="#directories">Directories</a></li><li><a href="#build">Build</a></li><li><a href="#preview">Preview</a></li></ul>
-      </nav>
-      <h2 id="install-raku-and-zef">Install Raku and zef<a class="anchor" href="#install-raku-and-zef">#</a></h2>
-<p>Blogin runs on Rakudo, the Raku compiler, and installs through zef, the Raku
-module manager. If <code>raku</code> and <code>zef</code> are already on your <code>PATH</code>, skip to the next
-section.</p>
-<p>Otherwise install Rakudo Star, a bundle that ships Rakudo and zef together.
-Download it for your platform from <a href="https://rakudo.org/star">rakudo.org</a>, or on
-macOS with Homebrew:</p>
-<pre><code class="language-bash">brew install rakudo-star
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Getting Started</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#install">Install</a></li><li><a href="#your-first-site">Your first site</a></li><li><a href="#where-things-go">Where things go</a></li><li><a href="#upgrading">Upgrading</a></li><li><a href="#other-ways-to-install">Other ways to install</a><ul><li><a href="#the-macos-binary-without-homebrew">The macOS binary without Homebrew</a></li><li><a href="#checking-a-linux-download">Checking a Linux download</a></li><li><a href="#verifying-a-download-came-from-the-release-build">Verifying a download came from the release build</a></li><li><a href="#building-from-source">Building from source</a></li></ul></li><li><a href="#platforms">Platforms</a></li><li><a href="#when-something-goes-wrong">When something goes wrong</a></li></ul>
+</nav>
+<h2 id="install">Install<a class="anchor" href="#install">#</a></h2>
+<p>The current release is <strong>0.9.0</strong>.</p>
+<p><strong>macOS</strong></p>
+<pre><code class="language-bash">brew tap gdonald/blogin
+brew trust gdonald/blogin
+brew install blogin
 </code></pre>
-<p>Confirm both tools are available:</p>
-<pre><code class="language-bash">raku --version
-zef --version
+<p>Homebrew asks you to trust any tap outside its own, once per machine. The
+<code>brew trust</code> line answers that ahead of time.</p>
+<p><strong>Linux, and Windows through WSL2</strong></p>
+<pre><code class="language-bash">curl -LO https://github.com/gdonald/Blogin/releases/latest/download/blogin-linux-x86_64
+chmod +x blogin-linux-x86_64
+sudo mv blogin-linux-x86_64 /usr/<span class="hl-keyword">local</span>/bin/blogin
 </code></pre>
-<h2 id="install-blogin">Install Blogin<a class="anchor" href="#install-blogin">#</a></h2>
-<pre><code class="language-bash">zef install Blogin
+<p>Swap <code>x86_64</code> for <code>arm64</code> on an ARM machine. See
+<a href="#other-ways-to-install">Other ways to install</a> to check the download against its
+checksum, for the universal macOS binary, and for building from source.</p>
+<p>Confirm it runs. With no command it prints its usage:</p>
+<pre><code class="language-bash">blogin
 </code></pre>
-<h2 id="create-a-site">Create a site<a class="anchor" href="#create-a-site">#</a></h2>
-<pre><code class="language-bash">blogin init myblog
+<h2 id="your-first-site">Your first site<a class="anchor" href="#your-first-site">#</a></h2>
+<pre><code class="language-bash">blogin init myblog        <span class="hl-comment"># write a site that already builds</span>
+cd myblog
+blogin new <span class="hl-string">&quot;Hello World&quot;</span>  <span class="hl-comment"># a dated post with its front matter filled in</span>
+blogin serve              <span class="hl-comment"># http://127.0.0.1:3000, rebuilding as you edit</span>
 </code></pre>
-<p>This scaffolds a buildable starter site: a <code>blogin.json</code>, a first post under
-<code>content/posts/</code>, the layouts, and an <code>assets/</code> tree.</p>
-<h2 id="directories">Directories<a class="anchor" href="#directories">#</a></h2>
+<p>Open <code>http://127.0.0.1:3000</code> and edit <code>content/posts/</code>. The page reloads itself
+as you save. When you are ready to publish:</p>
+<pre><code class="language-bash">blogin build
+</code></pre>
+<p>The finished site lands in <code>public/</code>, ready for any static host. See
+<a href="/guide/deploying/">Deploying</a>.</p>
+<p><code>blogin init</code> takes <code>--framework bootstrap5</code> to scaffold against Bootstrap 5
+rather than plain semantic HTML. See <a href="/guide/css-frameworks/">CSS Frameworks</a>.</p>
+<h2 id="where-things-go">Where things go<a class="anchor" href="#where-things-go">#</a></h2>
 <table class="table">
 <thead>
 <tr>
-<th>Source</th>
-<th>Purpose</th>
+<th>Directory</th>
+<th>What belongs there</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>content/</code></td>
-<td>Markdown posts, grouped into sections by subdirectory.</td>
+<td>Markdown posts. A subdirectory is a section.</td>
 </tr>
 <tr>
 <td><code>layouts/</code></td>
@@ -133,57 +144,205 @@ zef --version
 </tr>
 <tr>
 <td><code>assets/css</code>, <code>assets/js</code>, <code>assets/img</code></td>
-<td>Stylesheets, scripts, and images, copied to <code>public/assets/</code> keeping their subfolders. This is the processed pipeline: minify, fingerprint, and responsive images apply here.</td>
+<td>Stylesheets, scripts, and images, copied to <code>public/assets/</code>. Minifying, fingerprinting, and responsive images apply here.</td>
 </tr>
 <tr>
 <td><code>static/</code></td>
-<td>Files copied to the site root verbatim, with their exact names, for <code>favicon.ico</code>, <code>CNAME</code>, <code>robots.txt</code>, <code>.well-known/</code>, and the like. Nothing here is minified or fingerprinted, so fixed URLs stay fixed.</td>
+<td>Copied to the site root untouched, keeping exact names, for <code>favicon.ico</code>, <code>CNAME</code>, <code>.well-known/</code>, and the like.</td>
 </tr>
 <tr>
 <td><code>data/</code></td>
-<td>Optional JSON and YAML exposed to layouts.</td>
+<td>Optional JSON and YAML a layout reads. See <a href="/guide/data-files/">Data files</a>.</td>
 </tr>
 <tr>
 <td><code>shortcodes/</code></td>
-<td>Optional shortcode templates.</td>
+<td>Optional shortcode templates. See <a href="/guide/writing-posts/">Writing Posts</a>.</td>
+</tr>
+<tr>
+<td><code>themes/</code></td>
+<td>Optional layout and asset sets to fall back to. See <a href="/guide/themes/">Themes</a>.</td>
+</tr>
+<tr>
+<td><code>public/</code></td>
+<td>The built site. Named by <code>output-dir</code>.</td>
+</tr>
+<tr>
+<td><code>.blogin-preview/</code></td>
+<td>What <code>blogin serve</code> builds. Never deployed, and safe to ignore in version control.</td>
 </tr>
 </tbody>
 </table>
-<p>Blogin's own generated stylesheet and search assets are written under
-<code>public/assets/</code> too, so everything an app serves lives in one place.</p>
-<h2 id="build">Build<a class="anchor" href="#build">#</a></h2>
-<pre><code class="language-bash">cd myblog
-blogin build
+<p>Blogin's own stylesheet and search assets are written under <code>public/assets/</code>
+too, so everything the site serves lives in one place.</p>
+<h2 id="upgrading">Upgrading<a class="anchor" href="#upgrading">#</a></h2>
+<pre><code class="language-bash">brew upgrade blogin
 </code></pre>
-<p>The generated HTML lands in <code>public/</code>, ready to deploy to any static host.</p>
-<h2 id="preview">Preview<a class="anchor" href="#preview">#</a></h2>
-<pre><code class="language-bash">blogin serve
+<p>On Linux, download the new binary over the old one with the same three commands
+as the install. <code>blogin build</code> reads the previous build's records, so a version
+change rebuilds what it needs to and nothing more.</p>
+<h2 id="other-ways-to-install">Other ways to install<a class="anchor" href="#other-ways-to-install">#</a></h2>
+<h3 id="the-macos-binary-without-homebrew">The macOS binary without Homebrew<a class="anchor" href="#the-macos-binary-without-homebrew">#</a></h3>
+<p>Prefer Homebrew on macOS, because it clears the quarantine attribute Gatekeeper
+checks. The binary is unsigned, so a browser download is quarantined and macOS
+refuses to run it. Installing through Homebrew removes that attribute.</p>
+<p><code>blogin-macos-universal</code> carries Apple silicon and Intel in one file. Fetch it
+with <code>curl</code>, which sets no quarantine attribute:</p>
+<pre><code class="language-bash">curl -LO https://github.com/gdonald/Blogin/releases/latest/download/blogin-macos-universal
+curl -LO https://github.com/gdonald/Blogin/releases/latest/download/blogin-macos-universal.sha256
+shasum -a <span class="hl-number">256</span> -c blogin-macos-universal.sha256
+chmod +x blogin-macos-universal
+sudo mv blogin-macos-universal /usr/<span class="hl-keyword">local</span>/bin/blogin
 </code></pre>
-<p>This builds the site, serves it locally, and rebuilds as you edit.</p>
+<p>If you did download it through a browser, clear the attribute yourself:</p>
+<pre><code class="language-bash">xattr -d com.apple.quarantine blogin
+</code></pre>
+<h3 id="checking-a-linux-download">Checking a Linux download<a class="anchor" href="#checking-a-linux-download">#</a></h3>
+<p>Every binary ships with a <code>.sha256</code> beside it:</p>
+<pre><code class="language-bash">curl -LO https://github.com/gdonald/Blogin/releases/latest/download/blogin-linux-x86_64.sha256
+sha256sum -c blogin-linux-x86_64.sha256
+</code></pre>
+<h3 id="verifying-a-download-came-from-the-release-build">Verifying a download came from the release build<a class="anchor" href="#verifying-a-download-came-from-the-release-build">#</a></h3>
+<p>A checksum proves a file arrived intact. It does not prove where it came from,
+because whoever replaced the file could replace the checksum beside it. The
+release also carries a build provenance attestation, signed by GitHub with a
+short-lived certificate issued to the workflow that built it. There is no
+long-lived private key anywhere, so there is none to leak.</p>
+<p>Verifying needs the <a href="https://cli.github.com">GitHub CLI</a>:</p>
+<pre><code class="language-bash">gh attestation verify blogin-linux-x86_64 --repo gdonald/Blogin
+</code></pre>
+<p>It reports which workflow built the file, from which commit. A file built
+anywhere else fails, even with a matching checksum. The macOS binary, both Linux
+binaries, and <code>SHA256SUMS</code> are all attested.</p>
+<h3 id="building-from-source">Building from source<a class="anchor" href="#building-from-source">#</a></h3>
+<p>This works on any platform, and is the only route on anything the release
+binaries do not cover.</p>
+<p>You need a C++23 compiler and CMake 3.28 or newer. Ninja is optional and used
+when it is present. There is nothing else to install: no runtime, no package
+manager, and no libraries beyond what the compiler ships.</p>
+<p>With clang, on macOS or Linux:</p>
+<pre><code class="language-bash">git clone https://github.com/gdonald/Blogin.git
+cd Blogin
+cmake --preset release
+cmake --build build/release -j
+sudo cmake --install build/release
+</code></pre>
+<p>With GCC 14 or newer, on Linux:</p>
+<pre><code class="language-bash">git clone https://github.com/gdonald/Blogin.git
+cd Blogin
+cmake --preset gcc-release
+cmake --build build/gcc-release -j
+sudo cmake --install build/gcc-release
+</code></pre>
+<p>Both install to <code>/usr/local/bin/blogin</code>. Set <code>CMAKE_INSTALL_PREFIX</code> to install
+somewhere else, or copy the built binary wherever you keep your own.</p>
+<p>The presets that do not say <code>gcc</code> select clang, which is what the release
+binaries are built with. Both compilers build and run the whole test suite on
+every push.</p>
+<h2 id="platforms">Platforms<a class="anchor" href="#platforms">#</a></h2>
+<table class="table">
+<thead>
+<tr>
+<th>Platform</th>
+<th>Install</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS 13.3 and newer</td>
+<td>Homebrew, or the universal binary</td>
+<td>Apple silicon and Intel in one file.</td>
+</tr>
+<tr>
+<td>Linux x86_64 and arm64</td>
+<td>The static binary</td>
+<td>Any distribution. No libc, no loader, no glibc version floor.</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>WSL2, then follow Linux</td>
+<td>No native build.</td>
+</tr>
+</tbody>
+</table>
+<p>The Linux binaries are statically linked, so one file per architecture covers
+Debian, Ubuntu, Fedora, Arch, Alpine, and anything else. The release build
+checks this by running the binary in a container holding a shell and no
+libraries at all, so a build that picked up a dependency fails rather than
+ships.</p>
+<p>There is no <code>.deb</code> or <code>.rpm</code>, and none is planned. A package would carry the
+same single file the download does, with a version floor the static binary does
+not have.</p>
+<p>Homebrew runs on Linux, but it wants glibc and gcc and installs its own when the
+system's are too old. That is a lot of machinery to deliver one file that needs
+nothing, so the download is the shorter path even where <code>brew</code> is already there.</p>
+<p>Windows has no native build, since the file watcher behind <code>blogin serve</code> is
+written against FSEvents and inotify and the preview server uses POSIX sockets.
+WSL2 is a Linux kernel, so the Linux binary works there with live reload and
+everything else. WSL1 is not enough, because its inotify support is incomplete.</p>
+<h2 id="when-something-goes-wrong">When something goes wrong<a class="anchor" href="#when-something-goes-wrong">#</a></h2>
+<p><strong><code>cannot watch N directories: the per-user limit was reached</code></strong></p>
+<p><code>blogin serve</code> on Linux watches one inotify handle per directory, and a large
+site can pass the per-user cap. Raise it:</p>
+<pre><code class="language-bash">sudo sysctl fs.inotify.max_user_watches=<span class="hl-number">524288</span>
+</code></pre>
+<p>Add <code>fs.inotify.max_user_watches=524288</code> to <code>/etc/sysctl.conf</code>, or a file under
+<code>/etc/sysctl.d/</code>, to keep it across reboots. <code>blogin build</code> never watches
+anything, so it is unaffected.</p>
+<p><strong><code>two posts write the same page '/posts/hello-world/'</code></strong></p>
+<p>Two posts in one section produced the same slug, so one would overwrite the
+other. The message names both files. Give one of them a <code>slug</code> in its front
+matter, or retitle it. See <a href="/guide/writing-posts/">Writing Posts</a>.</p>
+<p><strong><code>no content directory at 'content'. Is this a Blogin site?</code></strong></p>
+<p><code>blogin build</code> and <code>blogin serve</code> are run from the site root, beside
+<code>blogin.json</code>. Pass <code>--src</code> if your content lives somewhere else.</p>
+<p><strong><code>port 3000 is already in use. Pass --port to choose another</code></strong></p>
+<p>Another process holds the port, often a <code>blogin serve</code> you left running.
+<code>blogin serve --port 4000</code> picks a different one.</p>
+<p><strong><code>post already exists: ... (pass --force to overwrite it)</code></strong></p>
+<p><code>blogin new</code> refuses to write over a post. Pick a different title, or pass
+<code>--force</code> when you meant to replace it.</p>
+<p><strong><code>unparseable date 'soon' in 'content/posts/x.md'</code></strong></p>
+<p>A <code>date</code> in front matter is <code>YYYY-MM-DD</code>. A date that does not exist, such as
+<code>2026-02-30</code>, is refused the same way.</p>
+<p><strong><code>missing title in 'content/posts/x.md'</code></strong></p>
+<p><code>title</code> is the only required front matter key.</p>
+<p><strong><code>blogin: command not found</code></strong></p>
+<p>The binary is not on your <code>PATH</code>. Check where it landed with <code>ls -l /usr/local/bin/blogin</code>, and confirm <code>/usr/local/bin</code> is on your <code>PATH</code> with
+<code>echo $PATH</code>.</p>
+<p><strong>Responsive images are not being written</strong></p>
+<p><code>image-widths</code> needs an image resizer on the build host: ImageMagick, or <code>sips</code>
+on macOS. Without one the build says so and carries on with the images
+unchanged. <code>brew install imagemagick</code>, or <code>apt install imagemagick</code>.</p>
+<p><strong>Extensionless URLs give a 404 once deployed</strong></p>
+<p><code>clean-urls</code> writes <code>posts/hello.html</code> and links it as <code>/posts/hello</code>, which the
+host has to rewrite. See <a href="/guide/deploying/">Deploying</a> for the nginx and Apache
+configuration, or leave <code>clean-urls</code> off and every host serves the site with no
+setup at all.</p>
 
-      <nav class='tags mt-4'>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/intro/'>intro</a>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/cli/'>cli</a>
-      </nav>
-    </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/overview/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Overview</span></a><a class="next btn btn-primary" href="/guide/writing-posts/"><span class="post-nav-label">Writing Posts</span> <span aria-hidden="true">&rarr;</span></a></nav>
-  </div>
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/intro/">intro</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/cli/">cli</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/guide/overview/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Overview</span></a><a class="next btn btn-primary" href="/guide/writing-posts/"><span class="post-nav-label">Writing Posts</span> <span aria-hidden="true">&rarr;</span></a></nav>
 </div>
-
-    </main>
-    <footer class='border-top mt-5 py-4'>
-      <div class='container d-flex flex-wrap justify-content-between gap-2'>
-        <p class='text-body-secondary mb-0'>
-          Built with
-          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
-        </p>
-        <nav class='d-flex gap-3'>
-          <a class='link-secondary' href='/tags/'>Browse by tag</a>
-          <a class='link-secondary' href='/feed.xml'>Atom</a>
-          <a class='link-secondary' href='/rss.xml'>RSS</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

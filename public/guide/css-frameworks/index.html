@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Blogin</title>
-    <link rel="canonical" href="https://blogin.dev/guide/css-frameworks/"/>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/css-frameworks/"/>
 <meta name="description" content="Emit framework-specific classes without touching the core renderer."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="CSS Frameworks"/>
@@ -14,162 +14,426 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CSS Frameworks"/>
 <meta name="twitter:description" content="Emit framework-specific classes without touching the core renderer."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
-    <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
-    <script>
-(function () {
-  var KEY = 'blogin-theme', root = document.documentElement;
-  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
-  function pref() {
-    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
-    return 'light';
-  }
-  apply(pref());
-  window.bloginToggleTheme = function () {
-    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    apply(m);
-    try { localStorage.setItem(KEY, m); } catch (e) {}
-  };
-})();
-</script>
 
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y16FBSMK2N');
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
     </script>
-  </head>
-  <body>
-    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
-      <div class='container'>
-        <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
-          Blogin
-        </a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div id='topbar' class='collapse navbar-collapse'>
-          <ul class='navbar-nav mb-2 mb-lg-0'>
-  <li class='nav-item'>
-  <a class='nav-link active' href='/guide/'>Guide</a>
-</li>
-<li class='nav-item'>
-  <a class='nav-link' href='/cli/'>CLI</a>
-</li>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
 </ul>
 
-          <div class='navbar-tools'>
-            <div class='navbar-search'>
-              <div class='blogin-search'>
-  <form data-blogin-search='true' role='search'>
-    <input type='search' name='q' placeholder='Search' aria-label='Search'>
-  </form>
-  <ul data-blogin-results='true'></ul>
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
-<script src='/assets/js/search.39a5f1f4.js'></script>
-
-            </div>
-            <div class='navbar-toggle-slot'>
-              <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main class='container my-4'>
-      <div class='card'>
-  <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>CSS Frameworks</h1>
-      <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
-        <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#profiles">Profiles</a></li><li><a href="#wiring-the-assets">Wiring the assets</a></li></ul>
-      </nav>
-      <p>The HTML Blogin emits carries framework-specific classes drawn from a selected
-profile, set by the <code>css-framework</code> config key. The core renderer stays
-framework-agnostic: it asks the profile for a class rather than hardcoding one.</p>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">CSS Frameworks</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#profiles">Profiles</a></li><li><a href="#what-each-profile-classes">What each profile classes</a></li><li><a href="#the-content-wrapper">The content wrapper</a></li><li><a href="#one-layout-four-sites">One layout, four sites</a></li><li><a href="#what-the-scaffold-writes-per-framework">What the scaffold writes per framework</a></li><li><a href="#wiring-the-assets">Wiring the assets</a></li><li><a href="#reading-a-slot-from-a-layout">Reading a slot from a layout</a></li></ul>
+</nav>
+<p>Blogin adds framework-specific classes to the HTML it writes, taken from the
+profile you name in the <code>css-framework</code> config key. The renderer itself knows no
+framework. It asks the profile for a named slot and writes back whatever it
+returns, so no framework is mentioned anywhere in the rendering code.</p>
 <h2 id="profiles">Profiles<a class="anchor" href="#profiles">#</a></h2>
 <table class="table">
 <thead>
 <tr>
 <th>Profile</th>
-<th>Style</th>
+<th>What it does</th>
+<th>Stylesheet</th>
+<th>Script</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>none</code></td>
-<td>Plain semantic HTML, no extra classes (default).</td>
+<td>Plain semantic HTML, no classes anywhere. The default.</td>
+<td>none</td>
+<td>none</td>
 </tr>
 <tr>
 <td><code>bootstrap5</code></td>
-<td>Per-element classes (<code>table</code>, <code>blockquote</code>, <code>img-fluid</code>, <code>pagination</code>).</td>
+<td>Classes each element Bootstrap needs classed, and ships a navbar and grid the scaffold uses.</td>
+<td>Bootstrap 5.3</td>
+<td><code>bootstrap.bundle.min.js</code></td>
 </tr>
 <tr>
 <td><code>pico</code></td>
-<td>Classless; styles bare semantic HTML.</td>
+<td>Styles bare semantic HTML, so the only class is the one bounding page width.</td>
+<td>Pico 2</td>
+<td>none</td>
 </tr>
 <tr>
 <td><code>bulma</code></td>
-<td>Class-based, with a <code>.content</code> wrapper and <code>.pagination</code>/<code>.navbar</code>/<code>.tag</code>.</td>
+<td>Wraps the rendered body in <code>.content</code>, which is how Bulma styles prose, and classes tables, images, pagination, and tags.</td>
+<td>Bulma 1</td>
+<td>none</td>
 </tr>
 </tbody>
 </table>
-<p>Under <code>none</code> and <code>pico</code> the elements stay unclassed. Under <code>bootstrap5</code> and
-<code>bulma</code> the renderer adds each framework's classes to the same semantic HTML, so
-switching frameworks never changes the markup structure.</p>
+<p>Any of the four can be scaffolded:</p>
+<pre><code class="language-bash">blogin init myblog --framework bulma
+</code></pre>
+<p>or set on a site you already have, by putting <code>&quot;css-framework&quot;: &quot;bulma&quot;</code> in
+<code>blogin.json</code>. An unknown name stops the build and lists the four that work.</p>
+<h2 id="what-each-profile-classes">What each profile classes<a class="anchor" href="#what-each-profile-classes">#</a></h2>
+<p>The renderer and the pagination helper ask for a slot by name. This is every
+slot and what each profile answers, and an empty cell means the framework styles
+that element without a class:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Slot</th>
+<th><code>none</code></th>
+<th><code>bootstrap5</code></th>
+<th><code>pico</code></th>
+<th><code>bulma</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>article</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>content</code></td>
+</tr>
+<tr>
+<td><code>table</code></td>
+<td></td>
+<td><code>table</code></td>
+<td></td>
+<td><code>table</code></td>
+</tr>
+<tr>
+<td><code>blockquote</code></td>
+<td></td>
+<td><code>blockquote</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td></td>
+<td><code>img-fluid</code></td>
+<td></td>
+<td><code>image</code></td>
+</tr>
+<tr>
+<td><code>heading</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>definition-list</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>code-block</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>pagination-nav</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>pagination</code></td>
+</tr>
+<tr>
+<td><code>pagination-list</code></td>
+<td></td>
+<td><code>pagination</code></td>
+<td></td>
+<td><code>pagination-list</code></td>
+</tr>
+<tr>
+<td><code>pagination-item</code></td>
+<td></td>
+<td><code>page-item</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>pagination-link</code></td>
+<td></td>
+<td><code>page-link</code></td>
+<td></td>
+<td><code>pagination-link</code></td>
+</tr>
+<tr>
+<td><code>pagination-active-item</code></td>
+<td></td>
+<td><code>active</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>pagination-active-link</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>is-current</code></td>
+</tr>
+<tr>
+<td><code>nav</code></td>
+<td></td>
+<td><code>nav</code></td>
+<td></td>
+<td><code>navbar</code></td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td></td>
+<td><code>container</code></td>
+<td><code>container</code></td>
+<td><code>container</code></td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td></td>
+<td><code>badge text-bg-secondary</code></td>
+<td></td>
+<td><code>tag</code></td>
+</tr>
+<tr>
+<td><code>post-nav-button</code></td>
+<td></td>
+<td><code>btn btn-primary</code></td>
+<td></td>
+<td><code>button</code></td>
+</tr>
+</tbody>
+</table>
+<p>An empty cell is a decision rather than a gap. Bootstrap and Pico both style
+bare headings, lists, and definition lists, and Bulma styles them through the
+<code>.content</code> wrapper, so nothing classes them. Blogin's spec suite asserts every
+cell of this table, so a profile cannot drift from what is written here.</p>
+<h2 id="the-content-wrapper">The content wrapper<a class="anchor" href="#the-content-wrapper">#</a></h2>
+<p>Bulma is the one profile that needs a wrapper. It styles prose only inside
+<code>.content</code>, so a bare <code>&lt;h1&gt;</code> or <code>&lt;ul&gt;</code> gets no Bulma styling at all. When a
+profile names an <code>article</code> class, the renderer wraps the rendered post body in
+it:</p>
+<pre><code class="language-html hl-plain">&lt;div class=&quot;content&quot;&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+  &lt;p&gt;Some text.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>No other profile names one, so no other profile gets a wrapper and the markup is
+unchanged.</p>
+<h2 id="one-layout-four-sites">One layout, four sites<a class="anchor" href="#one-layout-four-sites">#</a></h2>
+<p>The point of the slots is that a layout does not branch on the framework. This
+listing is the whole of what you write:</p>
+<pre><code class="language-haml hl-plain">%section
+  %h1= heading
+  - for posts -&gt; $entry
+    %article
+      %a{href: &quot;#{$entry&lt;url&gt;}&quot;}= $entry&lt;title&gt;
+  != pagination-html
+</code></pre>
+<p>Switching <code>css-framework</code> changes what it produces without touching the file.
+The pagination bar, on page 2 of a four-page listing:</p>
+<p><strong><code>none</code> and <code>pico</code></strong></p>
+<pre><code class="language-html hl-plain">&lt;nav class=&quot;blogin-pagination&quot; aria-label=&quot;Pagination&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a aria-label=&quot;First&quot; href=&quot;/posts/&quot;&gt;&amp;laquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/posts/&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current=&quot;page&quot;&gt;2&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
+<p><strong><code>bootstrap5</code></strong></p>
+<pre><code class="language-html hl-plain">&lt;nav class=&quot;blogin-pagination&quot; aria-label=&quot;Pagination&quot;&gt;
+  &lt;ul class=&quot;pagination&quot;&gt;
+    &lt;li class=&quot;page-item&quot;&gt;&lt;a class=&quot;page-link&quot; aria-label=&quot;First&quot; href=&quot;/posts/&quot;&gt;&amp;laquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;page-item&quot;&gt;&lt;a class=&quot;page-link&quot; href=&quot;/posts/&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;page-item active&quot;&gt;&lt;span class=&quot;page-link&quot; aria-current=&quot;page&quot;&gt;2&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
+<p><strong><code>bulma</code></strong></p>
+<pre><code class="language-html hl-plain">&lt;nav class=&quot;blogin-pagination pagination&quot; aria-label=&quot;Pagination&quot;&gt;
+  &lt;ul class=&quot;pagination-list&quot;&gt;
+    &lt;li&gt;&lt;a class=&quot;pagination-link&quot; aria-label=&quot;First&quot; href=&quot;/posts/&quot;&gt;&amp;laquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a class=&quot;pagination-link&quot; href=&quot;/posts/&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span class=&quot;pagination-link is-current&quot; aria-current=&quot;page&quot;&gt;2&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
+<p>Trimmed to the first three items each. <code>blogin-pagination</code> is on the <code>&lt;nav&gt;</code>
+under every profile, so a rule of your own targets all four at once. See
+<a href="/guide/pagination/">Pagination</a>.</p>
+<h2 id="what-the-scaffold-writes-per-framework">What the scaffold writes per framework<a class="anchor" href="#what-the-scaffold-writes-per-framework">#</a></h2>
+<p><code>blogin init --framework &lt;name&gt;</code> records the choice in <code>blogin.json</code> and writes
+layouts to match. Three of the four share the same layouts, because Pico styles
+bare semantic HTML and Bulma styles the rendered body through the wrapper, so
+neither needs markup the plain scaffold does not already have.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Framework</th>
+<th>Layouts</th>
+<th><code>assets/css/style.css</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td>The plain set</td>
+<td>A small stylesheet, since nothing else styles the page</td>
+</tr>
+<tr>
+<td><code>pico</code></td>
+<td>The plain set</td>
+<td>Empty</td>
+</tr>
+<tr>
+<td><code>bulma</code></td>
+<td>The plain set</td>
+<td>Empty</td>
+</tr>
+<tr>
+<td><code>bootstrap5</code></td>
+<td>Its own <code>base</code>, <code>index</code>, <code>_entry</code>, <code>_header</code>, <code>_nav</code>, <code>_nav-item</code>, and <code>_footer</code></td>
+<td>Empty</td>
+</tr>
+</tbody>
+</table>
+<p>Bootstrap is the exception because its navbar, grid, and utility classes are
+markup rather than styling. Its <code>base.haml</code> differs from the plain one in two
+lines:</p>
+<pre><code class="language-haml hl-plain">%body.d-flex.flex-column.min-vh-100
+  %main.container.my-4.flex-grow-1
+</code></pre>
+<p>against the plain scaffold's:</p>
+<pre><code class="language-haml hl-plain">%body
+  %main{class: framework-class('container')}
+</code></pre>
+<p>Switching a site from <code>none</code> to <code>pico</code> or <code>bulma</code> afterwards needs no layout
+edit at all, since the plain layouts already ask for the container slot.
+Switching to <code>bootstrap5</code> gets you the stylesheet and the classes, but not the
+navbar markup, so scaffold a throwaway site with <code>--framework bootstrap5</code> and
+copy the layouts across if you want that too.</p>
 <h2 id="wiring-the-assets">Wiring the assets<a class="anchor" href="#wiring-the-assets">#</a></h2>
-<p><code>blogin init --framework=bootstrap5</code> (or <code>pico</code>, <code>bulma</code>) records the framework in
-<code>blogin.json</code>. The layout emits that framework's assets from the config through two
-helpers:</p>
+<p>Layouts emit the selected framework's assets through two helpers:</p>
 <ul>
 <li><code>framework-stylesheet-tag</code> renders the stylesheet <code>&lt;link&gt;</code> in the document head.</li>
 <li><code>framework-script-tag</code> renders the JavaScript bundle <code>&lt;script&gt;</code> before the
 closing <code>&lt;/body&gt;</code>.</li>
 </ul>
-<p>Both read the selected profile, so changing <code>css-framework</code> in <code>blogin.json</code>
-swaps the linked assets without editing any template. A profile with no script
-(the <code>none</code>, <code>pico</code>, and <code>bulma</code> profiles) renders an empty script tag, so the
-bundle only loads where a framework ships one.</p>
-<p>Bootstrap 5 ships <code>bootstrap.bundle.min.js</code>, which powers its interactive
-components (the responsive navbar toggle, dropdowns, collapses). The scaffolded
-<code>base.haml</code> includes <code>framework-script-tag</code>, so those components work out of the
-box.</p>
-<p>Layouts read a slot's class with <code>framework-class('table')</code>, so a
-framework-aware template picks up the right class automatically. The built-in
-<code>pagination-html</code> uses this to class its markup per framework, so a paginated
+<p>Both read the selected profile, so changing <code>css-framework</code> swaps the linked
+assets without editing a template. Bootstrap is the only profile shipping
+JavaScript, and it is what powers the responsive navbar toggle, dropdowns, and
+collapses. The other three render an empty script tag.</p>
+<h2 id="reading-a-slot-from-a-layout">Reading a slot from a layout<a class="anchor" href="#reading-a-slot-from-a-layout">#</a></h2>
+<p><code>framework-class('container')</code> returns the class for a slot, or an empty string
+under a profile that leaves it bare. An empty class drops out of the tag rather
+than writing <code>class=&quot;&quot;</code>, so one layout serves every profile:</p>
+<pre><code class="language-haml hl-plain">%main{class: framework-class('container')}
+  = yield
+</code></pre>
+<p>That is what the scaffolded <code>base.haml</code> does, which is why a site scaffolded
+with <code>none</code> picks up Pico's or Bulma's container by changing one config key.</p>
+<p>The built-in <code>pagination-html</code> reads its slots the same way, so a paginated
 listing looks right under each profile with no layout change.</p>
 
-      <nav class='tags mt-4'>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/styling/'>styling</a>
-      </nav>
-    </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/data-files/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Data files</span></a><a class="next btn btn-primary" href="/guide/syntax-highlighting/"><span class="post-nav-label">Syntax Highlighting</span> <span aria-hidden="true">&rarr;</span></a></nav>
-  </div>
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/styling/">styling</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/guide/data-files/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Data files</span></a><a class="next btn btn-primary" href="/guide/syntax-highlighting/"><span class="post-nav-label">Syntax Highlighting</span> <span aria-hidden="true">&rarr;</span></a></nav>
 </div>
-
-    </main>
-    <footer class='border-top mt-5 py-4'>
-      <div class='container d-flex flex-wrap justify-content-between gap-2'>
-        <p class='text-body-secondary mb-0'>
-          Built with
-          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
-        </p>
-        <nav class='d-flex gap-3'>
-          <a class='link-secondary' href='/tags/'>Browse by tag</a>
-          <a class='link-secondary' href='/feed.xml'>Atom</a>
-          <a class='link-secondary' href='/rss.xml'>RSS</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

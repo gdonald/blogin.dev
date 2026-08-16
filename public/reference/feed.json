@@ -1,0 +1,29 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Blogin: reference",
+  "home_page_url": "https://blogin.dev/reference",
+  "feed_url": "https://blogin.dev/reference/feed.json",
+  "items": [
+    {
+      "id": "https://blogin.dev/reference/template-expressions/",
+      "url": "https://blogin.dev/reference/template-expressions/",
+      "title": "Template Expressions",
+      "date_published": "2026-08-15T00:00:00Z",
+      "content_text": "Blogin's layouts are HAML. What HAML does not define is the language inside = ..., - if ..., and #{...}. Ruby HAML embeds Ruby. Blogin embeds a small language of its own."
+    },
+    {
+      "id": "https://blogin.dev/reference/haml-compatibility/",
+      "url": "https://blogin.dev/reference/haml-compatibility/",
+      "title": "HAML Compatibility",
+      "date_published": "2026-08-15T00:00:00Z",
+      "content_text": "There is no HAML standard. Ruby HAML is a reference implementation that embeds Ruby, and every implementation embeds some host language. The structural syntax is what carries across, and the…"
+    },
+    {
+      "id": "https://blogin.dev/reference/data-file-yaml/",
+      "url": "https://blogin.dev/reference/data-file-yaml/",
+      "title": "Data File YAML",
+      "date_published": "2026-08-15T00:00:00Z",
+      "content_text": "Blogin reads YAML in two places: data/*.yaml, which a layout reads through data, and _data.yaml beside a section, which a layout reads the same way for pages in that section. See Data files for how…"
+    }
+  ]
+}

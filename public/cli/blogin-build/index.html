@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Blogin</title>
-    <link rel="canonical" href="https://blogin.dev/cli/blogin-build/"/>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/cli/blogin-build/"/>
 <meta name="description" content="Render the site to static files."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="blogin build"/>
@@ -14,135 +14,198 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="blogin build"/>
 <meta name="twitter:description" content="Render the site to static files."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
-    <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
-    <script>
-(function () {
-  var KEY = 'blogin-theme', root = document.documentElement;
-  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
-  function pref() {
-    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
-    return 'light';
-  }
-  apply(pref());
-  window.bloginToggleTheme = function () {
-    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    apply(m);
-    try { localStorage.setItem(KEY, m); } catch (e) {}
-  };
-})();
-</script>
 
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y16FBSMK2N');
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
     </script>
-  </head>
-  <body>
-    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
-      <div class='container'>
-        <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
-          Blogin
-        </a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div id='topbar' class='collapse navbar-collapse'>
-          <ul class='navbar-nav mb-2 mb-lg-0'>
-  <li class='nav-item'>
-  <a class='nav-link' href='/guide/'>Guide</a>
-</li>
-<li class='nav-item'>
-  <a class='nav-link active' href='/cli/'>CLI</a>
-</li>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link active" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
 </ul>
 
-          <div class='navbar-tools'>
-            <div class='navbar-search'>
-              <div class='blogin-search'>
-  <form data-blogin-search='true' role='search'>
-    <input type='search' name='q' placeholder='Search' aria-label='Search'>
-  </form>
-  <ul data-blogin-results='true'></ul>
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
-<script src='/assets/js/search.39a5f1f4.js'></script>
-
-            </div>
-            <div class='navbar-toggle-slot'>
-              <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main class='container my-4'>
-      <div class='card'>
-  <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>blogin build</h1>
-      <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
-        <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#options">Options</a></li><li><a href="#example">Example</a></li></ul>
-      </nav>
-      <p>Render the content tree to static HTML, writing feeds, a sitemap, and the search
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">blogin build</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#options">Options</a></li><li><a href="#example">Example</a></li><li><a href="#short-options">Short options</a></li><li><a href="#errors">Errors</a></li></ul>
+</nav>
+<p>Render the content tree to static HTML, writing feeds, a sitemap, and the search
 index alongside the pages.</p>
-<pre><code>blogin build [--src=&lt;dir&gt;] [--out=&lt;dir&gt;] [--drafts] [--future] [--jobs=&lt;n&gt;] [--debug] [--force]
+<pre><code>blogin build [--src &lt;dir&gt;] [--out &lt;dir&gt;] [--drafts] [--future] [--jobs &lt;n&gt;]
+             [--debug] [--no-debug] [--force] [--counters] [--verbose]
 </code></pre>
 <h2 id="options">Options<a class="anchor" href="#options">#</a></h2>
 <dl>
-<dt><code>--src=&lt;dir&gt;</code></dt>
-<dd>the content directory. It defaults to <code>content</code>. The <code>blogin.json</code> next to it supplies the configuration.</dd>
-<dt><code>--out=&lt;dir&gt;</code></dt>
-<dd>overrides the output directory from the config.</dd>
-<dt><code>--drafts</code></dt>
-<dd>includes posts marked as drafts.</dd>
-<dt><code>--future</code></dt>
-<dd>includes posts dated in the future, which are excluded by default.</dd>
-<dt><code>--jobs=&lt;n&gt;</code></dt>
-<dd>sets the number of parallel workers. It defaults to the CPU count.</dd>
-<dt><code>--debug</code></dt>
-<dd>emits provenance comments around rendered partials and pages.</dd>
-<dt><code>--force</code></dt>
-<dd>rewrites every file, bypassing the incremental content-hash check.</dd>
-<dt><code>--verbose</code></dt>
-<dd>prints extra detail.</dd>
+<dt><code>-s</code>, <code>--src &lt;dir&gt;</code></dt>
+<dd>the content directory. It defaults to <code>content</code>. The <code>blogin.json</code> next to it supplies the configuration, and everything else is found beside it.</dd>
+<dt><code>-o</code>, <code>--out &lt;dir&gt;</code></dt>
+<dd>overrides the <code>output-dir</code> from the config.</dd>
+<dt><code>-d</code>, <code>--drafts</code></dt>
+<dd>includes posts marked <code>draft: true</code>.</dd>
+<dt><code>-F</code>, <code>--future</code></dt>
+<dd>includes posts dated ahead of today, which are excluded by default.</dd>
+<dt><code>-j</code>, <code>--jobs &lt;n&gt;</code></dt>
+<dd>render threads. It defaults to one per core.</dd>
+<dt><code>-D</code>, <code>--debug</code></dt>
+<dd>emits provenance comments around rendered partials and pages, so a page says which layout produced what.</dd>
+<dt><code>-N</code>, <code>--no-debug</code></dt>
+<dd>turns that off for a site whose config sets <code>&quot;debug&quot;: true</code>.</dd>
+<dt><code>-f</code>, <code>--force</code></dt>
+<dd>rebuilds everything, ignoring what the last build recorded.</dd>
+<dt><code>-c</code>, <code>--counters</code></dt>
+<dd>prints the work the build did: posts parsed, templates compiled, pages rendered, files read and written, and directory walks.</dd>
+<dt><code>-v</code>, <code>--verbose</code></dt>
+<dd>names the directories it read and prints the work counters.</dd>
 </dl>
 <h2 id="example">Example<a class="anchor" href="#example">#</a></h2>
-<pre><code>blogin build --out=dist --force
+<pre><code>blogin build --out dist --force
 </code></pre>
+<h2 id="short-options">Short options<a class="anchor" href="#short-options">#</a></h2>
+<p>Every option has a one-letter spelling, and it means the same thing on every
+command:</p>
+<table class="table">
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-s</code> <code>--src</code></td>
+<td><code>-o</code> <code>--out</code></td>
+<td><code>-S</code> <code>--section</code></td>
+<td><code>-w</code> <code>--framework</code></td>
+</tr>
+<tr>
+<td><code>-j</code> <code>--jobs</code></td>
+<td><code>-p</code> <code>--port</code></td>
+<td><code>-d</code> <code>--drafts</code></td>
+<td><code>-F</code> <code>--future</code></td>
+</tr>
+<tr>
+<td><code>-f</code> <code>--force</code></td>
+<td><code>-D</code> <code>--debug</code></td>
+<td><code>-N</code> <code>--no-debug</code></td>
+<td><code>-c</code> <code>--counters</code></td>
+</tr>
+<tr>
+<td><code>-v</code> <code>--verbose</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>So <code>blogin build -o dist -f</code> is <code>blogin build --out dist --force</code>.</p>
+<p>They combine into one argument the usual way, so <code>-fv</code> is <code>-f --force -v</code>
+written short, and <code>blogin build -dFcv</code> turns on drafts, future posts, counters,
+and verbose output at once.</p>
+<p>An option taking a value can end a run but cannot sit inside one, since the
+value is the next argument and there is only one of those. <code>-fo dist</code> works and
+<code>-of dist</code> is refused, naming the letter:</p>
+<pre><code>$ blogin build -of dist
+blogin: '-o' wants a value, so it has to come last in '-of'
 
-      <nav class='tags mt-4'>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/cli/'>cli</a>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/builds/'>builds</a>
-      </nav>
-    </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/cli/blogin-new/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">blogin new</span></a><a class="next btn btn-primary" href="/cli/blogin-serve/"><span class="post-nav-label">blogin serve</span> <span aria-hidden="true">&rarr;</span></a></nav>
-  </div>
+$ blogin build -fZv
+blogin: unknown option '-Z' in '-fZv'
+</code></pre>
+<p>A value may itself begin with a dash. <code>blogin build -o -weird</code> writes to a
+directory called <code>-weird</code> rather than reading the letters as options.</p>
+<p><code>blogin</code> with no command prints this table.</p>
+<h2 id="errors">Errors<a class="anchor" href="#errors">#</a></h2>
+<p>Nothing is guessed. An unknown flag, a value flag with nothing after it, a
+number that is not one, or a second positional argument stops the build with a
+message naming what was wrong. A flag takes the next argument, so write
+<code>--out dist</code> with a space rather than <code>--out=dist</code>.</p>
+
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/cli/">cli</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/builds/">builds</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/cli/blogin-new/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">blogin new</span></a><a class="next btn btn-primary" href="/cli/blogin-serve/"><span class="post-nav-label">blogin serve</span> <span aria-hidden="true">&rarr;</span></a></nav>
 </div>
-
-    </main>
-    <footer class='border-top mt-5 py-4'>
-      <div class='container d-flex flex-wrap justify-content-between gap-2'>
-        <p class='text-body-secondary mb-0'>
-          Built with
-          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
-        </p>
-        <nav class='d-flex gap-3'>
-          <a class='link-secondary' href='/tags/'>Browse by tag</a>
-          <a class='link-secondary' href='/feed.xml'>Atom</a>
-          <a class='link-secondary' href='/rss.xml'>RSS</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

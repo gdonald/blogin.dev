@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/reference/data-file-yaml/"/>
+<meta name="description" content="The YAML subset a data file may use, and what is refused."/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Data File YAML"/>
+<meta property="og:description" content="The YAML subset a data file may use, and what is refused."/>
+<meta property="og:url" content="https://blogin.dev/reference/data-file-yaml/"/>
+<meta property="og:site_name" content="Blogin"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Data File YAML"/>
+<meta name="twitter:description" content="The YAML subset a data file may use, and what is refused."/>
+
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
+    <script>
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
+    </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link active" href="/reference/">Reference</a>
+</li>
+</ul>
+
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
+</div>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Data File YAML</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#what-is-read">What is read</a><ul><li><a href="#block-mappings">Block mappings</a></li><li><a href="#block-sequences">Block sequences</a></li><li><a href="#flow-sequences">Flow sequences</a></li><li><a href="#scalars">Scalars</a></li><li><a href="#comments">Comments</a></li><li><a href="#the-document-marker">The document marker</a></li></ul></li><li><a href="#what-is-refused">What is refused</a></li><li><a href="#json-is-read-too">JSON is read too</a></li></ul>
+</nav>
+<p>Blogin reads YAML in two places: <code>data/*.yaml</code>, which a layout reads through
+<code>data</code>, and <code>_data.yaml</code> beside a section, which a layout reads the same way for
+pages in that section. See <a href="/guide/data-files/">Data files</a> for how they load.
+Front matter is not YAML and is not covered here. It is a block of keys and
+values read directly.</p>
+<p>What follows is not all of YAML. It is the part data files use, written down so
+that everything outside it is a stated boundary. A file outside the subset fails
+with the line number and what was refused, and never with a guess.</p>
+<p>Full YAML 1.2 is a project of its own. Anchors and aliases, tags, multiple
+documents in one file, block scalar folding, and type resolution are the parts
+that make it one, and none of them appears in a data file that lists the entries
+of a menu.</p>
+<h2 id="what-is-read">What is read<a class="anchor" href="#what-is-read">#</a></h2>
+<h3 id="block-mappings">Block mappings<a class="anchor" href="#block-mappings">#</a></h3>
+<p>Keys and values, nested by indentation. Indentation is spaces.</p>
+<pre><code class="language-yaml hl-plain">site:
+  name: Example
+  owner:
+    name: A Person
+    email: person@example.com
+</code></pre>
+<p>A key may be quoted, which is how a key containing a colon is written. The split
+happens at the first colon outside quotes.</p>
+<h3 id="block-sequences">Block sequences<a class="anchor" href="#block-sequences">#</a></h3>
+<pre><code class="language-yaml hl-plain">archives:
+  - 2026
+  - 2025
+</code></pre>
+<p>The dashes may also sit at the key's own indentation, which is the other common
+style:</p>
+<pre><code class="language-yaml hl-plain">archives:
+- 2026
+- 2025
+</code></pre>
+<p>A sequence of mappings, with the first key on the dash line:</p>
+<pre><code class="language-yaml hl-plain">links:
+  - title: Home
+    url: /
+  - title: Notes
+    url: /notes/
+</code></pre>
+<p>A nested sequence goes on its own line, indented:</p>
+<pre><code class="language-yaml hl-plain">matrix:
+  -
+    - a
+    - b
+</code></pre>
+<p>Writing that as <code>- - a</code> is refused rather than read as the string <code>- a</code>.</p>
+<h3 id="flow-sequences">Flow sequences<a class="anchor" href="#flow-sequences">#</a></h3>
+<p>A list of scalars on one line:</p>
+<pre><code class="language-yaml hl-plain">tags: [cpp, web, notes]
+</code></pre>
+<h3 id="scalars">Scalars<a class="anchor" href="#scalars">#</a></h3>
+<table class="table">
+<thead>
+<tr>
+<th>Written</th>
+<th>Read as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>null</code>, <code>~</code>, nothing after the colon</td>
+<td>null</td>
+</tr>
+<tr>
+<td><code>true</code>, <code>false</code></td>
+<td>boolean</td>
+</tr>
+<tr>
+<td><code>42</code>, <code>-7</code></td>
+<td>integer</td>
+</tr>
+<tr>
+<td><code>3.14</code>, <code>-0.5</code></td>
+<td>number</td>
+</tr>
+<tr>
+<td>anything else</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p>A plain scalar needs no quotes. Single quotes make a string literal, with no
+escapes inside, so <code>'C:\path'</code> is those characters. Double quotes take <code>\n</code>,
+<code>\t</code>, <code>\r</code>, <code>\&quot;</code>, and <code>\\</code>, and any other escape is an error.</p>
+<pre><code class="language-yaml hl-plain">title: A Title
+quoted: 'true'
+message: &quot;line one\nline two&quot;
+</code></pre>
+<p><code>quoted</code> above is the string <code>true</code>, not the boolean.</p>
+<h3 id="comments">Comments<a class="anchor" href="#comments">#</a></h3>
+<p>A <code>#</code> at the start of a line or after a space runs to the end of the line. A <code>#</code>
+inside quotes is a character.</p>
+<pre><code class="language-yaml hl-plain"># The menu, in the order it is shown.
+color: &quot;#663399&quot;   # not a comment
+</code></pre>
+<h3 id="the-document-marker">The document marker<a class="anchor" href="#the-document-marker">#</a></h3>
+<p>A line of <code>---</code> on its own is skipped, so a file may open with one.</p>
+<h2 id="what-is-refused">What is refused<a class="anchor" href="#what-is-refused">#</a></h2>
+<p>Each of these fails with a line number rather than being guessed at.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Written</th>
+<th>Message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{a: 1}</code></td>
+<td>flow mappings are not supported</td>
+</tr>
+<tr>
+<td><code>&amp;anchor</code>, <code>*alias</code></td>
+<td>anchors and aliases are not supported</td>
+</tr>
+<tr>
+<td><code>|</code>, <code>&gt;</code></td>
+<td>block scalars are not supported</td>
+</tr>
+<tr>
+<td><code>- - a</code></td>
+<td>a nested sequence on the same line is not supported, indent it on its own line</td>
+</tr>
+<tr>
+<td>a line indented past its parent</td>
+<td>unexpected indentation</td>
+</tr>
+<tr>
+<td>a line with no colon where a key belongs</td>
+<td>expected 'key: value'</td>
+</tr>
+<tr>
+<td>a <code>-</code> item where a key belongs</td>
+<td>a sequence item where a mapping key was expected</td>
+</tr>
+<tr>
+<td><code>&quot;\q&quot;</code></td>
+<td>unknown escape in a double-quoted scalar</td>
+</tr>
+</tbody>
+</table>
+<p>Multiple documents in one file, tags such as <code>!!str</code>, and complex keys have no
+place in a data file and are not read.</p>
+<h2 id="json-is-read-too">JSON is read too<a class="anchor" href="#json-is-read-too">#</a></h2>
+<p>A data file may be <code>.json</code> instead, and JSON is read in full. The two produce the
+same values, so <code>data&lt;menu&gt;</code> reads the same whether <code>menu.yaml</code> or <code>menu.json</code> is
+what sits in <code>data/</code>.</p>
+
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/templates/">templates</a>
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/reference/">reference</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/reference/haml-compatibility/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">HAML Compatibility</span></a></nav>
+</div>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

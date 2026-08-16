@@ -9,6 +9,7 @@
   <url><loc>https://blogin.dev/cli/blogin-serve/</loc></url>
   <url><loc>https://blogin.dev/guide/</loc></url>
   <url><loc>https://blogin.dev/guide/configuration/</loc></url>
+  <url><loc>https://blogin.dev/guide/cookbook/</loc></url>
   <url><loc>https://blogin.dev/guide/css-frameworks/</loc></url>
   <url><loc>https://blogin.dev/guide/data-files/</loc></url>
   <url><loc>https://blogin.dev/guide/deploying/</loc></url>
@@ -19,17 +20,23 @@
   <url><loc>https://blogin.dev/guide/math-and-diagrams/</loc></url>
   <url><loc>https://blogin.dev/guide/metadata-and-seo/</loc></url>
   <url><loc>https://blogin.dev/guide/overview/</loc></url>
+  <url><loc>https://blogin.dev/guide/pagination/</loc></url>
   <url><loc>https://blogin.dev/guide/previewing-and-building/</loc></url>
   <url><loc>https://blogin.dev/guide/syntax-highlighting/</loc></url>
   <url><loc>https://blogin.dev/guide/template-data/</loc></url>
-  <url><loc>https://blogin.dev/guide/themes-and-plugins/</loc></url>
+  <url><loc>https://blogin.dev/guide/themes/</loc></url>
   <url><loc>https://blogin.dev/guide/writing-posts/</loc></url>
+  <url><loc>https://blogin.dev/reference/</loc></url>
+  <url><loc>https://blogin.dev/reference/data-file-yaml/</loc></url>
+  <url><loc>https://blogin.dev/reference/haml-compatibility/</loc></url>
+  <url><loc>https://blogin.dev/reference/template-expressions/</loc></url>
   <url><loc>https://blogin.dev/tags/</loc></url>
   <url><loc>https://blogin.dev/tags/builds/</loc></url>
   <url><loc>https://blogin.dev/tags/cli/</loc></url>
   <url><loc>https://blogin.dev/tags/configuration/</loc></url>
   <url><loc>https://blogin.dev/tags/intro/</loc></url>
   <url><loc>https://blogin.dev/tags/markdown/</loc></url>
+  <url><loc>https://blogin.dev/tags/reference/</loc></url>
   <url><loc>https://blogin.dev/tags/seo/</loc></url>
   <url><loc>https://blogin.dev/tags/styling/</loc></url>
   <url><loc>https://blogin.dev/tags/templates/</loc></url>

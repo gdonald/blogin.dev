@@ -14,9 +14,8 @@ backs `show.haml`, and a listing context backs `index.haml`, `home.haml`,
 `base.haml` sees whichever one wraps the page, so site-wide methods work in the
 shell and in every template it yields into.
 
-Knowing the exact surface is what lets you customize past the scaffold. This page
-lists every method and collection each context exposes, and the shape of the data
-inside the collections.
+This page lists every method and collection each context exposes, and the shape
+of the data inside the collections.
 
 ## The site context
 
@@ -43,7 +42,21 @@ These are available in every template, including `base.haml` and the partials.
 | `theme-toggle` | A ready-made light/dark toggle button, moon and sun icons, wired to the script. |
 | `has-header`, `has-sidebar`, `has-footer` | Whether the matching chrome partial exists. |
 | `truncate(text, n)`, `format-date(date, fmt)`, `group-by(items, field)` | Filters. See [Layouts](/guide/layouts/). |
-| `cache-fragment(key, block)` | Render the block once and reuse its HTML for every later call with the same key. For invariant chrome only. See [Layouts](/guide/layouts/). |
+| `cache-fragment(name, block)` | Render the block once and reuse its HTML wherever the values it read are the same. The name is advisory. See [Layouts](/guide/layouts/). |
+| `template-label` | The name of the template being rendered, for a debug comment. |
+| `debug-open(label)`, `debug-close(label)` | An HTML comment marking where a template or partial starts and ends, or an empty string when `debug` is off. |
+
+The last three are what the scaffolded layouts use to make `--debug` work:
+
+```haml
+!= debug-open(template-label)
+= yield
+!= debug-close(template-label)
+```
+
+With `debug` off they render nothing, so they cost an empty string per page and
+can stay in a layout permanently. See
+[Previewing and Building](/guide/previewing-and-building/).
 
 ## The post context
 
@@ -60,7 +73,7 @@ These are available in every template, including `base.haml` and the partials.
 | `tags`, `has-tags` | The post's own tags as `{ name, url }` links, and whether there are any. |
 | `post-nav-html` | The newer/older links within the section, as HTML. |
 
-A `show.haml` that uses the lot:
+A `show.haml` using all of them:
 
 ```haml
 %article
@@ -91,6 +104,7 @@ A `show.haml` that uses the lot:
 | `heading` | The page's `h1` text: the section label, or the term name on a term page, or the humanized taxonomy name on a taxonomy index. |
 | `posts` | The entries to list. |
 | `page-number`, `total-pages` | The current page and the page count. |
+| `at-root` | True when this listing is the site root rather than a section's own page, which is how a `home.haml` shared with `index.haml` tells them apart. |
 | `pagination-html` | A numbered pagination bar as HTML: first, previous, the current page with three on either side, next, and last. Classed for the active CSS framework. Empty on a single-page listing. |
 | `pagination-links` | One entry per page, for a layout that renders its own pagination instead. Empty on a single-page listing. |
 | `index-dates` | Whether the section lists dates. |
@@ -134,7 +148,7 @@ A **post entry** (`posts` on a listing, `related` on a post):
 post has none. A listing renders it as a lead thumbnail with `- if $entry<image>`.
 
 A **term entry** (`posts` on a taxonomy index). Its `title` already carries the
-count, such as `raku (4)`:
+count, such as `cpp (4)`:
 
 ```
 { title, url, date }
@@ -196,9 +210,12 @@ render binds each item to the name in `:as`:
 Inside `_entry.haml`, `$entry` is one post entry. Explicit locals pass a hash:
 
 ```haml
-!= render(:partial<header>, :locals(%( brand => site-title )))
+!= render(:partial<header>, :locals({brand: site-title}))
 ```
 
 Inside `_header.haml`, `$brand` is that value. Locals and the `:as` binding arrive
 as `$`-sigiled variables (`$entry`, `$node`, `$brand`), which is what sets them
 apart from the context methods, which are barewords.
+
+[Template Expressions](/reference/template-expressions/) covers how these values
+are read, compared, and iterated.

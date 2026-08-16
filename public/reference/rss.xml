@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Blogin: reference</title>
+    <link>https://blogin.dev/reference</link>
+    <description>Blogin: reference</description>
+    <lastBuildDate>Sat, 15 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Template Expressions</title>
+      <link>https://blogin.dev/reference/template-expressions/</link>
+      <guid isPermaLink="true">https://blogin.dev/reference/template-expressions/</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Blogin&apos;s layouts are HAML. What HAML does not define is the language inside = ..., - if ..., and #{...}. Ruby HAML embeds Ruby. Blogin embeds a small language of its own.</description>
+    </item>
+    <item>
+      <title>HAML Compatibility</title>
+      <link>https://blogin.dev/reference/haml-compatibility/</link>
+      <guid isPermaLink="true">https://blogin.dev/reference/haml-compatibility/</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+      <description>There is no HAML standard. Ruby HAML is a reference implementation that embeds Ruby, and every implementation embeds some host language. The structural syntax is what carries across, and the…</description>
+    </item>
+    <item>
+      <title>Data File YAML</title>
+      <link>https://blogin.dev/reference/data-file-yaml/</link>
+      <guid isPermaLink="true">https://blogin.dev/reference/data-file-yaml/</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Blogin reads YAML in two places: data/*.yaml, which a layout reads through data, and _data.yaml beside a section, which a layout reads the same way for pages in that section. See Data files for how…</description>
+    </item>
+  </channel>
+</rss>

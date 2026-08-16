@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Blogin</title>
-    <link rel="canonical" href="https://blogin.dev/guide/writing-posts/"/>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blogin</title>
+<link rel="canonical" href="https://blogin.dev/guide/writing-posts/"/>
 <meta name="description" content="Front matter, sections, and tags."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Writing Posts"/>
@@ -14,95 +14,142 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Writing Posts"/>
 <meta name="twitter:description" content="Front matter, sections, and tags."/>
-    <link rel='icon' type='image/svg+xml' href='/assets/img/logo.78b43a2a.svg'>
-    <link rel='icon' href='/favicon.ico' sizes='any'>
-    <link rel='apple-touch-icon' sizes='180x180' href='/assets/img/apple-touch-icon.5b3104aa.png'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/assets/css/blogin.c1def309.css'>
-    <script>
-(function () {
-  var KEY = 'blogin-theme', root = document.documentElement;
-  function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
-  function pref() {
-    try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
-    return 'light';
-  }
-  apply(pref());
-  window.bloginToggleTheme = function () {
-    var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    apply(m);
-    try { localStorage.setItem(KEY, m); } catch (e) {}
-  };
-})();
-</script>
 
-    <script async src='https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N'></script>
+<link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.e889ea68acff1926.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/blogin.37b1223f5d1eaa31.css" />
+<link rel="stylesheet" href="/assets/css/site.4dfe012bfd943ebb.css" />
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y16FBSMK2N');
+    (function () {
+      var KEY = 'blogin-theme', root = document.documentElement;
+      function apply(m) { root.setAttribute('data-theme', m); root.setAttribute('data-bs-theme', m); }
+      function pref() {
+        try { var s = localStorage.getItem(KEY); if (s === 'light' || s === 'dark') return s; } catch (e) {}
+        return 'light';
+      }
+      apply(pref());
+      window.bloginToggleTheme = function () {
+        var m = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(m);
+        try { localStorage.setItem(KEY, m); } catch (e) {}
+      };
+    })();
     </script>
-  </head>
-  <body>
-    <nav class='navbar navbar-expand-lg bg-body-tertiary border-bottom'>
-      <div class='container'>
-        <a class='navbar-brand d-flex align-items-center' href='/'>
-          <img class='me-2' src='/assets/img/logo.78b43a2a.svg' alt='' width='28' height='28'>
-          Blogin
-        </a>
-        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#topbar' aria-controls='topbar' aria-expanded='false' aria-label='Toggle navigation'>
-          <span class='navbar-toggler-icon'></span>
-        </button>
-        <div id='topbar' class='collapse navbar-collapse'>
-          <ul class='navbar-nav mb-2 mb-lg-0'>
-  <li class='nav-item'>
-  <a class='nav-link active' href='/guide/'>Guide</a>
-</li>
-<li class='nav-item'>
-  <a class='nav-link' href='/cli/'>CLI</a>
-</li>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y16FBSMK2N"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Y16FBSMK2N');
+</script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center" href="/">
+<img class="me-2" src="/assets/img/logo.0f5f064b1f44a8e8.svg" alt="" width="28" height="28" />
+Blogin
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbar" aria-controls="topbar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div id="topbar" class="collapse navbar-collapse">
+<ul class="navbar-nav mb-2 mb-lg-0"><li class="nav-item">
+<a class="nav-link active" href="/guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/cli/">CLI</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/reference/">Reference</a>
+</li>
 </ul>
 
-          <div class='navbar-tools'>
-            <div class='navbar-search'>
-              <div class='blogin-search'>
-  <form data-blogin-search='true' role='search'>
-    <input type='search' name='q' placeholder='Search' aria-label='Search'>
-  </form>
-  <ul data-blogin-results='true'></ul>
+<div class="navbar-tools">
+<div class="navbar-search"><div class="blogin-search">
+<form data-blogin-search="true" role="search">
+<input type="search" name="q" placeholder="Search" aria-label="Search" />
+</form>
+<ul data-blogin-results="true"></ul>
 </div>
-<link rel='stylesheet' href='/assets/css/search.e942027e.css'>
-<script src='/assets/js/search.39a5f1f4.js'></script>
-
-            </div>
-            <div class='navbar-toggle-slot'>
-              <button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main class='container my-4'>
-      <div class='card'>
-  <div class='card-body'>
-    <article>
-      <h1 class='mb-4'>Writing Posts</h1>
-      <nav class='toc mb-4 p-3 bg-body-tertiary rounded'>
-        <h2 class='h6 text-muted text-uppercase'>Contents</h2>
-        <ul><li><a href="#links-and-images">Links and images</a></li><li><a href="#reference-links-and-footnotes">Reference links and footnotes</a></li><li><a href="#sections">Sections</a></li><li><a href="#summaries">Summaries</a></li><li><a href="#table-of-contents">Table of contents</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#future-dated-posts">Future-dated posts</a></li><li><a href="#shortcodes">Shortcodes</a><ul><li><a href="#adding-your-own">Adding your own</a></li></ul></li><li><a href="#redirects">Redirects</a></li><li><a href="#tags-and-taxonomies">Tags and taxonomies</a></li><li><a href="#showing-a-post-s-tags">Showing a post's tags</a></li></ul>
-      </nav>
-      <p>A post is a Markdown file with a <code>---</code> front matter block:</p>
+<link rel="stylesheet" href="/assets/css/search.7ee6ce80cee79a52.css" />
+<script src="/assets/js/search.536343a89345028e.js"></script>
+</div>
+<div class="navbar-toggle-slot"><button type="button" class="blogin-theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" onclick="bloginToggleTheme()"><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 0 1 11.2 3 7 7 0 1 0 21 12.8z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg></button></div>
+</div>
+</div>
+</div>
+</nav>
+<main class="container my-4"><div class="card">
+<div class="card-body">
+<article>
+<h1 class="mb-4">Writing Posts</h1>
+<nav class="toc mb-4 p-3 bg-body-tertiary rounded">
+<h2 class="h6 text-muted text-uppercase">Contents</h2>
+<ul><li><a href="#slugs">Slugs</a></li><li><a href="#markdown">Markdown</a></li><li><a href="#definition-lists">Definition lists</a></li><li><a href="#links-and-images">Links and images</a></li><li><a href="#reference-links-and-footnotes">Reference links and footnotes</a></li><li><a href="#sections">Sections</a></li><li><a href="#summaries">Summaries</a></li><li><a href="#table-of-contents">Table of contents</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#future-dated-posts">Future-dated posts</a></li><li><a href="#shortcodes">Shortcodes</a><ul><li><a href="#adding-your-own">Adding your own</a></li></ul></li><li><a href="#redirects">Redirects</a></li><li><a href="#tags-and-taxonomies">Tags and taxonomies</a></li><li><a href="#showing-a-post-s-tags">Showing a post's tags</a></li></ul>
+</nav>
+<p>A post is a Markdown file with a <code>---</code> front matter block:</p>
 <pre><code>---
 title: My Post
 date: 2026-07-20
-tags: [raku, web]
+tags: [cpp, web]
 description: A short summary.
 ---
 The body goes here.
 </code></pre>
-<p>Run <code>blogin new "My Post"</code> to scaffold one with the front matter filled in.</p>
+<p>Run <code>blogin new &quot;My Post&quot;</code> to scaffold one with the front matter filled in.</p>
+<p><code>title</code> is the only required key. Everything else has a default: the date falls
+back to a date at the front of the filename, the slug follows the title, and the
+layout follows the section. <code>draft</code>, <code>date</code>, <code>description</code>, <code>summary</code>, <code>slug</code>,
+<code>layout</code>, <code>order</code>, <code>toc</code>, <code>tags</code>, and <code>aliases</code> are read, and any other key you
+write is available to the layout under its own name.</p>
+<h2 id="slugs">Slugs<a class="anchor" href="#slugs">#</a></h2>
+<p>A slug comes from the title, lowercased, with runs of punctuation and whitespace
+collapsed to single hyphens. Three characters carry the whole meaning of a name
+and are spelled out rather than dropped: <code>+</code> becomes <code>plus</code>, <code>#</code> becomes
+<code>sharp</code>, and <code>&amp;</code> becomes <code>and</code>. So a <code>c++</code> tag is <code>c-plus-plus</code> and a <code>c</code> tag is
+<code>c</code>, two pages rather than one overwriting the other.</p>
+<p>Set <code>slug</code> in front matter to choose the URL yourself.</p>
+<h2 id="markdown">Markdown<a class="anchor" href="#markdown">#</a></h2>
+<p>The body is CommonMark, with GitHub Flavored Markdown for the extensions:
+tables, task lists, strikethrough, and fenced code blocks with an info string.
+Footnotes, reference links, attribute lists, math, and Mermaid diagrams are
+covered below and in <a href="/guide/math-and-diagrams/">Math and Diagrams</a>.</p>
+<pre><code>| Column | Column |
+| --- | --- |
+| a | b |
+
+- [x] done
+- [ ] not done
+
+~~struck through~~
+</code></pre>
+<h2 id="definition-lists">Definition lists<a class="anchor" href="#definition-lists">#</a></h2>
+<p>A paragraph followed by a line starting with <code>: </code> becomes a term and its
+definition:</p>
+<pre><code>Term
+: what it means
+</code></pre>
+<p>which renders as:</p>
+<pre><code class="language-html hl-plain">&lt;dl&gt;
+&lt;dt&gt;Term&lt;/dt&gt;
+&lt;dd&gt;what it means&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+<p>One term takes as many definitions as you give it, and a list holds as many
+terms as you like:</p>
+<pre><code>--src &lt;dir&gt;
+: the content directory
+: defaults to `content`
+
+--out &lt;dir&gt;
+: where the site is written
+</code></pre>
+<p>A definition holds inline markup, so <code>: with *emphasis*</code> works. The CLI pages on
+this site are written this way.</p>
 <h2 id="links-and-images">Links and images<a class="anchor" href="#links-and-images">#</a></h2>
 <p>A link or an image takes an optional attribute list in braces right after the
 closing paren. Use <code>key=value</code> for an attribute, <code>.name</code> for a class, and
@@ -125,7 +172,7 @@ list of its own:</p>
 <code>[text][label]</code> in the body and define the label anywhere in the file:</p>
 <pre><code>See [the home page][home] for more.
 
-[home]: https://example.com "Optional title"
+[home]: https://example.com &quot;Optional title&quot;
 </code></pre>
 <p>A collapsed form, <code>[text][]</code>, uses the text as the label. Labels match
 case-insensitively, and an undefined reference is left as literal text.</p>
@@ -148,7 +195,7 @@ nested nav entries.</p>
 whole body. Blogin picks the summary in this order:</p>
 <ol>
 <li>A <code>summary</code> in front matter, used verbatim.</li>
-<li>The text before a `` marker in the body.</li>
+<li>The text before a <code>&lt;!--more--&gt;</code> marker in the body.</li>
 <li>The first block of the body, capped at <code>summary-length</code> characters (200 by
 default, set in <code>blogin.json</code>).</li>
 </ol>
@@ -160,7 +207,7 @@ summary: One sentence that stands in for the post on listing pages.
 <p>Or mark the cut point in the body:</p>
 <pre><code>The opening paragraph that reads as the teaser.
 
-
+&lt;!--more--&gt;
 
 The rest of the post, shown only on the post's own page.
 </code></pre>
@@ -186,11 +233,11 @@ guide or a documentation section where reading order matters more than date.</p>
 write ahead and publish by dating. Pass <code>blogin build --future</code> to include them
 while previewing.</p>
 <h2 id="shortcodes">Shortcodes<a class="anchor" href="#shortcodes">#</a></h2>
-<p>Shortcodes expand to HTML that Markdown can't express on its own. Write one on its
-own line in a post body, with <code>key="value"</code> arguments:</p>
-<pre><code>{{&lt; youtube id="dQw4w9WgXcQ" &gt;}}
+<p>Shortcodes expand to HTML that Markdown cannot express on its own. Write one on
+its own line in a post body, with <code>key=&quot;value&quot;</code> arguments:</p>
+<pre><code>{{&lt; youtube id=&quot;dQw4w9WgXcQ&quot; &gt;}}
 
-{{&lt; figure src="/img/photo.png" alt="A photo" caption="On location" &gt;}}
+{{&lt; figure src=&quot;/img/photo.png&quot; alt=&quot;A photo&quot; caption=&quot;On location&quot; &gt;}}
 </code></pre>
 <p>Two shortcodes are built in: <code>youtube</code> embeds a responsive player, and <code>figure</code>
 wraps an image with an optional caption.</p>
@@ -200,12 +247,12 @@ shortcode. A <code>{{ key }}</code> placeholder is replaced with the matching ar
 escaped:</p>
 <pre><code>shortcodes/note.html
 </code></pre>
-<pre><code class="language-html hl-plain">&lt;aside class="note"&gt;{{ text }}&lt;/aside&gt;
+<pre><code class="language-html hl-plain">&lt;aside class=&quot;note&quot;&gt;{{ text }}&lt;/aside&gt;
 </code></pre>
 <p>Then use it in a post:</p>
-<pre><code>{{&lt; note text="Heads up" &gt;}}
+<pre><code>{{&lt; note text=&quot;Heads up&quot; &gt;}}
 </code></pre>
-<p>which renders <code>&lt;aside class="note"&gt;Heads up&lt;/aside&gt;</code>. A file named for a built-in,
+<p>which renders <code>&lt;aside class=&quot;note&quot;&gt;Heads up&lt;/aside&gt;</code>. A file named for a built-in,
 such as <code>shortcodes/youtube.html</code>, overrides that built-in. An unrecognized
 shortcode is left in the page as plain text so nothing silently vanishes.</p>
 <h2 id="redirects">Redirects<a class="anchor" href="#redirects">#</a></h2>
@@ -222,16 +269,17 @@ the post's current URL, so redirects work on any static host.</p>
 listing its posts, and a tag index at <code>/tags</code> lists every tag with counts.</p>
 <p>Tags are one taxonomy. Declare more in <code>blogin.json</code> and group posts by any
 front-matter key:</p>
-<pre><code class="language-json"><span class="hl-string">"taxonomies"</span>: [<span class="hl-string">"tags"</span>, <span class="hl-string">"categories"</span>]
+<pre><code class="language-json"><span class="hl-string">&quot;taxonomies&quot;</span>: [<span class="hl-string">&quot;tags&quot;</span>, <span class="hl-string">&quot;categories&quot;</span>]
 </code></pre>
 <pre><code>---
 title: My Post
-tags: [raku, web]
+tags: [cpp, web]
 categories: [tutorials]
 ---
 </code></pre>
 <p>Each taxonomy <code>name</code> builds a page per term at <code>/name/&lt;term&gt;</code> and an index at
-<code>/name</code>. A term page renders through <code>layouts/&lt;singular&gt;.haml</code> when present, then
+<code>/name</code>. A term page paginates at the site's <code>page-size</code>, the same as any other
+listing. A term page renders through <code>layouts/&lt;singular&gt;.haml</code> when present, then
 <code>layouts/term.haml</code>, then <code>layouts/&lt;name&gt;.haml</code>, then <code>layouts/index.haml</code>, so
 <code>tags</code> styles its term pages with <code>tag.haml</code> and <code>categories</code> with a
 <code>categorie.haml</code> or a shared <code>term.haml</code>.</p>
@@ -243,43 +291,43 @@ page, the humanized taxonomy name on the index. A listing receives its terms as
 <code>posts</code>, so the index iterates them the same way a section listing iterates its
 posts.</p>
 <h2 id="showing-a-post-s-tags">Showing a post's tags<a class="anchor" href="#showing-a-post-s-tags">#</a></h2>
-<p>Building the tag pages is one half. Linking to them from each post is the other.
-The post layout receives the post's tags as <code>{ name, url }</code> links, so <code>show.haml</code>
-renders them itself:</p>
+<p>Building the tag pages does not link to them from each post. The post layout
+receives the post's tags as <code>{ name, url }</code> links, so <code>show.haml</code> renders them
+itself:</p>
 <pre><code class="language-haml hl-plain">- if has-tags
   %nav.tags
     - for tags -&gt; $tag
-      %a{href: "#{$tag&lt;url&gt;}"}= $tag&lt;name&gt;
+      %a{href: &quot;#{$tag&lt;url&gt;}&quot;}= $tag&lt;name&gt;
 </code></pre>
 <p><code>tags</code> holds the post's own terms in the <code>tags</code> taxonomy, each <code>url</code> pointing at
 that tag's page, and <code>has-tags</code> is false when the post has none, so the block
 drops out. The scaffold <code>show.haml</code> ships this markup, so a fresh site links a
-post's tags out of the box. Nothing else surfaces tags automatically: the nav is
+post's tags without any editing. Nothing else surfaces tags automatically: the nav is
 built from content sections, so link to <code>/tags</code> from a layout when you want the
 tag index in it.</p>
 
-      <nav class='tags mt-4'>
-        <a class='badge text-bg-secondary text-decoration-none me-1' href='/tags/markdown/'>markdown</a>
-      </nav>
-    </article>
-    <nav class="post-nav"><a class="prev btn btn-primary" href="/guide/getting-started/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Getting Started</span></a><a class="next btn btn-primary" href="/guide/layouts/"><span class="post-nav-label">Layouts</span> <span aria-hidden="true">&rarr;</span></a></nav>
-  </div>
+<nav class="tags mt-4">
+<a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/markdown/">markdown</a>
+</nav>
+</article>
+<nav class="post-nav"><a class="prev btn btn-primary" href="/guide/getting-started/"><span aria-hidden="true">&larr;</span> <span class="post-nav-label">Getting Started</span></a><a class="next btn btn-primary" href="/guide/layouts/"><span class="post-nav-label">Layouts</span> <span aria-hidden="true">&rarr;</span></a></nav>
 </div>
-
-    </main>
-    <footer class='border-top mt-5 py-4'>
-      <div class='container d-flex flex-wrap justify-content-between gap-2'>
-        <p class='text-body-secondary mb-0'>
-          Built with
-          <a class='link-secondary' href='https://blogin.dev'>Blogin</a>
-        </p>
-        <nav class='d-flex gap-3'>
-          <a class='link-secondary' href='/tags/'>Browse by tag</a>
-          <a class='link-secondary' href='/feed.xml'>Atom</a>
-          <a class='link-secondary' href='/rss.xml'>RSS</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</div>
+</main>
+<footer class="border-top mt-5 py-4">
+<div class="container d-flex flex-wrap justify-content-between gap-2">
+<p class="text-body-secondary mb-0">
+&copy; 2026 Greg Donald. Built with
+<a class="link-secondary" href="https://blogin.dev">Blogin</a>
+</p>
+<nav class="d-flex gap-3">
+<a class="link-secondary" href="https://github.com/gdonald/Blogin">GitHub</a>
+<a class="link-secondary" href="/tags/">Browse by tag</a>
+<a class="link-secondary" href="/feed.xml">Atom</a>
+<a class="link-secondary" href="/rss.xml">RSS</a>
+</nav>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
