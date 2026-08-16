@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Blogin</title>
 <link rel="canonical" href="https://blogin.dev/guide/getting-started/"/>
-<meta name="description" content="Install Blogin and build your first site in four commands."/>
+<meta name="description" content="Install Blogin and build your first site."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Getting Started"/>
-<meta property="og:description" content="Install Blogin and build your first site in four commands."/>
+<meta property="og:description" content="Install Blogin and build your first site."/>
 <meta property="og:url" content="https://blogin.dev/guide/getting-started/"/>
 <meta property="og:site_name" content="Blogin"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Getting Started"/>
-<meta name="twitter:description" content="Install Blogin and build your first site in four commands."/>
+<meta name="twitter:description" content="Install Blogin and build your first site."/>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -98,8 +98,15 @@ Blogin
 brew trust gdonald/blogin
 brew install blogin
 </code></pre>
-<p>Homebrew asks you to trust any tap outside its own, once per machine. The
-<code>brew trust</code> line answers that ahead of time.</p>
+<p>Homebrew refuses to load a formula from a tap outside its own until you trust
+it. That is once per machine, not once per install or upgrade, and it applies to
+every third-party tap rather than to this one in particular. Only <code>homebrew/core</code>
+and <code>homebrew/cask</code> are trusted without asking.</p>
+<p>Blogin can join <code>homebrew/core</code>, which would drop both the tap and the trust
+step, once it meets Homebrew's notability bar: 225 stars, 90 forks, or 90
+watchers when the author submits it. If you find Blogin useful, a star on
+<a href="https://github.com/gdonald/Blogin">github.com/gdonald/Blogin</a> counts toward
+that.</p>
 <p><strong>Linux, and Windows through WSL2</strong></p>
 <pre><code class="language-bash">curl -LO https://github.com/gdonald/Blogin/releases/latest/download/blogin-linux-x86_64
 chmod +x blogin-linux-x86_64
@@ -205,8 +212,8 @@ sha256sum -c blogin-linux-x86_64.sha256
 <p>A checksum proves a file arrived intact. It does not prove where it came from,
 because whoever replaced the file could replace the checksum beside it. The
 release also carries a build provenance attestation, signed by GitHub with a
-short-lived certificate issued to the workflow that built it. There is no
-long-lived private key anywhere, so there is none to leak.</p>
+short-lived certificate issued to the workflow that built it. No long-lived
+private key is involved.</p>
 <p>Verifying needs the <a href="https://cli.github.com">GitHub CLI</a>:</p>
 <pre><code class="language-bash">gh attestation verify blogin-linux-x86_64 --repo gdonald/Blogin
 </code></pre>

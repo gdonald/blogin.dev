@@ -4,7 +4,7 @@ date: 2026-08-15
 order: 1
 toc: true
 tags: [templates, reference]
-description: The complete language inside =, -, and #{} in a HAML layout.
+description: The language inside =, -, and #{} in a HAML layout.
 ---
 Blogin's layouts are HAML. What HAML does not define is the language inside
 `= ...`, `- if ...`, and `#{...}`. Ruby HAML embeds Ruby. Blogin embeds a small

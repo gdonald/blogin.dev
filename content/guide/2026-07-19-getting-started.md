@@ -4,7 +4,7 @@ date: 2026-07-19
 order: 2
 toc: true
 tags: [intro, cli]
-description: Install Blogin and build your first site in four commands.
+description: Install Blogin and build your first site.
 ---
 ## Install
 
@@ -18,8 +18,16 @@ brew trust gdonald/blogin
 brew install blogin
 ```
 
-Homebrew asks you to trust any tap outside its own, once per machine. The
-`brew trust` line answers that ahead of time.
+Homebrew refuses to load a formula from a tap outside its own until you trust
+it. That is once per machine, not once per install or upgrade, and it applies to
+every third-party tap rather than to this one in particular. Only `homebrew/core`
+and `homebrew/cask` are trusted without asking.
+
+Blogin can join `homebrew/core`, which would drop both the tap and the trust
+step, once it meets Homebrew's notability bar: 225 stars, 90 forks, or 90
+watchers when the author submits it. If you find Blogin useful, a star on
+[github.com/gdonald/Blogin](https://github.com/gdonald/Blogin) counts toward
+that.
 
 **Linux, and Windows through WSL2**
 
@@ -127,8 +135,8 @@ sha256sum -c blogin-linux-x86_64.sha256
 A checksum proves a file arrived intact. It does not prove where it came from,
 because whoever replaced the file could replace the checksum beside it. The
 release also carries a build provenance attestation, signed by GitHub with a
-short-lived certificate issued to the workflow that built it. There is no
-long-lived private key anywhere, so there is none to leak.
+short-lived certificate issued to the workflow that built it. No long-lived
+private key is involved.
 
 Verifying needs the [GitHub CLI](https://cli.github.com):
 
