@@ -192,3 +192,37 @@
     transition: none;
   }
 }
+
+/* Screenshots on the home page. The image keeps its 2008x1280 shape at every
+ * width, so a card cannot change height as the picture loads, and the grid
+ * drops from three columns to two to one on its own. */
+.showcase-tile {
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.showcase-tile .card-img-top {
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.showcase-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12);
+}
+
+.showcase-tile:focus-visible {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-tile {
+    transition: none;
+  }
+
+  .showcase-tile:hover {
+    transform: none;
+  }
+}
