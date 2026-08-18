@@ -264,6 +264,9 @@ aliases: [/old-path, /2020/01/my-post]
 </code></pre>
 <p>The build writes a small redirecting page at each alias that sends the browser to
 the post's current URL, so redirects work on any static host.</p>
+<p>A page the content tree publishes always keeps its own path, so an alias can
+never replace one. If two posts claim the same alias, the first keeps it and the
+build says so.</p>
 <h2 id="tags-and-taxonomies">Tags and taxonomies<a class="anchor" href="#tags-and-taxonomies">#</a></h2>
 <p>Tags are collected across every section. Each tag gets a page at <code>/tags/&lt;tag&gt;</code>
 listing its posts, and a tag index at <code>/tags</code> lists every tag with counts.</p>

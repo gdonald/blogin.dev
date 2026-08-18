@@ -8,7 +8,7 @@ description: Install Blogin and build your first site.
 ---
 ## Install
 
-The current release is **0.9.1**.
+The current release is **0.9.2**.
 
 **macOS**
 
