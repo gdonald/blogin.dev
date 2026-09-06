@@ -17,6 +17,3 @@ the HAML templates, `static/` and `assets/` the files it serves, and
 
 Render the site with `blogin build` from the repository root. `blogin serve`
 previews it on `http://127.0.0.1:3000` and rebuilds as you edit.
-
-`deploy.sh` builds and rsyncs `public/` to the production server. Pass
-`--dry-run` to see the transfer without changing anything.
