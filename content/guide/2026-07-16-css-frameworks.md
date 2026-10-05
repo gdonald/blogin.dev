@@ -101,6 +101,7 @@ The pagination bar, on page 2 of a four-page listing:
 <nav class="blogin-pagination" aria-label="Pagination">
   <ul>
     <li><a aria-label="First" href="/posts/">&laquo;</a></li>
+    <li><a rel="prev" aria-label="Previous" href="/posts/">&lsaquo;</a></li>
     <li><a href="/posts/">1</a></li>
     <li><span aria-current="page">2</span></li>
   </ul>
@@ -113,6 +114,7 @@ The pagination bar, on page 2 of a four-page listing:
 <nav class="blogin-pagination" aria-label="Pagination">
   <ul class="pagination">
     <li class="page-item"><a class="page-link" aria-label="First" href="/posts/">&laquo;</a></li>
+    <li class="page-item"><a class="page-link" rel="prev" aria-label="Previous" href="/posts/">&lsaquo;</a></li>
     <li class="page-item"><a class="page-link" href="/posts/">1</a></li>
     <li class="page-item active"><span class="page-link" aria-current="page">2</span></li>
   </ul>
@@ -125,13 +127,14 @@ The pagination bar, on page 2 of a four-page listing:
 <nav class="blogin-pagination pagination" aria-label="Pagination">
   <ul class="pagination-list">
     <li><a class="pagination-link" aria-label="First" href="/posts/">&laquo;</a></li>
+    <li><a class="pagination-link" rel="prev" aria-label="Previous" href="/posts/">&lsaquo;</a></li>
     <li><a class="pagination-link" href="/posts/">1</a></li>
     <li><span class="pagination-link is-current" aria-current="page">2</span></li>
   </ul>
 </nav>
 ```
 
-Trimmed to the first three items each. `blogin-pagination` is on the `<nav>`
+Trimmed to the first four items each. `blogin-pagination` is on the `<nav>`
 under every profile, so a rule of your own targets all four at once. See
 [Pagination](/guide/pagination/).
 
@@ -182,7 +185,7 @@ Layouts emit the selected framework's assets through two helpers:
 Both read the selected profile, so changing `css-framework` swaps the linked
 assets without editing a template. Bootstrap is the only profile shipping
 JavaScript, and it is what powers the responsive navbar toggle, dropdowns, and
-collapses. The other three render an empty script tag.
+collapses. For the other three, `framework-script-tag` is an empty string.
 
 ## Reading a slot from a layout
 

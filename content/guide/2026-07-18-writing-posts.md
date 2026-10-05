@@ -20,16 +20,31 @@ The body goes here.
 
 Run `blogin new "My Post"` to scaffold one with the front matter filled in.
 
-`title` is the only required key. Everything else has a default: the date falls
-back to a date at the front of the filename, the slug follows the title, and the
+`updated` is the date the post last changed, in the same form as `date`. It
+becomes `article:modified_time` and the post's `<lastmod>` in the sitemap.
+`noindex: true` asks search engines to leave the post out of their index and
+leaves it out of the sitemap.
+
+`image` names the picture a link preview shows for the post, such as
+`image: /assets/images/my-post.png`. See
+[Metadata and SEO](/guide/metadata-and-seo/#share-images).
+
+No key is required. A post with no `title` takes one from its filename, with any
+leading date and the extension removed and each word capitalized, so
+`2026-07-20-my-post.md` is titled `My Post`. The date falls back to a date at the
+front of the filename, the slug follows the title, and the
 layout follows the section. `draft`, `date`, `description`, `summary`, `slug`,
-`layout`, `order`, `toc`, `tags`, and `aliases` are read, and any other key you
-write is available to the layout under its own name.
+`layout`, `order`, `toc`, `tags`, `aliases`, `image`, `updated`, and `noindex`
+are read. `draft: true` leaves a post out of the build unless you pass
+`blogin build --drafts`. Any other key is read only when `taxonomies` in `blogin.json` names
+it, and then it groups posts the way `tags` does.
 
 ## Slugs
 
-A slug comes from the title, lowercased, with runs of punctuation and whitespace
-collapsed to single hyphens. Three characters carry the whole meaning of a name
+A slug comes from the title, lowercased, keeping only ASCII letters and digits.
+Any run of other characters, including whitespace, punctuation, and non-ASCII
+letters such as `é`, becomes a single hyphen, with none at the start or end. A
+title written only in non-ASCII characters needs an explicit `slug`. Three characters carry the whole meaning of a name
 and are spelled out rather than dropped: `+` becomes `plus`, `#` becomes
 `sharp`, and `&` becomes `and`. So a `c++` tag is `c-plus-plus` and a `c` tag is
 `c`, two pages rather than one overwriting the other.
@@ -145,7 +160,9 @@ reference. Reference and footnote definition lines never render as content.
 
 The subdirectory a file sits in under `content/` is its section, and the section
 is both the URL prefix and the layout selector. A file at `content/posts/hello.md`
-becomes `/posts/hello` and renders through `layouts/posts/show.haml` when present,
+titled `Hello` becomes `/posts/hello/`, written as `public/posts/hello/index.html`,
+or `/posts/hello` with `"clean-urls": true`. The last part of the URL is the
+post's slug, not its filename. The post renders through `layouts/posts/show.haml` when present,
 otherwise `layouts/show.haml`. Nested directories become nested sections and
 nested nav entries.
 
@@ -156,8 +173,9 @@ whole body. Blogin picks the summary in this order:
 
 1. A `summary` in front matter, used verbatim.
 2. The text before a `<!--more-->` marker in the body.
-3. The first block of the body, capped at `summary-length` characters (200 by
-   default, set in `blogin.json`).
+3. The first non-empty line of the body's text, a heading if the body opens with
+   one, cut at a word boundary to `summary-length` characters (200 by default,
+   set in `blogin.json`) with `…` appended when it was cut.
 
 ```
 ---
@@ -176,7 +194,8 @@ The opening paragraph that reads as the teaser.
 The rest of the post, shown only on the post's own page.
 ```
 
-The marker never appears in the rendered page. A layout reaches the summary in a
+The marker is an HTML comment, so it stays in the page source but is never
+shown. A layout reaches the summary in a
 listing through `$entry<summary>`.
 
 ## Table of contents
@@ -200,6 +219,7 @@ order: 2
 Posts with an `order` sort ascending and come before any post without one. Posts
 without an `order` keep the newest-first date order behind them. This suits a
 guide or a documentation section where reading order matters more than date.
+Feeds and the previous and next links use the same order.
 
 ## Future-dated posts
 
@@ -210,7 +230,7 @@ while previewing.
 ## Shortcodes
 
 Shortcodes expand to HTML that Markdown cannot express on its own. Write one on
-its own line in a post body, with `key="value"` arguments:
+its own line in a post body, with `key="value"` or `key='value'` arguments:
 
 ```
 {{< youtube id="dQw4w9WgXcQ" >}}
@@ -218,7 +238,8 @@ its own line in a post body, with `key="value"` arguments:
 {{< figure src="/img/photo.png" alt="A photo" caption="On location" >}}
 ```
 
-Two shortcodes are built in: `youtube` embeds a responsive player, and `figure`
+Two shortcodes are built in: `youtube` embeds the video in an `<iframe>` inside `<div class="video">`, which
+your stylesheet sizes, and `figure`
 wraps an image with an optional caption.
 
 ### Adding your own
@@ -265,8 +286,9 @@ build says so.
 
 ## Tags and taxonomies
 
-Tags are collected across every section. Each tag gets a page at `/tags/<tag>`
-listing its posts, and a tag index at `/tags` lists every tag with counts.
+Tags are collected across every section. Each tag gets a page at
+`/tags/<tag-slug>/` listing its posts, and a tag index at `/tags/` lists every
+tag with counts. With `"clean-urls": true` the trailing slashes are dropped.
 
 Tags are one taxonomy. Declare more in `blogin.json` and group posts by any
 front-matter key:
@@ -283,8 +305,8 @@ categories: [tutorials]
 ---
 ```
 
-Each taxonomy `name` builds a page per term at `/name/<term>` and an index at
-`/name`. A term page paginates at the site's `page-size`, the same as any other
+Each taxonomy `name` builds a page per term at `/name/<term-slug>/` and an index
+at `/name/`, the term put through the same slug rules as a title. A term page paginates at the site's `page-size`, the same as any other
 listing. A term page renders through `layouts/<singular>.haml` when present, then
 `layouts/term.haml`, then `layouts/<name>.haml`, then `layouts/index.haml`, so
 `tags` styles its term pages with `tag.haml` and `categories` with a

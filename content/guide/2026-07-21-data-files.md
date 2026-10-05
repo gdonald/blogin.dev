@@ -13,7 +13,9 @@ lives in one place rather than being repeated across templates.
 ## The data tree
 
 Every `.json`, `.yaml`, and `.yml` file under `data/` loads into a `data`
-structure keyed by filename without the extension. Subdirectories nest.
+structure keyed by filename without the extension. Subdirectories nest. When
+two files share a name, such as `authors.json` and `authors.yaml`, the last in
+sort order wins, so `.yml` beats `.yaml` beats `.json`.
 
 ```
 data/
@@ -35,7 +37,9 @@ A layout reaches it with a hash subscript:
   %a{href: "#{data<authors><url>}"}= data<authors><name>
 ```
 
-JSON and YAML are interchangeable. Use whichever suits the file.
+JSON and YAML read into the same structure. YAML is read as a subset: block
+mappings and sequences, scalars, inline `[a, b]` lists, and comments. See
+[Data File YAML](/reference/data-file-yaml/) for what it refuses.
 
 ```yaml
 links:
@@ -47,7 +51,10 @@ links:
 
 A `_data.json`, `_data.yaml`, or `_data.yml` file inside a content directory
 applies to the pages in and beneath that directory, overriding a matching key
-from the site-wide `data/` tree. Deeper directories override shallower ones.
+from the site-wide `data/` tree. Deeper directories override shallower ones, and
+`content/_data.json` applies to every page. A `_data` file must be a mapping,
+and one whose top level is a list is ignored. A directory holding more than one
+merges them in the order `.json`, `.yaml`, `.yml`.
 
 ```
 content/

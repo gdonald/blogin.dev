@@ -11,9 +11,15 @@
 <meta property="og:description" content="Emit framework-specific classes without touching the core renderer."/>
 <meta property="og:url" content="https://blogin.dev/guide/css-frameworks/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-16"/>
+<meta property="article:tag" content="styling"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CSS Frameworks"/>
 <meta name="twitter:description" content="Emit framework-specific classes without touching the core renderer."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSS Frameworks","url":"https://blogin.dev/guide/css-frameworks/","description":"Emit framework-specific classes without touching the core renderer.","datePublished":"2026-07-16"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -312,6 +318,7 @@ The pagination bar, on page 2 of a four-page listing:</p>
 <pre><code class="language-html hl-plain">&lt;nav class=&quot;blogin-pagination&quot; aria-label=&quot;Pagination&quot;&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;a aria-label=&quot;First&quot; href=&quot;/posts/&quot;&gt;&amp;laquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a rel=&quot;prev&quot; aria-label=&quot;Previous&quot; href=&quot;/posts/&quot;&gt;&amp;lsaquo;&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href=&quot;/posts/&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span aria-current=&quot;page&quot;&gt;2&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
@@ -321,6 +328,7 @@ The pagination bar, on page 2 of a four-page listing:</p>
 <pre><code class="language-html hl-plain">&lt;nav class=&quot;blogin-pagination&quot; aria-label=&quot;Pagination&quot;&gt;
   &lt;ul class=&quot;pagination&quot;&gt;
     &lt;li class=&quot;page-item&quot;&gt;&lt;a class=&quot;page-link&quot; aria-label=&quot;First&quot; href=&quot;/posts/&quot;&gt;&amp;laquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;page-item&quot;&gt;&lt;a class=&quot;page-link&quot; rel=&quot;prev&quot; aria-label=&quot;Previous&quot; href=&quot;/posts/&quot;&gt;&amp;lsaquo;&lt;/a&gt;&lt;/li&gt;
     &lt;li class=&quot;page-item&quot;&gt;&lt;a class=&quot;page-link&quot; href=&quot;/posts/&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
     &lt;li class=&quot;page-item active&quot;&gt;&lt;span class=&quot;page-link&quot; aria-current=&quot;page&quot;&gt;2&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
@@ -330,12 +338,13 @@ The pagination bar, on page 2 of a four-page listing:</p>
 <pre><code class="language-html hl-plain">&lt;nav class=&quot;blogin-pagination pagination&quot; aria-label=&quot;Pagination&quot;&gt;
   &lt;ul class=&quot;pagination-list&quot;&gt;
     &lt;li&gt;&lt;a class=&quot;pagination-link&quot; aria-label=&quot;First&quot; href=&quot;/posts/&quot;&gt;&amp;laquo;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a class=&quot;pagination-link&quot; rel=&quot;prev&quot; aria-label=&quot;Previous&quot; href=&quot;/posts/&quot;&gt;&amp;lsaquo;&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a class=&quot;pagination-link&quot; href=&quot;/posts/&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span class=&quot;pagination-link is-current&quot; aria-current=&quot;page&quot;&gt;2&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;
 </code></pre>
-<p>Trimmed to the first three items each. <code>blogin-pagination</code> is on the <code>&lt;nav&gt;</code>
+<p>Trimmed to the first four items each. <code>blogin-pagination</code> is on the <code>&lt;nav&gt;</code>
 under every profile, so a rule of your own targets all four at once. See
 <a href="/guide/pagination/">Pagination</a>.</p>
 <h2 id="what-the-scaffold-writes-per-framework">What the scaffold writes per framework<a class="anchor" href="#what-the-scaffold-writes-per-framework">#</a></h2>
@@ -399,7 +408,7 @@ closing <code>&lt;/body&gt;</code>.</li>
 <p>Both read the selected profile, so changing <code>css-framework</code> swaps the linked
 assets without editing a template. Bootstrap is the only profile shipping
 JavaScript, and it is what powers the responsive navbar toggle, dropdowns, and
-collapses. The other three render an empty script tag.</p>
+collapses. For the other three, <code>framework-script-tag</code> is an empty string.</p>
 <h2 id="reading-a-slot-from-a-layout">Reading a slot from a layout<a class="anchor" href="#reading-a-slot-from-a-layout">#</a></h2>
 <p><code>framework-class('container')</code> returns the class for a slot, or an empty string
 under a profile that leaves it bare. An empty class drops out of the tag rather

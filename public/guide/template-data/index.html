@@ -11,9 +11,15 @@
 <meta property="og:description" content="The context object every layout renders against, and the shapes it exposes."/>
 <meta property="og:url" content="https://blogin.dev/guide/template-data/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-22"/>
+<meta property="article:tag" content="templates"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Template Data"/>
 <meta name="twitter:description" content="The context object every layout renders against, and the shapes it exposes."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Template Data","url":"https://blogin.dev/guide/template-data/","description":"The context object every layout renders against, and the shapes it exposes.","datePublished":"2026-07-22"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -94,8 +100,10 @@ Blogin
 <p>Every layout renders against a context object. A method call in HAML is a call on
 that object, so <code>= title</code> runs the context's <code>title</code> method and <code>- for posts</code>
 iterates its <code>posts</code> collection. There are two context types. A post context
-backs <code>show.haml</code>, and a listing context backs <code>index.haml</code>, <code>home.haml</code>,
-<code>tag.haml</code>, <code>tags.haml</code>, and <code>404.haml</code>. Both build on a shared site context, and
+backs <code>show.haml</code> and any layout a post or section names in its place. A listing
+context backs <code>index.haml</code>, <code>home.haml</code>, the term layouts (<code>tag.haml</code>,
+<code>term.haml</code>, <code>tags.haml</code>, or the same names for another taxonomy), and
+<code>404.haml</code>. Both build on a shared site context, and
 <code>base.haml</code> sees whichever one wraps the page, so site-wide methods work in the
 shell and in every template it yields into.</p>
 <p>This page lists every method and collection each context exposes, and the shape
@@ -110,6 +118,10 @@ of the data inside the collections.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>site</code></td>
+<td>A hash of <code>title</code>, <code>base-url</code>, <code>author</code>, and <code>twitter</code> from <code>blogin.json</code>.</td>
+</tr>
 <tr>
 <td><code>site-title</code></td>
 <td>The configured <code>title</code>.</td>
@@ -132,7 +144,7 @@ of the data inside the collections.</p>
 </tr>
 <tr>
 <td><code>head-meta</code></td>
-<td>The Open Graph, Twitter, and canonical tags as one HTML string.</td>
+<td>The canonical link, robots, Open Graph, article, and Twitter tags, the feed links, and the JSON-LD structured data as one HTML string. See <a href="/guide/metadata-and-seo/">Metadata and SEO</a>.</td>
 </tr>
 <tr>
 <td><code>meta-title</code></td>
@@ -172,7 +184,7 @@ of the data inside the collections.</p>
 </tr>
 <tr>
 <td><code>theme-script</code></td>
-<td>An inline <code>&lt;script&gt;</code> for the <code>&lt;head&gt;</code> that applies the saved or preferred color theme before paint and defines the toggle.</td>
+<td>An inline <code>&lt;script&gt;</code> for the <code>&lt;head&gt;</code> that applies the saved color theme, or light when none is saved, before paint, and defines the toggle.</td>
 </tr>
 <tr>
 <td><code>theme-toggle</code></td>
@@ -191,6 +203,10 @@ of the data inside the collections.</p>
 <td>Render the block once and reuse its HTML wherever the values it read are the same. The name is advisory. See <a href="/guide/layouts/">Layouts</a>.</td>
 </tr>
 <tr>
+<td><code>debug</code></td>
+<td>True when <code>debug</code> is on, from <code>blogin.json</code> or <code>--debug</code>.</td>
+</tr>
+<tr>
 <td><code>template-label</code></td>
 <td>The name of the template being rendered, for a debug comment.</td>
 </tr>
@@ -200,7 +216,7 @@ of the data inside the collections.</p>
 </tr>
 </tbody>
 </table>
-<p>The last three are what the scaffolded layouts use to make <code>--debug</code> work:</p>
+<p><code>template-label</code>, <code>debug-open</code>, and <code>debug-close</code> are what the scaffolded layouts use to make <code>--debug</code> work:</p>
 <pre><code class="language-haml hl-plain">!= debug-open(template-label)
 = yield
 != debug-close(template-label)
@@ -221,6 +237,18 @@ can stay in a layout permanently. See
 <tr>
 <td><code>title</code>, <code>date</code>, <code>description</code></td>
 <td>The post's front matter fields.</td>
+</tr>
+<tr>
+<td><code>slug</code></td>
+<td>The post's slug.</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td>The post's summary: its front-matter <code>summary</code>, or one derived from the body.</td>
+</tr>
+<tr>
+<td><code>index-dates</code></td>
+<td>Whether the section's listings show dates, so the <code>entry</code> partial renders <code>related</code> the way a listing would.</td>
 </tr>
 <tr>
 <td><code>show-dates</code></td>
@@ -256,7 +284,7 @@ can stay in a layout permanently. See
 <pre><code class="language-haml hl-plain">%article
   %h1= title
   - if show-dates
-    %p.meta= &quot;#{date} · #{reading-time} min read&quot;
+    %p.meta #{date} · #{reading-time} min read
   - if has-toc
     %nav.toc
       != toc-html
@@ -286,8 +314,8 @@ can stay in a layout permanently. See
 <td>The page's <code>h1</code> text: the section label, or the term name on a term page, or the humanized taxonomy name on a taxonomy index.</td>
 </tr>
 <tr>
-<td><code>posts</code></td>
-<td>The entries to list.</td>
+<td><code>posts</code>, <code>entries</code></td>
+<td>The entries to list. Both names hold the same list.</td>
 </tr>
 <tr>
 <td><code>page-number</code>, <code>total-pages</code></td>
@@ -360,14 +388,15 @@ being rendered:</p>
 <p>A <strong>language</strong> (<code>languages</code>). <code>current</code> marks the page you are on:</p>
 <pre><code>{ code, url, current }
 </code></pre>
-<p>A <strong>nav node</strong> (<code>nav-nodes</code>, and each node's <code>children</code>) is an object, so read it
-with method calls, not hash keys:</p>
+<p>A <strong>nav node</strong> (<code>nav-nodes</code>, and each node's <code>children</code>) is a hash like the
+others, and <code>$node.url</code> reads the same key as <code>$node&lt;url&gt;</code>:</p>
 <pre><code class="language-haml hl-plain">%a{href: &quot;#{$node.url}&quot;}= $node.label
 - if $node.children.elems
   %ul
     != render(:partial&lt;nav-item&gt;, :collection($node.children), :as&lt;node&gt;)
 </code></pre>
-<p>Its fields are <code>name</code>, <code>label</code>, <code>path</code>, <code>url</code>, <code>order</code>, and <code>children</code>.</p>
+<p>Its fields are <code>name</code>, <code>label</code>, <code>path</code>, <code>url</code>, <code>current</code> (true for the current
+section or an ancestor of it), and <code>children</code>.</p>
 <h2 id="partials-and-locals">Partials and locals<a class="anchor" href="#partials-and-locals">#</a></h2>
 <p>A partial renders against the same context as the template that calls it, so
 every method above is in scope. Two things pass extra values in. A collection

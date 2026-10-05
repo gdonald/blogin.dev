@@ -11,9 +11,15 @@
 <meta property="og:description" content="Publishing the built public/ directory."/>
 <meta property="og:url" content="https://blogin.dev/guide/deploying/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-11"/>
+<meta property="article:tag" content="builds"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Deploying"/>
 <meta name="twitter:description" content="Publishing the built public/ directory."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Deploying","url":"https://blogin.dev/guide/deploying/","description":"Publishing the built public/ directory.","datePublished":"2026-07-11"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -118,7 +124,8 @@ RewriteRule ^(.+)$ $1.html [L]
 <p>If you would rather not touch the server, leave <code>clean-urls</code> off.</p>
 <h2 id="base-url">Base URL<a class="anchor" href="#base-url">#</a></h2>
 <p>Set <code>base-url</code> in <code>blogin.json</code> to your site's origin. Feed entries, the sitemap,
-and any absolute links use it, so it must match where the site is served.</p>
+canonical links, <code>og:image</code>, feed links, structured data, and any other absolute
+links use it, so it must match where the site is served.</p>
 
 <nav class="tags mt-4">
 <a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/builds/">builds</a>

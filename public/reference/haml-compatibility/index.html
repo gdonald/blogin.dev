@@ -11,9 +11,16 @@
 <meta property="og:description" content="Every HAML construct Blogin reads, each marked supported, changed, or unsupported."/>
 <meta property="og:url" content="https://blogin.dev/reference/haml-compatibility/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-08-15"/>
+<meta property="article:tag" content="templates"/>
+<meta property="article:tag" content="reference"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HAML Compatibility"/>
 <meta name="twitter:description" content="Every HAML construct Blogin reads, each marked supported, changed, or unsupported."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"HAML Compatibility","url":"https://blogin.dev/reference/haml-compatibility/","description":"Every HAML construct Blogin reads, each marked supported, changed, or unsupported.","datePublished":"2026-08-15"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -89,7 +96,7 @@ Blogin
 <h1 class="mb-4">HAML Compatibility</h1>
 <nav class="toc mb-4 p-3 bg-body-tertiary rounded">
 <h2 class="h6 text-muted text-uppercase">Contents</h2>
-<ul><li><a href="#status-of-every-construct">Status of every construct</a></li><li><a href="#deliberately-not-carried-over">Deliberately not carried over</a></li><li><a href="#the-two-real-differences">The two real differences</a><ul><li><a href="#cache-fragment-is-advisory">cache-fragment is advisory</a></li><li><a href="#an-html-comment-is-silent">An HTML comment is silent</a></li></ul></li></ul>
+<ul><li><a href="#status-of-every-construct">Status of every construct</a></li><li><a href="#deliberately-not-carried-over">Deliberately not carried over</a></li><li><a href="#two-differences-in-detail">Two differences in detail</a><ul><li><a href="#cache-fragment-is-advisory">cache-fragment is advisory</a></li><li><a href="#an-html-comment-is-silent">An HTML comment is silent</a></li></ul></li></ul>
 </nav>
 <p>There is no HAML standard. Ruby HAML is a reference implementation that embeds
 Ruby, and every implementation embeds some host language. The structural syntax
@@ -97,15 +104,14 @@ is what carries across, and the expression language is what differs. See
 <a href="/reference/template-expressions/">Template Expressions</a> for the language inside
 <code>=</code>, <code>-</code>, and <code>#{}</code>.</p>
 <p>This page is a registry rather than prose, because a compatibility claim nothing
-checks goes stale. Blogin's test suite walks a corpus of real sites and fails
-when one of them uses a construct that has no recorded decision, and this page is
-the published form of that record. Adding a construct to a real
-layout either passes or says which decision is missing, rather than producing a
-render bug nobody looks for.</p>
+checks goes stale. Blogin's test suite walks a corpus of real sites, counts every
+recorded construct it finds, checks each one has a status, and renders every
+layout. It detects only constructs already in its table, so a new construct is
+recorded by adding it there. This page is the published form of that table, plus
+the constructs below that are not carried over.</p>
 <h2 id="status-of-every-construct">Status of every construct<a class="anchor" href="#status-of-every-construct">#</a></h2>
 <p><code>supported</code> works the way HAML users expect. <code>changed</code> works but not
-identically, with the difference stated. <code>unsupported</code> is refused with an error
-naming the file and line.</p>
+identically, with the difference stated.</p>
 <table class="table">
 <thead>
 <tr>
@@ -131,8 +137,8 @@ naming the file and line.</p>
 <tr>
 <td>id shorthand</td>
 <td><code>#name</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>An <code>id</code> attribute replaces the shorthand id rather than joining it</td>
 </tr>
 <tr>
 <td>attribute hash</td>
@@ -149,8 +155,8 @@ naming the file and line.</p>
 <tr>
 <td>attribute HTML</td>
 <td><code>(key='value')</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>One attribute, or several separated by commas. Attributes separated only by spaces are read as one value</td>
 </tr>
 <tr>
 <td>nested attribute</td>
@@ -162,7 +168,7 @@ naming the file and line.</p>
 <td>boolean attribute</td>
 <td><code>{disabled: true}</code></td>
 <td>changed</td>
-<td>A false or null value omits the attribute rather than writing it empty</td>
+<td>When the value is an unquoted expression, <code>true</code> writes the bare attribute and <code>false</code> or <code>null</code> omits it. <code>{disabled}</code> alone also writes it</td>
 </tr>
 <tr>
 <td>self closing</td>
@@ -191,8 +197,8 @@ naming the file and line.</p>
 <tr>
 <td>interpolation</td>
 <td><code>#{expr}</code></td>
-<td>supported</td>
-<td>Escapes the value, not the text around it</td>
+<td>changed</td>
+<td>In text, escapes the value and not the text around it. In an attribute, escapes the whole value. Not interpolated in filters or in an expression string</td>
 </tr>
 <tr>
 <td>inline text</td>
@@ -221,26 +227,26 @@ naming the file and line.</p>
 <tr>
 <td>plain filter</td>
 <td><code>:plain</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>The body is written as it is. <code>#{}</code> is not interpolated</td>
 </tr>
 <tr>
 <td>escaped filter</td>
 <td><code>:escaped</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>The body is escaped. <code>#{}</code> is not interpolated</td>
 </tr>
 <tr>
 <td>JavaScript filter</td>
 <td><code>:javascript</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>The body is written as it is. <code>#{}</code> is not interpolated</td>
 </tr>
 <tr>
 <td>CSS filter</td>
 <td><code>:css</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>The body is written as it is. <code>#{}</code> is not interpolated</td>
 </tr>
 <tr>
 <td>conditional</td>
@@ -257,8 +263,8 @@ naming the file and line.</p>
 <tr>
 <td>else</td>
 <td><code>- else</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>Anything after <code>else</code> on the line is ignored, so write <code>- elsif</code> rather than <code>- else if</code></td>
 </tr>
 <tr>
 <td>negated conditional</td>
@@ -276,7 +282,7 @@ naming the file and line.</p>
 <td>partial render</td>
 <td><code>render(...)</code></td>
 <td>supported</td>
-<td></td>
+<td>Only as the whole expression of a <code>=</code> or <code>!=</code> line</td>
 </tr>
 <tr>
 <td>partial name</td>
@@ -305,25 +311,27 @@ naming the file and line.</p>
 <tr>
 <td>yield</td>
 <td><code>yield</code></td>
-<td>supported</td>
-<td></td>
+<td>changed</td>
+<td>Only as <code>= yield</code> or <code>!= yield</code>, and written raw either way</td>
 </tr>
 <tr>
 <td>fragment cache</td>
 <td><code>cache-fragment</code></td>
 <td>changed</td>
-<td>The name is advisory. Reuse is decided by what the fragment read. See below</td>
+<td>The name is advisory. Reuse is decided by what the fragment read. Also spelled <code>cache_fragment</code>. See below</td>
 </tr>
 <tr>
 <td>boolean literal</td>
 <td><code>True</code> / <code>False</code></td>
 <td>supported</td>
-<td>Accepted alongside <code>true</code> and <code>false</code></td>
+<td>Accepted alongside <code>true</code> and <code>false</code>. <code>Nil</code> is accepted for <code>null</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="deliberately-not-carried-over">Deliberately not carried over<a class="anchor" href="#deliberately-not-carried-over">#</a></h2>
-<p>Each of these is refused with an error rather than half-supported.</p>
+<p>None of these is interpreted. A host filter is refused with <code>no such filter</code>
+when the template renders. The others are not recognized and come out as
+literal text, so <code>%p&lt; inner</code> writes <code>&lt;p&gt;&lt; inner&lt;/p&gt;</code>.</p>
 <table class="table">
 <thead>
 <tr>
@@ -354,7 +362,7 @@ naming the file and line.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="the-two-real-differences">The two real differences<a class="anchor" href="#the-two-real-differences">#</a></h2>
+<h2 id="two-differences-in-detail">Two differences in detail<a class="anchor" href="#two-differences-in-detail">#</a></h2>
 <h3 id="cache-fragment-is-advisory">cache-fragment is advisory<a class="anchor" href="#cache-fragment-is-advisory">#</a></h3>
 <p>Naming a fragment normally means asserting by hand that its output does not
 vary, and a wrong assertion serves one page's markup to another. Here the key is

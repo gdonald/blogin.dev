@@ -11,9 +11,16 @@
 <meta property="og:description" content="The preview server, incremental builds, and debug output."/>
 <meta property="og:url" content="https://blogin.dev/guide/previewing-and-building/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-13"/>
+<meta property="article:tag" content="cli"/>
+<meta property="article:tag" content="builds"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Previewing and Building"/>
 <meta name="twitter:description" content="The preview server, incremental builds, and debug output."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Previewing and Building","url":"https://blogin.dev/guide/previewing-and-building/","description":"The preview server, incremental builds, and debug output.","datePublished":"2026-07-13"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -100,16 +107,16 @@ the source tree. It never writes <code>public/</code>, so serving a site cannot 
 directory you deploy holding preview output. A preview is unminified and
 unfingerprinted, and it keeps its own build state, so the two builds never read
 each other's.
-Any change to content, layouts, or static assets triggers a full rebuild in
-place, and config edits are picked up too. Every directory under the watched
+Any change under the site directory triggers an incremental rebuild in place.
+<code>blogin.json</code> is read once when the server starts, so an edit to it takes effect
+when you restart the server. Every directory under the watched
 trees is watched, however deeply nested, and a directory you add while the server
 runs is picked up without a restart. A save that fires several filesystem
 events is coalesced into one rebuild. Extensionless URLs resolve to their <code>.html</code>
 files, matching how a production host rewrites, so local preview behaves like the
 deployed site. The server is for previewing only, and what you deploy is
 static files.</p>
-<p><code>minify</code> and <code>fingerprint</code> are off while serving, whatever <code>blogin.json</code> says,
-and the server prints a line saying so when the config asks for them.
+<p><code>minify</code> and <code>fingerprint</code> are off while serving, whatever <code>blogin.json</code> says.
 Fingerprinting renames every asset on each build, which would leave an already
 open page pointing at files the rebuild just deleted, and it costs that renaming
 work on every save. <code>blogin build</code> still applies both, so what you deploy is
@@ -125,6 +132,9 @@ changed.</li>
 and without losing scroll position or form state.</li>
 <li>A changed image is re-fetched in place.</li>
 <li>A rebuild that rewrote nothing sends nothing, and no page reloads.</li>
+<li>A failed rebuild shows its error over the page and in the terminal. The
+overlay clears on the next successful build, and a page opened while the build
+is broken shows the error straight away.</li>
 </ul>
 <p>The client reconnects on its own when the socket drops, so a restarted server
 picks the page back up. On reconnecting it compares the build the page is showing
@@ -143,7 +153,7 @@ build recorded and rebuild everything.</p>
 <p>The result is byte-identical to a build from scratch, checked against randomised
 sequences of edits rather than a handful of examples.</p>
 <p>Pass <code>--counters</code> to see the work a build did: posts parsed, templates compiled,
-pages rendered, files read and written, and directory walks. Those numbers are
+pages rendered, files read and written, directory walks, and related-post terms. Those numbers are
 deterministic across machines, which is what makes them useful for telling
 whether a change did more work than it needed to.</p>
 <p>A <code>.keep</code> file is yours, not build output, so pruning leaves it alone and the
@@ -171,9 +181,10 @@ reference so the browser picks the right size. It needs an image resizer on the
 build host: ImageMagick or, on macOS, <code>sips</code>. With no widths set, images are
 copied unchanged.</p>
 <h2 id="debug-output">Debug output<a class="anchor" href="#debug-output">#</a></h2>
-<p><code>blogin build --debug</code> injects HTML comments marking each template and partial
-boundary and a provenance comment before each post body naming its source file,
-so a page says which layout produced what. It is a separate axis from
+<p><code>blogin build --debug</code> turns on the <code>debug-open</code> and <code>debug-close</code> helpers, which
+write a begin and end comment wherever a layout calls them. The scaffolded
+layouts mark the header, the footer, and the page template, so a page says which
+layout produced what. It is a separate axis from
 <code>--verbose</code>, which only affects log output. Comment text is sanitized so a stray
 <code>--&gt;</code> cannot break out.</p>
 <p>Turn it on for a site permanently with <code>&quot;debug&quot;: true</code> in <code>blogin.json</code>, and

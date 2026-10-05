@@ -33,9 +33,11 @@ description: A short summary.
 ---
 The body goes here.
 Run blogin new &quot;My Post&quot; to scaffold one with the front matter filled in.
-title is the only required key. Everything else has a default: the date falls back to a date at the front of the filename, the slug follows the title, and the layout follows the section. draft, date, description, summary, slug, layout, order, toc, tags, and aliases are read, and any other key you write is available to the layout under its own name.
+updated is the date the post last changed, in the same form as date. It becomes article:modified_time and the post&apos;s &lt;lastmod&gt; in the sitemap. noindex: true asks search engines to leave the post out of their index and leaves it out of the sitemap.
+image names the picture a link preview shows for the post, such as image: /assets/images/my-post.png. See Metadata and SEO.
+No key is required. A post with no title takes one from its filename, with any leading date and the extension removed and each word capitalized, so 2026-07-20-my-post.md is titled My Post. The date falls back to a date at the front of the filename, the slug follows the title, and the layout follows the section. draft, date, description, summary, slug, layout, order, toc, tags, aliases, image, updated, and noindex are read. draft: true leaves a post out of the build unless you pass blogin build --drafts. Any other key is read only when taxonomies in blogin.json names it, and then it groups posts the way tags does.
 Slugs
-A slug comes from the title, lowercased, with runs of punctuation and whitespace collapsed to single hyphens. Three characters carry the whole meaning of a name and are spelled out rather than dropped: + becomes plus, # becomes sharp, and &amp; becomes and. So a c++ tag is c-plus-plus and a c tag is c, two pages rather than one overwriting the other.
+A slug comes from the title, lowercased, keeping only ASCII letters and digits. Any run of other characters, including whitespace, punctuation, and non-ASCII letters such as é, becomes a single hyphen, with none at the start or end. A title written only in non-ASCII characters needs an explicit slug. Three characters carry the whole meaning of a name and are spelled out rather than dropped: + becomes plus, # becomes sharp, and &amp; becomes and. So a c++ tag is c-plus-plus and a c tag is c, two pages rather than one overwriting the other.
 Set slug in front matter to choose the URL yourself.
 Markdown
 The body is CommonMark, with GitHub Flavored Markdown for the extensions: tables, task lists, strikethrough, and fenced code blocks with an info string. Footnotes, reference links, attribute lists, math, and Mermaid diagrams are covered below and in Math and Diagrams.
@@ -85,7 +87,7 @@ A claim that needs a source[^src].
 [^src]: The cited source.
 Footnotes are numbered in the order they are first referenced and collected into a footnotes section at the end of the post, each with a link back to its reference. Reference and footnote definition lines never render as content.
 Sections
-The subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md becomes /posts/hello and renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.
+The subdirectory a file sits in under content/ is its section, and the section is both the URL prefix and the layout selector. A file at content/posts/hello.md titled Hello becomes /posts/hello/, written as public/posts/hello/index.html, or /posts/hello with &quot;clean-urls&quot;: true. The last part of the URL is the post&apos;s slug, not its filename. The post renders through layouts/posts/show.haml when present, otherwise layouts/show.haml. Nested directories become nested sections and nested nav entries.
 Summaries
 A listing and a feed entry show a short summary of each post rather than the whole body. Blogin picks the summary in this order:
 A summary in front matter, used verbatim.

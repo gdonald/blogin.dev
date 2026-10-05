@@ -11,9 +11,15 @@
 <meta property="og:description" content="Server-side highlighting for fenced code."/>
 <meta property="og:url" content="https://blogin.dev/guide/syntax-highlighting/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-15"/>
+<meta property="article:tag" content="markdown"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Syntax Highlighting"/>
 <meta name="twitter:description" content="Server-side highlighting for fenced code."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Syntax Highlighting","url":"https://blogin.dev/guide/syntax-highlighting/","description":"Server-side highlighting for fenced code.","datePublished":"2026-07-15"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -101,7 +107,10 @@ int x = 1;  // a comment
 <p>Recognized languages are <code>c</code>, <code>cpp</code>, <code>java</code>, <code>go</code>, <code>rust</code>, <code>javascript</code>,
 <code>typescript</code>, <code>python</code>, <code>ruby</code>, <code>raku</code>, <code>bash</code>, and <code>json</code>. Only the first word of the
 info string selects the highlighter, so <code>```cpp title=main.cpp</code> still
-highlights as C++.</p>
+highlights as C++. The name is matched without regard to case but otherwise
+exactly, so <code>js</code>, <code>ts</code>, <code>sh</code>, and <code>c++</code> are not recognized. Only line comments
+are marked (<code>//</code>, or <code>#</code> for <code>raku</code>, <code>ruby</code>, <code>python</code>, and <code>bash</code>), and <code>json</code>
+gets strings and numbers only.</p>
 <p>An unrecognized language falls back to escaped plain text and its code block is
 labeled with an <code>hl-plain</code> class, so a stylesheet can tell a highlighted block
 from an unhighlighted one.</p>

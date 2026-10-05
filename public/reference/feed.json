@@ -23,7 +23,7 @@
       "url": "https://blogin.dev/reference/data-file-yaml/",
       "title": "Data File YAML",
       "date_published": "2026-08-15T00:00:00Z",
-      "content_text": "Blogin reads YAML in two places: data/*.yaml, which a layout reads through data, and _data.yaml beside a section, which a layout reads the same way for pages in that section. See Data files for how…"
+      "content_text": "Blogin reads YAML in two places: data/*.yaml (or .yml, with subdirectories becoming nested maps), which a layout reads through data, and _data.yaml (or _data.yml) in a content directory, which is…"
     }
   ]
 }

@@ -11,9 +11,15 @@
 <meta property="og:description" content="Front matter, sections, and tags."/>
 <meta property="og:url" content="https://blogin.dev/guide/writing-posts/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-18"/>
+<meta property="article:tag" content="markdown"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Writing Posts"/>
 <meta name="twitter:description" content="Front matter, sections, and tags."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Writing Posts","url":"https://blogin.dev/guide/writing-posts/","description":"Front matter, sections, and tags.","datePublished":"2026-07-18"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -101,14 +107,27 @@ description: A short summary.
 The body goes here.
 </code></pre>
 <p>Run <code>blogin new &quot;My Post&quot;</code> to scaffold one with the front matter filled in.</p>
-<p><code>title</code> is the only required key. Everything else has a default: the date falls
-back to a date at the front of the filename, the slug follows the title, and the
+<p><code>updated</code> is the date the post last changed, in the same form as <code>date</code>. It
+becomes <code>article:modified_time</code> and the post's <code>&lt;lastmod&gt;</code> in the sitemap.
+<code>noindex: true</code> asks search engines to leave the post out of their index and
+leaves it out of the sitemap.</p>
+<p><code>image</code> names the picture a link preview shows for the post, such as
+<code>image: /assets/images/my-post.png</code>. See
+<a href="/guide/metadata-and-seo/#share-images">Metadata and SEO</a>.</p>
+<p>No key is required. A post with no <code>title</code> takes one from its filename, with any
+leading date and the extension removed and each word capitalized, so
+<code>2026-07-20-my-post.md</code> is titled <code>My Post</code>. The date falls back to a date at the
+front of the filename, the slug follows the title, and the
 layout follows the section. <code>draft</code>, <code>date</code>, <code>description</code>, <code>summary</code>, <code>slug</code>,
-<code>layout</code>, <code>order</code>, <code>toc</code>, <code>tags</code>, and <code>aliases</code> are read, and any other key you
-write is available to the layout under its own name.</p>
+<code>layout</code>, <code>order</code>, <code>toc</code>, <code>tags</code>, <code>aliases</code>, <code>image</code>, <code>updated</code>, and <code>noindex</code>
+are read. <code>draft: true</code> leaves a post out of the build unless you pass
+<code>blogin build --drafts</code>. Any other key is read only when <code>taxonomies</code> in <code>blogin.json</code> names
+it, and then it groups posts the way <code>tags</code> does.</p>
 <h2 id="slugs">Slugs<a class="anchor" href="#slugs">#</a></h2>
-<p>A slug comes from the title, lowercased, with runs of punctuation and whitespace
-collapsed to single hyphens. Three characters carry the whole meaning of a name
+<p>A slug comes from the title, lowercased, keeping only ASCII letters and digits.
+Any run of other characters, including whitespace, punctuation, and non-ASCII
+letters such as <code>é</code>, becomes a single hyphen, with none at the start or end. A
+title written only in non-ASCII characters needs an explicit <code>slug</code>. Three characters carry the whole meaning of a name
 and are spelled out rather than dropped: <code>+</code> becomes <code>plus</code>, <code>#</code> becomes
 <code>sharp</code>, and <code>&amp;</code> becomes <code>and</code>. So a <code>c++</code> tag is <code>c-plus-plus</code> and a <code>c</code> tag is
 <code>c</code>, two pages rather than one overwriting the other.</p>
@@ -187,7 +206,9 @@ reference. Reference and footnote definition lines never render as content.</p>
 <h2 id="sections">Sections<a class="anchor" href="#sections">#</a></h2>
 <p>The subdirectory a file sits in under <code>content/</code> is its section, and the section
 is both the URL prefix and the layout selector. A file at <code>content/posts/hello.md</code>
-becomes <code>/posts/hello</code> and renders through <code>layouts/posts/show.haml</code> when present,
+titled <code>Hello</code> becomes <code>/posts/hello/</code>, written as <code>public/posts/hello/index.html</code>,
+or <code>/posts/hello</code> with <code>&quot;clean-urls&quot;: true</code>. The last part of the URL is the
+post's slug, not its filename. The post renders through <code>layouts/posts/show.haml</code> when present,
 otherwise <code>layouts/show.haml</code>. Nested directories become nested sections and
 nested nav entries.</p>
 <h2 id="summaries">Summaries<a class="anchor" href="#summaries">#</a></h2>
@@ -196,8 +217,9 @@ whole body. Blogin picks the summary in this order:</p>
 <ol>
 <li>A <code>summary</code> in front matter, used verbatim.</li>
 <li>The text before a <code>&lt;!--more--&gt;</code> marker in the body.</li>
-<li>The first block of the body, capped at <code>summary-length</code> characters (200 by
-default, set in <code>blogin.json</code>).</li>
+<li>The first non-empty line of the body's text, a heading if the body opens with
+one, cut at a word boundary to <code>summary-length</code> characters (200 by default,
+set in <code>blogin.json</code>) with <code>…</code> appended when it was cut.</li>
 </ol>
 <pre><code>---
 title: A Longer Post
@@ -211,7 +233,8 @@ summary: One sentence that stands in for the post on listing pages.
 
 The rest of the post, shown only on the post's own page.
 </code></pre>
-<p>The marker never appears in the rendered page. A layout reaches the summary in a
+<p>The marker is an HTML comment, so it stays in the page source but is never
+shown. A layout reaches the summary in a
 listing through <code>$entry&lt;summary&gt;</code>.</p>
 <h2 id="table-of-contents">Table of contents<a class="anchor" href="#table-of-contents">#</a></h2>
 <p>Set <code>toc: true</code> in front matter to turn on the table of contents for a post. The
@@ -227,19 +250,21 @@ order: 2
 </code></pre>
 <p>Posts with an <code>order</code> sort ascending and come before any post without one. Posts
 without an <code>order</code> keep the newest-first date order behind them. This suits a
-guide or a documentation section where reading order matters more than date.</p>
+guide or a documentation section where reading order matters more than date.
+Feeds and the previous and next links use the same order.</p>
 <h2 id="future-dated-posts">Future-dated posts<a class="anchor" href="#future-dated-posts">#</a></h2>
 <p>A post whose <code>date</code> is in the future is left out of a normal build, so you can
 write ahead and publish by dating. Pass <code>blogin build --future</code> to include them
 while previewing.</p>
 <h2 id="shortcodes">Shortcodes<a class="anchor" href="#shortcodes">#</a></h2>
 <p>Shortcodes expand to HTML that Markdown cannot express on its own. Write one on
-its own line in a post body, with <code>key=&quot;value&quot;</code> arguments:</p>
+its own line in a post body, with <code>key=&quot;value&quot;</code> or <code>key='value'</code> arguments:</p>
 <pre><code>{{&lt; youtube id=&quot;dQw4w9WgXcQ&quot; &gt;}}
 
 {{&lt; figure src=&quot;/img/photo.png&quot; alt=&quot;A photo&quot; caption=&quot;On location&quot; &gt;}}
 </code></pre>
-<p>Two shortcodes are built in: <code>youtube</code> embeds a responsive player, and <code>figure</code>
+<p>Two shortcodes are built in: <code>youtube</code> embeds the video in an <code>&lt;iframe&gt;</code> inside <code>&lt;div class=&quot;video&quot;&gt;</code>, which
+your stylesheet sizes, and <code>figure</code>
 wraps an image with an optional caption.</p>
 <h3 id="adding-your-own">Adding your own<a class="anchor" href="#adding-your-own">#</a></h3>
 <p>Put an HTML template in a <code>shortcodes/</code> directory beside <code>content/</code>, named for the
@@ -268,8 +293,9 @@ the post's current URL, so redirects work on any static host.</p>
 never replace one. If two posts claim the same alias, the first keeps it and the
 build says so.</p>
 <h2 id="tags-and-taxonomies">Tags and taxonomies<a class="anchor" href="#tags-and-taxonomies">#</a></h2>
-<p>Tags are collected across every section. Each tag gets a page at <code>/tags/&lt;tag&gt;</code>
-listing its posts, and a tag index at <code>/tags</code> lists every tag with counts.</p>
+<p>Tags are collected across every section. Each tag gets a page at
+<code>/tags/&lt;tag-slug&gt;/</code> listing its posts, and a tag index at <code>/tags/</code> lists every
+tag with counts. With <code>&quot;clean-urls&quot;: true</code> the trailing slashes are dropped.</p>
 <p>Tags are one taxonomy. Declare more in <code>blogin.json</code> and group posts by any
 front-matter key:</p>
 <pre><code class="language-json"><span class="hl-string">&quot;taxonomies&quot;</span>: [<span class="hl-string">&quot;tags&quot;</span>, <span class="hl-string">&quot;categories&quot;</span>]
@@ -280,8 +306,8 @@ tags: [cpp, web]
 categories: [tutorials]
 ---
 </code></pre>
-<p>Each taxonomy <code>name</code> builds a page per term at <code>/name/&lt;term&gt;</code> and an index at
-<code>/name</code>. A term page paginates at the site's <code>page-size</code>, the same as any other
+<p>Each taxonomy <code>name</code> builds a page per term at <code>/name/&lt;term-slug&gt;/</code> and an index
+at <code>/name/</code>, the term put through the same slug rules as a title. A term page paginates at the site's <code>page-size</code>, the same as any other
 listing. A term page renders through <code>layouts/&lt;singular&gt;.haml</code> when present, then
 <code>layouts/term.haml</code>, then <code>layouts/&lt;name&gt;.haml</code>, then <code>layouts/index.haml</code>, so
 <code>tags</code> styles its term pages with <code>tag.haml</code> and <code>categories</code> with a

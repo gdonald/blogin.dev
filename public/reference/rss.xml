@@ -24,7 +24,7 @@
       <link>https://blogin.dev/reference/data-file-yaml/</link>
       <guid isPermaLink="true">https://blogin.dev/reference/data-file-yaml/</guid>
       <pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
-      <description>Blogin reads YAML in two places: data/*.yaml, which a layout reads through data, and _data.yaml beside a section, which a layout reads the same way for pages in that section. See Data files for how…</description>
+      <description>Blogin reads YAML in two places: data/*.yaml (or .yml, with subdirectories becoming nested maps), which a layout reads through data, and _data.yaml (or _data.yml) in a content directory, which is…</description>
     </item>
   </channel>
 </rss>

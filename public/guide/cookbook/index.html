@@ -11,9 +11,17 @@
 <meta property="og:description" content="The ways a Blogin site can be customized, and where each one is documented."/>
 <meta property="og:url" content="https://blogin.dev/guide/cookbook/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-09"/>
+<meta property="article:tag" content="templates"/>
+<meta property="article:tag" content="configuration"/>
+<meta property="article:tag" content="styling"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cookbook"/>
 <meta name="twitter:description" content="The ways a Blogin site can be customized, and where each one is documented."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Cookbook","url":"https://blogin.dev/guide/cookbook/","description":"The ways a Blogin site can be customized, and where each one is documented.","datePublished":"2026-07-09"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -89,7 +97,7 @@ Blogin
 <h1 class="mb-4">Cookbook</h1>
 <nav class="toc mb-4 p-3 bg-body-tertiary rounded">
 <h2 class="h6 text-muted text-uppercase">Contents</h2>
-<ul><li><a href="#change-what-a-page-looks-like">Change what a page looks like</a></li><li><a href="#change-what-a-post-does">Change what a post does</a></li><li><a href="#change-the-site-s-behaviour">Change the site's behaviour</a></li><li><a href="#change-the-navigation">Change the navigation</a></li><li><a href="#change-the-styling">Change the styling</a></li><li><a href="#change-the-pagination">Change the pagination</a></li><li><a href="#add-values-a-layout-can-read">Add values a layout can read</a></li><li><a href="#add-markup-a-post-can-call">Add markup a post can call</a></li><li><a href="#reuse-a-whole-design">Reuse a whole design</a></li><li><a href="#speed-up-a-big-site">Speed up a big site</a></li><li><a href="#what-cannot-be-customized">What cannot be customized</a></li></ul>
+<ul><li><a href="#change-what-a-page-looks-like">Change what a page looks like</a></li><li><a href="#change-what-a-post-does">Change what a post does</a></li><li><a href="#change-the-site-s-behavior">Change the site's behavior</a></li><li><a href="#change-the-navigation">Change the navigation</a></li><li><a href="#change-the-styling">Change the styling</a></li><li><a href="#change-the-pagination">Change the pagination</a></li><li><a href="#add-values-a-layout-can-read">Add values a layout can read</a></li><li><a href="#add-markup-a-post-can-call">Add markup a post can call</a></li><li><a href="#reuse-a-whole-design">Reuse a whole design</a></li><li><a href="#speed-up-a-big-site">Speed up a big site</a></li><li><a href="#what-cannot-be-customized">What cannot be customized</a></li></ul>
 </nav>
 <p>A Blogin site is customized in six places. This page is the index: what each one
 reaches, and where the detail lives.</p>
@@ -103,7 +111,7 @@ reaches, and where the detail lives.</p>
 <tbody>
 <tr>
 <td><code>blogin.json</code></td>
-<td>Site-wide behaviour. Feeds, pagination, taxonomies, assets, languages.</td>
+<td>Site-wide behavior. Feeds, pagination, taxonomies, assets, languages.</td>
 </tr>
 <tr>
 <td>Front matter</td>
@@ -129,7 +137,8 @@ reaches, and where the detail lives.</p>
 </table>
 <h2 id="change-what-a-page-looks-like">Change what a page looks like<a class="anchor" href="#change-what-a-page-looks-like">#</a></h2>
 <p>Edit <code>layouts/</code>. <code>base.haml</code> is the shell, <code>show.haml</code> a post, and <code>index.haml</code>
-a listing. A missing one of those three is a build error naming it.</p>
+a listing. <code>show.haml</code> and <code>index.haml</code> are required once there are posts and
+listings to render. <code>base.haml</code> is optional.</p>
 <p>Give one section its own markup by putting a layout in a matching directory.
 A post in <code>content/essays/</code> renders through <code>layouts/essays/show.haml</code> when that
 file exists, falling back to <code>layouts/show.haml</code>:</p>
@@ -145,7 +154,8 @@ file exists, falling back to <code>layouts/show.haml</code>:</p>
 <p>See <a href="/guide/layouts/">Layouts</a> for the full set of files and how they resolve,
 and <a href="/guide/template-data/">Template Data</a> for every value a layout can read.</p>
 <h2 id="change-what-a-post-does">Change what a post does<a class="anchor" href="#change-what-a-post-does">#</a></h2>
-<p>Front matter. <code>title</code> is the only required key:</p>
+<p>Front matter. No key is required, and a post with no <code>title</code> takes one from its
+filename:</p>
 <pre><code>---
 title: My Post
 slug: a-different-url
@@ -158,13 +168,14 @@ aliases: [/the-old-url]
 </code></pre>
 <p><code>slug</code> picks the URL, <code>order</code> places a post ahead of date ordering, <code>toc</code> turns
 on the table of contents, <code>draft</code> holds it back from a normal build, and
-<code>aliases</code> writes a redirecting page at each old URL. Any key Blogin does not
-recognise is still available to the layout under its own name, so
-<code>series: Advanced</code> in front matter reads as <code>series</code> in <code>show.haml</code>.</p>
+<code>aliases</code> writes a redirecting page at each old URL. Any other key is read only
+when <code>taxonomies</code> in <code>blogin.json</code> names it, and then it groups posts the way
+<code>tags</code> does.</p>
 <p>See <a href="/guide/writing-posts/">Writing Posts</a>.</p>
-<h2 id="change-the-site-s-behaviour">Change the site's behaviour<a class="anchor" href="#change-the-site-s-behaviour">#</a></h2>
-<p><code>blogin.json</code>. Every key is optional, an unknown key is a warning naming the
-closest real one, and a key with the wrong type stops the build.</p>
+<h2 id="change-the-site-s-behavior">Change the site's behavior<a class="anchor" href="#change-the-site-s-behavior">#</a></h2>
+<p><code>blogin.json</code>. Every key is optional, an unknown key is a warning that suggests
+a real key within three edits of it, and a key with the wrong type stops the
+build.</p>
 <p>Common ones:</p>
 <table class="table">
 <thead>
@@ -218,12 +229,13 @@ defaults.</p>
 <p>The nav is built from the content tree, so a new directory under <code>content/</code>
 becomes a new nav entry. Adjust it per section:</p>
 <pre><code class="language-json"><span class="hl-string">&quot;sections&quot;</span>: {
-  <span class="hl-string">&quot;notes&quot;</span>: { <span class="hl-string">&quot;label&quot;</span>: <span class="hl-string">&quot;Field Notes&quot;</span>, <span class="hl-string">&quot;order&quot;</span>: <span class="hl-number">1</span> },
+  <span class="hl-string">&quot;notes&quot;</span>: { <span class="hl-string">&quot;label&quot;</span>: <span class="hl-string">&quot;Field Notes&quot;</span>, <span class="hl-string">&quot;order&quot;</span>: -<span class="hl-number">1</span> },
   <span class="hl-string">&quot;drafts&quot;</span>: { <span class="hl-string">&quot;nav&quot;</span>: false }
 }
 </code></pre>
-<p><code>label</code> renames it, <code>order</code> places it ahead of alphabetical, and <code>nav: false</code>
-keeps it out. A layout renders the tree itself from <code>nav-nodes</code>, with
+<p><code>label</code> renames it, <code>order</code> sets its position, and <code>nav: false</code> keeps it out.
+Sections sort by <code>order</code> ascending, then by name, and a section without one
+counts as 0, so a negative <code>order</code> moves a section to the front. A layout renders the tree itself from <code>nav-nodes</code>, with
 <code>nav-current(node)</code> marking the current section, so the markup is yours. See
 <a href="/guide/template-data/">Template Data</a>.</p>
 <p>Nothing links <code>/tags</code> automatically. Add it to a layout when you want it.</p>

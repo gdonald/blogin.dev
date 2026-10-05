@@ -16,7 +16,7 @@
       "url": "https://blogin.dev/cli/blogin-new/",
       "title": "blogin new",
       "date_published": "2026-07-01T00:00:00Z",
-      "content_text": "Create a new post file from a title, with front matter filled in and a slug derived from the title."
+      "content_text": "Create a new post file from a title. It writes <section>/<today>-<slug>.md with title, date, an empty tags list, and an empty description filled in, the slug derived from the title."
     },
     {
       "id": "https://blogin.dev/cli/blogin-build/",
@@ -30,7 +30,7 @@
       "url": "https://blogin.dev/cli/blogin-serve/",
       "title": "blogin serve",
       "date_published": "2026-07-02T00:00:00Z",
-      "content_text": "Build the site and serve it locally, rebuilding when content, layouts, static assets, data files, or the configuration change. A successful rebuild live-reloads the open page in the browser."
+      "content_text": "Build the site and serve it locally, rebuilding when anything under the site directory changes. blogin.json is read once at startup, so an edit to it takes effect when you restart the server. A…"
     },
     {
       "id": "https://blogin.dev/cli/blogin-clean/",

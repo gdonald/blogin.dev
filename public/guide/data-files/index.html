@@ -11,9 +11,15 @@
 <meta property="og:description" content="Load JSON and YAML into layouts, site-wide and per directory."/>
 <meta property="og:url" content="https://blogin.dev/guide/data-files/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-21"/>
+<meta property="article:tag" content="templates"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Data files"/>
 <meta name="twitter:description" content="Load JSON and YAML into layouts, site-wide and per directory."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Data files","url":"https://blogin.dev/guide/data-files/","description":"Load JSON and YAML into layouts, site-wide and per directory.","datePublished":"2026-07-21"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -96,7 +102,9 @@ directly, so a list of authors, a set of social links, or a navigation table
 lives in one place rather than being repeated across templates.</p>
 <h2 id="the-data-tree">The data tree<a class="anchor" href="#the-data-tree">#</a></h2>
 <p>Every <code>.json</code>, <code>.yaml</code>, and <code>.yml</code> file under <code>data/</code> loads into a <code>data</code>
-structure keyed by filename without the extension. Subdirectories nest.</p>
+structure keyed by filename without the extension. Subdirectories nest. When
+two files share a name, such as <code>authors.json</code> and <code>authors.yaml</code>, the last in
+sort order wins, so <code>.yml</code> beats <code>.yaml</code> beats <code>.json</code>.</p>
 <pre><code>data/
   authors.json      -&gt; data&lt;authors&gt;
   site/
@@ -109,7 +117,9 @@ structure keyed by filename without the extension. Subdirectories nest.</p>
 <pre><code class="language-haml hl-plain">%p.byline
   %a{href: &quot;#{data&lt;authors&gt;&lt;url&gt;}&quot;}= data&lt;authors&gt;&lt;name&gt;
 </code></pre>
-<p>JSON and YAML are interchangeable. Use whichever suits the file.</p>
+<p>JSON and YAML read into the same structure. YAML is read as a subset: block
+mappings and sequences, scalars, inline <code>[a, b]</code> lists, and comments. See
+<a href="/reference/data-file-yaml/">Data File YAML</a> for what it refuses.</p>
 <pre><code class="language-yaml hl-plain">links:
   - title: Feed
     href: /feed.xml
@@ -117,7 +127,10 @@ structure keyed by filename without the extension. Subdirectories nest.</p>
 <h2 id="directory-scoped-data">Directory-scoped data<a class="anchor" href="#directory-scoped-data">#</a></h2>
 <p>A <code>_data.json</code>, <code>_data.yaml</code>, or <code>_data.yml</code> file inside a content directory
 applies to the pages in and beneath that directory, overriding a matching key
-from the site-wide <code>data/</code> tree. Deeper directories override shallower ones.</p>
+from the site-wide <code>data/</code> tree. Deeper directories override shallower ones, and
+<code>content/_data.json</code> applies to every page. A <code>_data</code> file must be a mapping,
+and one whose top level is a list is ignored. A directory holding more than one
+merges them in the order <code>.json</code>, <code>.yaml</code>, <code>.yml</code>.</p>
 <pre><code>content/
   posts/
     _data.json      -&gt; merges for every page under posts/

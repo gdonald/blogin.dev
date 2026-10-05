@@ -9,8 +9,10 @@ description: The context object every layout renders against, and the shapes it 
 Every layout renders against a context object. A method call in HAML is a call on
 that object, so `= title` runs the context's `title` method and `- for posts`
 iterates its `posts` collection. There are two context types. A post context
-backs `show.haml`, and a listing context backs `index.haml`, `home.haml`,
-`tag.haml`, `tags.haml`, and `404.haml`. Both build on a shared site context, and
+backs `show.haml` and any layout a post or section names in its place. A listing
+context backs `index.haml`, `home.haml`, the term layouts (`tag.haml`,
+`term.haml`, `tags.haml`, or the same names for another taxonomy), and
+`404.haml`. Both build on a shared site context, and
 `base.haml` sees whichever one wraps the page, so site-wide methods work in the
 shell and in every template it yields into.
 
@@ -23,12 +25,13 @@ These are available in every template, including `base.haml` and the partials.
 
 | Method | Returns |
 | --- | --- |
+| `site` | A hash of `title`, `base-url`, `author`, and `twitter` from `blogin.json`. |
 | `site-title` | The configured `title`. |
 | `section` | The current section path, `''` at the root. |
 | `section-label` | The section's nav label, or its humanized name. |
 | `url` | The page's own URL. |
 | `canonical-url` | `base-url` joined to `url`, for a canonical link. |
-| `head-meta` | The Open Graph, Twitter, and canonical tags as one HTML string. |
+| `head-meta` | The canonical link, robots, Open Graph, article, and Twitter tags, the feed links, and the JSON-LD structured data as one HTML string. See [Metadata and SEO](/guide/metadata-and-seo/). |
 | `meta-title` | The document title for the `<title>` tag: the site title, then the page's own title after a ` :: ` separator (`Greg Donald :: My Post`). The home page is the site title alone. |
 | `page-title` | The page's own title without the site prefix: the post title, the section label, or a term name. Empty on the home page. This is what `head-meta` puts in `og:title` and `twitter:title`. |
 | `meta-description`, `meta-type` | The other values `head-meta` uses, each callable on its own. |
@@ -38,15 +41,16 @@ These are available in every template, including `base.haml` and the partials.
 | `nav-current(node)` | True when a nav node is the current section or an ancestor of it. |
 | `framework-class(slot)` | The CSS-framework class for a named slot, `''` under `none`. |
 | `framework-stylesheet-tag`, `framework-script-tag` | The framework's `<link>` and `<script>`, `''` under `none`. |
-| `theme-script` | An inline `<script>` for the `<head>` that applies the saved or preferred color theme before paint and defines the toggle. |
+| `theme-script` | An inline `<script>` for the `<head>` that applies the saved color theme, or light when none is saved, before paint, and defines the toggle. |
 | `theme-toggle` | A ready-made light/dark toggle button, moon and sun icons, wired to the script. |
 | `has-header`, `has-sidebar`, `has-footer` | Whether the matching chrome partial exists. |
 | `truncate(text, n)`, `format-date(date, fmt)`, `group-by(items, field)` | Filters. See [Layouts](/guide/layouts/). |
 | `cache-fragment(name, block)` | Render the block once and reuse its HTML wherever the values it read are the same. The name is advisory. See [Layouts](/guide/layouts/). |
+| `debug` | True when `debug` is on, from `blogin.json` or `--debug`. |
 | `template-label` | The name of the template being rendered, for a debug comment. |
 | `debug-open(label)`, `debug-close(label)` | An HTML comment marking where a template or partial starts and ends, or an empty string when `debug` is off. |
 
-The last three are what the scaffolded layouts use to make `--debug` work:
+`template-label`, `debug-open`, and `debug-close` are what the scaffolded layouts use to make `--debug` work:
 
 ```haml
 != debug-open(template-label)
@@ -65,6 +69,9 @@ can stay in a layout permanently. See
 | Method | Returns |
 | --- | --- |
 | `title`, `date`, `description` | The post's front matter fields. |
+| `slug` | The post's slug. |
+| `summary` | The post's summary: its front-matter `summary`, or one derived from the body. |
+| `index-dates` | Whether the section's listings show dates, so the `entry` partial renders `related` the way a listing would. |
 | `show-dates` | Whether the section shows dates. |
 | `body` | The rendered post HTML. Insert with `!=`, it is already escaped where it needs to be. |
 | `has-toc`, `toc-html` | Whether `toc: true` is set, and the table of contents as HTML. |
@@ -79,7 +86,7 @@ A `show.haml` using all of them:
 %article
   %h1= title
   - if show-dates
-    %p.meta= "#{date} · #{reading-time} min read"
+    %p.meta #{date} · #{reading-time} min read
   - if has-toc
     %nav.toc
       != toc-html
@@ -102,7 +109,7 @@ A `show.haml` using all of them:
 | Method | Returns |
 | --- | --- |
 | `heading` | The page's `h1` text: the section label, or the term name on a term page, or the humanized taxonomy name on a taxonomy index. |
-| `posts` | The entries to list. |
+| `posts`, `entries` | The entries to list. Both names hold the same list. |
 | `page-number`, `total-pages` | The current page and the page count. |
 | `at-root` | True when this listing is the site root rather than a section's own page, which is how a `home.haml` shared with `index.haml` tells them apart. |
 | `pagination-html` | A numbered pagination bar as HTML: first, previous, the current page with three on either side, next, and last. Classed for the active CSS framework. Empty on a single-page listing. |
@@ -185,8 +192,8 @@ A **language** (`languages`). `current` marks the page you are on:
 { code, url, current }
 ```
 
-A **nav node** (`nav-nodes`, and each node's `children`) is an object, so read it
-with method calls, not hash keys:
+A **nav node** (`nav-nodes`, and each node's `children`) is a hash like the
+others, and `$node.url` reads the same key as `$node<url>`:
 
 ```haml
 %a{href: "#{$node.url}"}= $node.label
@@ -195,7 +202,8 @@ with method calls, not hash keys:
     != render(:partial<nav-item>, :collection($node.children), :as<node>)
 ```
 
-Its fields are `name`, `label`, `path`, `url`, `order`, and `children`.
+Its fields are `name`, `label`, `path`, `url`, `current` (true for the current
+section or an ancestor of it), and `children`.
 
 ## Partials and locals
 

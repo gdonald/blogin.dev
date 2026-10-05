@@ -12,7 +12,10 @@ Every build with at least one post emits feeds, a sitemap, and a search index.
 
 Blogin writes a site-wide Atom feed at `public/feed.xml` and a per-section feed at
 `public/<section>/feed.xml`. Entry links are absolute, built from `base-url`, so
-set that in `blogin.json`. A `public/sitemap.xml` lists every built page.
+set that in `blogin.json`. A `public/sitemap.xml` lists every built page except
+the ones marked [noindex](/guide/metadata-and-seo/#noindex). A post's entry
+carries a `<lastmod>` from its `updated` date, or its `date` when it has no
+`updated`.
 
 RSS 2.0 and JSON Feed are available alongside Atom. List the formats you want in
 `feed-formats`:
@@ -22,16 +25,24 @@ RSS 2.0 and JSON Feed are available alongside Atom. List the formats you want in
 ```
 
 Each format writes a site-wide file and a per-section file: Atom at `feed.xml`,
-RSS at `rss.xml`, and JSON Feed at `feed.json`. The default is `["atom"]`.
+RSS at `rss.xml`, and JSON Feed at `feed.json`. The default is `["atom"]`, and a
+site made by `blogin init` lists `["atom", "rss"]`.
+
+Feed entries are listed in the same order as section listings, so posts with an
+`order` come first, and each entry's time is its `date`. A file of the same name
+in `static/`, such as `static/feed.xml` or `static/sitemap.xml`, replaces the
+generated one.
 
 ## Search
 
 Search runs in the browser against a prebuilt index, so production stays static.
-The build writes `public/search-index.json`, one record per post with its title,
-url, date, tags, description, and stripped body text (truncated to
-`search-text-length`). It also emits `public/assets/js/search.js`, hand-written
-vanilla JavaScript that fetches the index, ranks matches (title and tag hits
-weigh more than body hits), and renders results.
+The build writes `public/search-index.json`, one record per post with its
+`title`, `url`, `date`, `tags`, `description`, and `text`, which is the post's
+[summary](/guide/writing-posts/#summaries) truncated to `search-text-length`.
+It also emits `public/assets/js/search.js`, hand-written vanilla JavaScript that
+fetches the index, ranks matches on the title, tags, and summary text (title and
+tag hits weigh more than summary hits), and renders results. The description is
+stored but not searched.
 
 Matching is by prefix, so results narrow as you type: `c`, then `cs`, then `css`
 each refine the same query rather than only matching a whole word.

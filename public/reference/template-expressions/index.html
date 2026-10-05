@@ -11,9 +11,16 @@
 <meta property="og:description" content="The language inside =, -, and #{} in a HAML layout."/>
 <meta property="og:url" content="https://blogin.dev/reference/template-expressions/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-08-15"/>
+<meta property="article:tag" content="templates"/>
+<meta property="article:tag" content="reference"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Template Expressions"/>
 <meta name="twitter:description" content="The language inside =, -, and #{} in a HAML layout."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Template Expressions","url":"https://blogin.dev/reference/template-expressions/","description":"The language inside =, -, and #{} in a HAML layout.","datePublished":"2026-08-15"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -95,8 +102,9 @@ Blogin
 <code>= ...</code>, <code>- if ...</code>, and <code>#{...}</code>. Ruby HAML embeds Ruby. Blogin embeds a small
 language of its own.</p>
 <p>Everything it does not do is a stated boundary rather than a missing feature,
-and reaching one produces an error naming the file, the line, the column, and
-the construct. It never guesses.</p>
+and reaching one produces an error naming the line, the column, and the
+construct, and the template file for an error found while compiling it. It
+never guesses.</p>
 <h2 id="why-a-language-at-all">Why a language at all<a class="anchor" href="#why-a-language-at-all">#</a></h2>
 <p>A layout has to ask questions of the page it is rendering: what is the title,
 does this post have tags, which navigation item is current. Answering those takes
@@ -123,41 +131,68 @@ reads <code>data</code> from a JSON file the same way it reads anything else.</p
 write <code>- if tags</code> rather than <code>- if tags.elems &gt; 0</code>.</p>
 <h2 id="grammar">Grammar<a class="anchor" href="#grammar">#</a></h2>
 <pre><code>expression   := or
-or           := and ( &quot;||&quot; and )*
-and          := comparison ( &quot;&amp;&amp;&quot; comparison )*
+or           := and ( (&quot;||&quot; | &quot;or&quot;) and )*
+and          := comparison ( (&quot;&amp;&amp;&quot; | &quot;and&quot;) comparison )*
 comparison   := additive ( (&quot;==&quot; | &quot;!=&quot; | &quot;&lt;&quot; | &quot;&lt;=&quot; | &quot;&gt;&quot; | &quot;&gt;=&quot; | &quot;eq&quot; | &quot;ne&quot;) additive )*
 additive     := unary ( (&quot;+&quot; | &quot;-&quot; | &quot;~&quot;) unary )*
-unary        := ( &quot;!&quot; | &quot;not&quot; )? postfix
+unary        := ( &quot;!&quot; | &quot;not&quot; ) unary | postfix
 postfix      := primary ( &quot;.&quot; name call-args? | &quot;&lt;&quot; name &quot;&gt;&quot; | &quot;(&quot; arguments &quot;)&quot; )*
-primary      := literal | variable | name | map | &quot;(&quot; expression &quot;)&quot;
-literal      := string | number | &quot;true&quot; | &quot;false&quot; | &quot;null&quot;
+primary      := literal | variable | name | map | block | &quot;(&quot; expression &quot;)&quot;
+literal      := string | number | &quot;true&quot; | &quot;false&quot; | &quot;True&quot; | &quot;False&quot; | &quot;null&quot; | &quot;Nil&quot;
+block        := &quot;{&quot; expression &quot;}&quot;
 map          := &quot;{&quot; ( entry ( &quot;,&quot; entry )* )? &quot;}&quot;
 entry        := name &quot;:&quot; expression
 variable     := &quot;$&quot; name
-name         := letter ( letter | digit | &quot;-&quot; | &quot;_&quot; )*
+name         := ( letter | &quot;_&quot; ) ( letter | digit | &quot;-&quot; | &quot;_&quot; )*
 arguments    := ( argument ( &quot;,&quot; argument )* )?
 argument     := expression | &quot;:&quot; name &quot;&lt;&quot; text &quot;&gt;&quot; | &quot;:&quot; name &quot;(&quot; expression &quot;)&quot;
 </code></pre>
-<p><code>+</code> concatenates strings, and so does <code>~</code>.</p>
+<p>A string is written in single or double quotes. A backslash makes the next
+character literal, there are no <code>\n</code>-style escapes, and <code>#{}</code> is not
+interpolated inside an expression string. A number is unsigned digits with an
+optional fractional part. There is no unary minus, so write <code>0 - 1</code>.</p>
+<p><code>+</code> adds two numbers and concatenates when either side is a string. <code>~</code> always
+concatenates, writing numbers and booleans as text. <code>-</code> subtracts numbers. A side
+that is not a number counts as 0. <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, and <code>&gt;=</code> compare two numbers or
+two strings, and anything else is an error. <code>==</code> between different types is
+false, so <code>&quot;1&quot; == 1</code> is false.</p>
+<p>An expression nests at most 64 levels deep, and past that it is refused with
+<code>nested too deeply, past 64 levels</code>. Each link of a chain written on one line
+counts as a level, so <code>1 + 1 + 1 ...</code> with 64 or more operators is refused, and
+so is a run of 64 member reads.</p>
 <p><code>&amp;&amp;</code> and <code>||</code> stop as soon as the answer is known and yield the value rather
-than a boolean, so <code>subtitle || title</code> reads as a default and
-<code>- if post &amp;&amp; post&lt;title&gt;</code> is safe to write.</p>
+than a boolean, so <code>page-title || site-title</code> reads as a default and
+<code>- if has-tags &amp;&amp; tags.first&lt;name&gt;</code> is safe to write.</p>
 <h2 id="reading-values">Reading values<a class="anchor" href="#reading-values">#</a></h2>
 <p><strong>A bare name</strong> is a question asked of the view: <code>title</code>, <code>site-title</code>,
 <code>has-tags</code>, <code>nav-nodes</code>. The view decides what to return. A name the view does
-not offer is an error, not null, because a typo in a layout should be visible.</p>
+not offer is an error, not null, because a typo in a layout should be visible. A
+bare name is looked up among the locals first, so inside a partial <code>brand</code> and
+<code>$brand</code> both read a local named <code>brand</code>.</p>
 <p><strong><code>$name</code></strong> is a local: a loop variable, or something passed through <code>:locals</code>.
 An unknown local is an error for the same reason.</p>
 <p><strong><code>.name</code></strong> reads a member of a map or asks an object for a property:
 <code>$node.url</code>, <code>$post.title</code>. On a list, <code>.elems</code>, <code>.size</code>, <code>.count</code>, <code>.first</code>,
-and <code>.last</code> are built in. On a string, <code>.chars</code> and <code>.elems</code> are its length.</p>
+and <code>.last</code> are built in. On a string, <code>.chars</code> and <code>.elems</code> are its length in
+bytes. <code>.name()</code> with empty parentheses is the same read as <code>.name</code>.
+<code>.name(arguments)</code> calls the view's <code>name</code> with those arguments, and the value
+before the dot is not passed.</p>
 <p><strong><code>&lt;name&gt;</code></strong> reads a map key: <code>$tag&lt;url&gt;</code>, <code>data&lt;archives&gt;</code>. <code>$tag.url</code> and
 <code>$tag&lt;url&gt;</code> do the same thing, so write whichever reads better.</p>
 <p>A missing key reads as null rather than raising, because <code>- if $entry&lt;image&gt;</code> is
-how a layout asks whether something is there.</p>
+how a layout asks whether something is there. Only a map answers a missing key
+with null. Reading a member of null, a boolean, or a number is an error, so
+<code>$entry&lt;image&gt;&lt;url&gt;</code> fails when <code>image</code> is absent. Guard it with
+<code>- if $entry&lt;image&gt;</code> first.</p>
 <p><strong><code>name(...)</code></strong> calls what the view offers, with arguments:
 <code>format-date(date, &quot;%B %e, %Y&quot;)</code>, <code>nav-current($node)</code>, <code>truncate(summary, 200)</code>.
 <code>url()</code> and <code>url</code> mean the same thing.</p>
+<p><code>truncate(text, length)</code> defaults to 200 characters, breaks at the last space,
+and appends <code>…</code>. <code>group-by(list, field)</code> returns <code>{ key, items }</code> maps, sorted
+by key descending. <code>nav-current(node)</code> reads the node's <code>current</code>.
+<code>framework-class(name)</code> returns the active framework's class for a slot, or an
+empty string. <code>debug-open(label)</code> and <code>debug-close(label)</code> write
+<code>&lt;!-- begin label --&gt;</code> and <code>&lt;!-- end label --&gt;</code> only when <code>debug</code> is on.</p>
 <h2 id="maps">Maps<a class="anchor" href="#maps">#</a></h2>
 <p><code>{ name: expression, ... }</code> is the one way to write a map, and it exists because
 <code>:locals</code> needs one:</p>
@@ -171,17 +206,18 @@ apart without any marker.</p>
 <pre><code class="language-haml hl-plain">!= render(:partial&lt;entry&gt;, :collection(posts), :as&lt;entry&gt;)
 </code></pre>
 <p><code>:name&lt;text&gt;</code> passes literal text. <code>:name(expression)</code> passes a value. This
-shape is accepted for any call, not only <code>render</code>.</p>
+shape is accepted for any call, not only <code>render</code>. Without <code>:as</code>, each
+collection item is <code>$item</code>. Partials may nest 32 deep.</p>
 <h2 id="control-flow">Control flow<a class="anchor" href="#control-flow">#</a></h2>
 <pre><code class="language-haml hl-plain">- if has-tags
   %p tagged
-- elsif has-categories
-  %p categorised
+- elsif has-related
+  %p related
 - else
   %p untagged
 
-- unless draft
-  %p published
+- unless show-dates
+  %p undated
 
 - for tags -&gt; $tag
   %li= $tag&lt;name&gt;
@@ -192,16 +228,21 @@ almost always a mistake rather than an empty result.</p>
 <code>||</code> when what you want is a default.</p>
 <h2 id="output">Output<a class="anchor" href="#output">#</a></h2>
 <p><code>=</code> writes an escaped value. <code>!=</code> writes it raw. <code>#{...}</code> interpolates inside
-text and inside attribute values, and escapes.</p>
-<p>Escaping means <code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, and <code>&quot;</code> become entities. There is no way to write
-markup accidentally: raw output is always spelled <code>!=</code>.</p>
+HAML text and inside quoted attribute values. In text the value is escaped, and
+in an attribute the whole finished value is escaped. Filter bodies (<code>:plain</code>,
+<code>:javascript</code>, <code>:css</code>, <code>:escaped</code>) are not interpolated.</p>
+<p>Escaping means <code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, and <code>&quot;</code> become entities. Raw output is spelled
+<code>!=</code>. The one exception is <code>yield</code>, which writes the wrapped page as it is with
+either <code>=</code> or <code>!=</code>.</p>
 <h2 id="blocks">Blocks<a class="anchor" href="#blocks">#</a></h2>
-<p>One form takes a block, and only one:</p>
+<p>Only <code>cache-fragment</code> defers a block:</p>
 <pre><code class="language-haml hl-plain">!= cache-fragment('header', { render(:partial&lt;header&gt;) })
 </code></pre>
 <p>The block is not a closure. It is an expression whose evaluation is deferred,
-which is all <code>cache-fragment</code> needs. Blocks cannot take parameters, be stored,
-or be passed anywhere else.</p>
+which is all <code>cache-fragment</code> needs. Passed to any other call, a block is
+evaluated on the spot, as if written without braces. Written anywhere but an
+argument, it is an error. <code>render(...)</code> and <code>cache-fragment(...)</code> must be the
+whole expression of a <code>=</code> or <code>!=</code> line.</p>
 <h2 id="working-examples">Working examples<a class="anchor" href="#working-examples">#</a></h2>
 <p>Each of these is a pattern a real site uses, with what the language is doing
 spelled out.</p>
@@ -209,13 +250,15 @@ spelled out.</p>
 <pre><code class="language-haml hl-plain">%article
   %h1= title
   - if show-dates
-    %p.meta= &quot;#{format-date(date, &quot;%B %e, %Y&quot;)} · #{reading-time} min read&quot;
+    %p.meta #{format-date(date, &quot;%B %e, %Y&quot;)} · #{reading-time} min read
   != body
 </code></pre>
 <p><code>title</code>, <code>show-dates</code>, <code>date</code>, <code>reading-time</code>, and <code>body</code> are names the view
-answers. <code>format-date</code> is a call the view offers, taking the date and a strftime
-pattern. <code>body</code> is written with <code>!=</code> because it is HTML the Markdown renderer
-produced. Everything else is written with <code>=</code> and escapes.</p>
+answers. The meta line is HAML text, so its <code>#{}</code> holes are interpolated and
+escaped. <code>format-date</code> takes the date and a pattern, defaulting to <code>%Y-%m-%d</code>.
+It understands <code>%Y %m %d %e %B %b %A %a %%</code>, where <code>%e</code> is the unpadded day, and
+returns its input unchanged when it is not a date. <code>body</code> is written with <code>!=</code>
+because it is HTML the Markdown renderer produced.</p>
 <h3 id="a-listing-entry">A listing entry<a class="anchor" href="#a-listing-entry">#</a></h3>
 <pre><code class="language-haml hl-plain">.card
   %h5
@@ -267,18 +310,22 @@ a list literal, so there is not one.</li>
 <li><strong>User-defined functions.</strong> A layout calls what the view offers.</li>
 <li><strong>Mutation.</strong> Nothing a template does changes a value another template sees.</li>
 <li><strong>Arbitrary method chains into the host.</strong> <code>.uc</code>, <code>.split</code>, <code>.map</code> and the
-like are not available. What the view offers is the whole surface.</li>
+like are not available. On a string or a list they are an error. On a map
+they read a key of that name, which is usually null. What the view offers is
+the whole surface.</li>
 <li><strong>General closures.</strong> Only the deferred-block form above.</li>
 <li><strong>Ranges, regular expressions, and case statements.</strong> No equivalent.</li>
 <li><strong>Arithmetic beyond <code>+</code> and <code>-</code>.</strong> No <code>*</code>, <code>/</code>, or <code>%</code>. Layouts do not
 calculate. Views do.</li>
 </ul>
 <h2 id="errors">Errors<a class="anchor" href="#errors">#</a></h2>
-<p>An error names where it happened and what was refused:</p>
-<pre><code>layouts/show.haml:14:11: no such name 'has-tag' (did you mean 'has-tags'?)
-layouts/_entry.haml:3:22: cannot iterate a string
-layouts/base.haml:9:5: assignment is not supported
+<p>An error names where it happened and what was refused. An error found while
+compiling a template also names the file:</p>
+<pre><code>blogin: line 2, column 3: no such name 'has-tag' (did you mean 'has-tags'?)
+blogin: line 2, column 1: cannot iterate string
+blogin: line 2, column 5: layouts/show.haml: assignment is not supported
 </code></pre>
+<p>Error messages call a list an <code>array</code> and a map an <code>object</code>.</p>
 <p>A suggestion appears when a name is close to one that exists, since the usual
 cause is a typo rather than a misunderstanding.</p>
 <p>The names the view answers are listed in

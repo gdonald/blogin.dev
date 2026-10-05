@@ -11,9 +11,16 @@
 <meta property="og:description" content="Render the site to static files."/>
 <meta property="og:url" content="https://blogin.dev/cli/blogin-build/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-03"/>
+<meta property="article:tag" content="cli"/>
+<meta property="article:tag" content="builds"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="blogin build"/>
 <meta name="twitter:description" content="Render the site to static files."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"blogin build","url":"https://blogin.dev/cli/blogin-build/","description":"Render the site to static files.","datePublished":"2026-07-03"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -101,21 +108,21 @@ index alongside the pages.</p>
 <dt><code>-s</code>, <code>--src &lt;dir&gt;</code></dt>
 <dd>the content directory. It defaults to <code>content</code>. The <code>blogin.json</code> next to it supplies the configuration, and everything else is found beside it.</dd>
 <dt><code>-o</code>, <code>--out &lt;dir&gt;</code></dt>
-<dd>overrides the <code>output-dir</code> from the config.</dd>
+<dd>overrides the <code>output-dir</code> from the config. The path is relative to the current directory, where <code>output-dir</code> is relative to the site directory.</dd>
 <dt><code>-d</code>, <code>--drafts</code></dt>
 <dd>includes posts marked <code>draft: true</code>.</dd>
 <dt><code>-F</code>, <code>--future</code></dt>
 <dd>includes posts dated ahead of today, which are excluded by default.</dd>
 <dt><code>-j</code>, <code>--jobs &lt;n&gt;</code></dt>
-<dd>render threads. It defaults to one per core.</dd>
+<dd>render threads. It defaults to one per core, and a value below 1 means 1.</dd>
 <dt><code>-D</code>, <code>--debug</code></dt>
-<dd>emits provenance comments around rendered partials and pages, so a page says which layout produced what.</dd>
+<dd>turns on the <code>debug-open</code> and <code>debug-close</code> helpers, which write a begin and end comment wherever a layout calls them. The scaffolded layouts mark the header, the footer, and the page template, so a page says which layout produced what.</dd>
 <dt><code>-N</code>, <code>--no-debug</code></dt>
 <dd>turns that off for a site whose config sets <code>&quot;debug&quot;: true</code>.</dd>
 <dt><code>-f</code>, <code>--force</code></dt>
 <dd>rebuilds everything, ignoring what the last build recorded.</dd>
 <dt><code>-c</code>, <code>--counters</code></dt>
-<dd>prints the work the build did: posts parsed, templates compiled, pages rendered, files read and written, and directory walks.</dd>
+<dd>prints the work the build did: posts parsed, templates compiled, pages rendered, files read and written, directory walks, and related-post terms.</dd>
 <dt><code>-v</code>, <code>--verbose</code></dt>
 <dd>names the directories it read and prints the work counters.</dd>
 </dl>
@@ -155,14 +162,14 @@ command:</p>
 </tr>
 <tr>
 <td><code>-v</code> <code>--verbose</code></td>
-<td></td>
+<td><code>-V</code> <code>--version</code></td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <p>So <code>blogin build -o dist -f</code> is <code>blogin build --out dist --force</code>.</p>
-<p>They combine into one argument the usual way, so <code>-fv</code> is <code>-f --force -v</code>
+<p>They combine into one argument the usual way, so <code>-fv</code> is <code>--force --verbose</code>
 written short, and <code>blogin build -dFcv</code> turns on drafts, future posts, counters,
 and verbose output at once.</p>
 <p>An option taking a value can end a run but cannot sit inside one, since the
@@ -176,11 +183,14 @@ blogin: unknown option '-Z' in '-fZv'
 </code></pre>
 <p>A value may itself begin with a dash. <code>blogin build -o -weird</code> writes to a
 directory called <code>-weird</code> rather than reading the letters as options.</p>
-<p><code>blogin</code> with no command prints this table.</p>
+<p><code>blogin</code> with no command prints this table. <code>blogin --version</code>, or <code>-V</code>
+anywhere on the line, prints the version and exits.</p>
 <h2 id="errors">Errors<a class="anchor" href="#errors">#</a></h2>
-<p>Nothing is guessed. An unknown flag, a value flag with nothing after it, a
-number that is not one, or a second positional argument stops the build with a
-message naming what was wrong. A flag takes the next argument, so write
+<p>An unknown flag, a value flag with nothing after it, a number that is not one,
+or a positional argument a command does not take (any for <code>build</code>, <code>serve</code>, and
+<code>clean</code>, or a second one for <code>init</code> and <code>new</code>) stops the command with a message
+naming what was wrong and exit status 2. Every command accepts every option and
+ignores the ones it does not use. A flag takes the next argument, so write
 <code>--out dist</code> with a space rather than <code>--out=dist</code>.</p>
 
 <nav class="tags mt-4">

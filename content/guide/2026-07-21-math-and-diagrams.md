@@ -13,7 +13,8 @@ happens in the browser.
 ## Math
 
 Write inline math between single dollars and display math between double dollars,
-or in a fenced `math` block:
+or in a fenced `math` block. The fence's info string must be `math` alone, with
+nothing after it:
 
 ````
 The identity $e^{i\pi} + 1 = 0$ is inline.
@@ -32,7 +33,8 @@ prose is left alone: `$5` and `$10` are not treated as math, because an opening
 
 ## Diagrams
 
-Put a diagram in a fenced `mermaid` block:
+Put a diagram in a fenced `mermaid` block, with nothing after `mermaid` on the
+fence line:
 
 ````
 ```mermaid

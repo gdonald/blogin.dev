@@ -11,9 +11,16 @@
 <meta property="og:description" content="Remove the generated output directory."/>
 <meta property="og:url" content="https://blogin.dev/cli/blogin-clean/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-05"/>
+<meta property="article:tag" content="cli"/>
+<meta property="article:tag" content="builds"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="blogin clean"/>
 <meta name="twitter:description" content="Remove the generated output directory."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"blogin clean","url":"https://blogin.dev/cli/blogin-clean/","description":"Remove the generated output directory.","datePublished":"2026-07-05"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -93,21 +100,22 @@ Blogin
 </nav>
 <p>Remove the output directory produced by a build, leaving the content, layouts,
 and configuration in place.</p>
-<pre><code>blogin clean [--out &lt;dir&gt;] [--verbose]
+<pre><code>blogin clean [--src &lt;dir&gt;] [--out &lt;dir&gt;]
 </code></pre>
 <h2 id="options">Options<a class="anchor" href="#options">#</a></h2>
 <dl>
+<dt><code>-s</code>, <code>--src &lt;dir&gt;</code></dt>
+<dd>the content directory. It defaults to <code>content</code>. The <code>blogin.json</code> beside it names the output directory, and its parent is the site directory.</dd>
 <dt><code>-o</code>, <code>--out &lt;dir&gt;</code></dt>
 <dd>the directory to remove. Naming one makes it the only target.</dd>
-<dt><code>-v</code>, <code>--verbose</code></dt>
-<dd>prints extra detail.</dd>
 </dl>
 <p>With no <code>--out</code>, both directories a build can write are removed: the <code>output-dir</code>
 from <code>blogin.json</code>, or <code>public</code> when the config does not set one, and
 <code>.blogin-preview/</code>, where <a href="/cli/blogin-serve/">blogin serve</a> builds. Each is
 reported separately, and one that does not exist is skipped.</p>
-<p>The target must sit inside the current directory. A path outside it is refused so
-a stray <code>--out</code> cannot delete unrelated files. The command reports how many files
+<p>The target must sit inside the site directory, the parent of <code>--src</code>, which is
+the current directory by default. A path outside it, or the site directory
+itself, is refused so a stray <code>--out</code> cannot delete unrelated files. The command reports how many files
 it removed.</p>
 <p>A <code>.keep</code> file is yours rather than build output, so it survives, and so does the
 directory holding it. Keep one at <code>public/.keep</code> to track the output directory in

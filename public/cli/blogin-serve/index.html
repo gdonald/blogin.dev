@@ -11,9 +11,16 @@
 <meta property="og:description" content="Preview the site locally with rebuilds on change."/>
 <meta property="og:url" content="https://blogin.dev/cli/blogin-serve/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-02"/>
+<meta property="article:tag" content="cli"/>
+<meta property="article:tag" content="builds"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="blogin serve"/>
 <meta name="twitter:description" content="Preview the site locally with rebuilds on change."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"blogin serve","url":"https://blogin.dev/cli/blogin-serve/","description":"Preview the site locally with rebuilds on change.","datePublished":"2026-07-02"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -91,8 +98,9 @@ Blogin
 <h2 class="h6 text-muted text-uppercase">Contents</h2>
 <ul><li><a href="#options">Options</a></li><li><a href="#example">Example</a></li><li><a href="#where-it-builds">Where it builds</a></li></ul>
 </nav>
-<p>Build the site and serve it locally, rebuilding when content, layouts, static
-assets, data files, or the configuration change. A successful rebuild
+<p>Build the site and serve it locally, rebuilding when anything under the site
+directory changes. <code>blogin.json</code> is read once at startup, so an edit to it
+takes effect when you restart the server. A successful rebuild
 live-reloads the open page in the browser.</p>
 <pre><code>blogin serve [--src &lt;dir&gt;] [--port &lt;n&gt;] [--verbose]
 </code></pre>
@@ -112,8 +120,8 @@ live-reloads the open page in the browser.</p>
 </code></pre>
 <p>The server binds loopback only, so it is reachable from the machine it runs on
 and nowhere else. <code>minify</code> and <code>fingerprint</code> are off while serving, whatever
-<code>blogin.json</code> says, and the server prints a line saying so when the config asks
-for them.</p>
+<code>blogin.json</code> says. Drafts and future-dated posts are left out of a preview, and
+<code>serve</code> has no option to include them.</p>
 <h2 id="where-it-builds">Where it builds<a class="anchor" href="#where-it-builds">#</a></h2>
 <p>A preview is built into <code>.blogin-preview/</code>, not the <code>output</code> directory in
 <code>blogin.json</code>. Serving a site therefore never writes the directory you deploy,

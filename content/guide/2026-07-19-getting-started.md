@@ -8,7 +8,7 @@ description: Install Blogin and build your first site.
 ---
 ## Install
 
-The current release is **0.9.2**.
+The current release is **0.9.5**.
 
 **macOS**
 
@@ -42,10 +42,10 @@ Swap `x86_64` for `arm64` on an ARM machine. See
 [Other ways to install](#other-ways-to-install) to check the download against its
 checksum, for the universal macOS binary, and for building from source.
 
-Confirm it runs. With no command it prints its usage:
+Confirm it runs:
 
 ```bash
-blogin
+blogin --version
 ```
 
 ## Your first site
@@ -53,7 +53,7 @@ blogin
 ```bash
 blogin init myblog        # write a site that already builds
 cd myblog
-blogin new "Hello World"  # a dated post with its front matter filled in
+blogin new "My First Post"  # a dated post with its front matter filled in
 blogin serve              # http://127.0.0.1:3000, rebuilding as you edit
 ```
 
@@ -81,11 +81,12 @@ rather than plain semantic HTML. See [CSS Frameworks](/guide/css-frameworks/).
 | `data/` | Optional JSON and YAML a layout reads. See [Data files](/guide/data-files/). |
 | `shortcodes/` | Optional shortcode templates. See [Writing Posts](/guide/writing-posts/). |
 | `themes/` | Optional layout and asset sets to fall back to. See [Themes](/guide/themes/). |
-| `public/` | The built site. Named by `output-dir`. |
+| `public/` | The built site. Named by `output-dir`. It also holds the build's own `.blogin-state.json` and `.blogin-manifest.json`, which the next build reads to skip unchanged work. |
 | `.blogin-preview/` | What `blogin serve` builds. Never deployed, and safe to ignore in version control. |
 
-Blogin's own stylesheet and search assets are written under `public/assets/`
-too, so everything the site serves lives in one place.
+Blogin's own stylesheet and search script are written under `public/assets/`
+too. The search index is `public/search-index.json`, beside the feeds,
+`sitemap.xml`, and `robots.txt`.
 
 ## Upgrading
 

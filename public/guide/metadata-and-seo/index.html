@@ -5,15 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Blogin</title>
 <link rel="canonical" href="https://blogin.dev/guide/metadata-and-seo/"/>
-<meta name="description" content="Open Graph and Twitter tags, canonical links, and robots.txt."/>
+<meta name="description" content="Open Graph and Twitter tags, structured data, share images, noindex, and robots.txt."/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Metadata and SEO"/>
-<meta property="og:description" content="Open Graph and Twitter tags, canonical links, and robots.txt."/>
+<meta property="og:description" content="Open Graph and Twitter tags, structured data, share images, noindex, and robots.txt."/>
 <meta property="og:url" content="https://blogin.dev/guide/metadata-and-seo/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-21"/>
+<meta property="article:tag" content="seo"/>
+<meta property="article:tag" content="configuration"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Metadata and SEO"/>
-<meta name="twitter:description" content="Open Graph and Twitter tags, canonical links, and robots.txt."/>
+<meta name="twitter:description" content="Open Graph and Twitter tags, structured data, share images, noindex, and robots.txt."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Metadata and SEO","url":"https://blogin.dev/guide/metadata-and-seo/","description":"Open Graph and Twitter tags, structured data, share images, noindex, and robots.txt.","datePublished":"2026-07-21"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -89,7 +96,7 @@ Blogin
 <h1 class="mb-4">Metadata and SEO</h1>
 <nav class="toc mb-4 p-3 bg-body-tertiary rounded">
 <h2 class="h6 text-muted text-uppercase">Contents</h2>
-<ul><li><a href="#head-meta">head-meta</a></li><li><a href="#robots-txt">robots.txt</a></li></ul>
+<ul><li><a href="#head-meta">head-meta</a></li><li><a href="#structured-data">Structured data</a></li><li><a href="#noindex">noindex</a></li><li><a href="#share-images">Share images</a></li><li><a href="#robots-txt">robots.txt</a></li></ul>
 </nav>
 <p>Blogin emits per-page metadata for search engines and social cards, and a
 site-wide <code>robots.txt</code>, without any template work beyond a single call in the
@@ -101,24 +108,96 @@ page head.</p>
   != head-meta
 </code></pre>
 <p>For a post page it emits a canonical link and the article metadata:</p>
-<pre><code class="language-html hl-plain">&lt;link rel=&quot;canonical&quot; href=&quot;https://example.com/posts/hello&quot;/&gt;
+<pre><code class="language-html hl-plain">&lt;link rel=&quot;canonical&quot; href=&quot;https://example.com/posts/hello/&quot;/&gt;
 &lt;meta name=&quot;description&quot; content=&quot;A short description.&quot;/&gt;
 &lt;meta property=&quot;og:type&quot; content=&quot;article&quot;/&gt;
 &lt;meta property=&quot;og:title&quot; content=&quot;Hello&quot;/&gt;
 &lt;meta property=&quot;og:description&quot; content=&quot;A short description.&quot;/&gt;
-&lt;meta property=&quot;og:url&quot; content=&quot;https://example.com/posts/hello&quot;/&gt;
+&lt;meta property=&quot;og:url&quot; content=&quot;https://example.com/posts/hello/&quot;/&gt;
 &lt;meta property=&quot;og:site_name&quot; content=&quot;My Site&quot;/&gt;
+&lt;meta property=&quot;article:published_time&quot; content=&quot;2026-07-20&quot;/&gt;
+&lt;meta property=&quot;article:modified_time&quot; content=&quot;2026-08-02&quot;/&gt;
+&lt;meta property=&quot;article:tag&quot; content=&quot;cpp&quot;/&gt;
 &lt;meta name=&quot;twitter:card&quot; content=&quot;summary&quot;/&gt;
+&lt;meta name=&quot;twitter:site&quot; content=&quot;@example&quot;/&gt;
+&lt;meta name=&quot;twitter:creator&quot; content=&quot;@example&quot;/&gt;
 &lt;meta name=&quot;twitter:title&quot; content=&quot;Hello&quot;/&gt;
-&lt;meta name=&quot;twitter:description&quot; content=&quot;Hello&quot;/&gt;
+&lt;meta name=&quot;twitter:description&quot; content=&quot;A short description.&quot;/&gt;
+&lt;link rel=&quot;alternate&quot; type=&quot;application/atom+xml&quot; title=&quot;My Site&quot; href=&quot;https://example.com/feed.xml&quot;/&gt;
+&lt;script type=&quot;application/ld+json&quot;&gt;{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@type&quot;:&quot;BlogPosting&quot;,&quot;headline&quot;:&quot;Hello&quot;,&quot;url&quot;:&quot;https://example.com/posts/hello/&quot;,&quot;description&quot;:&quot;A short description.&quot;,&quot;datePublished&quot;:&quot;2026-07-20&quot;,&quot;dateModified&quot;:&quot;2026-08-02&quot;,&quot;author&quot;:{&quot;@type&quot;:&quot;Person&quot;,&quot;name&quot;:&quot;Pat Lee&quot;}}&lt;/script&gt;
 </code></pre>
 <p>The description is the post's front-matter <code>description</code>, falling back to the
 derived summary. The canonical and <code>og:url</code> links are absolute, built from
 <code>base-url</code> in <code>blogin.json</code>, so set <code>base-url</code> for them to be complete. A listing
-page emits the same shape with <code>og:type</code> of <code>website</code> and the section label as
-the title.</p>
+page emits the same tags with <code>og:type</code> of <code>website</code>, without the description
+tags, the <code>article:</code> tags, or a <code>BlogPosting</code>. Its title is the section label:
+the site title on the root listing, the term on a term page, and the humanized
+taxonomy name on a taxonomy index.</p>
+<p>The <code>article:</code> tags appear on post pages only. <code>article:published_time</code> is the
+post's <code>date</code>, <code>article:modified_time</code> is its <code>updated</code> date, and there is one
+<code>article:tag</code> per tag. Each is left out when the post does not set it.</p>
+<p><code>twitter:site</code> and <code>twitter:creator</code> come from <code>twitter</code> in <code>blogin.json</code>,
+written as given, so include the <code>@</code>. Without it both are left out.</p>
+<p>There is one <code>&lt;link rel=&quot;alternate&quot;&gt;</code> per format in <code>feed-formats</code>, so browsers
+and feed readers can find the site-wide feeds from any page. A site with no
+posts writes no feeds and so links none.</p>
+<h2 id="structured-data">Structured data<a class="anchor" href="#structured-data">#</a></h2>
+<p><code>head-meta</code> writes JSON-LD that search engines read for rich results. A post
+page gets a <code>BlogPosting</code> with the headline, URL, description, dates, share
+image, and <code>author</code> from <code>blogin.json</code>, leaving out any of these the page does
+not have. The site's front page gets a <code>WebSite</code>. A root <code>index.md</code> is a post
+page, so it gets both:</p>
+<pre><code class="language-html hl-plain">&lt;script type=&quot;application/ld+json&quot;&gt;{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@type&quot;:&quot;WebSite&quot;,&quot;name&quot;:&quot;My Site&quot;,&quot;url&quot;:&quot;https://example.com/&quot;}&lt;/script&gt;
+</code></pre>
+<p>A <code>&lt;</code> in a title or description is written as <code>\u003c</code>, so no text can end the
+script element.</p>
+<h2 id="noindex">noindex<a class="anchor" href="#noindex">#</a></h2>
+<p>These pages carry <code>&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;/&gt;</code> and are left out of
+the sitemap:</p>
+<ul>
+<li>The 404 page.</li>
+<li>Every listing page after the first.</li>
+<li>A post with <code>noindex: true</code> in its front matter.</li>
+</ul>
+<h2 id="share-images">Share images<a class="anchor" href="#share-images">#</a></h2>
+<p>A link preview on LinkedIn, Facebook, Slack, or X shows an image when the page
+names one. Set <code>image</code> in a post's front matter:</p>
+<pre><code>---
+title: Hello
+image: /assets/images/hello.png
+---
+</code></pre>
+<p>Set <code>image</code> in <code>blogin.json</code> for the image every other page uses, listings
+included:</p>
+<pre><code class="language-json">{
+  <span class="hl-string">&quot;base-url&quot;</span>: <span class="hl-string">&quot;https://example.com&quot;</span>,
+  <span class="hl-string">&quot;image&quot;</span>: <span class="hl-string">&quot;/assets/images/share.png&quot;</span>
+}
+</code></pre>
+<p>With an image, <code>head-meta</code> adds these tags and switches the Twitter card to the
+large one:</p>
+<pre><code class="language-html hl-plain">&lt;meta property=&quot;og:image&quot; content=&quot;https://example.com/assets/images/hello.png&quot;/&gt;
+&lt;meta property=&quot;og:image:width&quot; content=&quot;1200&quot;/&gt;
+&lt;meta property=&quot;og:image:height&quot; content=&quot;627&quot;/&gt;
+&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot;/&gt;
+</code></pre>
+<p>The path is a URL on the site, so <code>/assets/images/hello.png</code> is the file at
+<code>assets/images/hello.png</code> and <code>/hello.png</code> is the file at <code>static/hello.png</code>. A
+theme's <code>assets/</code> and <code>static/</code> are searched after the site's own. <code>og:image</code> is
+made absolute from <code>base-url</code>, and with <code>&quot;fingerprint&quot;: true</code> an image under
+<code>assets/</code> is named by its hashed file. An image in <code>static/</code> keeps its name. A full <code>https://</code> URL is written as given.</p>
+<p>The width and height are read from the file's header, for PNG, JPEG, GIF, and
+WebP. For any other format, or for an image on another host, the two tags are
+left out. The build warns when a named image is missing or its size cannot be
+read. When the image's size changes, the next build rewrites every page that
+uses it.</p>
+<p>Make share images 1200 by 627 pixels. LinkedIn shows that size as a large card
+and a smaller image as a thumbnail. After deploying, the
+<a href="https://www.linkedin.com/post-inspector/">LinkedIn Post Inspector</a> shows the
+tags LinkedIn read and refreshes its cached preview.</p>
 <h2 id="robots-txt">robots.txt<a class="anchor" href="#robots-txt">#</a></h2>
-<p>Every build writes <code>robots.txt</code> at the site root:</p>
+<p>A build with at least one post writes <code>robots.txt</code> at the output root, unless
+<code>static/robots.txt</code> supplies your own:</p>
 <pre><code>User-agent: *
 Allow: /
 Sitemap: https://example.com/sitemap.xml

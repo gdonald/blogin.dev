@@ -26,7 +26,10 @@ const std::string greeting = "hello";  // keywords, strings, numbers, comments
 Recognized languages are `c`, `cpp`, `java`, `go`, `rust`, `javascript`,
 `typescript`, `python`, `ruby`, `raku`, `bash`, and `json`. Only the first word of the
 info string selects the highlighter, so ```` ```cpp title=main.cpp ```` still
-highlights as C++.
+highlights as C++. The name is matched without regard to case but otherwise
+exactly, so `js`, `ts`, `sh`, and `c++` are not recognized. Only line comments
+are marked (`//`, or `#` for `raku`, `ruby`, `python`, and `bash`), and `json`
+gets strings and numbers only.
 
 An unrecognized language falls back to escaped plain text and its code block is
 labeled with an `hl-plain` class, so a stylesheet can tell a highlighted block

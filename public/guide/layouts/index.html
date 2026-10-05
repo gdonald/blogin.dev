@@ -11,9 +11,15 @@
 <meta property="og:description" content="HAML templates, chrome partials, and per-section layouts."/>
 <meta property="og:url" content="https://blogin.dev/guide/layouts/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-17"/>
+<meta property="article:tag" content="templates"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Layouts"/>
 <meta name="twitter:description" content="HAML templates, chrome partials, and per-section layouts."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Layouts","url":"https://blogin.dev/guide/layouts/","description":"HAML templates, chrome partials, and per-section layouts.","datePublished":"2026-07-17"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -108,23 +114,23 @@ the language inside <code>=</code>, <code>-</code>, and <code>#{}</code>.</p>
 <tbody>
 <tr>
 <td><code>base.haml</code></td>
-<td>Page shell, wraps everything. Required.</td>
+<td>Page shell, wraps everything. Optional: without it, each page is the inner layout's output alone.</td>
 </tr>
 <tr>
 <td><code>show.haml</code></td>
-<td>A single post. Required.</td>
+<td>A single post. Required once there are posts.</td>
 </tr>
 <tr>
 <td><code>index.haml</code></td>
-<td>A section or taxonomy listing. Required for listings.</td>
+<td>A section or taxonomy listing. Required once a listing is written.</td>
 </tr>
 <tr>
 <td><code>home.haml</code></td>
-<td>The site root. Optional, falls back to <code>index.haml</code>.</td>
+<td>The site root listing, written when <code>home-section</code> names a section with posts. Optional, falls back to <code>index.haml</code>.</td>
 </tr>
 <tr>
-<td><code>tag.haml</code>, <code>tags.haml</code></td>
-<td>A single tag's posts, and the tag index. Optional, fall back to <code>index.haml</code>.</td>
+<td><code>tag.haml</code>, <code>term.haml</code>, <code>tags.haml</code></td>
+<td>A term page tries <code>tag.haml</code>, then <code>term.haml</code>, then <code>tags.haml</code>, then <code>index.haml</code>. The tag index tries <code>tags.haml</code>, then <code>index.haml</code>. Another taxonomy follows the same pattern under its own name, made singular by dropping a trailing <code>s</code>.</td>
 </tr>
 <tr>
 <td><code>404.haml</code></td>
@@ -142,11 +148,17 @@ the language inside <code>=</code>, <code>-</code>, and <code>#{}</code>.</p>
 <td><code>_nav.haml</code>, <code>_search.haml</code></td>
 <td>The nav menu and search form partials. The scaffold puts search in the navbar.</td>
 </tr>
+<tr>
+<td><code>_entry.haml</code>, <code>_nav-item.haml</code></td>
+<td>In the scaffold, one listed post (used by <code>index.haml</code> and the related list) and one nav node (rendered recursively by <code>_nav.haml</code>).</td>
+</tr>
 </tbody>
 </table>
 <p>A chrome partial that is not there is skipped rather than reported, so a site
-without a sidebar renders full width. A missing <code>base.haml</code>, <code>show.haml</code>, or <code>index.haml</code>
-is a build error that names the layout.</p>
+without a sidebar renders full width. A missing <code>show.haml</code> is the build error
+<code>no 'show' layout found</code> when there are posts to render, and a missing listing
+layout is the build error <code>no listing layout found</code> when a section or term
+listing has to be written.</p>
 <h2 id="rendering-shared-chrome-once">Rendering shared chrome once<a class="anchor" href="#rendering-shared-chrome-once">#</a></h2>
 <p>A partial that renders the same on every page, such as a sidebar of links or a
 footer, is otherwise re-rendered once per page. Wrap it in <code>cache-fragment</code> to
@@ -165,14 +177,17 @@ little bookkeeping and nothing else. The cache is
 cleared at the start of each build, so an edit to the partial or its data is
 picked up on the next build.</p>
 <h2 id="the-home-page">The home page<a class="anchor" href="#the-home-page">#</a></h2>
-<p>The site root renders through <code>home.haml</code> when it exists, falling back to
-<code>index.haml</code>. This gives the root a distinct landing page, a hero and feature
-callouts, separate from the <code>home-section</code> listing that the same posts produce at
-their section path. Like a listing, <code>home.haml</code> can reach <code>posts</code> and
-<code>pagination-html</code>, or ignore them for a static landing.</p>
+<p>With <code>home-section</code> set, the site root is a listing of that section's posts and
+renders through <code>home.haml</code> when it exists, falling back to <code>index.haml</code>. This
+gives the root a distinct landing page, a hero and feature callouts, separate
+from the listing the same posts produce at their section path. Like a listing,
+<code>home.haml</code> can reach <code>posts</code> and <code>pagination-html</code>, or ignore them for a static
+landing.</p>
+<p>Without <code>home-section</code>, no root listing is written. A <code>content/index.md</code> renders
+at <code>/</code> through <code>show.haml</code> instead.</p>
 <h2 id="the-404-page">The 404 page<a class="anchor" href="#the-404-page">#</a></h2>
-<p>Every build writes <code>404.html</code> at the site root, which hosts like GitHub Pages and
-Netlify serve for a missing URL. It renders through <code>404.haml</code> wrapped in
+<p>Every build writes <code>404.html</code> at the site root unless <code>static/</code> ships one. Hosts
+like GitHub Pages and Netlify serve it for a missing URL. It renders through <code>404.haml</code> wrapped in
 <code>base.haml</code> when that layout exists, and falls back to a plain built-in page
 otherwise.</p>
 <h2 id="per-section-layouts">Per-section layouts<a class="anchor" href="#per-section-layouts">#</a></h2>
@@ -182,7 +197,8 @@ otherwise <code>layouts/show.haml</code>, resolved by the nearest ancestor. The 
 to <code>index.haml</code> and the chrome partials.</p>
 <p>A section can also name a layout in <code>blogin.json</code> rather than by directory. Give
 the section a <code>layout</code> key and its posts render through <code>layouts/&lt;name&gt;.haml</code>,
-falling back to <code>show.haml</code> when that file is absent:</p>
+falling back to <code>show.haml</code> when that file is absent. A post's own front-matter
+<code>layout</code> comes first:</p>
 <pre><code class="language-json"><span class="hl-string">&quot;sections&quot;</span>: {
   <span class="hl-string">&quot;essays&quot;</span>: { <span class="hl-string">&quot;layout&quot;</span>: <span class="hl-string">&quot;essay&quot;</span> }
 }
@@ -212,8 +228,8 @@ text), <code>posts</code>, and <code>pagination-html</code>. The nav tree is ava
 with <code>nav-current(node)</code> marking the current section.</p>
 <p><a href="/guide/template-data/">Template Data</a> is the complete reference: every method on
 each context, and the shape of each collection. A name the view does not offer
-is a build error naming the file, line, and column, with a suggestion when it is
-close to a real one.</p>
+is a build error giving the line and column, with a suggestion when it is close
+to a real one.</p>
 <h2 id="color-theme">Color theme<a class="anchor" href="#color-theme">#</a></h2>
 <p>Every layout can offer a light and dark toggle with two methods. Put
 <code>theme-script</code> in the <code>&lt;head&gt;</code> and a <code>theme-toggle</code> button in the navbar:</p>

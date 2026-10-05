@@ -17,7 +17,7 @@
       <link>https://blogin.dev/cli/blogin-new/</link>
       <guid isPermaLink="true">https://blogin.dev/cli/blogin-new/</guid>
       <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Create a new post file from a title, with front matter filled in and a slug derived from the title.</description>
+      <description>Create a new post file from a title. It writes &lt;section&gt;/&lt;today&gt;-&lt;slug&gt;.md with title, date, an empty tags list, and an empty description filled in, the slug derived from the title.</description>
     </item>
     <item>
       <title>blogin build</title>
@@ -31,7 +31,7 @@
       <link>https://blogin.dev/cli/blogin-serve/</link>
       <guid isPermaLink="true">https://blogin.dev/cli/blogin-serve/</guid>
       <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Build the site and serve it locally, rebuilding when content, layouts, static assets, data files, or the configuration change. A successful rebuild live-reloads the open page in the browser.</description>
+      <description>Build the site and serve it locally, rebuilding when anything under the site directory changes. blogin.json is read once at startup, so an edit to it takes effect when you restart the server. A…</description>
     </item>
     <item>
       <title>blogin clean</title>

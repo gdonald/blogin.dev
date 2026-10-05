@@ -11,9 +11,16 @@
 <meta property="og:description" content="The YAML subset a data file may use, and what is refused."/>
 <meta property="og:url" content="https://blogin.dev/reference/data-file-yaml/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-08-15"/>
+<meta property="article:tag" content="templates"/>
+<meta property="article:tag" content="reference"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Data File YAML"/>
 <meta name="twitter:description" content="The YAML subset a data file may use, and what is refused."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Data File YAML","url":"https://blogin.dev/reference/data-file-yaml/","description":"The YAML subset a data file may use, and what is refused.","datePublished":"2026-08-15"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -91,29 +98,35 @@ Blogin
 <h2 class="h6 text-muted text-uppercase">Contents</h2>
 <ul><li><a href="#what-is-read">What is read</a><ul><li><a href="#block-mappings">Block mappings</a></li><li><a href="#block-sequences">Block sequences</a></li><li><a href="#flow-sequences">Flow sequences</a></li><li><a href="#scalars">Scalars</a></li><li><a href="#comments">Comments</a></li><li><a href="#the-document-marker">The document marker</a></li></ul></li><li><a href="#what-is-refused">What is refused</a></li><li><a href="#json-is-read-too">JSON is read too</a></li></ul>
 </nav>
-<p>Blogin reads YAML in two places: <code>data/*.yaml</code>, which a layout reads through
-<code>data</code>, and <code>_data.yaml</code> beside a section, which a layout reads the same way for
-pages in that section. See <a href="/guide/data-files/">Data files</a> for how they load.
+<p>Blogin reads YAML in two places: <code>data/*.yaml</code> (or <code>.yml</code>, with subdirectories
+becoming nested maps), which a layout reads through <code>data</code>, and <code>_data.yaml</code> (or
+<code>_data.yml</code>) in a content directory, which is merged into <code>data</code> for pages in
+that directory and every directory below it. See <a href="/guide/data-files/">Data files</a> for how they load.
 Front matter is not YAML and is not covered here. It is a block of keys and
 values read directly.</p>
 <p>What follows is not all of YAML. It is the part data files use, written down so
-that everything outside it is a stated boundary. A file outside the subset fails
-with the line number and what was refused, and never with a guess.</p>
+that everything outside it is a stated boundary. The constructs in
+<a href="#what-is-refused">What is refused</a> fail with the line number and what was
+refused. A few others are read in a way you may not expect, and are listed after
+that table.</p>
 <p>Full YAML 1.2 is a project of its own. Anchors and aliases, tags, multiple
 documents in one file, block scalar folding, and type resolution are the parts
 that make it one, and none of them appears in a data file that lists the entries
 of a menu.</p>
 <h2 id="what-is-read">What is read<a class="anchor" href="#what-is-read">#</a></h2>
 <h3 id="block-mappings">Block mappings<a class="anchor" href="#block-mappings">#</a></h3>
-<p>Keys and values, nested by indentation. Indentation is spaces.</p>
+<p>Keys and values, nested by indentation. Indentation is spaces. A tab is not
+refused, and a tab-indented line is read as if it were not indented, so do not
+indent with tabs.</p>
 <pre><code class="language-yaml hl-plain">site:
   name: Example
   owner:
     name: A Person
     email: person@example.com
 </code></pre>
-<p>A key may be quoted, which is how a key containing a colon is written. The split
-happens at the first colon outside quotes.</p>
+<p>The split between key and value happens at the first colon outside quotes that
+is followed by a space or ends the line, so <code>a:b: c</code> has the key <code>a:b</code>. A key
+that must contain <code>: </code> is quoted.</p>
 <h3 id="block-sequences">Block sequences<a class="anchor" href="#block-sequences">#</a></h3>
 <pre><code class="language-yaml hl-plain">archives:
   - 2026
@@ -143,6 +156,8 @@ style:</p>
 <p>A list of scalars on one line:</p>
 <pre><code class="language-yaml hl-plain">tags: [cpp, web, notes]
 </code></pre>
+<p>Brackets or braces inside it are not read as structure. They become part of the
+strings around them, so do not nest them.</p>
 <h3 id="scalars">Scalars<a class="anchor" href="#scalars">#</a></h3>
 <table class="table">
 <thead>
@@ -183,13 +198,14 @@ message: &quot;line one\nline two&quot;
 </code></pre>
 <p><code>quoted</code> above is the string <code>true</code>, not the boolean.</p>
 <h3 id="comments">Comments<a class="anchor" href="#comments">#</a></h3>
-<p>A <code>#</code> at the start of a line or after a space runs to the end of the line. A <code>#</code>
+<p>A <code>#</code> at the start of a line or after a space or tab runs to the end of the line. A <code>#</code>
 inside quotes is a character.</p>
 <pre><code class="language-yaml hl-plain"># The menu, in the order it is shown.
 color: &quot;#663399&quot;   # not a comment
 </code></pre>
 <h3 id="the-document-marker">The document marker<a class="anchor" href="#the-document-marker">#</a></h3>
-<p>A line of <code>---</code> on its own is skipped, so a file may open with one.</p>
+<p>A line of <code>---</code> on its own is skipped wherever it appears. A file may open with
+one, and a second document after another <code>---</code> is read as part of the first.</p>
 <h2 id="what-is-refused">What is refused<a class="anchor" href="#what-is-refused">#</a></h2>
 <p>Each of these fails with a line number rather than being guessed at.</p>
 <table class="table">
@@ -209,12 +225,12 @@ color: &quot;#663399&quot;   # not a comment
 <td>anchors and aliases are not supported</td>
 </tr>
 <tr>
-<td><code>|</code>, <code>&gt;</code></td>
+<td><code>|</code>, <code>&gt;</code>, <code>|-</code>, <code>&gt;-</code></td>
 <td>block scalars are not supported</td>
 </tr>
 <tr>
 <td><code>- - a</code></td>
-<td>a nested sequence on the same line is not supported, indent it on its own line</td>
+<td>a nested sequence on the same line is not supported. Indent it on its own line</td>
 </tr>
 <tr>
 <td>a line indented past its parent</td>
@@ -225,21 +241,28 @@ color: &quot;#663399&quot;   # not a comment
 <td>expected 'key: value'</td>
 </tr>
 <tr>
-<td>a <code>-</code> item where a key belongs</td>
+<td>a <code>- item</code> where a key belongs</td>
 <td>a sequence item where a mapping key was expected</td>
 </tr>
 <tr>
 <td><code>&quot;\q&quot;</code></td>
 <td>unknown escape in a double-quoted scalar</td>
 </tr>
+<tr>
+<td>nesting deeper than 64 levels</td>
+<td>nested too deeply</td>
+</tr>
 </tbody>
 </table>
-<p>Multiple documents in one file, tags such as <code>!!str</code>, and complex keys have no
-place in a data file and are not read.</p>
+<p>These are read rather than refused. Multiple documents are merged into one, a
+tag such as <code>!!str</code> becomes part of the string, a repeated key keeps its last
+value, and a complex key fails with <code>expected 'key: value'</code>. None of them
+belongs in a data file.</p>
 <h2 id="json-is-read-too">JSON is read too<a class="anchor" href="#json-is-read-too">#</a></h2>
-<p>A data file may be <code>.json</code> instead, and JSON is read in full. The two produce the
-same values, so <code>data&lt;menu&gt;</code> reads the same whether <code>menu.yaml</code> or <code>menu.json</code> is
-what sits in <code>data/</code>.</p>
+<p>A data file may be <code>.json</code> instead, and JSON is read in full, up to 64 levels of
+nesting. The two produce the same values, so <code>data&lt;menu&gt;</code> reads the same whether
+<code>menu.yaml</code> or <code>menu.json</code> is what sits in <code>data/</code>. If both exist, <code>menu.yaml</code> (or
+<code>.yml</code>) wins over <code>menu.json</code>.</p>
 
 <nav class="tags mt-4">
 <a class="badge text-bg-secondary text-decoration-none me-1" href="/tags/templates/">templates</a>

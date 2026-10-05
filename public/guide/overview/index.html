@@ -11,9 +11,16 @@
 <meta property="og:description" content="What Blogin is and how it works."/>
 <meta property="og:url" content="https://blogin.dev/guide/overview/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-20"/>
+<meta property="article:tag" content="intro"/>
+<meta property="article:tag" content="markdown"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Overview"/>
 <meta name="twitter:description" content="What Blogin is and how it works."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Overview","url":"https://blogin.dev/guide/overview/","description":"What Blogin is and how it works.","datePublished":"2026-07-20"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -93,8 +100,11 @@ Blogin
 </nav>
 <p>Blogin is a static blog generator written in C++. Point it at a directory of
 Markdown files and it produces a directory of plain HTML you can host anywhere.
-There is no database and no runtime. What ships is static HTML, CSS, and one
-search script, and the generator itself is a single binary with no dependencies.</p>
+There is no database and no runtime. What ships is static HTML, CSS, feeds, a
+JSON search index, and a small amount of JavaScript: the search script and an
+inline light and dark theme toggle. The generator is a single binary.
+Responsive image variants (<code>image-widths</code>) also need ImageMagick or macOS <code>sips</code>
+on the <code>PATH</code>.</p>
 <h2 id="the-pipeline">The pipeline<a class="anchor" href="#the-pipeline">#</a></h2>
 <p>A build reads <code>content/</code>, parses each post's front matter and Markdown, renders
 the body to HTML, wraps it in your HAML layouts, and writes the result under
@@ -113,7 +123,8 @@ randomised edit sequences rather than a few examples.</p>
 <ul>
 <li>Sections from the content tree, with clean URLs, pagination, and explicit post
 ordering.</li>
-<li>Named taxonomies (tags, categories, and any you declare), each with term pages
+<li>Named taxonomies (<code>tags</code> by default, plus any you declare, such as
+<code>categories</code>), each with term pages
 and an index, paginated the same way a section listing is. See
 <a href="/guide/writing-posts/">Writing Posts</a>.</li>
 <li>Atom, RSS, and JSON feeds, site-wide and per section, and a sitemap. See
@@ -123,7 +134,8 @@ lists, math, and Mermaid diagrams. See <a href="/guide/writing-posts/">Writing P
 and <a href="/guide/math-and-diagrams/">Math and Diagrams</a>.</li>
 <li>Per-post summaries and an optional table of contents. See
 <a href="/guide/writing-posts/">Writing Posts</a>.</li>
-<li>Open Graph and Twitter metadata, canonical links, and <code>robots.txt</code>. See
+<li>Open Graph and Twitter metadata, share images, JSON-LD structured data, feed
+links, canonical links, <code>noindex</code>, and <code>robots.txt</code>. See
 <a href="/guide/metadata-and-seo/">Metadata and SEO</a>.</li>
 <li>Data files, CSS-framework profiles, and server-side syntax highlighting.</li>
 <li>An asset pipeline that minifies, content-hashes, and writes responsive image

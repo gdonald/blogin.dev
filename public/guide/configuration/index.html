@@ -11,9 +11,15 @@
 <meta property="og:description" content="The keys in blogin.json."/>
 <meta property="og:url" content="https://blogin.dev/guide/configuration/"/>
 <meta property="og:site_name" content="Blogin"/>
+<meta property="article:published_time" content="2026-07-12"/>
+<meta property="article:tag" content="configuration"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuration"/>
 <meta name="twitter:description" content="The keys in blogin.json."/>
+<link rel="alternate" type="application/atom+xml" title="Blogin" href="https://blogin.dev/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="Blogin" href="https://blogin.dev/rss.xml"/>
+<link rel="alternate" type="application/feed+json" title="Blogin" href="https://blogin.dev/feed.json"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Configuration","url":"https://blogin.dev/guide/configuration/","description":"The keys in blogin.json.","datePublished":"2026-07-12"}</script>
 
 <link rel="icon" type="image/svg+xml" href="/assets/img/logo.0f5f064b1f44a8e8.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -93,8 +99,8 @@ Blogin
 </nav>
 <p>Site-wide settings live in <code>blogin.json</code> beside the content directory. Every key
 is optional. Command-line options override the file.</p>
-<p>An unknown key is a warning naming the closest real key, so a typo is reported
-rather than silently ignored. A key with the wrong type stops the build.</p>
+<p>An unknown key is a warning, with a &quot;did you mean&quot; suggestion when a real key is
+within three edits of it, so a typo is reported rather than silently ignored. A key with the wrong type stops the build.</p>
 <table class="table">
 <thead>
 <tr>
@@ -122,6 +128,18 @@ rather than silently ignored. A key with the wrong type stops the build.</p>
 <td>string</td>
 <td>empty</td>
 <td>Site author, available to layouts and feeds.</td>
+</tr>
+<tr>
+<td><code>twitter</code></td>
+<td>string</td>
+<td>empty</td>
+<td>The site's X handle, with the <code>@</code>, written as <code>twitter:site</code> and <code>twitter:creator</code>.</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>string</td>
+<td>empty</td>
+<td>Share image for any page whose front matter sets no <code>image</code>. See <a href="/guide/metadata-and-seo/#share-images">Metadata and SEO</a>.</td>
 </tr>
 <tr>
 <td><code>output-dir</code></td>
@@ -175,7 +193,7 @@ rather than silently ignored. A key with the wrong type stops the build.</p>
 <td><code>search-text-length</code></td>
 <td>integer</td>
 <td><code>2000</code></td>
-<td>Characters of body text indexed per post.</td>
+<td>Characters of each post's summary written into the search index.</td>
 </tr>
 <tr>
 <td><code>search-cap</code></td>
@@ -229,7 +247,7 @@ rather than silently ignored. A key with the wrong type stops the build.</p>
 <td><code>image-widths</code></td>
 <td>list of integers</td>
 <td>empty</td>
-<td>Widths to write each raster image at, with a <code>srcset</code> wherever a page references it.</td>
+<td>Widths to write each raster image under <code>assets/</code> at, for each width smaller than the original, with a <code>srcset</code> wherever a page references it. Files under <code>static/</code> are copied as they are.</td>
 </tr>
 <tr>
 <td><code>taxonomies</code></td>
@@ -253,7 +271,7 @@ rather than silently ignored. A key with the wrong type stops the build.</p>
 <td><code>language-config</code></td>
 <td>map</td>
 <td>empty</td>
-<td>Per-language overrides such as <code>title</code>, keyed by code.</td>
+<td>A per-language site <code>title</code>, keyed by code. <code>title</code> is the only key read.</td>
 </tr>
 <tr>
 <td><code>sections</code></td>
@@ -283,11 +301,11 @@ nav order, visibility, page size, and whether dates show:</p>
 <tbody>
 <tr>
 <td><code>label</code></td>
-<td>Nav label and listing heading. Defaults to the humanized name.</td>
+<td>Nav label and listing heading. Defaults to the humanized name. A section with <code>nav: false</code> uses the humanized name as its heading.</td>
 </tr>
 <tr>
 <td><code>order</code></td>
-<td>Sort position in the nav, ahead of alphabetical.</td>
+<td>Integer sort key for the nav, ascending. A section without one counts as 0, and ties sort by name, so a negative <code>order</code> moves a section to the front.</td>
 </tr>
 <tr>
 <td><code>page-size</code></td>
@@ -295,11 +313,11 @@ nav order, visibility, page size, and whether dates show:</p>
 </tr>
 <tr>
 <td><code>nav</code></td>
-<td>Include the section in the nav when true.</td>
+<td>Set to <code>false</code> to leave the section out of the nav. Included by default.</td>
 </tr>
 <tr>
 <td><code>layout</code></td>
-<td>Layout name override for the section.</td>
+<td>The layout the section's posts render through, in place of <code>show.haml</code>. A post's own front-matter <code>layout</code> comes first, and <code>show.haml</code> is used when the named file does not exist.</td>
 </tr>
 <tr>
 <td><code>index-dates</code></td>

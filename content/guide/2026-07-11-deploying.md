@@ -45,4 +45,5 @@ If you would rather not touch the server, leave `clean-urls` off.
 ## Base URL
 
 Set `base-url` in `blogin.json` to your site's origin. Feed entries, the sitemap,
-and any absolute links use it, so it must match where the site is served.
+canonical links, `og:image`, feed links, structured data, and any other absolute
+links use it, so it must match where the site is served.

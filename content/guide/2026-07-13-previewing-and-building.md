@@ -19,8 +19,9 @@ the source tree. It never writes `public/`, so serving a site cannot leave the
 directory you deploy holding preview output. A preview is unminified and
 unfingerprinted, and it keeps its own build state, so the two builds never read
 each other's.
-Any change to content, layouts, or static assets triggers a full rebuild in
-place, and config edits are picked up too. Every directory under the watched
+Any change under the site directory triggers an incremental rebuild in place.
+`blogin.json` is read once when the server starts, so an edit to it takes effect
+when you restart the server. Every directory under the watched
 trees is watched, however deeply nested, and a directory you add while the server
 runs is picked up without a restart. A save that fires several filesystem
 events is coalesced into one rebuild. Extensionless URLs resolve to their `.html`
@@ -28,8 +29,7 @@ files, matching how a production host rewrites, so local preview behaves like th
 deployed site. The server is for previewing only, and what you deploy is
 static files.
 
-`minify` and `fingerprint` are off while serving, whatever `blogin.json` says,
-and the server prints a line saying so when the config asks for them.
+`minify` and `fingerprint` are off while serving, whatever `blogin.json` says.
 Fingerprinting renames every asset on each build, which would leave an already
 open page pointing at files the rebuild just deleted, and it costs that renaming
 work on every save. `blogin build` still applies both, so what you deploy is
@@ -47,6 +47,9 @@ rebuild rewrote, and the page acts on it:
   and without losing scroll position or form state.
 - A changed image is re-fetched in place.
 - A rebuild that rewrote nothing sends nothing, and no page reloads.
+- A failed rebuild shows its error over the page and in the terminal. The
+  overlay clears on the next successful build, and a page opened while the build
+  is broken shows the error straight away.
 
 The client reconnects on its own when the socket drops, so a restarted server
 picks the page back up. On reconnecting it compares the build the page is showing
@@ -70,7 +73,7 @@ The result is byte-identical to a build from scratch, checked against randomised
 sequences of edits rather than a handful of examples.
 
 Pass `--counters` to see the work a build did: posts parsed, templates compiled,
-pages rendered, files read and written, and directory walks. Those numbers are
+pages rendered, files read and written, directory walks, and related-post terms. Those numbers are
 deterministic across machines, which is what makes them useful for telling
 whether a change did more work than it needed to.
 
@@ -106,9 +109,10 @@ copied unchanged.
 
 ## Debug output
 
-`blogin build --debug` injects HTML comments marking each template and partial
-boundary and a provenance comment before each post body naming its source file,
-so a page says which layout produced what. It is a separate axis from
+`blogin build --debug` turns on the `debug-open` and `debug-close` helpers, which
+write a begin and end comment wherever a layout calls them. The scaffolded
+layouts mark the header, the footer, and the page template, so a page says which
+layout produced what. It is a separate axis from
 `--verbose`, which only affects log output. Comment text is sanitized so a stray
 `-->` cannot break out.
 
