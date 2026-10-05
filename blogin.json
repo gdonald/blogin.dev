@@ -1,6 +1,8 @@
 {
   "title": "Blogin",
   "base-url": "https://blogin.dev",
+  "author": "Greg Donald",
+  "image": "/assets/img/share.png",
   "home-section": "guide",
   "clean-urls": false,
   "css-framework": "bootstrap5",

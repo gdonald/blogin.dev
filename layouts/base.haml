@@ -3,7 +3,10 @@
   %head
     %meta{charset: 'utf-8'}
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
-    %title= site-title
+    - if page-title
+      %title= page-title ~ ' | ' ~ site-title
+    - else
+      %title= site-title
     != head-meta
     %link{rel: 'icon', type: 'image/svg+xml', href: '/assets/img/logo.svg'}
     %link{rel: 'icon', href: '/favicon.ico', sizes: 'any'}
